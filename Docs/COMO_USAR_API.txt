@@ -1,0 +1,450 @@
+════════════════════════════════════════════════════════════════════════════════
+🔌 CÓMO USAR LA API DESDE TU FRONTEND REACT
+════════════════════════════════════════════════════════════════════════════════
+
+📝 IMPORTANTE: Ya NO necesitas ejecutar main.py
+            Solo ejecuta la API y consúmela desde tu frontend
+
+════════════════════════════════════════════════════════════════════════════════
+⚡ PASO 1: INICIAR LA API
+════════════════════════════════════════════════════════════════════════════════
+
+Abre tu terminal y ejecuta:
+
+   python api.py
+
+O alternativamente:
+
+   python iniciar_api.py
+
+
+Deberías ver:
+   ✅ LISTO - Presiona Ctrl+C para detener
+   🌐 Servidor corriendo en: http://localhost:8000
+
+
+════════════════════════════════════════════════════════════════════════════════
+⚡ PASO 2: VERIFICAR QUE FUNCIONA
+════════════════════════════════════════════════════════════════════════════════
+
+Abre en tu navegador:
+
+   http://localhost:8000/docs
+
+Verás la documentación interactiva Swagger donde puedes probar todos los endpoints.
+
+
+════════════════════════════════════════════════════════════════════════════════
+⚡ PASO 3: CONSUMIR DESDE TU FRONTEND REACT
+════════════════════════════════════════════════════════════════════════════════
+
+En tu proyecto React, usa estos endpoints:
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 1: Estadísticas para Dashboard
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/estadisticas
+
+Respuesta:
+{
+  "total_mascotas": 250,
+  "total_clientes": 150,
+  "total_citas": 2000,
+  "total_servicios": 15
+}
+
+
+Código React:
+──────────────
+fetch('http://localhost:8000/api/estadisticas')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 2: Chatbot
+─────────────────────────────────────────────────────────────────────────────
+
+POST http://localhost:8000/api/chat
+Content-Type: application/json
+
+Body:
+{
+  "mensaje": "¿Cuál es el tipo de mascota más común?",
+  "usuario_id": "user123"
+}
+
+Respuesta:
+{
+  "respuesta": "🏆 El tipo más común es: Perro (45.5%)",
+  "intencion": "tipo_mas_comun",
+  "confianza": 0.9,
+  "timestamp": "2024-11-03T10:30:00"
+}
+
+
+Código React:
+──────────────
+fetch('http://localhost:8000/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    mensaje: "Hola",
+    usuario_id: "user123"
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data.respuesta));
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 3: Análisis - Tipos de Mascota (TU PREGUNTA PRINCIPAL)
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/analisis/tipos-mascota
+
+Respuesta:
+{
+  "tipo_mas_comun": "Perro",
+  "estadisticas": [
+    {
+      "tipo_mascota": "Perro",
+      "total_mascotas": 250,
+      "total_citas": 450,
+      "promedio_citas": 1.8,
+      "porcentaje": 45.5
+    },
+    {
+      "tipo_mascota": "Gato",
+      "total_mascotas": 180,
+      "total_citas": 320,
+      "promedio_citas": 1.77,
+      "porcentaje": 32.7
+    }
+  ]
+}
+
+
+Código React:
+──────────────
+fetch('http://localhost:8000/api/analisis/tipos-mascota')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Tipo más común:', data.tipo_mas_comun);
+    console.log('Estadísticas:', data.estadisticas);
+  });
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 4: Análisis - Día con Más Atención (TU PREGUNTA PRINCIPAL)
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/analisis/dias-atencion
+
+Respuesta:
+{
+  "dia_mas_atencion": "Viernes",
+  "estadisticas": [
+    {
+      "dia_semana": "Lunes",
+      "numero_dia": 1,
+      "total_citas": 85,
+      "completadas": 72,
+      "canceladas": 13,
+      "tasa_asistencia": 84.7
+    },
+    ...
+  ]
+}
+
+
+Código React:
+──────────────
+fetch('http://localhost:8000/api/analisis/dias-atencion')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Día con más atención:', data.dia_mas_atencion);
+    console.log('Estadísticas semanales:', data.estadisticas);
+  });
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 5: Análisis - Horas Pico
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/analisis/horas-pico
+
+Respuesta:
+{
+  "hora_pico": 10,
+  "estadisticas": [
+    {
+      "hora": 10,
+      "total_citas": 120,
+      "mascotas_unicas": 95,
+      "clientes_unicos": 88,
+      "duracion_promedio": 45.5
+    },
+    ...
+  ]
+}
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 6: Análisis - Servicios Más Utilizados
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/analisis/servicios
+
+Respuesta:
+{
+  "servicio_mas_popular": "Consulta General",
+  "estadisticas": [
+    {
+      "service_id": 1,
+      "servicio": "Consulta General",
+      "precio": 50.00,
+      "total_citas": 450,
+      "completadas": 385,
+      "canceladas": 65,
+      "tasa_asistencia": 85.5
+    },
+    ...
+  ]
+}
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 7: Predicción con IA - Tipo de Mascota
+─────────────────────────────────────────────────────────────────────────────
+
+POST http://localhost:8000/api/predicciones/tipo-mascota
+Content-Type: application/json
+
+Body:
+{
+  "dia_semana": 5,
+  "hora": 10,
+  "mes": 11,
+  "service_id": 1
+}
+
+Respuesta:
+{
+  "predicciones": [
+    { "tipo_mascota": "Perro", "probabilidad": 0.785 },
+    { "tipo_mascota": "Gato", "probabilidad": 0.152 }
+  ],
+  "tipo_mas_probable": "Perro",
+  "confianza": 0.785
+}
+
+
+Código React:
+──────────────
+fetch('http://localhost:8000/api/predicciones/tipo-mascota', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    dia_semana: 5,  // Viernes
+    hora: 10,
+    mes: 11,
+    service_id: 1
+  })
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('Predicción:', data.tipo_mas_probable);
+    console.log('Confianza:', data.confianza * 100 + '%');
+  });
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 8: Buscar Mascota
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/mascotas/buscar/Max
+
+Respuesta:
+{
+  "mascotas": [
+    {
+      "pet_id": 45,
+      "nombre": "Max",
+      "tipo": "Perro",
+      "raza": "Golden Retriever",
+      "edad": 3,
+      "sexo": "Macho",
+      "propietario": "Juan Pérez",
+      "telefono": "555-1234",
+      "correo": "juan@example.com"
+    }
+  ],
+  "total": 1
+}
+
+
+─────────────────────────────────────────────────────────────────────────────
+ENDPOINT 9: Listar Servicios Disponibles
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8000/api/servicios
+
+Respuesta:
+{
+  "servicios": [
+    {
+      "service_id": 1,
+      "nombre": "Consulta General",
+      "descripcion": "Revisión médica completa",
+      "precio": 50.00,
+      "duracion_minutos": 30
+    },
+    ...
+  ],
+  "total": 15
+}
+
+
+════════════════════════════════════════════════════════════════════════════════
+📚 LISTA COMPLETA DE ENDPOINTS
+════════════════════════════════════════════════════════════════════════════════
+
+Todos los endpoints disponibles:
+
+GENERAL:
+  GET  /                              - Info de la API
+  GET  /api/health                    - Estado del servidor
+
+CHATBOT:
+  POST /api/chat                      - Enviar mensaje
+  GET  /api/chat/comandos             - Listar comandos
+
+ESTADÍSTICAS:
+  GET  /api/estadisticas              - Estadísticas generales
+
+ANÁLISIS:
+  GET  /api/analisis/tipos-mascota    - Tipos más comunes
+  GET  /api/analisis/dias-atencion    - Días con más atención
+  GET  /api/analisis/horas-pico       - Horas pico
+  GET  /api/analisis/servicios        - Servicios más usados
+
+PREDICCIONES IA:
+  POST /api/predicciones/tipo-mascota       - Predecir tipo
+  POST /api/predicciones/asistencia         - Predecir asistencia
+  GET  /api/predicciones/tipo-mas-comun     - Análisis tipo más común
+  GET  /api/predicciones/dia-mas-atencion   - Análisis día más atención
+  GET  /api/predicciones/estado             - Estado de modelos
+
+CONSULTAS:
+  GET  /api/mascotas/buscar/{nombre}              - Buscar mascota
+  GET  /api/mascotas/{pet_id}/historial           - Historial médico
+  GET  /api/mascotas/{pet_id}/citas               - Próximas citas
+  GET  /api/mascotas/{pet_id}/vacunas             - Historial vacunas
+  GET  /api/clientes/buscar/{correo}              - Buscar cliente
+  GET  /api/clientes/{client_id}/mascotas         - Mascotas de cliente
+  GET  /api/servicios                             - Servicios disponibles
+
+ADMINISTRACIÓN:
+  POST /api/entrenar                  - Entrenar modelos IA
+  GET  /api/exportar/dataset          - Exportar datos
+
+
+════════════════════════════════════════════════════════════════════════════════
+⚠️ IMPORTANTE - PREDICCIONES CON IA
+════════════════════════════════════════════════════════════════════════════════
+
+Si vas a usar las predicciones, los modelos deben estar entrenados primero.
+
+Opción 1: Desde la API (recomendado)
+────────────────────────────────────
+POST http://localhost:8000/api/entrenar
+
+Esto entrena en segundo plano (tarda 5-10 minutos).
+
+
+Opción 2: Desde terminal (solo una vez)
+────────────────────────────────────────
+python main.py
+# Selecciona opción 4: Entrenar Modelos de IA
+
+
+Verificar estado:
+─────────────────
+GET http://localhost:8000/api/predicciones/estado
+
+Si devuelve "modelos_entrenados": true, ya puedes usar las predicciones.
+
+
+════════════════════════════════════════════════════════════════════════════════
+🔧 CONFIGURACIÓN
+════════════════════════════════════════════════════════════════════════════════
+
+Si tu frontend React está en un puerto diferente (ej: 3000), y tienes problemas
+de CORS, edita api.py línea ~38:
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Tu frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+════════════════════════════════════════════════════════════════════════════════
+🚨 SOLUCIÓN DE PROBLEMAS
+════════════════════════════════════════════════════════════════════════════════
+
+Error: "ModuleNotFoundError: No module named 'fastapi'"
+──────────────────────────────────────────────────────────
+pip install fastapi uvicorn pydantic
+
+
+Error: "Address already in use"
+───────────────────────────────
+El puerto 8000 está ocupado. Cambia el puerto en api.py o cierra el proceso.
+
+
+Error: "Los modelos no están entrenados"
+─────────────────────────────────────────
+POST http://localhost:8000/api/entrenar
+
+
+Error de CORS desde React
+──────────────────────────
+Configura allow_origins en api.py (ver sección CONFIGURACIÓN arriba).
+
+
+════════════════════════════════════════════════════════════════════════════════
+📖 DOCUMENTACIÓN ADICIONAL
+════════════════════════════════════════════════════════════════════════════════
+
+• README_API.md          - Documentación completa de la API
+• API_ENDPOINTS.md       - Lista detallada de todos los endpoints
+• EJEMPLOS_REACT.md      - Componentes React completos
+• http://localhost:8000/docs  - Documentación interactiva (Swagger)
+
+
+════════════════════════════════════════════════════════════════════════════════
+✅ RESUMEN
+════════════════════════════════════════════════════════════════════════════════
+
+1. Ejecuta:        python api.py
+2. Verifica:       http://localhost:8000/docs
+3. Consume desde:  http://localhost:8000/api/*
+
+Endpoints principales para tu dashboard:
+  • GET  /api/estadisticas
+  • GET  /api/analisis/tipos-mascota
+  • GET  /api/analisis/dias-atencion
+  • GET  /api/analisis/horas-pico
+  • POST /api/chat
+
+
+════════════════════════════════════════════════════════════════════════════════
+¡API LISTA PARA TU FRONTEND! 🚀
+════════════════════════════════════════════════════════════════════════════════
+

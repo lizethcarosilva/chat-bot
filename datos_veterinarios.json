@@ -1,0 +1,394 @@
+{
+  "intents": [
+    {
+      "tag": "saludo",
+      "patterns": [
+        "hola",
+        "buenos días",
+        "buenas tardes",
+        "buenas noches",
+        "hey",
+        "saludos",
+        "qué tal",
+        "cómo estás"
+      ],
+      "responses": [
+        "¡Hola! Soy tu asistente veterinario virtual. ¿En qué puedo ayudarte hoy?",
+        "¡Bienvenido! Estoy aquí para ayudarte con información sobre el cuidado de tus mascotas.",
+        "¡Hola! ¿Tienes alguna pregunta sobre el cuidado de tu mascota?"
+      ]
+    },
+    {
+      "tag": "despedida",
+      "patterns": [
+        "adiós",
+        "hasta luego",
+        "nos vemos",
+        "chao",
+        "bye",
+        "hasta pronto",
+        "me voy"
+      ],
+      "responses": [
+        "¡Hasta luego! Cuida bien a tu mascota.",
+        "¡Adiós! No dudes en volver si necesitas más ayuda.",
+        "¡Que tengas un buen día! Tu mascota está en buenas manos."
+      ]
+    },
+    {
+      "tag": "enfermedades_perros",
+      "patterns": [
+        "mi perro está enfermo",
+        "enfermedades comunes en perros",
+        "qué enfermedades tienen los perros",
+        "mi perro tiene fiebre",
+        "síntomas de enfermedad en perros",
+        "enfermedades perros",
+        "perro enfermo síntomas"
+      ],
+      "responses": [
+        "Las enfermedades más comunes en perros incluyen: Parvovirus (vómitos, diarrea), Moquillo (fiebre, secreción nasal), Coronavirus, Rabia, Leptospirosis. Si tu perro presenta síntomas como vómito persistente, diarrea con sangre, fiebre alta, o letargo extremo, es importante llevarlo al veterinario inmediatamente."
+      ]
+    },
+    {
+      "tag": "enfermedades_gatos",
+      "patterns": [
+        "mi gato está enfermo",
+        "enfermedades comunes en gatos",
+        "qué enfermedades tienen los gatos",
+        "mi gato tiene fiebre",
+        "síntomas de enfermedad en gatos",
+        "enfermedades gatos",
+        "gato enfermo síntomas"
+      ],
+      "responses": [
+        "Las enfermedades más comunes en gatos incluyen: Leucemia Felina (FeLV), Inmunodeficiencia Felina (FIV), Panleucopenia (moquillo felino), Calicivirus, Rinotraqueítis. Síntomas de alerta: pérdida de apetito, letargo, fiebre, problemas respiratorios. Consulta a tu veterinario ante cualquier cambio en el comportamiento."
+      ]
+    },
+    {
+      "tag": "parvovirus",
+      "patterns": [
+        "qué es el parvovirus",
+        "síntomas de parvovirus",
+        "mi perro tiene parvovirus",
+        "cómo se trata el parvo",
+        "parvovirus canino"
+      ],
+      "responses": [
+        "El Parvovirus canino es una enfermedad viral grave que afecta principalmente a cachorros. Síntomas: vómito intenso, diarrea con sangre, fiebre alta, deshidratación severa, pérdida de apetito. Es URGENTE llevar al perro al veterinario. Tratamiento: hidratación intravenosa, antibióticos para infecciones secundarias, medicamentos antieméticos. La vacunación es la mejor prevención."
+      ]
+    },
+    {
+      "tag": "moquillo",
+      "patterns": [
+        "qué es el moquillo",
+        "síntomas de moquillo",
+        "mi perro tiene moquillo",
+        "cómo se cura el moquillo",
+        "moquillo canino tratamiento"
+      ],
+      "responses": [
+        "El Moquillo canino es una enfermedad viral grave. Síntomas: fiebre alta, secreción nasal y ocular, tos, vómito, diarrea, convulsiones en casos avanzados. No tiene cura específica, el tratamiento es de soporte: fluidos, antibióticos para infecciones secundarias, control de síntomas neurológicos. La vacunación es ESENCIAL para prevenir."
+      ]
+    },
+    {
+      "tag": "rabia",
+      "patterns": [
+        "qué es la rabia",
+        "síntomas de rabia",
+        "vacuna contra la rabia",
+        "rabia en mascotas",
+        "mi mascota tiene rabia"
+      ],
+      "responses": [
+        "La Rabia es una enfermedad viral MORTAL que afecta el sistema nervioso. Síntomas: cambios de comportamiento (agresividad o timidez extrema), salivación excesiva, dificultad para tragar, parálisis, convulsiones. Es transmisible a humanos por mordedura. NO HAY CURA una vez aparecen síntomas. La VACUNACIÓN es OBLIGATORIA y la única prevención efectiva."
+      ]
+    },
+    {
+      "tag": "vacunas_perros",
+      "patterns": [
+        "qué vacunas necesita mi perro",
+        "calendario de vacunas para perros",
+        "cuándo vacunar a mi perro",
+        "vacunas obligatorias perros",
+        "vacunas cachorros"
+      ],
+      "responses": [
+        "Calendario de vacunación para perros:\n• 6-8 semanas: Primera dosis múltiple (Parvovirus, Moquillo, Hepatitis)\n• 10-12 semanas: Segunda dosis múltiple\n• 14-16 semanas: Tercera dosis múltiple + Rabia\n• 1 año: Refuerzo anual\n• Anualmente: Refuerzos de todas las vacunas\n\nVacunas opcionales según riesgo: Leptospirosis, Tos de las perreras, Giardia."
+      ]
+    },
+    {
+      "tag": "vacunas_gatos",
+      "patterns": [
+        "qué vacunas necesita mi gato",
+        "calendario de vacunas para gatos",
+        "cuándo vacunar a mi gato",
+        "vacunas obligatorias gatos",
+        "vacunas gatitos"
+      ],
+      "responses": [
+        "Calendario de vacunación para gatos:\n• 6-8 semanas: Primera dosis triple felina (Panleucopenia, Calicivirus, Rinotraqueítis)\n• 12 semanas: Segunda dosis triple felina\n• 16 semanas: Tercera dosis triple felina + Rabia\n• 1 año: Refuerzo anual\n• Anualmente: Refuerzos\n\nVacunas opcionales: Leucemia Felina (FeLV) para gatos que salen al exterior."
+      ]
+    },
+    {
+      "tag": "desparasitacion",
+      "patterns": [
+        "cómo desparasitar a mi mascota",
+        "cada cuánto desparasitar",
+        "desparasitantes para perros",
+        "desparasitantes para gatos",
+        "mi mascota tiene parásitos",
+        "síntomas de parásitos"
+      ],
+      "responses": [
+        "Desparasitación:\n• Cachorros/gatitos: Cada 2 semanas desde las 2 hasta las 12 semanas\n• Adultos: Cada 3-4 meses\n• Desparasitación interna: Contra lombrices, tenias, giardias\n• Desparasitación externa: Contra pulgas, garrapatas, ácaros\n\nSíntomas de parásitos: vómito, diarrea, pérdida de peso, abdomen hinchado, picazón, pelaje opaco. Consulta a tu veterinario para el desparasitante adecuado."
+      ]
+    },
+    {
+      "tag": "alimentacion_perros",
+      "patterns": [
+        "qué debe comer mi perro",
+        "alimentación para perros",
+        "mejor comida para perros",
+        "cuánto debe comer mi perro",
+        "dieta para perros"
+      ],
+      "responses": [
+        "Alimentación canina:\n• Cachorros (hasta 12 meses): 3-4 comidas diarias, alimento para cachorros alto en proteína\n• Adultos: 2 comidas diarias, alimento balanceado de calidad\n• Seniors (+7 años): Alimento para perros mayores, bajo en calorías\n\nALIMENTOS PROHIBIDOS: Chocolate, uvas, cebolla, ajo, aguacate, café, alcohol, xilitol.\n\nCantidad: Según peso y actividad (ver etiqueta del alimento). Siempre agua fresca disponible."
+      ]
+    },
+    {
+      "tag": "alimentacion_gatos",
+      "patterns": [
+        "qué debe comer mi gato",
+        "alimentación para gatos",
+        "mejor comida para gatos",
+        "cuánto debe comer mi gato",
+        "dieta para gatos"
+      ],
+      "responses": [
+        "Alimentación felina:\n• Gatitos (hasta 12 meses): 3-4 comidas diarias, alimento para gatitos\n• Adultos: 2 comidas diarias o libre acceso (según preferencia del gato)\n• Los gatos son CARNÍVOROS OBLIGADOS: necesitan taurina (esencial)\n\nALIMENTOS PROHIBIDOS: Chocolate, cebolla, ajo, uvas, lácteos (muchos gatos son intolerantes), atún en exceso.\n\nAgua: SIEMPRE fresca y limpia. Los gatos tienden a beber poco, considera fuente de agua para estimularlos."
+      ]
+    },
+    {
+      "tag": "vomito",
+      "patterns": [
+        "mi mascota vomita",
+        "mi perro vomita",
+        "mi gato vomita",
+        "por qué vomita mi mascota",
+        "qué hacer si mi mascota vomita"
+      ],
+      "responses": [
+        "Vómito en mascotas:\n\nCAUSAS COMUNES:\n• Comer muy rápido o en exceso\n• Cambio brusco de alimentación\n• Ingestión de objetos extraños\n• Parásitos intestinales\n• Enfermedades virales (parvovirus, moquillo)\n\nCUÁNDO ES URGENTE:\n• Vómito con sangre\n• Vómito persistente (más de 24 horas)\n• Diarrea acompañante\n• Letargo o debilidad extrema\n• Abdomen hinchado y doloroso\n\nPRIMEROS AUXILIOS: Ayuno de 12-24 horas, agua en pequeñas cantidades. Si continúa, CONSULTA AL VETERINARIO."
+      ]
+    },
+    {
+      "tag": "diarrea",
+      "patterns": [
+        "mi mascota tiene diarrea",
+        "mi perro tiene diarrea",
+        "mi gato tiene diarrea",
+        "qué hacer con diarrea",
+        "diarrea con sangre"
+      ],
+      "responses": [
+        "Diarrea en mascotas:\n\nCAUSAS COMUNES:\n• Cambio de alimentación\n• Parásitos intestinales\n• Infecciones bacterianas o virales\n• Intolerancia alimentaria\n• Estrés\n\nCUÁNDO ES URGENTE:\n• Diarrea con sangre\n• Diarrea con mucosidad excesiva\n• Fiebre alta\n• Deshidratación (encías secas, ojos hundidos)\n• Dura más de 24-48 horas\n\nTRATAMIENTO BÁSICO: Ayuno de 12 horas, luego dieta blanda (pollo hervido + arroz). Hidratación constante. Si persiste, CONSULTA AL VETERINARIO."
+      ]
+    },
+    {
+      "tag": "pulgas_garrapatas",
+      "patterns": [
+        "mi mascota tiene pulgas",
+        "cómo eliminar pulgas",
+        "mi perro tiene garrapatas",
+        "cómo quitar garrapatas",
+        "prevención de pulgas"
+      ],
+      "responses": [
+        "Control de parásitos externos:\n\nPULGAS:\n• Síntomas: Picazón intensa, rascado constante, puntos negros en pelaje\n• Tratamiento: Pipetas, collares antipulgas, champús, sprays\n• Prevención: Desparasitación mensual, limpieza del ambiente\n\nGARRAPATAS:\n• Riesgo: Transmiten enfermedades (Ehrlichia, Babesia)\n• Remoción: Con pinzas especiales, girar y tirar suavemente\n• Prevención: Pipetas, collares, revisión después de paseos\n\nRECOMENDACIÓN: Usar antiparasitarios todo el año."
+      ]
+    },
+    {
+      "tag": "esterilizacion",
+      "patterns": [
+        "debo esterilizar a mi mascota",
+        "beneficios de la esterilización",
+        "cuándo esterilizar",
+        "castración de perros",
+        "castración de gatos"
+      ],
+      "responses": [
+        "Esterilización/Castración:\n\nBENEFICIOS:\n• Previene cáncer de mama y útero (hembras)\n• Previene cáncer de próstata y testículos (machos)\n• Reduce comportamientos agresivos\n• Evita camadas no deseadas\n• Previene infecciones uterinas (piometra)\n\nEDAD RECOMENDADA:\n• Perros: 6-9 meses (antes del primer celo)\n• Gatos: 5-6 meses\n\nES UN PROCEDIMIENTO SEGURO: Con anestesia y cuidados postoperatorios adecuados, la recuperación es rápida (7-10 días)."
+      ]
+    },
+    {
+      "tag": "cuidados_cachorros",
+      "patterns": [
+        "cómo cuidar a un cachorro",
+        "cuidados para cachorros",
+        "tengo un cachorro nuevo",
+        "qué necesita un cachorro"
+      ],
+      "responses": [
+        "Cuidados para cachorros:\n\n1. VACUNACIÓN: Iniciar a las 6-8 semanas\n2. DESPARASITACIÓN: Cada 2 semanas hasta los 3 meses\n3. ALIMENTACIÓN: 3-4 comidas diarias, alimento para cachorros\n4. SOCIALIZACIÓN: Exponer a diferentes personas, sonidos, ambientes (después de vacunas)\n5. ENTRENAMIENTO: Enseñar órdenes básicas desde temprano\n6. HIGIENE: Baño cada 3-4 semanas, cepillado regular\n7. EJERCICIO: Paseos cortos y controlados\n8. REVISIÓN VETERINARIA: Control mensual hasta los 6 meses"
+      ]
+    },
+    {
+      "tag": "cuidados_gatitos",
+      "patterns": [
+        "cómo cuidar a un gatito",
+        "cuidados para gatitos",
+        "tengo un gatito nuevo",
+        "qué necesita un gatito"
+      ],
+      "responses": [
+        "Cuidados para gatitos:\n\n1. VACUNACIÓN: Iniciar a las 6-8 semanas\n2. DESPARASITACIÓN: Cada 2 semanas hasta los 3 meses\n3. ALIMENTACIÓN: 3-4 comidas diarias, alimento para gatitos\n4. ARENERO: Limpio y accesible, mostrarle dónde está\n5. SOCIALIZACIÓN: Manipulación suave, juego interactivo\n6. RASCADORES: Proporcionarlos para evitar daños en muebles\n7. SEGURIDAD: Ventanas con mallas, cables eléctricos protegidos\n8. JUGUETES: Estimulación mental y física\n9. REVISIÓN VETERINARIA: Control mensual hasta los 6 meses"
+      ]
+    },
+    {
+      "tag": "emergencias",
+      "patterns": [
+        "emergencia veterinaria",
+        "mi mascota está en peligro",
+        "accidente de mascota",
+        "primeros auxilios",
+        "urgencia veterinaria"
+      ],
+      "responses": [
+        "EMERGENCIAS VETERINARIAS - Acude INMEDIATAMENTE al veterinario si:\n\n• Dificultad para respirar\n• Sangrado que no se detiene\n• Convulsiones o pérdida de conocimiento\n• Golpe fuerte o atropellamiento\n• Envenenamiento (vómito, temblores, salivación)\n• Hinchazón abdominal súbita\n• Imposibilidad de orinar\n• Heridas profundas\n• Temperatura > 40°C o < 37°C\n• Dolor intenso\n\nMIENTRAS LLEGAS AL VETERINARIO: Mantén la calma, mantén a la mascota quieta y abrigada, controla sangrados con presión."
+      ]
+    },
+    {
+      "tag": "temperatura",
+      "patterns": [
+        "temperatura normal de mascota",
+        "mi mascota tiene fiebre",
+        "cómo tomar temperatura a mi mascota",
+        "fiebre en perros",
+        "fiebre en gatos"
+      ],
+      "responses": [
+        "Temperatura corporal en mascotas:\n\nNORMAL:\n• Perros: 38°C - 39°C\n• Gatos: 38°C - 39.2°C\n\nFIEBRE: > 39.5°C\nHIPOTERMIA: < 37°C\n\nCÓMO MEDIR:\n1. Usar termómetro digital rectal\n2. Lubricar con vaselina\n3. Insertar 2-3 cm suavemente\n4. Esperar 1-2 minutos\n\nSÍNTOMAS DE FIEBRE:\n• Nariz caliente y seca\n• Letargo\n• Pérdida de apetito\n• Temblores\n\nSi la temperatura es > 40°C o < 37°C, ACUDE AL VETERINARIO INMEDIATAMENTE."
+      ]
+    },
+    {
+      "tag": "dolor",
+      "patterns": [
+        "mi mascota tiene dolor",
+        "cómo saber si mi mascota siente dolor",
+        "síntomas de dolor en mascotas",
+        "mi perro cojea",
+        "mi gato no quiere moverse"
+      ],
+      "responses": [
+        "Señales de dolor en mascotas:\n\n• Cojera o dificultad para moverse\n• Llanto, gemidos o maullidos excesivos\n• Agresividad cuando se le toca\n• Pérdida de apetito\n• Respiración rápida o superficial\n• Postura encorvada\n• Lamido excesivo de una zona\n• Aislamiento\n• Cambios en el comportamiento\n\nNUNCA des medicamentos humanos (paracetamol, ibuprofeno) - SON TÓXICOS.\n\nConsulta al veterinario para diagnóstico y tratamiento adecuado."
+      ]
+    },
+    {
+      "tag": "obesidad",
+      "patterns": [
+        "mi mascota tiene sobrepeso",
+        "mi perro está gordo",
+        "mi gato está obeso",
+        "cómo hacer que mi mascota baje de peso",
+        "obesidad en mascotas"
+      ],
+      "responses": [
+        "Obesidad en mascotas:\n\nRIESGOS:\n• Diabetes\n• Problemas articulares\n• Enfermedades cardíacas\n• Reducción de esperanza de vida\n\nCAUSAS:\n• Sobrealimentación\n• Falta de ejercicio\n• Premios excesivos\n• Esterilización (reduce metabolismo)\n\nSOLUCIÓN:\n1. Consulta al veterinario para plan de pérdida de peso\n2. Reduce porciones gradualmente\n3. Cambia a alimento light o bajo en calorías\n4. Aumenta el ejercicio progresivamente\n5. Elimina premios o usa opciones bajas en calorías\n6. NO hagas dietas extremas (peligroso)"
+      ]
+    },
+    {
+      "tag": "higiene_dental",
+      "patterns": [
+        "cómo cepillar los dientes de mi mascota",
+        "mal aliento en perros",
+        "mal aliento en gatos",
+        "cuidado dental mascotas",
+        "sarro en dientes"
+      ],
+      "responses": [
+        "Higiene dental en mascotas:\n\nIMPORTANCIA:\n• Previene enfermedad periodontal\n• Evita pérdida de dientes\n• Previene infecciones que afectan otros órganos\n\nCUIDADO EN CASA:\n• Cepillado: 2-3 veces por semana con pasta dental para mascotas\n• Premios dentales: Snacks diseñados para limpiar dientes\n• Juguetes dentales: Ayudan a remover placa\n\nSÍNTOMAS DE PROBLEMAS:\n• Mal aliento\n• Encías rojas o sangrantes\n• Dificultad para comer\n• Babeo excesivo\n\nLIMPIEZA PROFESIONAL: Cada 1-2 años con veterinario (bajo anestesia)"
+      ]
+    },
+    {
+      "tag": "comportamiento_perros",
+      "patterns": [
+        "mi perro ladra mucho",
+        "mi perro es agresivo",
+        "mi perro tiene ansiedad",
+        "cómo educar a mi perro",
+        "problemas de comportamiento perros"
+      ],
+      "responses": [
+        "Problemas de comportamiento en perros:\n\nLADRIDO EXCESIVO:\n• Causas: Aburrimiento, ansiedad, alerta, buscar atención\n• Solución: Ejercicio adecuado, entrenamiento, identificar causa\n\nAGRESIVIDAD:\n• Causas: Miedo, protección de recursos, dolor, mala socialización\n• Solución: Consulta con etólogo, nunca castigues físicamente\n\nANSIEDAD POR SEPARACIÓN:\n• Síntomas: Destrucción, ladridos, micción/defecación inapropiada\n• Solución: Desensibilización gradual, juguetes interactivos, feromonas\n\nENTRENAMIENTO:\n• Refuerzo positivo (premios, elogios)\n• Consistencia\n• Paciencia\n• Socialización temprana"
+      ]
+    },
+    {
+      "tag": "toxicos",
+      "patterns": [
+        "alimentos tóxicos para mascotas",
+        "mi mascota comió chocolate",
+        "envenenamiento en mascotas",
+        "plantas tóxicas para mascotas",
+        "qué es venenoso para perros y gatos"
+      ],
+      "responses": [
+        "TÓXICOS PARA MASCOTAS:\n\nALIMENTOS PELIGROSOS:\n• Chocolate (teobromina)\n• Uvas y pasas (insuficiencia renal)\n• Cebolla y ajo (anemia)\n• Aguacate\n• Xilitol (edulcorante) - MORTAL\n• Alcohol\n• Café y té\n• Nueces de macadamia\n\nPLANTAS TÓXICAS:\n• Lirios (mortales para gatos)\n• Azaleas\n• Tulipanes\n• Dieffenbachia\n• Potos\n\nMEDICAMENTOS HUMANOS:\n• Paracetamol\n• Ibuprofeno\n• Aspirina\n\nSI HAY INTOXICACIÓN: ACUDE AL VETERINARIO INMEDIATAMENTE. Lleva el envase del producto."
+      ]
+    },
+    {
+      "tag": "vejez",
+      "patterns": [
+        "cuidados para perros viejos",
+        "cuidados para gatos viejos",
+        "mi mascota está envejeciendo",
+        "mascotas senior",
+        "cambios en mascotas viejas"
+      ],
+      "responses": [
+        "Cuidados para mascotas senior:\n\nSENIOR:\n• Perros: > 7 años (razas grandes), > 10 años (razas pequeñas)\n• Gatos: > 11 años\n\nCAMBIOS NORMALES:\n• Menos energía\n• Pelaje gris\n• Menor agilidad\n• Dificultad para subir escaleras\n\nCUIDADOS ESPECIALES:\n• Alimentación: Dieta senior, menor en calorías\n• Ejercicio: Moderado, adaptado a capacidades\n• Revisiones: Chequeos veterinarios cada 6 meses\n• Suplementos: Glucosamina para articulaciones\n• Confort: Cama ortopédica, acceso fácil a agua/comida\n\nVIGILA: Cambios súbitos en comportamiento, pérdida de peso, dolor."
+      ]
+    },
+    {
+      "tag": "estadisticas_db",
+      "patterns": [
+        "estadísticas",
+        "cuántas mascotas hay",
+        "datos del sistema",
+        "información general",
+        "dame estadísticas"
+      ],
+      "responses": [
+        "Para obtener estadísticas del sistema, puedo mostrarte información sobre mascotas registradas, citas programadas y servicios. ¿Qué información específica necesitas? Puedo consultar la base de datos."
+      ]
+    },
+    {
+      "tag": "tipo_mascota_comun",
+      "patterns": [
+        "qué tipo de mascota es más común",
+        "cuál es el tipo de mascota más común",
+        "tipo de mascota más atendida",
+        "qué animales hay más",
+        "mascotas más populares"
+      ],
+      "responses": [
+        "Consultando la base de datos sobre los tipos de mascotas más comunes. Esta información se obtiene del análisis de todas las mascotas registradas en el sistema."
+      ]
+    },
+    {
+      "tag": "dia_mas_atencion",
+      "patterns": [
+        "qué día hay más atención",
+        "día con más citas",
+        "cuándo hay más clientes",
+        "día más ocupado",
+        "horarios con más demanda"
+      ],
+      "responses": [
+        "Analizando los patrones de atención en la base de datos para identificar los días y horas con mayor demanda de servicios."
+      ]
+    }
+  ]
+}
+
