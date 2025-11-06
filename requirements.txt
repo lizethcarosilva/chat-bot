@@ -16,6 +16,11 @@ tensorflow==2.15.0
 keras==2.15.0
 scipy==1.11.4
 
+# PyTorch para Transformer
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+
 # Utilidades
 python-dotenv==1.0.0
 pickle-mixin>=1.0.2

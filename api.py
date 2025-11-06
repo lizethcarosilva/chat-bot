@@ -13,6 +13,7 @@ import logging
 from database import PetStoreDatabase
 from predictor import PetStorePredictor
 from chatbot import PetStoreBot
+from transformer_chatbot import PetStoreBotTransformer
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -40,13 +41,20 @@ app.add_middleware(
 db = PetStoreDatabase()
 predictor = PetStorePredictor()
 bot = PetStoreBot()
+bot_transformer = PetStoreBotTransformer()
 
 # Intentar cargar modelos entrenados
 try:
     predictor.cargar_modelos()
-    logger.info("✅ Modelos cargados exitosamente")
+    logger.info("✅ Modelos predictivos cargados exitosamente")
 except:
-    logger.warning("⚠️ Modelos no encontrados. Entrena primero.")
+    logger.warning("⚠️ Modelos predictivos no encontrados. Entrena primero.")
+
+# Verificar modelo transformer
+if bot_transformer.model_trained:
+    logger.info("✅ Chatbot Transformer cargado y listo")
+else:
+    logger.info("ℹ️  Chatbot usando modo híbrido (sin transformer entrenado)")
 
 
 # =============================================================================
@@ -62,6 +70,7 @@ class ChatResponse(BaseModel):
     intencion: str
     confianza: float
     timestamp: str
+    modelo: Optional[str] = "Transformer"  # Indica qué modelo generó la respuesta
 
 class PrediccionTipoMascotaRequest(BaseModel):
     dia_semana: int  # 0=Domingo, 1=Lunes, ..., 6=Sábado
@@ -153,9 +162,20 @@ async def health_check():
 # =============================================================================
 
 @app.post("/api/chat", response_model=ChatResponse, tags=["Chatbot"])
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest, use_transformer: bool = True):
     """
-    Envía un mensaje al chatbot y obtiene respuesta
+    Envía un mensaje al chatbot y obtiene respuesta usando Red Neuronal Transformer
+    
+    **Arquitectura Transformer:**
+    - Multi-Head Attention para entender contexto
+    - Positional Encoding para orden de palabras
+    - Feed-Forward Networks para procesamiento profundo
+    - Generación autoregresiva de respuestas naturales
+    
+    **Parámetros:**
+    - mensaje: El texto del usuario
+    - usuario_id: Identificador del usuario (opcional)
+    - use_transformer: True para usar Transformer, False para LSTM clásico (default: True)
     
     **Ejemplo de uso:**
     ```javascript
@@ -169,9 +189,23 @@ async def chat(request: ChatRequest):
     });
     const data = await response.json();
     ```
+    
+    **Ventajas del Transformer:**
+    - Respuestas más naturales y contextuales
+    - Mejor comprensión del lenguaje
+    - Generación dinámica (no solo respuestas predefinidas)
+    - Arquitectura estado del arte en NLP
     """
     try:
-        resultado = bot.procesar_mensaje(request.mensaje)
+        if use_transformer:
+            # Usar el nuevo chatbot con Transformer
+            resultado = bot_transformer.procesar_mensaje(request.mensaje)
+            logger.info(f"💬 Transformer generó respuesta con {resultado['confianza']:.0%} confianza")
+        else:
+            # Usar el chatbot LSTM clásico
+            resultado = bot.procesar_mensaje(request.mensaje)
+            logger.info(f"💬 LSTM generó respuesta con {resultado['confianza']:.0%} confianza")
+        
         return ChatResponse(**resultado)
     except Exception as e:
         logger.error(f"Error en chat: {e}")
