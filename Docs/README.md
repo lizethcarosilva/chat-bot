@@ -1,12 +1,12 @@
-# 🐾 Pet Store - Chatbot Veterinario con IA y Análisis Predictivo
+#  Pet Store - Chatbot Veterinario con IA y Análisis Predictivo
 
 Sistema inteligente de **chatbot veterinario** que responde preguntas sobre enfermedades, cuidados, vacunas y síntomas usando **redes neuronales LSTM**. Además, analiza datos de la base de datos con **redes neuronales predictivas** para identificar patrones, tipos de mascotas más comunes y días con mayor demanda.
 
 ---
 
-## 🎯 Características Principales
+##  Características Principales
 
-### 1. 🏥 Chatbot Veterinario con Red Neuronal LSTM
+### 1.  Chatbot Veterinario con Red Neuronal LSTM
 - **Información Médica**: Enfermedades (Parvovirus, Moquillo, Rabia, Leucemia Felina)
 - **Vacunas**: Calendarios de vacunación para perros y gatos
 - **Cuidados**: Alimentación, desparasitación, higiene dental
@@ -14,19 +14,19 @@ Sistema inteligente de **chatbot veterinario** que responde preguntas sobre enfe
 - **Comportamiento**: Problemas de conducta y soluciones
 - **Red Neuronal LSTM**: Clasifica intenciones con 85%+ de precisión
 
-### 2. 🧠 Análisis con Redes Neuronales Predictivas
+### 2.  Análisis con Redes Neuronales Predictivas
 - **Predicción de Tipo de Mascota**: Predice qué tipo es más probable según día, hora y servicio (78% precisión)
 - **Predicción de Asistencia**: Calcula probabilidad de asistencia a citas (85% precisión)
 - **Análisis de Patrones**: Identifica tendencias en los datos de la BD
 
-### 3. 📊 Análisis Estadístico
+### 3.  Análisis Estadístico
 - Tipos de mascotas más comunes
 - Días con mayor demanda de atención
 - Horas pico de actividad
 - Servicios más solicitados
 - Razas más populares por tipo de mascota
 
-### 4. 🔍 Consultas a Base de Datos
+### 4.  Consultas a Base de Datos
 - Búsqueda de mascotas por nombre
 - Historial médico completo
 - Próximas citas programadas
@@ -35,35 +35,35 @@ Sistema inteligente de **chatbot veterinario** que responde preguntas sobre enfe
 
 ---
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 chat-bot/
-├── config.py           # Configuración del sistema
-├── database.py         # Conexión y consultas a PostgreSQL
-├── predictor.py        # Modelos de red neuronal para predicciones
-├── chatbot.py          # Chatbot inteligente
-├── main.py             # Aplicación principal con menús
-├── requirements.txt    # Dependencias Python
-├── .env                # Variables de entorno
-├── README.md           # Este archivo
-│
-├── models/             # Modelos entrenados (se crean automáticamente)
-│   ├── chatbot_model.h5
-│   ├── predictor_model.h5
-│   ├── tokenizer.pkl
-│   ├── label_encoder.pkl
-│   └── scaler.pkl
-│
-├── data/               # Datasets generados
-│   └── dataset_citas_ml.csv
-│
-└── exports/            # Reportes exportados
+ config.py           # Configuración del sistema
+ database.py         # Conexión y consultas a PostgreSQL
+ predictor.py        # Modelos de red neuronal para predicciones
+ chatbot.py          # Chatbot inteligente
+ main.py             # Aplicación principal con menús
+ requirements.txt    # Dependencias Python
+ .env                # Variables de entorno
+ README.md           # Este archivo
+
+ models/             # Modelos entrenados (se crean automáticamente)
+    chatbot_model.h5
+    predictor_model.h5
+    tokenizer.pkl
+    label_encoder.pkl
+    scaler.pkl
+
+ data/               # Datasets generados
+    dataset_citas_ml.csv
+
+ exports/            # Reportes exportados
 ```
 
 ---
 
-## ⚡ Instalación Rápida
+##  Instalación Rápida
 
 ### 1. Requisitos Previos
 - Python 3.9 o superior
@@ -76,14 +76,14 @@ chat-bot/
 pip install -r requirements.txt
 ```
 
-⏱️ **Nota**: La instalación puede tardar 5-10 minutos (TensorFlow es pesado).
+⏱ **Nota**: La instalación puede tardar 5-10 minutos (TensorFlow es pesado).
 
 ### 3. Entrenar el Chatbot Veterinario (OBLIGATORIO - Primera vez)
 ```bash
 python entrenar_chatbot_veterinario.py
 ```
 
-⏱️ **Tarda**: 2-5 minutos. Entrena la red neuronal con información veterinaria.
+⏱ **Tarda**: 2-5 minutos. Entrena la red neuronal con información veterinaria.
 
 ### 4. Iniciar la API REST
 ```bash
@@ -108,7 +108,7 @@ fetch('http://localhost:8000/api/chat', {
 
 ---
 
-## 🚀 Uso del Sistema
+##  Uso del Sistema
 
 ### Sistema Basado en API REST
 
@@ -122,9 +122,9 @@ python api.py
 
 **Verás:**
 ```
-🚀 INICIANDO API REST - PET STORE CHATBOT
-✅ LISTO - Servidor en: http://localhost:8000
-📝 Documentación: http://localhost:8000/docs
+ INICIANDO API REST - PET STORE CHATBOT
+ LISTO - Servidor en: http://localhost:8000
+ Documentación: http://localhost:8000/docs
 ```
 
 ### 2. Probar los Endpoints
@@ -161,11 +161,11 @@ fetch('http://localhost:8000/api/analisis/tipos-mascota')
 
 ---
 
-## 🧠 Entrenar Modelos de Red Neuronal
+##  Entrenar Modelos de Red Neuronal
 
 ### HAY 2 MODELOS DIFERENTES:
 
-### 1️⃣ Chatbot Veterinario (LSTM - Información Médica)
+### 1⃣ Chatbot Veterinario (LSTM - Información Médica)
 
 **OBLIGATORIO antes de usar el chatbot:**
 
@@ -177,8 +177,8 @@ python entrenar_chatbot_veterinario.py
 - Lee `datos_veterinarios.json` (enfermedades, vacunas, cuidados)
 - Entrena red neuronal LSTM para clasificar intenciones
 - Guarda modelo en `models/chatbot_veterinario.h5`
-- ⏱️ Tarda: 2-5 minutos
-- 🎯 Precisión: 85%+
+- ⏱ Tarda: 2-5 minutos
+-  Precisión: 85%+
 
 **Archivos generados:**
 - `models/chatbot_veterinario.h5` - Red neuronal entrenada
@@ -186,7 +186,7 @@ python entrenar_chatbot_veterinario.py
 - `models/label_encoder_veterinario.pkl` - Codificador de intenciones
 - `models/intents_veterinario.pkl` - Respuestas
 
-### 2️⃣ Predictor de Datos (Dense - Análisis de BD)
+### 2⃣ Predictor de Datos (Dense - Análisis de BD)
 
 **OPCIONAL - Solo si usarás predicciones de datos:**
 
@@ -213,25 +213,25 @@ python
 - Entrena 2 modelos:
   - **Tipo de Mascota**: Predice tipo según día/hora/servicio
   - **Asistencia**: Predice probabilidad de asistencia
-- ⏱️ Tarda: 5-10 minutos
-- 🎯 Precisión: 75-85%
+- ⏱ Tarda: 5-10 minutos
+-  Precisión: 75-85%
 
 ---
 
-## 📊 Análisis Disponibles
+##  Análisis Disponibles
 
 ### 1. Tipo de Mascota Más Común
 Analiza qué tipos de mascotas están más registrados en el sistema.
 
 **Ejemplo de salida:**
 ```
-🏆 Tipo más común: Perro
+ Tipo más común: Perro
 
-📊 Distribución:
-   Perro          250 (45.5%) ████████████
-   Gato           180 (32.7%) ████████
-   Ave             70 (12.7%) ███
-   Conejo          30  (5.5%) █
+ Distribución:
+   Perro          250 (45.5%) 
+   Gato           180 (32.7%) 
+   Ave             70 (12.7%) 
+   Conejo          30  (5.5%) 
 ```
 
 ### 2. Día con Más Atención
@@ -239,16 +239,16 @@ Identifica qué día de la semana tiene más citas programadas.
 
 **Ejemplo de salida:**
 ```
-🏆 Día con más atención: Viernes
+ Día con más atención: Viernes
 
-📊 Distribución semanal:
-   Lunes       85 citas ████████
-   Martes      92 citas █████████
-   Miércoles   78 citas ███████
-   Jueves      88 citas ████████
-   Viernes    120 citas ████████████
-   Sábado      95 citas █████████
-   Domingo     45 citas ████
+ Distribución semanal:
+   Lunes       85 citas 
+   Martes      92 citas 
+   Miércoles   78 citas 
+   Jueves      88 citas 
+   Viernes    120 citas 
+   Sábado      95 citas 
+   Domingo     45 citas 
 ```
 
 ### 3. Hora Pico
@@ -256,7 +256,7 @@ Muestra la hora del día con más demanda.
 
 ---
 
-## 🔮 Predicciones con Red Neuronal
+##  Predicciones con Red Neuronal
 
 ### Predecir Tipo de Mascota
 
@@ -268,8 +268,8 @@ Mes: 11
 Servicio ID: 1
 
 Resultado:
-🏆 PREDICCIÓN: Perro
-📊 Confianza: 78.5%
+ PREDICCIÓN: Perro
+ Confianza: 78.5%
 
 Top 3 más probables:
    • Perro: 78.5%
@@ -288,14 +288,14 @@ Servicio: 2
 Edad Mascota: 5 años
 
 Resultado:
-📊 Probabilidad de asistencia: 82.3%
-🎯 Predicción: Asistirá ✅
-📈 Confianza: Alta
+ Probabilidad de asistencia: 82.3%
+ Predicción: Asistirá 
+ Confianza: Alta
 ```
 
 ---
 
-## 🗄️ Base de Datos
+##  Base de Datos
 
 ### Tablas Principales
 
@@ -323,21 +323,21 @@ DB_PASSWORD=LpEGFItXIhiOLcvpeWczptlFPxYnxhhI
 
 ---
 
-## 📈 Ejemplos de Uso
+##  Ejemplos de Uso
 
 ### Ejemplo 1: Chat Interactivo
 
 ```
-👤 Tú: Hola
+ Tú: Hola
 
-🤖 PetBot: ¡Hola! 👋 Soy PetBot, tu asistente virtual.
+ PetBot: ¡Hola!  Soy PetBot, tu asistente virtual.
 
-👤 Tú: ¿Cuál es el tipo de mascota más común?
+ Tú: ¿Cuál es el tipo de mascota más común?
 
-🤖 PetBot: 
-🏆 El tipo más común es: Perro
+ PetBot: 
+ El tipo más común es: Perro
 
-📊 Distribución:
+ Distribución:
    Perro: 250 (45.5%)
    Gato: 180 (32.7%)
    Ave: 70 (12.7%)
@@ -346,12 +346,12 @@ DB_PASSWORD=LpEGFItXIhiOLcvpeWczptlFPxYnxhhI
 ### Ejemplo 2: Búsqueda de Mascota
 
 ```
-👤 Tú: buscar mascota Max
+ Tú: buscar mascota Max
 
-🤖 PetBot:
-🔍 RESULTADOS DE BÚSQUEDA: 'Max'
+ PetBot:
+ RESULTADOS DE BÚSQUEDA: 'Max'
 
-🐾 Max (ID: 45)
+ Max (ID: 45)
    • Tipo: Perro
    • Raza: Golden Retriever
    • Edad: 3 años | Sexo: Macho
@@ -362,21 +362,21 @@ DB_PASSWORD=LpEGFItXIhiOLcvpeWczptlFPxYnxhhI
 ### Ejemplo 3: Predicción
 
 ```
-👤 Tú: predice tipo mascota
+ Tú: predice tipo mascota
 
-🤖 PetBot:
-🔮 PREDICCIÓN: Tipo de Mascota
+ PetBot:
+ PREDICCIÓN: Tipo de Mascota
 
-📅 Día: Viernes
+ Día: Viernes
 ⏰ Hora: 10:00
 
-🏆 Predicción: Perro
-📊 Confianza: 78.5%
+ Predicción: Perro
+ Confianza: 78.5%
 ```
 
 ---
 
-## 🛠️ Solución de Problemas
+##  Solución de Problemas
 
 ### Error: "No se puede conectar a la base de datos"
 - Verifica tu conexión a Internet
@@ -407,7 +407,7 @@ pip install tensorflow-cpu==2.15.0
 
 ---
 
-## 📊 Resultados Esperados
+##  Resultados Esperados
 
 ### Precisión de Modelos
 
@@ -423,14 +423,14 @@ Con datos suficientes (>1000 registros):
 
 ---
 
-## 🎓 Arquitectura del Sistema
+##  Arquitectura del Sistema
 
 ### Flujo de Datos
 
 ```
-Usuario → main.py → chatbot.py → predictor.py → Red Neuronal
-                        ↓
-                   database.py → PostgreSQL
+Usuario  main.py  chatbot.py  predictor.py  Red Neuronal
+                        
+                   database.py  PostgreSQL
 ```
 
 ### Componentes
@@ -443,16 +443,16 @@ Usuario → main.py → chatbot.py → predictor.py → Red Neuronal
 
 ---
 
-## 🔒 Seguridad
+##  Seguridad
 
-- ✅ Variables de entorno en `.env` (no subir a Git)
-- ✅ Conexión SSL a PostgreSQL
-- ✅ Validación de entradas de usuario
-- ⚠️  No compartir credenciales de base de datos
+-  Variables de entorno en `.env` (no subir a Git)
+-  Conexión SSL a PostgreSQL
+-  Validación de entradas de usuario
+-   No compartir credenciales de base de datos
 
 ---
 
-## 📝 Notas Técnicas
+##  Notas Técnicas
 
 ### Tecnologías Utilizadas
 
@@ -468,32 +468,32 @@ Usuario → main.py → chatbot.py → predictor.py → Red Neuronal
 **Arquitectura - Tipo de Mascota:**
 ```
 Input (4 features)
-    ↓
-Dense(128, relu) → Dropout(0.3)
-    ↓
-Dense(64, relu) → Dropout(0.3)
-    ↓
-Dense(32, relu) → Dropout(0.2)
-    ↓
+    
+Dense(128, relu)  Dropout(0.3)
+    
+Dense(64, relu)  Dropout(0.3)
+    
+Dense(32, relu)  Dropout(0.2)
+    
 Dense(n_classes, softmax)
 ```
 
 **Arquitectura - Asistencia:**
 ```
 Input (5 features)
-    ↓
-Dense(64, relu) → Dropout(0.3)
-    ↓
-Dense(32, relu) → Dropout(0.2)
-    ↓
+    
+Dense(64, relu)  Dropout(0.3)
+    
+Dense(32, relu)  Dropout(0.2)
+    
 Dense(16, relu)
-    ↓
+    
 Dense(1, sigmoid)
 ```
 
 ---
 
-## 🚀 Próximas Mejoras
+##  Próximas Mejoras
 
 - [ ] Exportación de reportes en PDF
 - [ ] Gráficos interactivos con Plotly
@@ -505,7 +505,7 @@ Dense(1, sigmoid)
 
 ---
 
-## 📞 Soporte
+##  Soporte
 
 Si encuentras problemas o tienes sugerencias, verifica:
 
@@ -516,7 +516,7 @@ Si encuentras problemas o tienes sugerencias, verifica:
 
 ---
 
-## ✅ Checklist de Instalación
+##  Checklist de Instalación
 
 - [ ] Python 3.9+ instalado
 - [ ] Entorno virtual creado y activado
@@ -528,7 +528,7 @@ Si encuentras problemas o tienes sugerencias, verifica:
 
 ---
 
-## 🎯 Casos de Uso
+##  Casos de Uso
 
 1. **Análisis de demanda**: Identificar patrones de atención para optimizar recursos
 2. **Predicción de no-shows**: Anticipar cancelaciones y optimizar agenda
@@ -538,13 +538,13 @@ Si encuentras problemas o tienes sugerencias, verifica:
 
 ---
 
-## 📄 Licencia
+##  Licencia
 
 Este proyecto es de uso educativo y demostrativo.
 
 ---
 
-## 🙏 Créditos
+##  Créditos
 
 Desarrollado para el curso de Aprendizaje Automatizado  
 Universidad: SEPTIMO SEMESTRE  
@@ -552,5 +552,5 @@ Fecha: Noviembre 2024
 
 ---
 
-**¡Gracias por usar PetBot! 🐾**
+**¡Gracias por usar PetBot! **
 

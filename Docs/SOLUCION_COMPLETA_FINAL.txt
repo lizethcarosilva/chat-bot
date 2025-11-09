@@ -1,15 +1,15 @@
-════════════════════════════════════════════════════════════════════════════════
-✅ SOLUCIÓN COMPLETA - TODO ARREGLADO
-════════════════════════════════════════════════════════════════════════════════
 
-1. ERROR DE ENTRENAMIENTO: ✅ ARREGLADO
-2. CÓMO AGREGAR INFORMACIÓN: ✅ EXPLICADO
-3. DOCUMENTACIÓN PARA EXPOSICIÓN: ✅ COMPLETA
+ SOLUCIÓN COMPLETA - TODO ARREGLADO
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔧 PROBLEMA 1: ERROR AL ENTRENAR (ARREGLADO)
-════════════════════════════════════════════════════════════════════════════════
+1. ERROR DE ENTRENAMIENTO:  ARREGLADO
+2. CÓMO AGREGAR INFORMACIÓN:  EXPLICADO
+3. DOCUMENTACIÓN PARA EXPOSICIÓN:  COMPLETA
+
+
+
+ PROBLEMA 1: ERROR AL ENTRENAR (ARREGLADO)
+
 
 ERROR:
   "The least populated class in y has only 1 member"
@@ -19,19 +19,19 @@ CAUSA:
   train_test_split con stratify requiere mínimo 2 por clase.
 
 SOLUCIÓN APLICADA:
-  ✅ Código modificado en predictor.py
-  ✅ Ahora detecta automáticamente si hay clases con pocos ejemplos
-  ✅ Entrena sin stratify cuando es necesario
+   Código modificado en predictor.py
+   Ahora detecta automáticamente si hay clases con pocos ejemplos
+   Entrena sin stratify cuando es necesario
 
 ACCIÓN REQUERIDA:
-  1. Reinicia la API: Ctrl+C → python api.py
+  1. Reinicia la API: Ctrl+C  python api.py
   2. Intenta entrenar de nuevo
-  3. Debería funcionar sin error ✅
+  3. Debería funcionar sin error 
 
 
-════════════════════════════════════════════════════════════════════════════════
-📝 PROBLEMA 2: AGREGAR INFORMACIÓN AL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
+ PROBLEMA 2: AGREGAR INFORMACIÓN AL CHATBOT
+
 
 QUIERES QUE EL CHATBOT SEPA SOBRE:
   • Tipos de enfermedades
@@ -43,7 +43,7 @@ HAY 2 FORMAS:
 
 
 FORMA 1: Editar JSON y Re-entrenar (Recomendado)
-────────────────────────────────────────────────
+
 
 1. Abre: datos_veterinarios.json
 
@@ -70,13 +70,13 @@ FORMA 1: Editar JSON y Re-entrenar (Recomendado)
    python api.py
 
 VENTAJAS:
-  ✅ El chatbot usa IA para entender variaciones
-  ✅ Entiende sinónimos
-  ✅ Mayor precisión
+   El chatbot usa IA para entender variaciones
+   Entiende sinónimos
+   Mayor precisión
 
 
 FORMA 2: Agregar Directamente al Código (Más Rápido)
-─────────────────────────────────────────────────────
+
 
 1. Abre: chatbot.py
 
@@ -95,71 +95,71 @@ FORMA 2: Agregar Directamente al Código (Más Rápido)
 5. Guarda y reinicia API
 
 VENTAJAS:
-  ✅ No requiere entrenamiento
-  ✅ Más rápido de implementar
-  ✅ Control total del texto
+   No requiere entrenamiento
+   Más rápido de implementar
+   Control total del texto
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 DOCUMENTACIÓN PARA TU EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ DOCUMENTACIÓN PARA TU EXPOSICIÓN
+
 
 LEE ESTOS ARCHIVOS (en orden):
 
-1. GUIA_PARA_EXPOSICION.md ⭐⭐⭐⭐⭐
-   └─> Explicación completa de cada archivo .py
-   └─> Flujos de datos con ejemplos
-   └─> Algoritmos explicados
-   └─> LEE ESTE PRIMERO
+1. GUIA_PARA_EXPOSICION.md 
+   > Explicación completa de cada archivo .py
+   > Flujos de datos con ejemplos
+   > Algoritmos explicados
+   > LEE ESTE PRIMERO
 
-2. EXPLICACION_ARCHIVOS_PARA_EXPOSICION.md ⭐⭐⭐⭐
-   └─> Resumen de qué hace cada archivo
-   └─> Diagrama de arquitectura
-   └─> Tecnologías utilizadas
+2. EXPLICACION_ARCHIVOS_PARA_EXPOSICION.md 
+   > Resumen de qué hace cada archivo
+   > Diagrama de arquitectura
+   > Tecnologías utilizadas
 
-3. PASO_A_PASO_ENTRENAR_IA.md ⭐⭐⭐
-   └─> Cómo entrenar paso a paso
-   └─> Interpretación de métricas
+3. PASO_A_PASO_ENTRENAR_IA.md 
+   > Cómo entrenar paso a paso
+   > Interpretación de métricas
 
-4. DONDE_SE_GUARDA_ENTRENAMIENTO.md ⭐⭐⭐
-   └─> Archivos generados (.h5, .pkl)
-   └─> Qué contiene cada archivo
+4. DONDE_SE_GUARDA_ENTRENAMIENTO.md 
+   > Archivos generados (.h5, .pkl)
+   > Qué contiene cada archivo
 
-5. COMO_AGREGAR_INFORMACION_CHATBOT.md ⭐⭐
-   └─> Cómo agregar enfermedades y cuidados
+5. COMO_AGREGAR_INFORMACION_CHATBOT.md 
+   > Cómo agregar enfermedades y cuidados
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎓 ARCHIVOS .PY QUE DEBES EXPLICAR
-════════════════════════════════════════════════════════════════════════════════
 
-1. config.py (78 líneas) ⭐
+ ARCHIVOS .PY QUE DEBES EXPLICAR
+
+
+1. config.py (78 líneas) 
    Configuración del sistema
 
-2. database.py (740 líneas) ⭐⭐
+2. database.py (740 líneas) 
    Acceso a PostgreSQL, consultas SQL
 
-3. chatbot.py (1209 líneas) ⭐⭐⭐⭐
+3. chatbot.py (1209 líneas) 
    IA conversacional, NLP, detección de intenciones
 
-4. predictor.py (913 líneas) ⭐⭐⭐⭐⭐
+4. predictor.py (913 líneas) 
    Machine Learning, Hierarchical Clustering, Redes Neuronales
-   ★ DESTACAR ESTE EN TU EXPOSICIÓN ★
+    DESTACAR ESTE EN TU EXPOSICIÓN 
 
-5. api.py (1247 líneas) ⭐⭐⭐
+5. api.py (1247 líneas) 
    Servidor REST, 25+ endpoints
 
-6. entrenar_chatbot_veterinario.py ⭐⭐⭐
+6. entrenar_chatbot_veterinario.py 
    Entrenamiento de red LSTM
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔬 ENFOQUE DE LA EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ ENFOQUE DE LA EXPOSICIÓN
+
 
 DEDICA 40% DEL TIEMPO A:
 
-  🔬 HIERARCHICAL CLUSTERING (predictor.py)
+   HIERARCHICAL CLUSTERING (predictor.py)
   
   • Qué es: Aprendizaje no supervisado
   • Algoritmo: Agglomerative (bottom-up)
@@ -169,59 +169,59 @@ DEDICA 40% DEL TIEMPO A:
   • Código: Totalmente comentado (líneas 430-730)
 
 
-════════════════════════════════════════════════════════════════════════════════
-🚀 PRÓXIMOS PASOS INMEDIATOS
-════════════════════════════════════════════════════════════════════════════════
+
+ PRÓXIMOS PASOS INMEDIATOS
+
 
 1. REINICIAR LA API (para aplicar fix del error)
-   ────────────────────────────────────────────
+   
    Ctrl+C
    python api.py
 
 
 2. INTENTAR ENTRENAR DE NUEVO
-   ──────────────────────────
-   http://localhost:8000/docs
-   POST /api/entrenar → Execute
    
-   Ahora debería funcionar sin error ✅
+   http://localhost:8000/docs
+   POST /api/entrenar  Execute
+   
+   Ahora debería funcionar sin error 
 
 
 3. (OPCIONAL) AGREGAR MÁS INFORMACIÓN AL CHATBOT
-   ──────────────────────────────────────────────
+   
    Edita: datos_veterinarios.json
    Agrega: Enfermedades, cuidados, tratamientos
    Re-entrena: python entrenar_chatbot_veterinario.py
 
 
 4. PREPARAR EXPOSICIÓN
-   ───────────────────
+   
    Lee: GUIA_PARA_EXPOSICION.md
    Estudia: predictor.py (clustering comentado)
    Practica: Demo en Swagger UI
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ RESUMEN FINAL
-════════════════════════════════════════════════════════════════════════════════
 
-✅ Error de entrenamiento ARREGLADO
-✅ Código comentado y explicado
-✅ Documentación completa para exposición
-✅ Guías para agregar información
-✅ Todo listo para entrenar
+ RESUMEN FINAL
+
+
+ Error de entrenamiento ARREGLADO
+ Código comentado y explicado
+ Documentación completa para exposición
+ Guías para agregar información
+ Todo listo para entrenar
 
 ACCIÓN INMEDIATA:
   1. Reinicia API
   2. Intenta entrenar
-  3. Debería funcionar ✅
+  3. Debería funcionar 
 
 PARA EXPOSICIÓN:
   Lee: GUIA_PARA_EXPOSICION.md
   Enfócate en: Hierarchical Clustering (predictor.py)
   
 
-════════════════════════════════════════════════════════════════════════════════
-🎉 ¡TODO COMPLETO Y LISTO!
-════════════════════════════════════════════════════════════════════════════════
+
+ ¡TODO COMPLETO Y LISTO!
+
 

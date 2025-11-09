@@ -52,17 +52,17 @@ TRANSFORMER_CONFIG = {
 
 INTENCIONES_BASE = {
     'saludo': [
-        '¡Hola! 👋 Soy tu asistente virtual con IA Transformer. ¿En qué puedo ayudarte?',
+        '¡Hola!  Soy tu asistente virtual con IA Transformer. ¿En qué puedo ayudarte?',
         '¡Bienvenido! Estoy aquí para asistirte con información del Pet Store.',
         '¡Hola! Puedo ayudarte con estadísticas, citas, ventas y más.'
     ],
     'despedida': [
-        '¡Hasta pronto! 👋 Cuida bien a tus mascotas 🐾',
+        '¡Hasta pronto!  Cuida bien a tus mascotas ',
         '¡Adiós! Regresa cuando necesites ayuda.',
         '¡Nos vemos! Que tengas un excelente día.'
     ],
     'agradecimiento': [
-        '¡De nada! Estoy aquí para ayudarte. 😊',
+        '¡De nada! Estoy aquí para ayudarte. ',
         'Es un placer ayudarte. ¿Necesitas algo más?',
         'Para eso estoy aquí. ¿Algo más que pueda hacer por ti?'
     ]
@@ -120,7 +120,7 @@ PYTORCH_CONFIG = {
 
 SYSTEM_MESSAGES = {
     'modelo_no_entrenado': """
-🤖 **Sistema Híbrido Activo**
+ **Sistema Híbrido Activo**
 
 Actualmente estoy funcionando en modo híbrido, combinando:
 - Detección de intenciones con patrones
@@ -134,25 +134,25 @@ python entrenar_transformer.py
     """,
     
     'error_generacion': """
-⚠️ Hubo un problema generando la respuesta. 
+ Hubo un problema generando la respuesta. 
 
 Pero no te preocupes, puedo ayudarte con:
-📊 Estadísticas del negocio
-📅 Consultar citas
-💰 Análisis de ventas
-🐾 Información sobre mascotas
+ Estadísticas del negocio
+ Consultar citas
+ Análisis de ventas
+ Información sobre mascotas
 
 ¿Qué necesitas?
     """,
     
     'bienvenida': """
-🤖 **Chatbot con Transformer - Pet Store**
+ **Chatbot con Transformer - Pet Store**
 
 Tecnología:
-✨ Arquitectura Transformer (Estado del arte en NLP)
-🧠 Multi-Head Attention
-📊 Enriquecimiento con datos en tiempo real
-🎯 Generación contextual de respuestas
+ Arquitectura Transformer (Estado del arte en NLP)
+ Multi-Head Attention
+ Enriquecimiento con datos en tiempo real
+ Generación contextual de respuestas
 
 Capacidades:
 • Consultas de estadísticas y métricas
@@ -236,16 +236,16 @@ def print_config():
     print("CONFIGURACIÓN DEL CHATBOT TRANSFORMER")
     print("=" * 80)
     
-    print("\n📊 MODELO:")
+    print("\n MODELO:")
     for key, value in TRANSFORMER_CONFIG.items():
         if not key.endswith('_path'):
             print(f"  • {key}: {value}")
     
-    print("\n🎯 CONTEXTO:")
+    print("\n CONTEXTO:")
     for key, value in CONTEXT_CONFIG.items():
         print(f"  • {key}: {value}")
     
-    print("\n⚡ PERFORMANCE:")
+    print("\n PERFORMANCE:")
     for key, value in PERFORMANCE_CONFIG.items():
         print(f"  • {key}: {value}")
     

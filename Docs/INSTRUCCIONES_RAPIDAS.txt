@@ -1,89 +1,89 @@
-════════════════════════════════════════════════════════════════════════════════
-🐾 INSTRUCCIONES RÁPIDAS - PET STORE CHATBOT
-════════════════════════════════════════════════════════════════════════════════
 
-✅ SISTEMA LIMPIO - SOLO ARCHIVOS NECESARIOS
-✅ CHATBOT VETERINARIO - Responde sobre enfermedades, cuidados, vacunas
-✅ ANÁLISIS DE BD - Identifica patrones con IA
-✅ API REST - Lista para consumir desde tu frontend React
+ INSTRUCCIONES RÁPIDAS - PET STORE CHATBOT
 
-════════════════════════════════════════════════════════════════════════════════
-⚡ INICIO RÁPIDO (3 PASOS)
-════════════════════════════════════════════════════════════════════════════════
+
+ SISTEMA LIMPIO - SOLO ARCHIVOS NECESARIOS
+ CHATBOT VETERINARIO - Responde sobre enfermedades, cuidados, vacunas
+ ANÁLISIS DE BD - Identifica patrones con IA
+ API REST - Lista para consumir desde tu frontend React
+
+
+ INICIO RÁPIDO (3 PASOS)
+
 
 PASO 1: Instalar dependencias
-───────────────────────────────
+
 pip install -r requirements.txt
 
-⏱️ Tarda: 5-10 minutos
+⏱ Tarda: 5-10 minutos
 
 
 PASO 2: Entrenar chatbot veterinario (OBLIGATORIO)
-───────────────────────────────────────────────────
+
 python entrenar_chatbot_veterinario.py
 
-⏱️ Tarda: 2-5 minutos
-✅ Genera: models/chatbot_veterinario.h5
+⏱ Tarda: 2-5 minutos
+ Genera: models/chatbot_veterinario.h5
 
 
 PASO 3: Iniciar API
-────────────────────
+
 python api.py
 
-✅ Servidor en: http://localhost:8000
-📝 Docs: http://localhost:8000/docs
+ Servidor en: http://localhost:8000
+ Docs: http://localhost:8000/docs
 
 
-════════════════════════════════════════════════════════════════════════════════
-🗂️ ARCHIVOS DEL PROYECTO (SOLO LOS NECESARIOS)
-════════════════════════════════════════════════════════════════════════════════
+
+ ARCHIVOS DEL PROYECTO (SOLO LOS NECESARIOS)
+
 
 MÓDULOS PRINCIPALES:
-   api.py                           ⭐ EJECUTAR ESTO
-   database.py                      → Consultas a PostgreSQL
-   predictor.py                     → Red neuronal predictiva (análisis BD)
-   chatbot.py                       → Chatbot veterinario (red LSTM)
-   config.py                        → Configuración
+   api.py                            EJECUTAR ESTO
+   database.py                       Consultas a PostgreSQL
+   predictor.py                      Red neuronal predictiva (análisis BD)
+   chatbot.py                        Chatbot veterinario (red LSTM)
+   config.py                         Configuración
 
 ENTRENAMIENTO:
-   entrenar_chatbot_veterinario.py  ⭐ EJECUTAR PRIMERO (una vez)
-   datos_veterinarios.json          → Datos de entrenamiento
+   entrenar_chatbot_veterinario.py   EJECUTAR PRIMERO (una vez)
+   datos_veterinarios.json           Datos de entrenamiento
 
 CONFIGURACIÓN:
-   requirements.txt                 → Dependencias
-   .env                             → Credenciales BD
+   requirements.txt                  Dependencias
+   .env                              Credenciales BD
 
 DOCUMENTACIÓN:
-   README.md                        → Documentación general
-   DOCUMENTACION_TECNICA.md         ⭐ EXPLICACIÓN COMPLETA DEL CÓDIGO
-   README_API.md                    → Guía de la API
-   API_ENDPOINTS.md                 → Lista de endpoints
-   COMO_USAR_API.txt                → Ejemplos de uso
+   README.md                         Documentación general
+   DOCUMENTACION_TECNICA.md          EXPLICACIÓN COMPLETA DEL CÓDIGO
+   README_API.md                     Guía de la API
+   API_ENDPOINTS.md                  Lista de endpoints
+   COMO_USAR_API.txt                 Ejemplos de uso
 
 
-════════════════════════════════════════════════════════════════════════════════
-🤖 CHATBOT VETERINARIO
-════════════════════════════════════════════════════════════════════════════════
+
+ CHATBOT VETERINARIO
+
 
 El chatbot responde sobre:
 
-🏥 ENFERMEDADES:
+ ENFERMEDADES:
    • Parvovirus, Moquillo, Rabia
    • Leucemia Felina, Inmunodeficiencia
    • Síntomas y tratamientos
 
-💉 VACUNAS:
+ VACUNAS:
    • Calendarios de vacunación
    • Vacunas obligatorias
    • Dosis de refuerzo
 
-🐾 CUIDADOS:
+ CUIDADOS:
    • Alimentación perros y gatos
    • Desparasitación
    • Higiene dental
    • Cuidados cachorros/gatitos
 
-🚨 EMERGENCIAS:
+ EMERGENCIAS:
    • Síntomas de alerta
    • Primeros auxilios
    • Tóxicos para mascotas
@@ -96,31 +96,31 @@ EJEMPLOS DE PREGUNTAS:
    "Alimentos tóxicos para perros"
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 ANÁLISIS DE BASE DE DATOS
-════════════════════════════════════════════════════════════════════════════════
+
+ ANÁLISIS DE BASE DE DATOS
+
 
 El sistema analiza:
 
-✅ Tipo de mascota más común
-   → Endpoint: GET /api/analisis/tipos-mascota
+ Tipo de mascota más común
+    Endpoint: GET /api/analisis/tipos-mascota
 
-✅ Día con más atención
-   → Endpoint: GET /api/analisis/dias-atencion
+ Día con más atención
+    Endpoint: GET /api/analisis/dias-atencion
 
-✅ Horas pico
-   → Endpoint: GET /api/analisis/horas-pico
+ Horas pico
+    Endpoint: GET /api/analisis/horas-pico
 
-✅ Servicios más utilizados
-   → Endpoint: GET /api/analisis/servicios
+ Servicios más utilizados
+    Endpoint: GET /api/analisis/servicios
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔌 ENDPOINTS PRINCIPALES PARA TU FRONTEND
-════════════════════════════════════════════════════════════════════════════════
+
+ ENDPOINTS PRINCIPALES PARA TU FRONTEND
+
 
 CHATBOT VETERINARIO:
-────────────────────
+
 POST /api/chat
 {
   "mensaje": "mi perro tiene fiebre",
@@ -136,7 +136,7 @@ Respuesta:
 
 
 ESTADÍSTICAS GENERALES:
-───────────────────────
+
 GET /api/estadisticas
 
 Respuesta:
@@ -149,7 +149,7 @@ Respuesta:
 
 
 TIPO DE MASCOTA MÁS COMÚN:
-───────────────────────────
+
 GET /api/analisis/tipos-mascota
 
 Respuesta:
@@ -163,7 +163,7 @@ Respuesta:
 
 
 DÍA CON MÁS ATENCIÓN:
-──────────────────────
+
 GET /api/analisis/dias-atencion
 
 Respuesta:
@@ -177,7 +177,7 @@ Respuesta:
 
 
 BUSCAR MASCOTA:
-───────────────
+
 GET /api/mascotas/buscar/Max
 
 Respuesta:
@@ -195,9 +195,9 @@ Respuesta:
 }
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 CÓMO AGREGAR MÁS INFORMACIÓN AL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
+ CÓMO AGREGAR MÁS INFORMACIÓN AL CHATBOT
+
 
 1. Edita: datos_veterinarios.json
 
@@ -224,7 +224,7 @@ Respuesta:
 
 
 EJEMPLO REAL:
-─────────────
+
 {
   "tag": "otitis",
   "patterns": [
@@ -238,12 +238,12 @@ EJEMPLO REAL:
 }
 
 
-════════════════════════════════════════════════════════════════════════════════
-🧪 PROBAR EL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
+ PROBAR EL CHATBOT
+
 
 Opción 1: Desde la documentación interactiva
-─────────────────────────────────────────────
+
 1. Abre: http://localhost:8000/docs
 2. Busca: POST /api/chat
 3. Click en "Try it out"
@@ -252,14 +252,14 @@ Opción 1: Desde la documentación interactiva
 
 
 Opción 2: Desde terminal (curl)
-────────────────────────────────
+
 curl -X POST "http://localhost:8000/api/chat" \
   -H "Content-Type: application/json" \
   -d '{"mensaje": "mi perro tiene fiebre"}'
 
 
 Opción 3: Desde tu frontend React
-──────────────────────────────────
+
 fetch('http://localhost:8000/api/chat', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -269,63 +269,63 @@ fetch('http://localhost:8000/api/chat', {
   .then(data => console.log(data.respuesta));
 
 
-════════════════════════════════════════════════════════════════════════════════
-📖 DOCUMENTACIÓN TÉCNICA COMPLETA
-════════════════════════════════════════════════════════════════════════════════
+
+ DOCUMENTACIÓN TÉCNICA COMPLETA
+
 
 Lee el archivo: DOCUMENTACION_TECNICA.md
 
 Explica en detalle:
-   ✅ Cómo funciona cada módulo
-   ✅ Qué hace cada función
-   ✅ Por qué se usa cada técnica
-   ✅ Arquitectura de las redes neuronales
-   ✅ Proceso de entrenamiento
-   ✅ Flujo de datos
-   ✅ Ejemplos paso a paso
+    Cómo funciona cada módulo
+    Qué hace cada función
+    Por qué se usa cada técnica
+    Arquitectura de las redes neuronales
+    Proceso de entrenamiento
+    Flujo de datos
+    Ejemplos paso a paso
 
 
-════════════════════════════════════════════════════════════════════════════════
-🚨 SOLUCIÓN DE PROBLEMAS
-════════════════════════════════════════════════════════════════════════════════
+
+ SOLUCIÓN DE PROBLEMAS
+
 
 Error: "No se puede conectar a la base de datos"
-──────────────────────────────────────────────────
+
 • Verifica conexión a Internet
 • Revisa .env tiene las credenciales correctas
 
 
 Error: "Modelo de chatbot no encontrado"
-─────────────────────────────────────────
+
 python entrenar_chatbot_veterinario.py
 
 
 Error: "ModuleNotFoundError: fastapi"
-─────────────────────────────────────
+
 pip install fastapi uvicorn pydantic
 
 
 Error de CORS desde React
-──────────────────────────
+
 En api.py línea ~38, ajusta:
 allow_origins=["http://localhost:3000"]
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ CHECKLIST
-════════════════════════════════════════════════════════════════════════════════
 
-□ pip install -r requirements.txt
-□ python entrenar_chatbot_veterinario.py
-□ python api.py
-□ Verificar http://localhost:8000/docs
-□ Probar endpoint de chat
-□ Consumir desde tu frontend React
+ CHECKLIST
 
 
-════════════════════════════════════════════════════════════════════════════════
-📞 MÁS INFORMACIÓN
-════════════════════════════════════════════════════════════════════════════════
+ pip install -r requirements.txt
+ python entrenar_chatbot_veterinario.py
+ python api.py
+ Verificar http://localhost:8000/docs
+ Probar endpoint de chat
+ Consumir desde tu frontend React
+
+
+
+ MÁS INFORMACIÓN
+
 
 • DOCUMENTACION_TECNICA.md   - Explicación completa del código
 • API_ENDPOINTS.md            - Lista de todos los endpoints
@@ -333,13 +333,13 @@ allow_origins=["http://localhost:3000"]
 • README.md                   - Documentación general
 
 
-════════════════════════════════════════════════════════════════════════════════
-¡SISTEMA LISTO! 🚀
-════════════════════════════════════════════════════════════════════════════════
+
+¡SISTEMA LISTO! 
+
 
 1. python entrenar_chatbot_veterinario.py
 2. python api.py
 3. Consumir desde tu React
 
-¡Disfruta! 🐾
+¡Disfruta! 
 

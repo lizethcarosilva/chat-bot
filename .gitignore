@@ -1,0 +1,183 @@
+# Carpetas excluidas del proyecto
+Docs/
+data/
+exports/
+
+# Archivos de modelos entrenados (muy pesados)
+models/*.h5
+models/*.pth
+models/*.pkl
+models/*.json
+
+# Mantener la carpeta models pero vacía
+!models/.gitkeep
+
+# Entornos virtuales de Python
+venv/
+env/
+ENV/
+.venv
+.env
+
+# Archivos de configuración de entorno
+.env.local
+.env.development
+.env.production
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribución / empaquetado
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IPython
+profile_default/
+ipython_config.py
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# mkdocs
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# Logs
+logs/
+*.log
+log.txt
+
+# Base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de respaldo
+*.bak
+*.backup
+*~.nib
+
+# Archivos de compilación
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Archivos de prueba y desarrollo temporal
+test.py
+temp.py
+scratch.py
+playground.py
+remove_*.py
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Archivos de datos grandes o sensibles
+*.csv
+*.xlsx
+*.xls
+*.json.bak
+
+# Excepciones - Mantener estos archivos JSON importantes
+!datos_veterinarios.json
+!package.json
+!package-lock.json
+
+# Archivos de configuración de despliegue
+*.pem
+*.key
+*.crt
+
+# Archivos de Docker (si se usan en el futuro)
+docker-compose.override.yml
+
+# Node modules (si hay frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Archivos de sistema de Windows
+$RECYCLE.BIN/
+*.lnk
+
+# Archivos de sistema de macOS
+.AppleDouble
+.LSOverride
+
+# Archivos de sistema de Linux
+.directory
+.Trash-*
+

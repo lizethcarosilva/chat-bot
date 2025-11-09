@@ -1,6 +1,6 @@
-# 🎓 GUÍA PARA EXPOSICIÓN - SISTEMA PET STORE CON IA
+#  GUÍA PARA EXPOSICIÓN - SISTEMA PET STORE CON IA
 
-## 📋 RESUMEN EJECUTIVO
+##  RESUMEN EJECUTIVO
 
 **Proyecto:** Sistema inteligente para gestión de Pet Store  
 **Tecnología:** Python + Machine Learning + API REST  
@@ -8,48 +8,48 @@
 
 ---
 
-## 🏗️ ARQUITECTURA DEL SISTEMA
+##  ARQUITECTURA DEL SISTEMA
 
 ### Capas del Sistema:
 
 ```
-┌────────────────────────────────────────────────┐
-│           CAPA DE PRESENTACIÓN                 │
-│         Frontend (React/Angular/Vue)           │
-│   Muestra datos, formularios, dashboards      │
-└──────────────────┬─────────────────────────────┘
-                   │ HTTP/REST
-                   ↓
-┌────────────────────────────────────────────────┐
-│         CAPA DE APLICACIÓN (api.py)            │
-│           API REST con FastAPI                 │
-│   • Recibe requests HTTP                       │
-│   • Coordina servicios                         │
-│   • Retorna JSON                               │
-└─────┬──────────────┬──────────────┬────────────┘
-      │              │              │
-      ↓              ↓              ↓
-┌──────────┐  ┌───────────┐  ┌──────────────┐
-│chatbot.py│  │database.py│  │predictor.py  │
-│   (IA)   │  │   (SQL)   │  │  (ML/DL)     │
-└──────────┘  └───────────┘  └──────────────┘
-      │              │              │
-      └──────────────┴──────────────┘
-                     │
-            ┌────────────────┐
-            │   config.py    │
-            │ (Configuración)│
-            └────────────────┘
+
+           CAPA DE PRESENTACIÓN                 
+         Frontend (React/Angular/Vue)           
+   Muestra datos, formularios, dashboards      
+
+                    HTTP/REST
+                   
+
+         CAPA DE APLICACIÓN (api.py)            
+           API REST con FastAPI                 
+   • Recibe requests HTTP                       
+   • Coordina servicios                         
+   • Retorna JSON                               
+
+                                  
+                                  
+    
+chatbot.py  database.py  predictor.py  
+   (IA)        (SQL)       (ML/DL)     
+    
+                                  
+      
+                     
+            
+               config.py    
+             (Configuración)
+            
 ```
 
 ---
 
-## 📂 DESCRIPCIÓN DE ARCHIVOS .PY
+##  DESCRIPCIÓN DE ARCHIVOS .PY
 
-### 1️⃣ **config.py** - Configuración Centralizada
+### 1⃣ **config.py** - Configuración Centralizada
 
 **Líneas:** ~78  
-**Complejidad:** ⭐ Baja  
+**Complejidad:**  Baja  
 
 **¿Qué hace?**
 - Define constantes del sistema
@@ -82,10 +82,10 @@ MODEL_CONFIG = {
 
 ---
 
-### 2️⃣ **database.py** - Capa de Acceso a Datos
+### 2⃣ **database.py** - Capa de Acceso a Datos
 
 **Líneas:** ~740  
-**Complejidad:** ⭐⭐ Media  
+**Complejidad:**  Media  
 
 **¿Qué hace?**
 - Conecta a PostgreSQL
@@ -135,10 +135,10 @@ def obtener_tipos_mascota_mas_comunes(self):
 
 ---
 
-### 3️⃣ **chatbot.py** - Inteligencia Conversacional
+### 3⃣ **chatbot.py** - Inteligencia Conversacional
 
 **Líneas:** ~1201  
-**Complejidad:** ⭐⭐⭐⭐ Alta  
+**Complejidad:**  Alta  
 
 **¿Qué hace?**
 - Procesa mensajes en lenguaje natural
@@ -171,7 +171,7 @@ def detectar_intencion(self, texto: str) -> str:
     # Ejemplos:
     texto = "cuantos clientes tengo"
     if 'clientes' in texto and 'cuantos' in texto:
-        return 'estadisticas'  # ← Intención detectada
+        return 'estadisticas'  #  Intención detectada
 ```
 
 #### C. Predicción con Red Neuronal (Opcional)
@@ -179,7 +179,7 @@ def detectar_intencion(self, texto: str) -> str:
 def predecir_intencion_neuronal(self, texto: str):
     # Usa modelo LSTM entrenado
     # Proceso:
-    # 1. Tokeniza texto (palabras → números)
+    # 1. Tokeniza texto (palabras  números)
     # 2. Padding (ajusta longitud)
     # 3. Pasa por red LSTM
     # 4. Softmax da probabilidades por intención
@@ -199,15 +199,15 @@ def predecir_intencion_neuronal(self, texto: str):
 
 ---
 
-### 4️⃣ **predictor.py** - Machine Learning y Clustering
+### 4⃣ **predictor.py** - Machine Learning y Clustering
 
 **Líneas:** ~815  
-**Complejidad:** ⭐⭐⭐⭐⭐ Muy Alta  
+**Complejidad:**  Muy Alta  
 
 **¿Qué hace?**
 - Implementa 3 tipos de algoritmos de IA
 - Predice con redes neuronales
-- **Agrupa datos con Hierarchical Clustering** 🔬
+- **Agrupa datos con Hierarchical Clustering** 
 
 **Algoritmos implementados:**
 
@@ -219,15 +219,15 @@ def entrenar_modelo_tipo_mascota(self, df):
     
     # Arquitectura:
     # Input (4 features) 
-    #   → Dense(128, ReLU) 
-    #   → Dropout(0.3)
-    #   → Dense(64, ReLU)
-    #   → Dropout(0.3)
-    #   → Dense(num_clases, Softmax)
+    #    Dense(128, ReLU) 
+    #    Dropout(0.3)
+    #    Dense(64, ReLU)
+    #    Dropout(0.3)
+    #    Dense(num_clases, Softmax)
     # Output (probabilidades)
 ```
 
-#### B. Hierarchical Clustering 🔬 (ESTRELLA DEL PROYECTO)
+#### B. Hierarchical Clustering  (ESTRELLA DEL PROYECTO)
 
 **Clustering de Mascotas:**
 ```python
@@ -271,25 +271,25 @@ def clustering_clientes(self, df, n_clusters=4):
     #    • Visitas: 8+ citas
     #    • Gasto: $800+
     #    • Asistencia: 90%+
-    #    → Estrategia: Programa de lealtad
+    #     Estrategia: Programa de lealtad
     # 
     # 2. Regular - Moderado
     #    • Visitas: 4-7 citas
     #    • Gasto: $300-800
     #    • Asistencia: 75-85%
-    #    → Estrategia: Mantener satisfacción
+    #     Estrategia: Mantener satisfacción
     # 
     # 3. Ocasional - Bajo
     #    • Visitas: 1-3 citas
     #    • Gasto: $100-300
     #    • Asistencia: 60-75%
-    #    → Estrategia: Reactivación
+    #     Estrategia: Reactivación
     # 
     # 4. Nuevo - Exploratorio
     #    • Visitas: 1-2 citas
     #    • Gasto: < $100
     #    • Asistencia: Variable
-    #    → Estrategia: Onboarding
+    #     Estrategia: Onboarding
 ```
 
 **Métrica de Calidad: Silhouette Score**
@@ -315,10 +315,10 @@ donde:
 
 ---
 
-### 5️⃣ **api.py** - Servidor REST
+### 5⃣ **api.py** - Servidor REST
 
 **Líneas:** ~1247  
-**Complejidad:** ⭐⭐⭐ Media-Alta  
+**Complejidad:**  Media-Alta  
 
 **¿Qué hace?**
 - Servidor web con FastAPI
@@ -370,10 +370,10 @@ async def obtener_dashboard_completo():
 
 ---
 
-### 6️⃣ **entrenar_chatbot_veterinario.py** - Entrenamiento
+### 6⃣ **entrenar_chatbot_veterinario.py** - Entrenamiento
 
 **Líneas:** Variable  
-**Complejidad:** ⭐⭐⭐ Media  
+**Complejidad:**  Media  
 
 **¿Qué hace?**
 - Entrena red neuronal LSTM del chatbot
@@ -386,12 +386,12 @@ async def obtener_dashboard_completo():
 # 1. CARGAR DATOS
 with open('datos_veterinarios.json') as f:
     data = json.load(f)
-# Ejemplos: "mi perro tiene fiebre" → intención: "sintomas"
+# Ejemplos: "mi perro tiene fiebre"  intención: "sintomas"
 
 # 2. TOKENIZACIÓN
 tokenizer = Tokenizer(num_words=5000)
 tokenizer.fit_on_texts(patterns)
-# Convierte: "perro" → 145, "tiene" → 28, "fiebre" → 392
+# Convierte: "perro"  145, "tiene"  28, "fiebre"  392
 
 # 3. PADDING
 padded = pad_sequences(sequences, maxlen=50)
@@ -421,10 +421,10 @@ do"
 
 ---
 
-### 7️⃣ **verificar_deteccion.py** - Testing
+### 7⃣ **verificar_deteccion.py** - Testing
 
 **Líneas:** ~90  
-**Complejidad:** ⭐ Baja  
+**Complejidad:**  Baja  
 
 **¿Qué hace?**
 - Script de prueba
@@ -435,7 +435,7 @@ do"
 
 ---
 
-## 🔬 ALGORITMO PRINCIPAL: HIERARCHICAL CLUSTERING
+##  ALGORITMO PRINCIPAL: HIERARCHICAL CLUSTERING
 
 ### ¿Qué es?
 
@@ -479,7 +479,7 @@ Final: 4 clusters
 ### Fórmula de Distancia Euclidiana:
 
 ```
-d(p, q) = √((p₁-q₁)² + (p₂-q₂)² + (p₃-q₃)²)
+d(p, q) = ((p₁-q₁)² + (p₂-q₂)² + (p₃-q₃)²)
 
 Ejemplo con 2 clientes:
 Cliente A: [5 citas, $500 gasto, 0.8 asistencia]
@@ -489,9 +489,9 @@ Después de estandarizar:
 Cliente A: [0.5, 0.3, 0.7]
 Cliente B: [-0.2, -0.4, -0.5]
 
-Distancia = √((0.5-(-0.2))² + (0.3-(-0.4))² + (0.7-(-0.5))²)
-          = √(0.49 + 0.49 + 1.44)
-          = √2.42
+Distancia = ((0.5-(-0.2))² + (0.3-(-0.4))² + (0.7-(-0.5))²)
+          = (0.49 + 0.49 + 1.44)
+          = 2.42
           = 1.56
 ```
 
@@ -509,14 +509,14 @@ silhouette(i) = (b(i) - a(i)) / max(a(i), b(i))
 
 **Interpretación visual:**
 ```
-Score = 0.9  →  ●●●●●  ·····  ●●●●●  (Muy separados)
-Score = 0.5  →  ●●●   ····   ●●●●   (Bien separados)
-Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
+Score = 0.9      ·····    (Muy separados)
+Score = 0.5       ····      (Bien separados)
+Score = 0.2    ·· ···  ··  (Solapados)
 ```
 
 ---
 
-## 📊 TECNOLOGÍAS DE IA UTILIZADAS
+##  TECNOLOGÍAS DE IA UTILIZADAS
 
 | Tecnología | Tipo | Dónde se usa | Propósito |
 |------------|------|--------------|-----------|
@@ -529,43 +529,43 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
 
 ---
 
-## 🎯 FLUJO COMPLETO: Ejemplo Real
+##  FLUJO COMPLETO: Ejemplo Real
 
 ### Usuario pregunta: "clustering"
 
 ```
 1. FRONTEND
-   └─> POST /api/chat
+   > POST /api/chat
        Body: {"mensaje": "clustering"}
 
 2. API.PY (línea 135)
-   └─> @app.post("/api/chat")
-   └─> bot.procesar_mensaje("clustering")
+   > @app.post("/api/chat")
+   > bot.procesar_mensaje("clustering")
 
 3. CHATBOT.PY (línea 945)
-   └─> normalizar_texto("clustering")
+   > normalizar_texto("clustering")
        Resultado: "clustering"
    
-   └─> detectar_intencion("clustering")
+   > detectar_intencion("clustering")
        Encuentra: "clustering" in texto
        Retorna: 'clustering'
    
-   └─> procesar_mensaje() → línea 1078
+   > procesar_mensaje()  línea 1078
        elif intencion == 'clustering':
            responder_clustering()
 
-4. CHATBOT.PY → responder_clustering() (línea 887)
-   └─> db.obtener_dataset_completo()
+4. CHATBOT.PY  responder_clustering() (línea 887)
+   > db.obtener_dataset_completo()
        (2000 citas de la BD)
    
-   └─> predictor.analisis_clustering_completo(df)
+   > predictor.analisis_clustering_completo(df)
 
-5. PREDICTOR.PY → analisis_clustering_completo() (línea 729)
-   └─> clustering_mascotas(df, 3)    # Agrupa mascotas
-   └─> clustering_clientes(df, 4)    # Segmenta clientes
-   └─> clustering_servicios(df, 3)   # Agrupa servicios
+5. PREDICTOR.PY  analisis_clustering_completo() (línea 729)
+   > clustering_mascotas(df, 3)    # Agrupa mascotas
+   > clustering_clientes(df, 4)    # Segmenta clientes
+   > clustering_servicios(df, 3)   # Agrupa servicios
 
-6. PREDICTOR.PY → clustering_clientes() (línea 545)
+6. PREDICTOR.PY  clustering_clientes() (línea 545)
    # PASO 1: Agrupar por cliente
    clientes_stats = df.groupby('client_id').agg({...})
    
@@ -587,19 +587,19 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
    # Retorna JSON con segmentos
 
 7. CHATBOT.PY
-   └─> Formatea respuesta bonita con emojis
-   └─> Retorna a API
+   > Formatea respuesta bonita con emojis
+   > Retorna a API
 
 8. API.PY
-   └─> Retorna JSON al frontend
+   > Retorna JSON al frontend
 
 9. FRONTEND
-   └─> Muestra resultado al usuario
+   > Muestra resultado al usuario
 ```
 
 ---
 
-## 🎓 PUNTOS CLAVE PARA LA EXPOSICIÓN
+##  PUNTOS CLAVE PARA LA EXPOSICIÓN
 
 ### Slide 1: Introducción
 - Sistema completo de Pet Store
@@ -613,7 +613,7 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
 ### Slide 3: Tecnologías de IA
 - **LSTM:** Chatbot inteligente
 - **Redes Neuronales:** Predicciones
-- **Hierarchical Clustering:** Segmentación automática 🔬
+- **Hierarchical Clustering:** Segmentación automática 
 
 ### Slide 4: Hierarchical Clustering (DESTACAR)
 - Qué es: Aprendizaje no supervisado
@@ -632,7 +632,7 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
 
 ---
 
-## 📚 ARCHIVOS DE REFERENCIA
+##  ARCHIVOS DE REFERENCIA
 
 | Archivo | Para qué leerlo |
 |---------|-----------------|
@@ -642,7 +642,7 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
 
 ---
 
-## ✅ RESUMEN PARA TU EXPOSICIÓN
+##  RESUMEN PARA TU EXPOSICIÓN
 
 **Sistema:** Pet Store con IA  
 **Archivos Python:** 7 (4 principales)  
@@ -656,5 +656,5 @@ Score = 0.2  →  ●●··●● ·●··●  ●··●●  (Solapados)
 
 ---
 
-**¡Listo para tu exposición!** 🎓📊🔬
+**¡Listo para tu exposición!** 
 

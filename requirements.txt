@@ -52,7 +52,7 @@ pytest==7.4.3
 #    pip install -r requirements.txt
 #
 # 4. Verificar instalación:
-#    python -c "import pandas, tensorflow, psycopg2; print('✅ OK')"
+#    python -c "import pandas, tensorflow, psycopg2; print(' OK')"
 #
 # =============================================================================
 # VERSIONES ALTERNATIVAS

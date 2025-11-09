@@ -1,6 +1,6 @@
-# 🔬 ENDPOINTS DE CLUSTERING - Para Consumir desde tu Frontend
+#  ENDPOINTS DE CLUSTERING - Para Consumir desde tu Frontend
 
-## 📡 ENDPOINTS DISPONIBLES
+##  ENDPOINTS DISPONIBLES
 
 ### 1. Clustering de Mascotas
 ```
@@ -127,7 +127,7 @@ GET http://localhost:8000/api/clustering/completo
 
 ---
 
-## 💻 EJEMPLOS DE CONSUMO
+##  EJEMPLOS DE CONSUMO
 
 ### JavaScript Puro (fetch)
 
@@ -182,7 +182,7 @@ async mounted() {
 
 ---
 
-## 📊 ESTRUCTURA DE DATOS
+##  ESTRUCTURA DE DATOS
 
 ### Segmentos de Clientes
 
@@ -226,7 +226,7 @@ async mounted() {
 
 ---
 
-## 🔧 PARÁMETROS OPCIONALES
+##  PARÁMETROS OPCIONALES
 
 Todos los endpoints aceptan el parámetro `n_clusters`:
 
@@ -248,7 +248,7 @@ fetch('http://localhost:8000/api/clustering/mascotas?n_clusters=2')
 
 ---
 
-## ⚡ EJEMPLO COMPLETO
+##  EJEMPLO COMPLETO
 
 ```javascript
 async function obtenerClustering() {
@@ -276,7 +276,7 @@ async function obtenerClustering() {
 
 ---
 
-## 📋 RESUMEN DE ENDPOINTS
+##  RESUMEN DE ENDPOINTS
 
 | Endpoint | Método | Qué retorna |
 |----------|--------|-------------|
@@ -289,7 +289,7 @@ async function obtenerClustering() {
 
 ---
 
-## ✅ VERIFICACIÓN
+##  VERIFICACIÓN
 
 Prueba en tu navegador:
 ```
@@ -307,14 +307,14 @@ Busca la sección: **"Clustering"**
 
 ---
 
-## 🎯 LISTO PARA TU FRONTEND
+##  LISTO PARA TU FRONTEND
 
 Los endpoints están listos para consumir desde:
-- ✅ React
-- ✅ Angular
-- ✅ Vue
-- ✅ JavaScript puro
-- ✅ Cualquier framework
+-  React
+-  Angular
+-  Vue
+-  JavaScript puro
+-  Cualquier framework
 
-**Solo haz fetch a los endpoints y procesa el JSON.** 🚀
+**Solo haz fetch a los endpoints y procesa el JSON.** 
 

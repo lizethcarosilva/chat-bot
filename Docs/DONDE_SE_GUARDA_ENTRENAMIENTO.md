@@ -1,23 +1,23 @@
-# 📦 DÓNDE SE GUARDA LA INFORMACIÓN DE ENTRENAMIENTO Y VALIDACIÓN
+#  DÓNDE SE GUARDA LA INFORMACIÓN DE ENTRENAMIENTO Y VALIDACIÓN
 
-## 📂 ESTRUCTURA DE CARPETAS
+##  ESTRUCTURA DE CARPETAS
 
 Cuando entrenas los modelos de IA, se crean archivos en estas carpetas:
 
 ```
 chat-bot/
-├── models/           ← AQUÍ SE GUARDAN LOS MODELOS ENTRENADOS
-│   ├── (archivos .h5 y .pkl)
-├── data/             ← AQUÍ SE GUARDAN DATASETS
-│   ├── (archivos .csv)
-├── exports/          ← AQUÍ SE EXPORTAN RESULTADOS
-│   ├── (archivos de análisis)
-└── ...
+ models/            AQUÍ SE GUARDAN LOS MODELOS ENTRENADOS
+    (archivos .h5 y .pkl)
+ data/              AQUÍ SE GUARDAN DATASETS
+    (archivos .csv)
+ exports/           AQUÍ SE EXPORTAN RESULTADOS
+    (archivos de análisis)
+ ...
 ```
 
 ---
 
-## 🧠 MODELOS DE PREDICCIÓN (predictor.py)
+##  MODELOS DE PREDICCIÓN (predictor.py)
 
 Cuando ejecutas el entrenamiento de predicción:
 
@@ -32,8 +32,8 @@ predictor.guardar_modelos()
 
 ```
 models/
-├── predictor_model.h5        ← Modelo de red neuronal (.h5 = Keras/TensorFlow)
-└── scaler.pkl                ← StandardScaler + Label Encoders (.pkl = Pickle)
+ predictor_model.h5         Modelo de red neuronal (.h5 = Keras/TensorFlow)
+ scaler.pkl                 StandardScaler + Label Encoders (.pkl = Pickle)
 ```
 
 ### 1. **predictor_model.h5** (Modelo de Red Neuronal)
@@ -53,17 +53,17 @@ models/
 **Estructura interna:**
 ```
 predictor_model.h5
-├── Model Configuration
-│   ├── Layers: Dense(128) → Dropout(0.3) → Dense(64) → ...
-│   ├── Activation: ReLU, Softmax
-│   └── Optimizer: Adam
-├── Weights (Pesos de las neuronas)
-│   ├── Layer 1: matriz 4x128 (512 valores)
-│   ├── Layer 2: matriz 128x64 (8192 valores)
-│   └── ... (miles de parámetros)
-└── Training Configuration
-    ├── Loss: categorical_crossentropy
-    └── Metrics: accuracy
+ Model Configuration
+    Layers: Dense(128)  Dropout(0.3)  Dense(64)  ...
+    Activation: ReLU, Softmax
+    Optimizer: Adam
+ Weights (Pesos de las neuronas)
+    Layer 1: matriz 4x128 (512 valores)
+    Layer 2: matriz 128x64 (8192 valores)
+    ... (miles de parámetros)
+ Training Configuration
+     Loss: categorical_crossentropy
+     Metrics: accuracy
 ```
 
 ### 2. **scaler.pkl** (Normalizador + Codificadores)
@@ -82,19 +82,19 @@ predictor_model.h5
 - **StandardScaler:** Normaliza features antes de predecir
   ```python
   # Transforma valores a media=0, std=1
-  [día=5, hora=10, mes=11] → [0.23, -0.45, 0.78]
+  [día=5, hora=10, mes=11]  [0.23, -0.45, 0.78]
   ```
 
 - **LabelEncoder:** Convierte tipos de mascota a números
   ```python
-  "Perro" → 0
-  "Gato" → 1
-  "Ave" → 2
+  "Perro"  0
+  "Gato"  1
+  "Ave"  2
   ```
 
 ---
 
-## 🤖 MODELOS DEL CHATBOT (entrenar_chatbot_veterinario.py)
+##  MODELOS DEL CHATBOT (entrenar_chatbot_veterinario.py)
 
 Cuando ejecutas:
 
@@ -106,10 +106,10 @@ python entrenar_chatbot_veterinario.py
 
 ```
 models/
-├── chatbot_veterinario.h5             ← Red neuronal LSTM
-├── tokenizer_veterinario.pkl          ← Vocabulario (palabras → números)
-├── label_encoder_veterinario.pkl      ← Intenciones → números
-└── intents_veterinario.pkl            ← Diccionario de respuestas
+ chatbot_veterinario.h5              Red neuronal LSTM
+ tokenizer_veterinario.pkl           Vocabulario (palabras  números)
+ label_encoder_veterinario.pkl       Intenciones  números
+ intents_veterinario.pkl             Diccionario de respuestas
 ```
 
 ### 1. **chatbot_veterinario.h5** (Red LSTM)
@@ -123,19 +123,19 @@ models/
 **Arquitectura:**
 ```
 Input: Secuencia de palabras [145, 28, 392, 0, 0, ...]
-   ↓
+   
 Embedding(5000, 128): Convierte números a vectores densos
-   ↓
-Bidirectional LSTM(64): Procesa secuencia (→ y ←)
-   ↓
+   
+Bidirectional LSTM(64): Procesa secuencia ( y )
+   
 Dropout(0.3): Regularización
-   ↓
+   
 Bidirectional LSTM(64): Segunda capa
-   ↓
+   
 Dense(64, ReLU): Capa densa
-   ↓
+   
 Dense(num_intenciones, Softmax): Clasificación
-   ↓
+   
 Output: [0.05, 0.82, 0.03, ...] (probabilidades)
 ```
 
@@ -198,7 +198,7 @@ tokenizer.texts_to_sequences([texto])
 
 ---
 
-## 📊 INFORMACIÓN DE VALIDACIÓN
+##  INFORMACIÓN DE VALIDACIÓN
 
 Durante el entrenamiento, también se genera información de validación que **NO se guarda en disco** (solo se muestra en consola):
 
@@ -241,20 +241,20 @@ def entrenar_modelo_tipo_mascota(self, df: pd.DataFrame) -> Dict:
     
     return {
         "accuracy": accuracy,
-        "history": history.history  # ← Contiene todo el historial
+        "history": history.history  #  Contiene todo el historial
     }
 ```
 
 ---
 
-## 🗂️ RESUMEN DE ARCHIVOS GENERADOS
+##  RESUMEN DE ARCHIVOS GENERADOS
 
 ### Después de Entrenar Predictor:
 
 ```
 models/
-├── predictor_model.h5           (Red neuronal para predicciones)
-└── scaler.pkl                   (Normalizador + encoders)
+ predictor_model.h5           (Red neuronal para predicciones)
+ scaler.pkl                   (Normalizador + encoders)
 ```
 
 **Comando:**
@@ -271,10 +271,10 @@ POST http://localhost:8000/api/entrenar
 
 ```
 models/
-├── chatbot_veterinario.h5           (Red LSTM del chatbot)
-├── tokenizer_veterinario.pkl        (Vocabulario)
-├── label_encoder_veterinario.pkl    (Intenciones)
-└── intents_veterinario.pkl          (Respuestas)
+ chatbot_veterinario.h5           (Red LSTM del chatbot)
+ tokenizer_veterinario.pkl        (Vocabulario)
+ label_encoder_veterinario.pkl    (Intenciones)
+ intents_veterinario.pkl          (Respuestas)
 ```
 
 **Comando:**
@@ -291,31 +291,31 @@ python entrenar_chatbot_veterinario.py
 
 ```
 models/
-├── predictor_model.h5              # Predicción de tipos
-├── scaler.pkl                      # Normalizador
-├── chatbot_veterinario.h5          # LSTM del chatbot
-├── tokenizer_veterinario.pkl       # Vocabulario
-├── label_encoder_veterinario.pkl   # Encoder de intenciones
-└── intents_veterinario.pkl         # Diccionario de respuestas
+ predictor_model.h5              # Predicción de tipos
+ scaler.pkl                      # Normalizador
+ chatbot_veterinario.h5          # LSTM del chatbot
+ tokenizer_veterinario.pkl       # Vocabulario
+ label_encoder_veterinario.pkl   # Encoder de intenciones
+ intents_veterinario.pkl         # Diccionario de respuestas
 ```
 
 ---
 
-## 📈 MÉTRICAS DE VALIDACIÓN (En Consola)
+##  MÉTRICAS DE VALIDACIÓN (En Consola)
 
 ### Lo que verás durante el entrenamiento:
 
 ```
-🚀 ENTRENANDO MODELO: Tipo de Mascota
+ ENTRENANDO MODELO: Tipo de Mascota
 ================================================================================
-📊 Preparando datos para predicción de tipo de mascota...
-✓ Datos preparados: 1600 train, 400 test
-✓ Clases: 7
+ Preparando datos para predicción de tipo de mascota...
+ Datos preparados: 1600 train, 400 test
+ Clases: 7
 
-🏗️  Construyendo modelo de predicción de tipo de mascota...
-✓ Modelo construido
+  Construyendo modelo de predicción de tipo de mascota...
+ Modelo construido
 
-📈 Entrenando...
+ Entrenando...
 Epoch 1/100
 50/50 [==============================] - 2s 31ms/step
   loss: 1.8234 
@@ -335,21 +335,21 @@ Epoch 2/100
 Epoch 100/100
 50/50 [==============================] - 1s 27ms/step
   loss: 0.2134 
-  accuracy: 0.9425 ← Precisión en entrenamiento: 94.25%
+  accuracy: 0.9425  Precisión en entrenamiento: 94.25%
   val_loss: 0.2567 
-  val_accuracy: 0.9125 ← Precisión en validación: 91.25% ⭐
+  val_accuracy: 0.9125  Precisión en validación: 91.25% 
 
-📊 Evaluando modelo...
-✓ Precisión en test: 91.25%
+ Evaluando modelo...
+ Precisión en test: 91.25%
 
-💾 Guardando modelos...
-✓ Modelo tipo mascota guardado
-✓ Encoders y scaler guardados
+ Guardando modelos...
+ Modelo tipo mascota guardado
+ Encoders y scaler guardados
 ```
 
 ---
 
-## 💾 ¿QUÉ CONTIENE CADA ARCHIVO?
+##  ¿QUÉ CONTIENE CADA ARCHIVO?
 
 ### .h5 (Modelo de Keras/TensorFlow)
 
@@ -358,15 +358,15 @@ Epoch 100/100
 **Contiene:**
 ```
 / (raíz)
-├── model_weights/
-│   ├── dense_1/kernel    (matriz de pesos)
-│   ├── dense_1/bias      (vector de bias)
-│   ├── lstm_1/kernel     (pesos LSTM)
-│   └── ...
-├── model_config/
-│   └── config.json       (arquitectura)
-└── training_config/
-    └── optimizer, loss, metrics
+ model_weights/
+    dense_1/kernel    (matriz de pesos)
+    dense_1/bias      (vector de bias)
+    lstm_1/kernel     (pesos LSTM)
+    ...
+ model_config/
+    config.json       (arquitectura)
+ training_config/
+     optimizer, loss, metrics
 ```
 
 **Cómo ver información:**
@@ -392,7 +392,7 @@ with open('models/scaler.pkl', 'rb') as f:
 
 ---
 
-## 📊 INFORMACIÓN DE VALIDACIÓN (NO se guarda por defecto)
+##  INFORMACIÓN DE VALIDACIÓN (NO se guarda por defecto)
 
 ### Curvas de Aprendizaje
 
@@ -406,7 +406,7 @@ history = model.fit(X_train, y_train, validation_split=0.2, epochs=100)
     'loss': [2.1, 1.8, 1.5, ..., 0.21],           # Pérdida por época (train)
     'accuracy': [0.45, 0.58, 0.67, ..., 0.94],    # Precisión por época (train)
     'val_loss': [2.3, 1.9, 1.6, ..., 0.25],       # Pérdida (validation)
-    'val_accuracy': [0.42, 0.56, 0.65, ..., 0.91] # Precisión (validation) ⭐
+    'val_accuracy': [0.42, 0.56, 0.65, ..., 0.91] # Precisión (validation) 
 }
 ```
 
@@ -447,7 +447,7 @@ plt.savefig('exports/curvas_aprendizaje.png')
 
 ---
 
-## 🔍 CÓMO VERIFICAR QUE SE GUARDÓ CORRECTAMENTE
+##  CÓMO VERIFICAR QUE SE GUARDÓ CORRECTAMENTE
 
 ### Opción 1: Desde código Python
 
@@ -507,17 +507,17 @@ tokenizer_veterinario.pkl     120 KB
 
 ---
 
-## 📥 CÓMO SE CARGAN LOS MODELOS
+##  CÓMO SE CARGAN LOS MODELOS
 
 Cuando inicias la API, automáticamente intenta cargar los modelos:
 
 ```python
 # En api.py (línea 45)
 try:
-    predictor.cargar_modelos()  # ← Carga modelos entrenados
-    logger.info("✅ Modelos cargados exitosamente")
+    predictor.cargar_modelos()  #  Carga modelos entrenados
+    logger.info(" Modelos cargados exitosamente")
 except:
-    logger.warning("⚠️ Modelos no encontrados. Entrena primero.")
+    logger.warning(" Modelos no encontrados. Entrena primero.")
 ```
 
 **Proceso de carga:**
@@ -539,7 +539,7 @@ def cargar_modelos(self):
 
 ---
 
-## 🎯 RESUMEN PARA TU EXPOSICIÓN
+##  RESUMEN PARA TU EXPOSICIÓN
 
 ### Tipos de Modelos:
 
@@ -562,24 +562,24 @@ def cargar_modelos(self):
 
 ---
 
-## 📝 PARA INCLUIR EN TU EXPOSICIÓN
+##  PARA INCLUIR EN TU EXPOSICIÓN
 
 ### Slide: "Persistencia de Modelos"
 
 ```
 Modelos Entrenados se Guardan en:
-  📁 models/
-     ├── predictor_model.h5 (1.2 MB)
-     ├── chatbot_veterinario.h5 (3.5 MB)
-     └── archivos auxiliares (.pkl)
+   models/
+      predictor_model.h5 (1.2 MB)
+      chatbot_veterinario.h5 (3.5 MB)
+      archivos auxiliares (.pkl)
 
 Formato: HDF5 para redes neuronales
          Pickle para objetos Python
 
 Ventajas:
-  ✅ Entrenar una vez, usar siempre
-  ✅ No re-entrenar en cada inicio
-  ✅ Portabilidad entre servidores
+   Entrenar una vez, usar siempre
+   No re-entrenar en cada inicio
+   Portabilidad entre servidores
 ```
 
 ### Slide: "Información de Validación"
@@ -600,7 +600,7 @@ Early Stopping: Evita sobreajuste
 
 ---
 
-## ✅ CHECKLIST
+##  CHECKLIST
 
 - [ ] Carpeta `models/` existe (se crea automáticamente)
 - [ ] Después de entrenar, archivos .h5 y .pkl aparecen
@@ -609,10 +609,10 @@ Early Stopping: Evita sobreajuste
 
 ---
 
-## 🎉 RESUMEN
+##  RESUMEN
 
 **Dónde se guarda:**
-- 📁 `models/` - Todos los modelos entrenados
+-  `models/` - Todos los modelos entrenados
 - Formato: .h5 (Keras) y .pkl (Pickle)
 
 **Qué se guarda:**
@@ -627,5 +627,5 @@ Early Stopping: Evita sobreajuste
 
 ---
 
-**Para tu exposición:** Explica que los modelos se guardan en formato estándar (HDF5) para reutilizarlos sin re-entrenar. 🚀
+**Para tu exposición:** Explica que los modelos se guardan en formato estándar (HDF5) para reutilizarlos sin re-entrenar. 
 

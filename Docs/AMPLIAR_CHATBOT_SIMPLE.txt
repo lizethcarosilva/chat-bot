@@ -1,34 +1,34 @@
-════════════════════════════════════════════════════════════════════════════════
-🎯 CÓMO HACER QUE EL CHATBOT SEPA MÁS
-════════════════════════════════════════════════════════════════════════════════
+
+ CÓMO HACER QUE EL CHATBOT SEPA MÁS
+
 
 PROBLEMA IDENTIFICADO:
-──────────────────────
+
 
 Tu chatbot tiene 2 tipos de información:
 
-✅ BASE DE DATOS (Funciona bien):
+ BASE DE DATOS (Funciona bien):
    • ¿Cuántos clientes tengo?
    • Estadísticas
    • Clustering
 
-⚠️ INFORMACIÓN VETERINARIA (Limitada):
+ INFORMACIÓN VETERINARIA (Limitada):
    • Enfermedades
    • Cuidados
    • Tratamientos
-   → Esta info NO está en la BD
-   → Está en: datos_veterinarios.json
+    Esta info NO está en la BD
+    Está en: datos_veterinarios.json
 
 
 SOLUCIÓN:
-─────────
+
 
 AGREGAR MÁS INTENCIONES al archivo datos_veterinarios.json
 
 
-════════════════════════════════════════════════════════════════════════════════
-📝 PASO A PASO SIMPLE
-════════════════════════════════════════════════════════════════════════════════
+
+ PASO A PASO SIMPLE
+
 
 1. ABRE EL ARCHIVO
    datos_veterinarios.json
@@ -65,12 +65,12 @@ AGREGAR MÁS INTENCIONES al archivo datos_veterinarios.json
 
 8. PRUEBA
    Pregunta: "mi perro tiene la piel roja"
-   Debería responder con info detallada ✅
+   Debería responder con info detallada 
 
 
-════════════════════════════════════════════════════════════════════════════════
-📋 FORMATO DE UNA INTENCIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ FORMATO DE UNA INTENCIÓN
+
 
 {
   "tag": "nombre_del_tema",
@@ -87,77 +87,77 @@ AGREGAR MÁS INTENCIONES al archivo datos_veterinarios.json
 
 
 REGLAS:
-───────
-✅ Mínimo 15 patterns (preguntas) por intención
-✅ Responses detalladas y útiles
-✅ Cada intención separada por coma ,
-✅ La ÚLTIMA intención SIN coma
+
+ Mínimo 15 patterns (preguntas) por intención
+ Responses detalladas y útiles
+ Cada intención separada por coma ,
+ La ÚLTIMA intención SIN coma
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎁 INTENCIONES LISTAS PARA USAR
-════════════════════════════════════════════════════════════════════════════════
+
+ INTENCIONES LISTAS PARA USAR
+
 
 EN EL ARCHIVO: AMPLIAR_CONOCIMIENTO_CHATBOT.md
 
 Encontrarás 5 intenciones COMPLETAS listas para copiar/pegar:
 
 1. ENFERMEDADES DE PIEL (20 patterns)
-   → Dermatitis, hongos, sarna, alergias
+    Dermatitis, hongos, sarna, alergias
 
 2. CUIDADOS DENTALES (20 patterns)
-   → Cepillado, limpieza, enfermedad periodontal
+    Cepillado, limpieza, enfermedad periodontal
 
 3. NUTRICIÓN CACHORROS (20 patterns)
-   → Alimentación, frecuencia, porciones
+    Alimentación, frecuencia, porciones
 
 4. PRIMEROS AUXILIOS (20 patterns)
-   → Heridas, RCP, envenenamientos, emergencias
+    Heridas, RCP, envenenamientos, emergencias
 
 5. COMPORTAMIENTO CANINO (20 patterns)
-   → Ladridos, ansiedad, entrenamiento, miedos
+    Ladridos, ansiedad, entrenamiento, miedos
 
 
 CADA UNA TIENE:
-───────────────
-✅ 15-20 ejemplos de preguntas
-✅ Respuestas súper detalladas (1000+ palabras)
-✅ Información práctica y útil
-✅ Formato claro con emojis y estructura
+
+ 15-20 ejemplos de preguntas
+ Respuestas súper detalladas (1000+ palabras)
+ Información práctica y útil
+ Formato claro con emojis y estructura
 
 
-════════════════════════════════════════════════════════════════════════════════
-⚡ PROCESO VISUAL
-════════════════════════════════════════════════════════════════════════════════
+
+ PROCESO VISUAL
+
 
 ANTES:
   datos_veterinarios.json
-  ├─ 45 intenciones
-  └─ 782 patterns
+   45 intenciones
+   782 patterns
   
-  Chatbot sabe poco ⚠️
+  Chatbot sabe poco 
 
-     ↓
+     
      
 AGREGAR 5 intenciones nuevas
      
-     ↓
+     
      
 RE-ENTRENAR (python entrenar_chatbot_veterinario.py)
      
-     ↓
+     
 
 DESPUÉS:
   datos_veterinarios.json
-  ├─ 50 intenciones
-  └─ 982 patterns
+   50 intenciones
+   982 patterns
   
-  Chatbot sabe MUCHO MÁS ✅
+  Chatbot sabe MUCHO MÁS 
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎓 PARA TU EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ PARA TU EXPOSICIÓN
+
 
 EXPLICA ASÍ:
 
@@ -186,9 +186,9 @@ Generalización:
   "mi can tiene alergia en la piel"
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 MÁS TEMAS QUE PUEDES AGREGAR (Futuro)
-════════════════════════════════════════════════════════════════════════════════
+
+ MÁS TEMAS QUE PUEDES AGREGAR (Futuro)
+
 
 Enfermedades:
   • Problemas respiratorios
@@ -209,9 +209,9 @@ Reproducción:
   • Parto
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ RESUMEN
-════════════════════════════════════════════════════════════════════════════════
+
+ RESUMEN
+
 
 1. Abre: datos_veterinarios.json
 
@@ -223,19 +223,19 @@ Reproducción:
 
 5. Prueba: "mi perro tiene la piel roja"
 
-6. ✅ Chatbot ahora responde con información detallada
+6.  Chatbot ahora responde con información detallada
 
 
 TIEMPO TOTAL: 15-20 minutos
 
 
-════════════════════════════════════════════════════════════════════════════════
-📖 DOCUMENTACIÓN COMPLETA
-════════════════════════════════════════════════════════════════════════════════
+
+ DOCUMENTACIÓN COMPLETA
+
 
 Lee: AMPLIAR_CONOCIMIENTO_CHATBOT.md
-  → Explicación detallada
-  → 5 intenciones completas listas
-  → Ejemplos de código
-  → Consejos para crear más
+   Explicación detallada
+   5 intenciones completas listas
+   Ejemplos de código
+   Consejos para crear más
 

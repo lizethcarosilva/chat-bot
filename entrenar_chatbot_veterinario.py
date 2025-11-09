@@ -18,7 +18,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 
 print("=" * 80)
-print("🧠 ENTRENAMIENTO DE CHATBOT VETERINARIO CON RED NEURONAL")
+print(" ENTRENAMIENTO DE CHATBOT VETERINARIO CON RED NEURONAL")
 print("=" * 80)
 
 
@@ -37,7 +37,7 @@ VALIDATION_SPLIT = 0.2  # 20% para validación
 # =============================================================================
 # PASO 1: CARGAR Y PREPROCESAR DATOS
 # =============================================================================
-print("\n📚 PASO 1: Cargando datos de entrenamiento...")
+print("\n PASO 1: Cargando datos de entrenamiento...")
 
 with open('datos_veterinarios.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
@@ -60,15 +60,15 @@ for intent in data['intents']:
         patterns.append(pattern_normalized)
         labels.append(tag)
 
-print(f"✓ Patrones cargados: {len(patterns)}")
-print(f"✓ Intenciones únicas: {len(set(labels))}")
-print(f"✓ Intenciones: {', '.join(set(labels))}")
+print(f" Patrones cargados: {len(patterns)}")
+print(f" Intenciones únicas: {len(set(labels))}")
+print(f" Intenciones: {', '.join(set(labels))}")
 
 
 # =============================================================================
 # PASO 2: TOKENIZACIÓN Y CODIFICACIÓN
 # =============================================================================
-print("\n🔧 PASO 2: Tokenizando texto...")
+print("\n PASO 2: Tokenizando texto...")
 
 # Tokenizar patrones (convertir palabras a números)
 tokenizer = Tokenizer(num_words=MAX_WORDS, oov_token="<OOV>")
@@ -80,9 +80,9 @@ sequences = tokenizer.texts_to_sequences(patterns)
 # Padding (rellenar/truncar para que todas tengan la misma longitud)
 X = pad_sequences(sequences, maxlen=MAX_LEN, padding='post')
 
-print(f"✓ Vocabulario: {len(tokenizer.word_index)} palabras")
-print(f"✓ Forma de X (datos de entrada): {X.shape}")
-print(f"✓ Ejemplo de secuencia: {X[0][:10]}...")
+print(f" Vocabulario: {len(tokenizer.word_index)} palabras")
+print(f" Forma de X (datos de entrada): {X.shape}")
+print(f" Ejemplo de secuencia: {X[0][:10]}...")
 
 # Codificar etiquetas (convertir intenciones a números)
 label_encoder = LabelEncoder()
@@ -91,14 +91,14 @@ y_encoded = label_encoder.fit_transform(labels)
 # Convertir a formato categórico (one-hot encoding)
 y = keras.utils.to_categorical(y_encoded)
 
-print(f"✓ Clases codificadas: {len(label_encoder.classes_)}")
-print(f"✓ Forma de y (etiquetas): {y.shape}")
+print(f" Clases codificadas: {len(label_encoder.classes_)}")
+print(f" Forma de y (etiquetas): {y.shape}")
 
 
 # =============================================================================
 # PASO 3: DIVIDIR DATOS EN ENTRENAMIENTO Y PRUEBA
 # =============================================================================
-print("\n📊 PASO 3: Dividiendo datos...")
+print("\n PASO 3: Dividiendo datos...")
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, 
@@ -107,14 +107,14 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y_encoded
 )
 
-print(f"✓ Datos de entrenamiento: {X_train.shape[0]} muestras")
-print(f"✓ Datos de prueba: {X_test.shape[0]} muestras")
+print(f" Datos de entrenamiento: {X_train.shape[0]} muestras")
+print(f" Datos de prueba: {X_test.shape[0]} muestras")
 
 
 # =============================================================================
 # PASO 4: CONSTRUIR LA RED NEURONAL
 # =============================================================================
-print("\n🏗️  PASO 4: Construyendo arquitectura de red neuronal...")
+print("\n  PASO 4: Construyendo arquitectura de red neuronal...")
 
 """
 ARQUITECTURA DE LA RED:
@@ -147,7 +147,7 @@ ARQUITECTURA DE LA RED:
 num_classes = len(label_encoder.classes_)
 
 model = Sequential([
-    # Capa 1: Embeddings (palabras → vectores)
+    # Capa 1: Embeddings (palabras  vectores)
     Embedding(
         input_dim=MAX_WORDS,      # Tamaño del vocabulario
         output_dim=EMBEDDING_DIM,  # Dimensión de los vectores
@@ -178,15 +178,15 @@ model.compile(
     metrics=['accuracy']                 # Métrica: precisión
 )
 
-print("\n📋 Resumen de la arquitectura:")
+print("\n Resumen de la arquitectura:")
 model.summary()
 
 
 # =============================================================================
 # PASO 5: ENTRENAR LA RED NEURONAL
 # =============================================================================
-print("\n🚀 PASO 5: Entrenando red neuronal...")
-print(f"⏱️  Esto puede tardar varios minutos...\n")
+print("\n PASO 5: Entrenando red neuronal...")
+print(f"⏱  Esto puede tardar varios minutos...\n")
 
 # Callbacks para mejorar el entrenamiento
 early_stop = keras.callbacks.EarlyStopping(
@@ -216,13 +216,13 @@ history = model.fit(
 # =============================================================================
 # PASO 6: EVALUAR EL MODELO
 # =============================================================================
-print("\n📊 PASO 6: Evaluando modelo en datos de prueba...")
+print("\n PASO 6: Evaluando modelo en datos de prueba...")
 
 # Evaluar en datos de prueba
 test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=0)
 
-print(f"\n✓ Pérdida en prueba: {test_loss:.4f}")
-print(f"✓ Precisión en prueba: {test_accuracy:.2%}")
+print(f"\n Pérdida en prueba: {test_loss:.4f}")
+print(f" Precisión en prueba: {test_accuracy:.2%}")
 
 # Hacer predicciones en datos de prueba
 y_pred = model.predict(X_test)
@@ -232,7 +232,7 @@ y_test_classes = np.argmax(y_test, axis=1)
 # Métricas detalladas
 from sklearn.metrics import classification_report, confusion_matrix
 
-print("\n📈 Reporte de clasificación:")
+print("\n Reporte de clasificación:")
 print(classification_report(
     y_test_classes, 
     y_pred_classes, 
@@ -244,33 +244,33 @@ print(classification_report(
 # =============================================================================
 # PASO 7: GUARDAR EL MODELO ENTRENADO
 # =============================================================================
-print("\n💾 PASO 7: Guardando modelo entrenado...")
+print("\n PASO 7: Guardando modelo entrenado...")
 
 # Guardar modelo
 model.save('models/chatbot_veterinario.h5')
-print("✓ Modelo guardado: models/chatbot_veterinario.h5")
+print(" Modelo guardado: models/chatbot_veterinario.h5")
 
 # Guardar tokenizer
 with open('models/tokenizer_veterinario.pkl', 'wb') as f:
     pickle.dump(tokenizer, f)
-print("✓ Tokenizer guardado: models/tokenizer_veterinario.pkl")
+print(" Tokenizer guardado: models/tokenizer_veterinario.pkl")
 
 # Guardar label encoder
 with open('models/label_encoder_veterinario.pkl', 'wb') as f:
     pickle.dump(label_encoder, f)
-print("✓ Label encoder guardado: models/label_encoder_veterinario.pkl")
+print(" Label encoder guardado: models/label_encoder_veterinario.pkl")
 
 # Guardar diccionario de intenciones
 with open('models/intents_veterinario.pkl', 'wb') as f:
     pickle.dump(intents_dict, f)
-print("✓ Intenciones guardadas: models/intents_veterinario.pkl")
+print(" Intenciones guardadas: models/intents_veterinario.pkl")
 
 
 # =============================================================================
 # PASO 8: PROBAR EL MODELO
 # =============================================================================
 print("\n" + "=" * 80)
-print("🧪 PASO 8: Probando el modelo entrenado")
+print(" PASO 8: Probando el modelo entrenado")
 print("=" * 80)
 
 def predecir_intencion(texto, threshold=0.6):
@@ -311,9 +311,9 @@ for texto in pruebas:
     intent, confidence = predecir_intencion(texto)
     response = intents_dict.get(intent, ["No tengo respuesta"])[0]
     
-    print(f"❓ Pregunta: {texto}")
-    print(f"🎯 Intención detectada: {intent} (confianza: {confidence:.2%})")
-    print(f"💬 Respuesta: {response[:100]}...")
+    print(f" Pregunta: {texto}")
+    print(f" Intención detectada: {intent} (confianza: {confidence:.2%})")
+    print(f" Respuesta: {response[:100]}...")
     print("-" * 80)
 
 
@@ -321,22 +321,22 @@ for texto in pruebas:
 # RESUMEN FINAL
 # =============================================================================
 print("\n" + "=" * 80)
-print("✅ ENTRENAMIENTO COMPLETADO EXITOSAMENTE")
+print(" ENTRENAMIENTO COMPLETADO EXITOSAMENTE")
 print("=" * 80)
 print(f"""
-📊 RESUMEN:
+ RESUMEN:
    • Patrones de entrenamiento: {len(patterns)}
    • Intenciones: {len(label_encoder.classes_)}
    • Vocabulario: {len(tokenizer.word_index)} palabras
    • Precisión en prueba: {test_accuracy:.2%}
    • Modelo guardado en: models/chatbot_veterinario.h5
 
-🚀 PRÓXIMOS PASOS:
+ PRÓXIMOS PASOS:
    1. El chatbot ahora puede responder preguntas veterinarias
    2. Usa la API para consultar el chatbot
    3. Para agregar más datos, edita datos_veterinarios.json y vuelve a entrenar
 
-💡 USAR EL MODELO:
+ USAR EL MODELO:
    python api.py
    POST http://localhost:8000/api/chat
    {{

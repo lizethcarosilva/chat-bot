@@ -1,244 +1,244 @@
-════════════════════════════════════════════════════════════════════════════════
-✅ PROYECTO COMPLETADO - PET STORE CHATBOT CON IA
-════════════════════════════════════════════════════════════════════════════════
 
-🎯 SISTEMA FUNCIONAL AL 100%
-🧹 CÓDIGO LIMPIO - SOLO ARCHIVOS NECESARIOS
-📚 DOCUMENTACIÓN COMPLETA EN ESPAÑOL
-
-════════════════════════════════════════════════════════════════════════════════
-📦 ARCHIVOS FINALES DEL PROYECTO (14 ARCHIVOS)
-════════════════════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🎯 ARCHIVOS PRINCIPALES (LOS QUE EJECUTAS)                                 │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ 1. api.py                              ⭐ EJECUTAR PARA INICIAR API        │
-│    → Servidor API REST con FastAPI                                         │
-│    → 25+ endpoints para tu frontend React                                  │
-│    → Corre en: http://localhost:8000                                       │
-│    → Comando: python api.py                                                │
-│                                                                             │
-│ 2. entrenar_chatbot_veterinario.py     ⭐ EJECUTAR PRIMERO (una vez)       │
-│    → Entrena la red neuronal del chatbot                                   │
-│    → Lee datos_veterinarios.json                                           │
-│    → Genera modelos en carpeta models/                                     │
-│    → Tarda: 2-5 minutos                                                    │
-│    → Comando: python entrenar_chatbot_veterinario.py                       │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🧠 MÓDULOS DEL SISTEMA (Importados por api.py)                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ 3. chatbot.py                                                               │
-│    → Chatbot veterinario con red neuronal LSTM                             │
-│    → Responde sobre enfermedades, cuidados, vacunas                        │
-│    → Usa modelo entrenado en models/chatbot_veterinario.h5                 │
-│                                                                             │
-│ 4. predictor.py                                                             │
-│    → Modelos de predicción con redes neuronales Dense                      │
-│    → Predice tipo de mascota y probabilidad de asistencia                  │
-│    → Analiza patrones en los datos de la BD                                │
-│                                                                             │
-│ 5. database.py                                                              │
-│    → Conexión a PostgreSQL                                                 │
-│    → Consultas SQL para análisis                                           │
-│    → Extrae datos para los modelos de IA                                   │
-│                                                                             │
-│ 6. config.py                                                                │
-│    → Configuración centralizada                                            │
-│    → Credenciales de BD, parámetros de modelos                             │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 📚 DATOS Y CONFIGURACIÓN                                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ 7. datos_veterinarios.json             ⭐ EDITAR PARA AGREGAR INFO         │
-│    → Datos de entrenamiento del chatbot                                    │
-│    → Intenciones: enfermedades, vacunas, cuidados, emergencias            │
-│    → 15+ categorías veterinarias                                           │
-│    → Formato: {"tag": "", "patterns": [], "responses": []}                │
-│                                                                             │
-│ 8. requirements.txt                                                         │
-│    → Todas las dependencias Python                                         │
-│    → TensorFlow, FastAPI, Pandas, PostgreSQL, etc.                         │
-│                                                                             │
-│ 9. .env                                                                     │
-│    → Credenciales de PostgreSQL                                            │
-│    → NO SUBIR A GIT                                                        │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 📖 DOCUMENTACIÓN COMPLETA                                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ 10. DOCUMENTACION_TECNICA.md           ⭐ LEER PARA ENTENDER EL CÓDIGO     │
-│     → Explicación COMPLETA de todo el código                               │
-│     → Cómo funciona cada módulo                                            │
-│     → Por qué se usa cada técnica                                          │
-│     → Arquitectura de redes neuronales                                     │
-│     → Proceso de entrenamiento detallado                                   │
-│                                                                             │
-│ 11. README.md                                                               │
-│     → Documentación general del proyecto                                   │
-│     → Instalación y uso                                                    │
-│                                                                             │
-│ 12. API_ENDPOINTS.md                                                        │
-│     → Lista COMPLETA de todos los endpoints                                │
-│     → Ejemplos de request/response                                         │
-│                                                                             │
-│ 13. README_API.md                                                           │
-│     → Guía rápida de la API                                                │
-│                                                                             │
-│ 14. COMO_USAR_API.txt                                                       │
-│     → Ejemplos de uso de cada endpoint                                     │
-│                                                                             │
-│ 15. INSTRUCCIONES_RAPIDAS.txt         ⭐ ESTE ARCHIVO                      │
-│     → Instrucciones rápidas de inicio                                      │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+ PROYECTO COMPLETADO - PET STORE CHATBOT CON IA
 
 
-════════════════════════════════════════════════════════════════════════════════
-🏗️ ARQUITECTURA DEL SISTEMA
-════════════════════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────┐
-│         FRONTEND REACT (Tu App)             │
-│                                             │
-│  • Dashboard con estadísticas               │
-│  • Chat con el bot                          │
-│  • Gráficos de análisis                     │
-└──────────────────┬──────────────────────────┘
-                   │
-                   │ HTTP Requests (JSON)
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│           API REST (api.py)                 │
-│         FastAPI - Puerto 8000               │
-│                                             │
-│  Endpoints:                                 │
-│  • POST /api/chat                           │
-│  • GET  /api/estadisticas                   │
-│  • GET  /api/analisis/*                     │
-│  • POST /api/predicciones/*                 │
-└─────┬──────────────┬─────────────┬──────────┘
-      │              │             │
-      ▼              ▼             ▼
-┌───────────┐  ┌──────────┐  ┌──────────┐
-│ CHATBOT   │  │PREDICTOR │  │ DATABASE │
-│chatbot.py │  │predictor │  │database  │
-│           │  │.py       │  │.py       │
-│Red LSTM   │  │Red Dense │  │PostgreSQL│
-│           │  │          │  │          │
-│Intenciones│  │Prediccion│  │Consultas │
-│Veterinarias│ │es Datos  │  │SQL       │
-└───────────┘  └──────────┘  └──────────┘
-      │              │             │
-      ▼              ▼             ▼
-┌───────────┐  ┌──────────┐  ┌──────────┐
-│  Datos    │  │ Modelos  │  │ Railway  │
-│Veterinario│  │Predictivo│  │PostgreSQL│
-│  .json    │  │  .h5     │  │          │
-└───────────┘  └──────────┘  └──────────┘
+ SISTEMA FUNCIONAL AL 100%
+ CÓDIGO LIMPIO - SOLO ARCHIVOS NECESARIOS
+ DOCUMENTACIÓN COMPLETA EN ESPAÑOL
 
 
-════════════════════════════════════════════════════════════════════════════════
-🧠 REDES NEURONALES DEL SISTEMA
-════════════════════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ RED 1: CHATBOT VETERINARIO (LSTM)                                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ PROPÓSITO: Clasificar intenciones en preguntas de texto                    │
-│                                                                             │
-│ ARQUITECTURA:                                                               │
-│   Input: "mi perro tiene fiebre"                                           │
-│      ↓                                                                      │
-│   Tokenización: [45, 12, 3, 67, 0, 0, ...]                                │
-│      ↓                                                                      │
-│   Embedding(5000, 128)  → Convierte palabras a vectores                    │
-│      ↓                                                                      │
-│   Bidirectional LSTM(64) → Procesa secuencia en ambas direcciones          │
-│      ↓                                                                      │
-│   Dropout(0.5)          → Previene overfitting                             │
-│      ↓                                                                      │
-│   Bidirectional LSTM(32) → Segunda capa de memoria                         │
-│      ↓                                                                      │
-│   Dense(64, relu)       → Aprende patrones                                 │
-│      ↓                                                                      │
-│   Dense(n_clases, softmax) → Probabilidades por intención                  │
-│      ↓                                                                      │
-│   Output: {"enfermedad_perros": 0.85, "vacunas": 0.10, ...}               │
-│                                                                             │
-│ DATOS: datos_veterinarios.json (15+ intenciones médicas)                   │
-│ PRECISIÓN: 85-95%                                                           │
-│ ARCHIVO: models/chatbot_veterinario.h5                                     │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ RED 2: PREDICTOR DE TIPO DE MASCOTA (Dense)                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ PROPÓSITO: Predecir tipo de mascota según día, hora, servicio              │
-│                                                                             │
-│ ARQUITECTURA:                                                               │
-│   Input: [dia_semana=5, hora=10, mes=11, service_id=1]                    │
-│      ↓                                                                      │
-│   Normalización (StandardScaler)                                           │
-│      ↓                                                                      │
-│   Dense(128, relu) → Primera capa oculta                                   │
-│      ↓                                                                      │
-│   Dropout(0.3)                                                              │
-│      ↓                                                                      │
-│   Dense(64, relu)  → Segunda capa oculta                                   │
-│      ↓                                                                      │
-│   Dense(32, relu)  → Tercera capa oculta                                   │
-│      ↓                                                                      │
-│   Dense(n_clases, softmax) → Probabilidades por tipo                       │
-│      ↓                                                                      │
-│   Output: {"Perro": 0.78, "Gato": 0.15, "Ave": 0.05}                      │
-│                                                                             │
-│ DATOS: Base de datos PostgreSQL (tabla appointment + pet)                  │
-│ PRECISIÓN: 75-85%                                                           │
-│ ARCHIVO: models/predictor_model.h5                                         │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+ ARCHIVOS FINALES DEL PROYECTO (14 ARCHIVOS)
 
 
-════════════════════════════════════════════════════════════════════════════════
-🚀 CÓMO USAR EL SISTEMA
-════════════════════════════════════════════════════════════════════════════════
 
-────────────────────────────────────────────────────────────────────────────────
+  ARCHIVOS PRINCIPALES (LOS QUE EJECUTAS)                                 
+
+                                                                             
+ 1. api.py                               EJECUTAR PARA INICIAR API        
+     Servidor API REST con FastAPI                                         
+     25+ endpoints para tu frontend React                                  
+     Corre en: http://localhost:8000                                       
+     Comando: python api.py                                                
+                                                                             
+ 2. entrenar_chatbot_veterinario.py      EJECUTAR PRIMERO (una vez)       
+     Entrena la red neuronal del chatbot                                   
+     Lee datos_veterinarios.json                                           
+     Genera modelos en carpeta models/                                     
+     Tarda: 2-5 minutos                                                    
+     Comando: python entrenar_chatbot_veterinario.py                       
+                                                                             
+
+
+
+  MÓDULOS DEL SISTEMA (Importados por api.py)                             
+
+                                                                             
+ 3. chatbot.py                                                               
+     Chatbot veterinario con red neuronal LSTM                             
+     Responde sobre enfermedades, cuidados, vacunas                        
+     Usa modelo entrenado en models/chatbot_veterinario.h5                 
+                                                                             
+ 4. predictor.py                                                             
+     Modelos de predicción con redes neuronales Dense                      
+     Predice tipo de mascota y probabilidad de asistencia                  
+     Analiza patrones en los datos de la BD                                
+                                                                             
+ 5. database.py                                                              
+     Conexión a PostgreSQL                                                 
+     Consultas SQL para análisis                                           
+     Extrae datos para los modelos de IA                                   
+                                                                             
+ 6. config.py                                                                
+     Configuración centralizada                                            
+     Credenciales de BD, parámetros de modelos                             
+                                                                             
+
+
+
+  DATOS Y CONFIGURACIÓN                                                    
+
+                                                                             
+ 7. datos_veterinarios.json              EDITAR PARA AGREGAR INFO         
+     Datos de entrenamiento del chatbot                                    
+     Intenciones: enfermedades, vacunas, cuidados, emergencias            
+     15+ categorías veterinarias                                           
+     Formato: {"tag": "", "patterns": [], "responses": []}                
+                                                                             
+ 8. requirements.txt                                                         
+     Todas las dependencias Python                                         
+     TensorFlow, FastAPI, Pandas, PostgreSQL, etc.                         
+                                                                             
+ 9. .env                                                                     
+     Credenciales de PostgreSQL                                            
+     NO SUBIR A GIT                                                        
+                                                                             
+
+
+
+  DOCUMENTACIÓN COMPLETA                                                   
+
+                                                                             
+ 10. DOCUMENTACION_TECNICA.md            LEER PARA ENTENDER EL CÓDIGO     
+      Explicación COMPLETA de todo el código                               
+      Cómo funciona cada módulo                                            
+      Por qué se usa cada técnica                                          
+      Arquitectura de redes neuronales                                     
+      Proceso de entrenamiento detallado                                   
+                                                                             
+ 11. README.md                                                               
+      Documentación general del proyecto                                   
+      Instalación y uso                                                    
+                                                                             
+ 12. API_ENDPOINTS.md                                                        
+      Lista COMPLETA de todos los endpoints                                
+      Ejemplos de request/response                                         
+                                                                             
+ 13. README_API.md                                                           
+      Guía rápida de la API                                                
+                                                                             
+ 14. COMO_USAR_API.txt                                                       
+      Ejemplos de uso de cada endpoint                                     
+                                                                             
+ 15. INSTRUCCIONES_RAPIDAS.txt          ESTE ARCHIVO                      
+      Instrucciones rápidas de inicio                                      
+                                                                             
+
+
+
+
+ ARQUITECTURA DEL SISTEMA
+
+
+
+         FRONTEND REACT (Tu App)             
+                                             
+  • Dashboard con estadísticas               
+  • Chat con el bot                          
+  • Gráficos de análisis                     
+
+                   
+                    HTTP Requests (JSON)
+                   
+                   
+
+           API REST (api.py)                 
+         FastAPI - Puerto 8000               
+                                             
+  Endpoints:                                 
+  • POST /api/chat                           
+  • GET  /api/estadisticas                   
+  • GET  /api/analisis/*                     
+  • POST /api/predicciones/*                 
+
+                                 
+                                 
+    
+ CHATBOT     PREDICTOR    DATABASE 
+chatbot.py   predictor   database  
+             .py         .py       
+Red LSTM     Red Dense   PostgreSQL
+                                   
+Intenciones  Prediccion  Consultas 
+Veterinarias es Datos    SQL       
+    
+                                 
+                                 
+    
+  Datos       Modelos     Railway  
+Veterinario  Predictivo  PostgreSQL
+  .json        .h5                 
+    
+
+
+
+ REDES NEURONALES DEL SISTEMA
+
+
+
+ RED 1: CHATBOT VETERINARIO (LSTM)                                          
+
+                                                                             
+ PROPÓSITO: Clasificar intenciones en preguntas de texto                    
+                                                                             
+ ARQUITECTURA:                                                               
+   Input: "mi perro tiene fiebre"                                           
+                                                                            
+   Tokenización: [45, 12, 3, 67, 0, 0, ...]                                
+                                                                            
+   Embedding(5000, 128)   Convierte palabras a vectores                    
+                                                                            
+   Bidirectional LSTM(64)  Procesa secuencia en ambas direcciones          
+                                                                            
+   Dropout(0.5)           Previene overfitting                             
+                                                                            
+   Bidirectional LSTM(32)  Segunda capa de memoria                         
+                                                                            
+   Dense(64, relu)        Aprende patrones                                 
+                                                                            
+   Dense(n_clases, softmax)  Probabilidades por intención                  
+                                                                            
+   Output: {"enfermedad_perros": 0.85, "vacunas": 0.10, ...}               
+                                                                             
+ DATOS: datos_veterinarios.json (15+ intenciones médicas)                   
+ PRECISIÓN: 85-95%                                                           
+ ARCHIVO: models/chatbot_veterinario.h5                                     
+                                                                             
+
+
+
+ RED 2: PREDICTOR DE TIPO DE MASCOTA (Dense)                                
+
+                                                                             
+ PROPÓSITO: Predecir tipo de mascota según día, hora, servicio              
+                                                                             
+ ARQUITECTURA:                                                               
+   Input: [dia_semana=5, hora=10, mes=11, service_id=1]                    
+                                                                            
+   Normalización (StandardScaler)                                           
+                                                                            
+   Dense(128, relu)  Primera capa oculta                                   
+                                                                            
+   Dropout(0.3)                                                              
+                                                                            
+   Dense(64, relu)   Segunda capa oculta                                   
+                                                                            
+   Dense(32, relu)   Tercera capa oculta                                   
+                                                                            
+   Dense(n_clases, softmax)  Probabilidades por tipo                       
+                                                                            
+   Output: {"Perro": 0.78, "Gato": 0.15, "Ave": 0.05}                      
+                                                                             
+ DATOS: Base de datos PostgreSQL (tabla appointment + pet)                  
+ PRECISIÓN: 75-85%                                                           
+ ARCHIVO: models/predictor_model.h5                                         
+                                                                             
+
+
+
+
+ CÓMO USAR EL SISTEMA
+
+
+
 PRIMERA VEZ (CONFIGURACIÓN INICIAL)
-────────────────────────────────────────────────────────────────────────────────
+
 
 1. Instalar dependencias:
    pip install -r requirements.txt
-   ⏱️ Tarda: 5-10 minutos
+   ⏱ Tarda: 5-10 minutos
 
 2. Entrenar chatbot veterinario:
    python entrenar_chatbot_veterinario.py
-   ⏱️ Tarda: 2-5 minutos
+   ⏱ Tarda: 2-5 minutos
 
 3. Iniciar API:
    python api.py
-   ✅ API en: http://localhost:8000
+    API en: http://localhost:8000
 
 
-────────────────────────────────────────────────────────────────────────────────
+
 USO DIARIO
-────────────────────────────────────────────────────────────────────────────────
+
 
 1. Iniciar API:
    python api.py
@@ -247,104 +247,104 @@ USO DIARIO
    http://localhost:8000/api/*
 
 
-════════════════════════════════════════════════════════════════════════════════
-🤖 CAPACIDADES DEL CHATBOT VETERINARIO
-════════════════════════════════════════════════════════════════════════════════
+
+ CAPACIDADES DEL CHATBOT VETERINARIO
+
 
 El chatbot responde preguntas sobre:
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🏥 ENFERMEDADES                                                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ • Parvovirus (síntomas, tratamiento)                                       │
-│ • Moquillo canino                                                           │
-│ • Rabia                                                                     │
-│ • Leucemia Felina (FeLV)                                                    │
-│ • Inmunodeficiencia Felina (FIV)                                            │
-│ • Enfermedades comunes de perros y gatos                                   │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 💉 VACUNAS Y PREVENCIÓN                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ • Calendario de vacunación perros                                          │
-│ • Calendario de vacunación gatos                                           │
-│ • Desparasitación (interna y externa)                                      │
-│ • Control de pulgas y garrapatas                                           │
-└─────────────────────────────────────────────────────────────────────────────┘
+  ENFERMEDADES                                                             
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🐾 CUIDADOS Y ALIMENTACIÓN                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ • Alimentación adecuada para perros                                        │
-│ • Alimentación adecuada para gatos                                         │
-│ • Cuidados de cachorros y gatitos                                          │
-│ • Higiene dental                                                            │
-│ • Obesidad y control de peso                                               │
-│ • Cuidados para mascotas senior                                            │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🚨 SÍNTOMAS Y EMERGENCIAS                                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ • Vómito (cuándo es grave)                                                 │
-│ • Diarrea (tratamiento y señales de alerta)                                │
-│ • Fiebre (temperatura normal y cómo medirla)                               │
-│ • Dolor (cómo detectarlo)                                                  │
-│ • Emergencias veterinarias                                                 │
-│ • Alimentos y plantas tóxicas                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 🧬 OTROS TEMAS                                                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ • Esterilización/castración                                                │
-│ • Problemas de comportamiento                                              │
-│ • Primeros auxilios                                                        │
-└─────────────────────────────────────────────────────────────────────────────┘
+ • Parvovirus (síntomas, tratamiento)                                       
+ • Moquillo canino                                                           
+ • Rabia                                                                     
+ • Leucemia Felina (FeLV)                                                    
+ • Inmunodeficiencia Felina (FIV)                                            
+ • Enfermedades comunes de perros y gatos                                   
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 ANÁLISIS DE BASE DE DATOS
-════════════════════════════════════════════════════════════════════════════════
+
+  VACUNAS Y PREVENCIÓN                                                     
+
+ • Calendario de vacunación perros                                          
+ • Calendario de vacunación gatos                                           
+ • Desparasitación (interna y externa)                                      
+ • Control de pulgas y garrapatas                                           
+
+
+
+  CUIDADOS Y ALIMENTACIÓN                                                  
+
+ • Alimentación adecuada para perros                                        
+ • Alimentación adecuada para gatos                                         
+ • Cuidados de cachorros y gatitos                                          
+ • Higiene dental                                                            
+ • Obesidad y control de peso                                               
+ • Cuidados para mascotas senior                                            
+
+
+
+  SÍNTOMAS Y EMERGENCIAS                                                   
+
+ • Vómito (cuándo es grave)                                                 
+ • Diarrea (tratamiento y señales de alerta)                                
+ • Fiebre (temperatura normal y cómo medirla)                               
+ • Dolor (cómo detectarlo)                                                  
+ • Emergencias veterinarias                                                 
+ • Alimentos y plantas tóxicas                                              
+
+
+
+  OTROS TEMAS                                                              
+
+ • Esterilización/castración                                                
+ • Problemas de comportamiento                                              
+ • Primeros auxilios                                                        
+
+
+
+
+ ANÁLISIS DE BASE DE DATOS
+
 
 El sistema analiza datos de PostgreSQL y proporciona:
 
-✅ Tipo de mascota más común
+ Tipo de mascota más común
    Endpoint: GET /api/analisis/tipos-mascota
    Ejemplo: {"tipo_mas_comun": "Perro", "porcentaje": 45.5}
 
-✅ Día con más atención
+ Día con más atención
    Endpoint: GET /api/analisis/dias-atencion
    Ejemplo: {"dia_mas_atencion": "Viernes", "total_citas": 120}
 
-✅ Horas pico
+ Horas pico
    Endpoint: GET /api/analisis/horas-pico
    Ejemplo: {"hora_pico": 10, "total_citas": 120}
 
-✅ Servicios más utilizados
+ Servicios más utilizados
    Endpoint: GET /api/analisis/servicios
    Ejemplo: {"servicio_mas_popular": "Consulta General"}
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔮 PREDICCIONES CON IA
-════════════════════════════════════════════════════════════════════════════════
 
-✅ Predecir tipo de mascota para un día/hora específico
+ PREDICCIONES CON IA
+
+
+ Predecir tipo de mascota para un día/hora específico
    Endpoint: POST /api/predicciones/tipo-mascota
    Entrada: {dia_semana: 5, hora: 10, mes: 11, service_id: 1}
    Salida: {"tipo_mas_probable": "Perro", "confianza": 0.78}
 
-✅ Predecir probabilidad de asistencia
+ Predecir probabilidad de asistencia
    Endpoint: POST /api/predicciones/asistencia
    Entrada: {dia_semana: 3, hora: 14, mes: 11, service_id: 2, edad_mascota: 5}
    Salida: {"probabilidad_asistencia": 0.82, "asistira": true}
 
 
-════════════════════════════════════════════════════════════════════════════════
-💬 EJEMPLOS DE CONVERSACIÓN CON EL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
+ EJEMPLOS DE CONVERSACIÓN CON EL CHATBOT
+
 
 Usuario: "Mi perro tiene fiebre"
 Bot: "La temperatura normal en perros es 38-39°C. Si supera 39.5°C, es fiebre.
@@ -364,19 +364,19 @@ Bot: "Vómito en gatos puede ser por: comer rápido, cambio de alimento,
       o acompañado de letargo, consulta al veterinario urgente."
 
 Usuario: "Cuál es el tipo de mascota más común"
-Bot: "🏆 El tipo más común es: Perro (45.5%)
+Bot: " El tipo más común es: Perro (45.5%)
       Estadísticas:
       • Perro: 250 (45.5%)
       • Gato: 180 (32.7%)
       • Ave: 70 (12.7%)"
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 CÓMO AGREGAR MÁS INFORMACIÓN AL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
+ CÓMO AGREGAR MÁS INFORMACIÓN AL CHATBOT
+
 
 PASO 1: Editar datos_veterinarios.json
-────────────────────────────────────────
+
 
 Agrega una nueva intención:
 
@@ -396,12 +396,12 @@ Agrega una nueva intención:
 
 
 PASO 2: Volver a entrenar
-──────────────────────────
+
 python entrenar_chatbot_veterinario.py
 
 
 PASO 3: Reiniciar API
-──────────────────────
+
 Ctrl+C (detener API)
 python api.py (iniciar de nuevo)
 
@@ -409,67 +409,67 @@ python api.py (iniciar de nuevo)
 ¡Listo! El chatbot ahora responderá sobre otitis.
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎯 ENDPOINTS MÁS IMPORTANTES
-════════════════════════════════════════════════════════════════════════════════
+
+ ENDPOINTS MÁS IMPORTANTES
+
 
 Para tu DASHBOARD:
-──────────────────
-GET  /api/estadisticas               → Totales del sistema
-GET  /api/analisis/tipos-mascota     → Tipos más comunes
-GET  /api/analisis/dias-atencion     → Días con más citas
-GET  /api/analisis/horas-pico        → Horas de mayor demanda
-GET  /api/analisis/servicios         → Servicios populares
+
+GET  /api/estadisticas                Totales del sistema
+GET  /api/analisis/tipos-mascota      Tipos más comunes
+GET  /api/analisis/dias-atencion      Días con más citas
+GET  /api/analisis/horas-pico         Horas de mayor demanda
+GET  /api/analisis/servicios          Servicios populares
 
 Para CHATBOT:
-─────────────
-POST /api/chat                       → Conversar con el bot
+
+POST /api/chat                        Conversar con el bot
 
 Para BÚSQUEDAS:
-───────────────
-GET  /api/mascotas/buscar/{nombre}   → Buscar mascota
-GET  /api/servicios                  → Listar servicios
+
+GET  /api/mascotas/buscar/{nombre}    Buscar mascota
+GET  /api/servicios                   Listar servicios
 
 Para PREDICCIONES IA:
-─────────────────────
-POST /api/predicciones/tipo-mascota  → Predecir tipo
-POST /api/predicciones/asistencia    → Predecir asistencia
+
+POST /api/predicciones/tipo-mascota   Predecir tipo
+POST /api/predicciones/asistencia     Predecir asistencia
 
 
-════════════════════════════════════════════════════════════════════════════════
-📖 DOCUMENTACIÓN DISPONIBLE
-════════════════════════════════════════════════════════════════════════════════
+
+ DOCUMENTACIÓN DISPONIBLE
+
 
 PARA ENTENDER EL CÓDIGO:
-   DOCUMENTACION_TECNICA.md          ⭐⭐⭐ LEE ESTO PRIMERO
-   → Explicación COMPLETA línea por línea
-   → Cómo funciona cada red neuronal
-   → Por qué se usa cada técnica
+   DOCUMENTACION_TECNICA.md           LEE ESTO PRIMERO
+    Explicación COMPLETA línea por línea
+    Cómo funciona cada red neuronal
+    Por qué se usa cada técnica
 
 PARA USAR LA API:
-   README_API.md                     ⭐⭐⭐ Guía de la API
-   API_ENDPOINTS.md                  → Lista de endpoints
-   COMO_USAR_API.txt                 → Ejemplos prácticos
-   http://localhost:8000/docs        → Docs interactiva
+   README_API.md                      Guía de la API
+   API_ENDPOINTS.md                   Lista de endpoints
+   COMO_USAR_API.txt                  Ejemplos prácticos
+   http://localhost:8000/docs         Docs interactiva
 
 GUÍA GENERAL:
-   README.md                         → Info del proyecto
-   INSTRUCCIONES_RAPIDAS.txt         → Este archivo
+   README.md                          Info del proyecto
+   INSTRUCCIONES_RAPIDAS.txt          Este archivo
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ RESUMEN DE LO QUE SE CREÓ
-════════════════════════════════════════════════════════════════════════════════
 
-✅ Chatbot veterinario con red neuronal LSTM
-✅ Responde sobre enfermedades, vacunas, cuidados, emergencias
-✅ Análisis de BD con red neuronal Dense
-✅ Identifica tipo de mascota más común
-✅ Identifica día con más atención
-✅ Predice patrones futuros
-✅ API REST completa con 25+ endpoints
-✅ Documentación técnica completa
-✅ Sistema listo para producción
+ RESUMEN DE LO QUE SE CREÓ
+
+
+ Chatbot veterinario con red neuronal LSTM
+ Responde sobre enfermedades, vacunas, cuidados, emergencias
+ Análisis de BD con red neuronal Dense
+ Identifica tipo de mascota más común
+ Identifica día con más atención
+ Predice patrones futuros
+ API REST completa con 25+ endpoints
+ Documentación técnica completa
+ Sistema listo para producción
 
 TECNOLOGÍAS:
    • Python 3.9+
@@ -480,9 +480,9 @@ TECNOLOGÍAS:
    • Pandas (Análisis de datos)
 
 
-════════════════════════════════════════════════════════════════════════════════
-⚡ COMANDOS ESENCIALES
-════════════════════════════════════════════════════════════════════════════════
+
+ COMANDOS ESENCIALES
+
 
 # Primera vez (setup)
 pip install -r requirements.txt
@@ -495,22 +495,22 @@ python api.py
 http://localhost:8000/docs
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎉 ¡PROYECTO COMPLETADO!
-════════════════════════════════════════════════════════════════════════════════
 
-✅ Código limpio y organizado
-✅ Solo archivos necesarios
-✅ Chatbot enfocado en veterinaria
-✅ Análisis de BD con IA
-✅ API lista para React
-✅ Documentación completa
+ ¡PROYECTO COMPLETADO!
+
+
+ Código limpio y organizado
+ Solo archivos necesarios
+ Chatbot enfocado en veterinaria
+ Análisis de BD con IA
+ API lista para React
+ Documentación completa
 
 PRÓXIMOS PASOS:
    1. python entrenar_chatbot_veterinario.py
    2. python api.py
    3. Consumir desde tu frontend React
-   4. ¡Disfrutar! 🐾
+   4. ¡Disfrutar! 
 
 
 Desarrollado para Aprendizaje Automatizado - Séptimo Semestre

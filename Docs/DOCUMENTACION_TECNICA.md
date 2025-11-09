@@ -1,9 +1,9 @@
-# 📚 DOCUMENTACIÓN TÉCNICA COMPLETA
+#  DOCUMENTACIÓN TÉCNICA COMPLETA
 ## Sistema de Chatbot Veterinario con Red Neuronal y Análisis Predictivo
 
 ---
 
-## 📋 Tabla de Contenidos
+##  Tabla de Contenidos
 
 1. [Arquitectura del Sistema](#arquitectura-del-sistema)
 2. [Módulo: Database (database.py)](#módulo-database)
@@ -16,37 +16,37 @@
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+##  Arquitectura del Sistema
 
 El sistema está compuesto por 4 componentes principales:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        FRONTEND REACT                           │
-│                   (Tu aplicación web)                           │
-└────────────────────────┬────────────────────────────────────────┘
-                         │ HTTP Requests
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      API REST (api.py)                          │
-│              FastAPI - Endpoints HTTP/JSON                      │
-└───────┬─────────────────────┬──────────────────┬────────────────┘
-        │                     │                  │
-        ▼                     ▼                  ▼
-┌───────────────┐  ┌─────────────────┐  ┌──────────────────┐
-│ CHATBOT       │  │ PREDICTOR       │  │ DATABASE         │
-│ chatbot.py    │  │ predictor.py    │  │ database.py      │
-│               │  │                 │  │                  │
-│ Red Neuronal  │  │ Red Neuronal    │  │ PostgreSQL       │
-│ LSTM          │  │ Dense           │  │ Consultas SQL    │
-│ (Intenciones) │  │ (Predicciones)  │  │                  │
-└───────────────┘  └─────────────────┘  └──────────────────┘
-        │                     │                  │
-        ▼                     ▼                  ▼
-┌───────────────┐  ┌─────────────────┐  ┌──────────────────┐
-│ Datos         │  │ Modelos         │  │ Railway DB       │
-│ Veterinarios  │  │ Predictivos     │  │ PostgreSQL       │
-└───────────────┘  └─────────────────┘  └──────────────────┘
+
+                        FRONTEND REACT                           
+                   (Tu aplicación web)                           
+
+                          HTTP Requests
+                         
+
+                      API REST (api.py)                          
+              FastAPI - Endpoints HTTP/JSON                      
+
+                                               
+                                               
+    
+ CHATBOT          PREDICTOR          DATABASE         
+ chatbot.py       predictor.py       database.py      
+                                                      
+ Red Neuronal     Red Neuronal       PostgreSQL       
+ LSTM             Dense              Consultas SQL    
+ (Intenciones)    (Predicciones)                      
+    
+                                               
+                                               
+    
+ Datos            Modelos            Railway DB       
+ Veterinarios     Predictivos        PostgreSQL       
+    
 ```
 
 ### Flujo de una Petición:
@@ -59,7 +59,7 @@ El sistema está compuesto por 4 componentes principales:
 
 ---
 
-## 📊 Módulo: Database (database.py)
+##  Módulo: Database (database.py)
 
 ### Propósito
 Gestiona TODAS las conexiones y consultas a la base de datos PostgreSQL.
@@ -85,9 +85,9 @@ def conectar(self):
     try:
         self.conn = psycopg2.connect(**DB_CONFIG)
         # DB_CONFIG contiene: host, port, database, user, password
-        logger.info("✅ Conexión exitosa")
+        logger.info(" Conexión exitosa")
     except Exception as e:
-        logger.error(f"❌ Error: {e}")
+        logger.error(f" Error: {e}")
         raise
 ```
 
@@ -113,7 +113,7 @@ def ejecutar_query(self, query: str, params: tuple = None) -> pd.DataFrame:
             df = pd.read_sql(query, self.conn)
         return df
     except Exception as e:
-        logger.error(f"❌ Error: {e}")
+        logger.error(f" Error: {e}")
         return pd.DataFrame()
 ```
 
@@ -259,7 +259,7 @@ def obtener_dias_con_mas_atencion(self) -> pd.DataFrame:
 
 ---
 
-## 🧠 Módulo: Predictor (predictor.py)
+##  Módulo: Predictor (predictor.py)
 
 ### Propósito
 Usa redes neuronales para predecir patrones y hacer análisis predictivos.
@@ -327,9 +327,9 @@ def preparar_datos_tipo_mascota(self, df: pd.DataFrame) -> Tuple:
 
 3. **LabelEncoder**: Convierte texto a números
    ```
-   "Perro" → 0
-   "Gato"  → 1
-   "Ave"   → 2
+   "Perro"  0
+   "Gato"   1
+   "Ave"    2
    ```
 
 4. **train_test_split**: Divide datos
@@ -339,15 +339,15 @@ def preparar_datos_tipo_mascota(self, df: pd.DataFrame) -> Tuple:
 
 5. **StandardScaler**: Normaliza valores
    ```
-   hora = 10 → (10 - mean) / std = 0.5
+   hora = 10  (10 - mean) / std = 0.5
    ```
    **POR QUÉ:** Las redes neuronales funcionan mejor con valores normalizados
 
 6. **to_categorical**: One-hot encoding
    ```
-   Clase 0 → [1, 0, 0]
-   Clase 1 → [0, 1, 0]
-   Clase 2 → [0, 0, 1]
+   Clase 0  [1, 0, 0]
+   Clase 1  [0, 1, 0]
+   Clase 2  [0, 0, 1]
    ```
 
 ---
@@ -410,7 +410,7 @@ def construir_modelo_tipo_mascota(self, num_features: int, num_classes: int):
 - Softmax: Convierte a probabilidades que suman 1
 ```
 Output: [0.78, 0.15, 0.05, 0.02]
-        ⬆️    ⬆️    ⬆️    ⬆️
+                    
       Perro Gato  Ave  Otros
 ```
 
@@ -546,7 +546,7 @@ predecir_tipo_mascota(
 
 ---
 
-## 💬 Módulo: Chatbot (chatbot.py)
+##  Módulo: Chatbot (chatbot.py)
 
 ### Propósito
 Chatbot inteligente que responde preguntas sobre veterinaria usando red neuronal LSTM.
@@ -580,17 +580,17 @@ class PetStoreBot:
 **ARQUITECTURA:**
 ```
 Input: "mi perro tiene fiebre"
-   ↓
+   
 Tokenización: [45, 12, 3, 67]
-   ↓
+   
 Embedding: [[0.2, 0.5, ...], [0.8, 0.1, ...], ...]
-   ↓
-Bidirectional LSTM: Procesa secuencia → vectores
-   ↓
+   
+Bidirectional LSTM: Procesa secuencia  vectores
+   
 Dense Layers: Aprende patrones
-   ↓
+   
 Softmax: Probabilidades por intención
-   ↓
+   
 Output: {"saludo": 0.05, "enfermedad": 0.85, ...}
 ```
 
@@ -629,7 +629,7 @@ def predecir_intencion_neuronal(self, texto: str) -> Tuple[str, float]:
     
     # 7. Convertir índice a etiqueta
     intent = self.label_encoder.inverse_transform([predicted_class])[0]
-    # 2 → "enfermedad_perros"
+    # 2  "enfermedad_perros"
     
     return intent, max_confidence  # ("enfermedad_perros", 0.85)
 ```
@@ -637,15 +637,15 @@ def predecir_intencion_neuronal(self, texto: str) -> Tuple[str, float]:
 **PROCESO COMPLETO:**
 ```
 "mi perro tiene fiebre"
-   ↓ normalizar
+    normalizar
 "mi perro tiene fiebre"
-   ↓ tokenizar
+    tokenizar
 [45, 12, 3, 67]
-   ↓ padding
+    padding
 [45, 12, 3, 67, 0, 0, ..., 0]  (50 elementos)
-   ↓ red neuronal
+    red neuronal
 [0.02, 0.03, 0.85, 0.05, ...]  (probabilidades)
-   ↓ argmax + decoder
+    argmax + decoder
 ("enfermedad_perros", 0.85)
 ```
 
@@ -689,17 +689,17 @@ def procesar_mensaje(self, mensaje: str) -> Dict:
 **FLUJO:**
 ```
 Usuario: "mi perro tiene fiebre"
-   ↓
+   
 Red Neuronal: intencion="enfermedad_perros", confianza=0.85
-   ↓
+   
 Buscar respuesta en self.intents["enfermedad_perros"]
-   ↓
+   
 Retornar: "Las enfermedades más comunes en perros incluyen..."
 ```
 
 ---
 
-## 🏋️ Entrenamiento del Chatbot
+##  Entrenamiento del Chatbot
 
 ### Script: `entrenar_chatbot_veterinario.py`
 
@@ -752,11 +752,11 @@ X = pad_sequences(sequences, maxlen=50, padding='post')
 **Ejemplo:**
 ```
 "mi perro está enfermo"
-   ↓ fit_on_texts (construye vocabulario)
+    fit_on_texts (construye vocabulario)
 word_index = {"mi": 1, "perro": 2, "está": 3, "enfermo": 4, ...}
-   ↓ texts_to_sequences
+    texts_to_sequences
 [1, 2, 3, 4]
-   ↓ pad_sequences
+    pad_sequences
 [1, 2, 3, 4, 0, 0, 0, ..., 0]  (50 elementos)
 ```
 
@@ -774,9 +774,9 @@ y = keras.utils.to_categorical(y_encoded)
 **Ejemplo:**
 ```
 labels = ["saludo", "enfermedad", "saludo", "vacuna"]
-   ↓ fit_transform
+    fit_transform
 y_encoded = [0, 1, 0, 2]
-   ↓ to_categorical
+    to_categorical
 y = [[1, 0, 0],
      [0, 1, 0],
      [1, 0, 0],
@@ -787,7 +787,7 @@ y = [[1, 0, 0],
 
 ```python
 model = Sequential([
-    # Embedding: palabras → vectores densos
+    # Embedding: palabras  vectores densos
     Embedding(
         input_dim=5000,      # Tamaño vocabulario
         output_dim=128,      # Dimensión del vector
@@ -839,7 +839,7 @@ pickle.dump(label_encoder, open('models/label_encoder_veterinario.pkl', 'wb'))
 
 ---
 
-## 🔌 API REST (api.py)
+##  API REST (api.py)
 
 ### Propósito
 Expone todos los módulos como endpoints HTTP para consumo desde frontend.
@@ -862,24 +862,24 @@ async def chat(request: ChatRequest):
 
 **FLUJO COMPLETO:**
 ```
-Frontend → POST /api/chat
-            ↓
+Frontend  POST /api/chat
+            
          api.py recibe
-            ↓
+            
          bot.procesar_mensaje()
-            ↓
+            
          Red Neuronal clasifica
-            ↓
+            
          Genera respuesta
-            ↓
+            
          api.py retorna JSON
-            ↓
+            
          Frontend muestra
 ```
 
 ---
 
-## 🎓 Cómo Entrenar los Modelos
+##  Cómo Entrenar los Modelos
 
 ### 1. Entrenar Chatbot Veterinario
 
@@ -929,32 +929,32 @@ python
 
 ---
 
-## 🎯 Resumen de Flujo de Datos
+##  Resumen de Flujo de Datos
 
 ### Consulta Simple (Estadísticas)
 ```
-Frontend → API → database.py → PostgreSQL → DataFrame → JSON → Frontend
+Frontend  API  database.py  PostgreSQL  DataFrame  JSON  Frontend
 ```
 
 ### Predicción (Red Neuronal)
 ```
-Frontend → API → predictor.py → Red Neuronal → Predicción → JSON → Frontend
+Frontend  API  predictor.py  Red Neuronal  Predicción  JSON  Frontend
 ```
 
 ### Chatbot (Red Neuronal LSTM)
 ```
-Frontend → API → chatbot.py
-                    ↓
+Frontend  API  chatbot.py
+                    
                 Red Neuronal LSTM
-                    ↓
+                    
             Clasificación Intención
-                    ↓
-            Respuesta → JSON → Frontend
+                    
+            Respuesta  JSON  Frontend
 ```
 
 ---
 
-## 📝 Conceptos Clave
+##  Conceptos Clave
 
 ### ¿Qué es una Red Neuronal?
 Modelo matemático inspirado en el cerebro que aprende patrones de los datos.
@@ -977,7 +977,7 @@ Modelo matemático inspirado en el cerebro que aprende patrones de los datos.
 
 ---
 
-## ✅ Checklist de Entrenamiento
+##  Checklist de Entrenamiento
 
 - [ ] Datos suficientes en BD (>100 registros)
 - [ ] Ejecutar `python entrenar_chatbot_veterinario.py`

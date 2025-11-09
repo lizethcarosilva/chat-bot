@@ -1,17 +1,17 @@
-════════════════════════════════════════════════════════════════════════════════
-📡 GUÍA DE ENDPOINTS PARA TU FRONTEND
-════════════════════════════════════════════════════════════════════════════════
+
+ GUÍA DE ENDPOINTS PARA TU FRONTEND
+
 
 Base URL: http://localhost:8000
 Documentación interactiva: http://localhost:8000/docs
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔬 CLUSTERING (NUEVO - Hierarchical Clustering con IA)
-════════════════════════════════════════════════════════════════════════════════
+
+ CLUSTERING (NUEVO - Hierarchical Clustering con IA)
+
 
 1. Clustering de Clientes (Segmentación)
-   ─────────────────────────────────────
+   
    GET /api/clustering/clientes?n_clusters=4
 
    Retorna:
@@ -33,7 +33,7 @@ Documentación interactiva: http://localhost:8000/docs
 
 
 2. Clustering de Mascotas
-   ──────────────────────
+   
    GET /api/clustering/mascotas?n_clusters=3
 
    Retorna:
@@ -50,7 +50,7 @@ Documentación interactiva: http://localhost:8000/docs
 
 
 3. Clustering de Servicios
-   ────────────────────────
+   
    GET /api/clustering/servicios?n_clusters=3
 
    Retorna:
@@ -66,40 +66,40 @@ Documentación interactiva: http://localhost:8000/docs
 
 
 4. Clustering Completo (TODO)
-   ───────────────────────────
+   
    GET /api/clustering/completo
 
    Retorna: Todos los análisis de clustering en una sola llamada
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 MÉTRICAS DE NEGOCIO
-════════════════════════════════════════════════════════════════════════════════
 
-GET /api/metricas/citas-hoy          → Citas programadas hoy
-GET /api/metricas/cantidad-productos → Total productos
-GET /api/metricas/ventas-dia         → Ventas del día
-GET /api/metricas/ventas-mes         → Ventas del mes
-GET /api/metricas/productos-proximos-vencer → Productos por vencer
-GET /api/metricas/alerta-bajo-inventario → Bajo inventario
-GET /api/metricas/comparativa-ventas → Mes actual vs anterior
-GET /api/metricas/dashboard          → TODAS las métricas (recomendado)
+ MÉTRICAS DE NEGOCIO
 
 
-════════════════════════════════════════════════════════════════════════════════
-📈 ANÁLISIS Y ESTADÍSTICAS
-════════════════════════════════════════════════════════════════════════════════
+GET /api/metricas/citas-hoy           Citas programadas hoy
+GET /api/metricas/cantidad-productos  Total productos
+GET /api/metricas/ventas-dia          Ventas del día
+GET /api/metricas/ventas-mes          Ventas del mes
+GET /api/metricas/productos-proximos-vencer  Productos por vencer
+GET /api/metricas/alerta-bajo-inventario  Bajo inventario
+GET /api/metricas/comparativa-ventas  Mes actual vs anterior
+GET /api/metricas/dashboard           TODAS las métricas (recomendado)
 
-GET /api/estadisticas                → Estadísticas generales
-GET /api/analisis/tipos-mascota      → Tipos más comunes
-GET /api/analisis/dias-atencion      → Días con más atención
-GET /api/analisis/horas-pico         → Horas pico
-GET /api/analisis/servicios          → Servicios más usados
 
 
-════════════════════════════════════════════════════════════════════════════════
-🤖 CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+ ANÁLISIS Y ESTADÍSTICAS
+
+
+GET /api/estadisticas                 Estadísticas generales
+GET /api/analisis/tipos-mascota       Tipos más comunes
+GET /api/analisis/dias-atencion       Días con más atención
+GET /api/analisis/horas-pico          Horas pico
+GET /api/analisis/servicios           Servicios más usados
+
+
+
+ CHATBOT
+
 
 POST /api/chat
 
@@ -118,9 +118,9 @@ Retorna:
 }
 
 
-════════════════════════════════════════════════════════════════════════════════
-💻 EJEMPLO DE USO EN TU FRONTEND
-════════════════════════════════════════════════════════════════════════════════
+
+ EJEMPLO DE USO EN TU FRONTEND
+
 
 // Obtener clustering de clientes
 fetch('http://localhost:8000/api/clustering/clientes')
@@ -153,41 +153,41 @@ fetch('http://localhost:8000/api/chat', {
   .then(data => console.log(data.respuesta));
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ RESUMEN
-════════════════════════════════════════════════════════════════════════════════
+
+ RESUMEN
+
 
 ENDPOINTS IMPLEMENTADOS:
 
-✅ 4 endpoints de Clustering (Hierarchical Clustering con IA)
-✅ 8 endpoints de Métricas de Negocio
-✅ 5 endpoints de Análisis y Estadísticas
-✅ 1 endpoint de Chatbot
-✅ 7 endpoints de Consultas
+ 4 endpoints de Clustering (Hierarchical Clustering con IA)
+ 8 endpoints de Métricas de Negocio
+ 5 endpoints de Análisis y Estadísticas
+ 1 endpoint de Chatbot
+ 7 endpoints de Consultas
 
 Total: 25 endpoints REST listos para consumir
 
 
 DOCUMENTACIÓN:
 
-📖 ENDPOINTS_CLUSTERING.md          → Endpoints de clustering detallados
-📖 ENDPOINTS_RESUMEN_FINAL.md       → Lista rápida de todos los endpoints
-📖 HIERARCHICAL_CLUSTERING_DOCS.md  → Documentación técnica de clustering
-📖 METRICAS_NEGOCIO.md              → Documentación de métricas
-📖 http://localhost:8000/docs       → Swagger UI (interactivo)
+ ENDPOINTS_CLUSTERING.md           Endpoints de clustering detallados
+ ENDPOINTS_RESUMEN_FINAL.md        Lista rápida de todos los endpoints
+ HIERARCHICAL_CLUSTERING_DOCS.md   Documentación técnica de clustering
+ METRICAS_NEGOCIO.md               Documentación de métricas
+ http://localhost:8000/docs        Swagger UI (interactivo)
 
 
 ARCHIVOS DE BACKEND:
 
-🐍 api.py          → API REST con FastAPI
-🐍 database.py     → Consultas a PostgreSQL
-🐍 chatbot.py      → Chatbot con IA
-🐍 predictor.py    → Clustering + Predicciones
+ api.py           API REST con FastAPI
+ database.py      Consultas a PostgreSQL
+ chatbot.py       Chatbot con IA
+ predictor.py     Clustering + Predicciones
 
 
-════════════════════════════════════════════════════════════════════════════════
-🚀 INICIO RÁPIDO
-════════════════════════════════════════════════════════════════════════════════
+
+ INICIO RÁPIDO
+
 
 1. Inicia la API:
    python api.py
@@ -199,11 +199,11 @@ ARCHIVOS DE BACKEND:
    fetch('http://localhost:8000/api/clustering/clientes')
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ TODO LISTO PARA CONSUMIR DESDE TU FRONTEND
-════════════════════════════════════════════════════════════════════════════════
+
+ TODO LISTO PARA CONSUMIR DESDE TU FRONTEND
+
 
 Los endpoints están funcionando y listos para que tu frontend los consuma.
 
-Solo haz fetch/axios a las URLs y procesa el JSON. 🚀
+Solo haz fetch/axios a las URLs y procesa el JSON. 
 

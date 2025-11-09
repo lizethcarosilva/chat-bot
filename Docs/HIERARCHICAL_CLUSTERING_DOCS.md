@@ -1,21 +1,21 @@
-# 🔬 HIERARCHICAL CLUSTERING - Análisis con IA
+#  HIERARCHICAL CLUSTERING - Análisis con IA
 
-## 🎯 ¿Qué es Hierarchical Clustering?
+##  ¿Qué es Hierarchical Clustering?
 
 **Hierarchical Clustering (Agrupamiento Jerárquico)** es un algoritmo de Machine Learning que identifica **grupos naturales** en tus datos sin necesidad de etiquetas previas.
 
-### 🌟 Ventajas:
-- ✅ Descubre patrones ocultos en tus datos
-- ✅ Segmenta clientes automáticamente
-- ✅ Identifica grupos de mascotas similares
-- ✅ Agrupa servicios por patrones de uso
-- ✅ No requiere definir grupos de antemano
+###  Ventajas:
+-  Descubre patrones ocultos en tus datos
+-  Segmenta clientes automáticamente
+-  Identifica grupos de mascotas similares
+-  Agrupa servicios por patrones de uso
+-  No requiere definir grupos de antemano
 
 ---
 
-## 📊 ¿Qué Agregamos al Sistema?
+##  ¿Qué Agregamos al Sistema?
 
-### 1. 🐾 Clustering de Mascotas
+### 1.  Clustering de Mascotas
 Agrupa mascotas por:
 - Edad
 - Tipo de servicios que reciben
@@ -23,14 +23,14 @@ Agrupa mascotas por:
 
 **Resultado:** 3 clusters que identifican perfiles de mascotas
 
-### 2. 👥 Clustering de Clientes
+### 2.  Clustering de Clientes
 Segmenta clientes en:
 - **VIP:** Alta frecuencia y gasto
 - **Regular:** Visitas moderadas
 - **Ocasional:** Visitas esporádicas
 - **Nuevo:** Clientes exploratorios
 
-### 3. 🏥 Clustering de Servicios
+### 3.  Clustering de Servicios
 Agrupa servicios según:
 - Frecuencia de uso
 - Horario típico
@@ -38,7 +38,7 @@ Agrupa servicios según:
 
 ---
 
-## 🚀 CÓMO USAR
+##  CÓMO USAR
 
 ### Opción 1: Desde el Chatbot
 
@@ -51,9 +51,9 @@ Agrupa servicios según:
 
 **Respuesta esperada:**
 ```
-🔬 ANÁLISIS DE HIERARCHICAL CLUSTERING
+ ANÁLISIS DE HIERARCHICAL CLUSTERING
 
-🐾 CLUSTERS DE MASCOTAS: 3 grupos
+ CLUSTERS DE MASCOTAS: 3 grupos
    Calidad (Silhouette): 0.652
 
    Cluster 0:
@@ -61,7 +61,7 @@ Agrupa servicios según:
    • Edad promedio: 3.5 años
    • Tipo predominante: Perro
 
-👥 SEGMENTACIÓN DE CLIENTES: 4 segmentos
+ SEGMENTACIÓN DE CLIENTES: 4 segmentos
    Calidad: Buena
 
    VIP - Alta frecuencia:
@@ -159,7 +159,7 @@ fetch('http://localhost:8000/api/clustering/completo')
 
 ---
 
-## 📡 ENDPOINTS DISPONIBLES
+##  ENDPOINTS DISPONIBLES
 
 | Endpoint | Descripción | Parámetros |
 |----------|-------------|------------|
@@ -170,7 +170,7 @@ fetch('http://localhost:8000/api/clustering/completo')
 
 ---
 
-## 💡 CASOS DE USO
+##  CASOS DE USO
 
 ### 1. Segmentación de Clientes para Marketing
 
@@ -186,7 +186,7 @@ const SegmentacionClientes = () => {
 
   return (
     <div>
-      <h2>🎯 Segmentación de Clientes</h2>
+      <h2> Segmentación de Clientes</h2>
       {segmentos.map(seg => (
         <div key={seg.segmento_id} className="segmento-card">
           <h3>{seg.nombre}</h3>
@@ -236,16 +236,16 @@ fetch('http://localhost:8000/api/clustering/servicios')
 
 ---
 
-## 📊 INTERPRETACIÓN DE RESULTADOS
+##  INTERPRETACIÓN DE RESULTADOS
 
 ### Silhouette Score (Calidad del Clustering)
 
 | Rango | Interpretación |
 |-------|----------------|
-| 0.7 - 1.0 | ✅ Excelente - Clusters bien definidos |
-| 0.5 - 0.7 | ✅ Bueno - Clusters claros |
-| 0.3 - 0.5 | ⚠️ Moderado - Algunos grupos se solapan |
-| 0.0 - 0.3 | ❌ Bajo - Clustering poco útil |
+| 0.7 - 1.0 |  Excelente - Clusters bien definidos |
+| 0.5 - 0.7 |  Bueno - Clusters claros |
+| 0.3 - 0.5 |  Moderado - Algunos grupos se solapan |
+| 0.0 - 0.3 |  Bajo - Clustering poco útil |
 
 ### Ejemplo de Interpretación
 
@@ -260,7 +260,7 @@ fetch('http://localhost:8000/api/clustering/servicios')
 
 ---
 
-## 🎨 VISUALIZACIÓN EN REACT
+##  VISUALIZACIÓN EN REACT
 
 ### Componente de Clustering
 
@@ -281,7 +281,7 @@ const ClusteringVisual = () => {
 
   return (
     <div className="clustering-container">
-      <h2>🔬 Segmentación de Clientes</h2>
+      <h2> Segmentación de Clientes</h2>
       <p>Calidad: {clustering.calidad_clustering}</p>
       <p>Silhouette Score: {clustering.silhouette_score.toFixed(3)}</p>
 
@@ -379,7 +379,7 @@ export default ClusteringVisual;
 
 ---
 
-## 🔧 PARÁMETROS CONFIGURABLES
+##  PARÁMETROS CONFIGURABLES
 
 ### Número de Clusters
 
@@ -403,7 +403,7 @@ fetch('http://localhost:8000/api/clustering/servicios?n_clusters=4')
 
 ---
 
-## 📈 APLICACIONES PRÁCTICAS
+##  APLICACIONES PRÁCTICAS
 
 ### 1. Marketing Dirigido
 
@@ -456,7 +456,7 @@ fetch('http://localhost:8000/api/clustering/mascotas')
 
 ---
 
-## 🎯 EJEMPLO COMPLETO DE DASHBOARD
+##  EJEMPLO COMPLETO DE DASHBOARD
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -474,22 +474,22 @@ const ClusteringDashboard = () => {
 
   return (
     <div className="clustering-dashboard">
-      <h1>🔬 Análisis de Hierarchical Clustering</h1>
+      <h1> Análisis de Hierarchical Clustering</h1>
       
       {/* Resumen */}
       <div className="resumen">
         <div className="stat-card">
-          <h3>🐾 Mascotas</h3>
+          <h3> Mascotas</h3>
           <p>{data.clustering_mascotas.n_clusters} Clusters</p>
           <small>Score: {data.clustering_mascotas.silhouette_score.toFixed(3)}</small>
         </div>
         <div className="stat-card">
-          <h3>👥 Clientes</h3>
+          <h3> Clientes</h3>
           <p>{data.clustering_clientes.n_segmentos} Segmentos</p>
           <small>{data.clustering_clientes.calidad_clustering}</small>
         </div>
         <div className="stat-card">
-          <h3>🏥 Servicios</h3>
+          <h3> Servicios</h3>
           <p>{data.clustering_servicios.n_grupos} Grupos</p>
           <small>Score: {data.clustering_servicios.silhouette_score.toFixed(3)}</small>
         </div>
@@ -523,7 +523,7 @@ export default ClusteringDashboard;
 
 ---
 
-## 🧮 ALGORITMO UTILIZADO
+##  ALGORITMO UTILIZADO
 
 ### Agglomerative Clustering
 
@@ -541,7 +541,7 @@ export default ClusteringDashboard;
 
 ---
 
-## 📊 MÉTRICAS DE CALIDAD
+##  MÉTRICAS DE CALIDAD
 
 ### Silhouette Score
 
@@ -560,7 +560,7 @@ donde:
 
 ---
 
-## 🚀 INSTALACIÓN
+##  INSTALACIÓN
 
 ### Dependencias Adicionales
 
@@ -576,7 +576,7 @@ pip install -r requirements.txt
 
 ---
 
-## ✅ CHECKLIST DE VERIFICACIÓN
+##  CHECKLIST DE VERIFICACIÓN
 
 - [ ] API reiniciada
 - [ ] Endpoint `/api/clustering/completo` funciona
@@ -586,7 +586,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🎯 PRUEBA RÁPIDA
+##  PRUEBA RÁPIDA
 
 ### 1. Desde el Navegador
 
@@ -611,7 +611,7 @@ Pregunta:
 
 ---
 
-## 💼 DECISIONES ESTRATÉGICAS CON CLUSTERING
+##  DECISIONES ESTRATÉGICAS CON CLUSTERING
 
 ### Clientes VIP
 - Programa de lealtad exclusivo
@@ -635,7 +635,7 @@ Pregunta:
 
 ---
 
-## 🆘 TROUBLESHOOTING
+##  TROUBLESHOOTING
 
 ### Error: "Datos insuficientes para clustering"
 
@@ -657,7 +657,7 @@ pip install scipy
 
 ---
 
-## 📚 DOCUMENTACIÓN ADICIONAL
+##  DOCUMENTACIÓN ADICIONAL
 
 - **Swagger UI:** http://localhost:8000/docs (sección "Clustering")
 - **Archivo:** `predictor.py` (líneas 426-713)
@@ -666,16 +666,16 @@ pip install scipy
 
 ---
 
-## 🎉 RESUMEN
+##  RESUMEN
 
-✅ **Hierarchical Clustering implementado**  
-✅ **4 endpoints REST funcionando**  
-✅ **Chatbot integrado**  
-✅ **Análisis de mascotas, clientes y servicios**  
-✅ **Métricas de calidad incluidas**  
-✅ **Listo para usar en React**  
+ **Hierarchical Clustering implementado**  
+ **4 endpoints REST funcionando**  
+ **Chatbot integrado**  
+ **Análisis de mascotas, clientes y servicios**  
+ **Métricas de calidad incluidas**  
+ **Listo para usar en React**  
 
 ---
 
-**¡Sistema de Clustering con IA listo para descubrir patrones en tus datos!** 🚀
+**¡Sistema de Clustering con IA listo para descubrir patrones en tus datos!** 
 

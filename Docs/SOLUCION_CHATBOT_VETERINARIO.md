@@ -1,6 +1,6 @@
-# ✅ SOLUCIÓN: Chatbot Veterinario Ahora Funciona
+#  SOLUCIÓN: Chatbot Veterinario Ahora Funciona
 
-## 🔧 Problema Resuelto
+##  Problema Resuelto
 
 El chatbot no respondía a preguntas veterinarias como:
 - "Mi gata tiene fiebre de 39 grados y molesta la oreja izquierda tiene hinchada"
@@ -13,32 +13,32 @@ El chatbot no respondía a preguntas veterinarias como:
 
 ---
 
-## ✅ Cambios Realizados
+##  Cambios Realizados
 
 ### 1. Detección de Intenciones Veterinarias
 
 Ahora el chatbot reconoce automáticamente:
 
-#### 🏥 Síntomas y Enfermedades
+####  Síntomas y Enfermedades
 Palabras clave detectadas:
 - `fiebre`, `vómito`, `diarrea`, `tos`, `estornuda`
 - `sangre`, `dolor`, `hinchado`, `inflamado`, `rascando`
 - `oreja`, `ojos`, `piel`, `pelo`, `herida`
 - `cojea`, `temblor`, `convulsión`, `débil`, `letargo`
 
-#### 💉 Vacunas
+####  Vacunas
 - `vacuna`, `vacunar`, `inmunización`, `inyección`
 
-#### 🐛 Desparasitación
+####  Desparasitación
 - `desparasitar`, `parásito`, `gusano`, `pulga`, `garrapata`
 
-#### 🍽️ Alimentación
+####  Alimentación
 - `alimentación`, `comida`, `comer`, `dieta`, `alimento`
 
-#### 🛁 Cuidados
+####  Cuidados
 - `cuidado`, `cuidar`, `baño`, `higiene`, `ejercicio`
 
-#### 🚨 Emergencias
+####  Emergencias
 - `emergencia`, `urgente`, `grave`, `rápido`, `ayuda`
 
 ### 2. Respuestas Completas
@@ -53,22 +53,22 @@ El chatbot ahora proporciona información detallada sobre:
 
 ---
 
-## 🎯 Cómo Funciona Ahora
+##  Cómo Funciona Ahora
 
 ### Ejemplo 1: Síntomas
 **Usuario:** "Mi gata tiene fiebre de 39 grados y molesta la oreja izquierda tiene hinchada"
 
 **Chatbot responde:**
 ```
-🏥 CONSULTA VETERINARIA
+ CONSULTA VETERINARIA
 
-⚠️ IMPORTANTE: Los síntomas que describes requieren atención veterinaria profesional.
+ IMPORTANTE: Los síntomas que describes requieren atención veterinaria profesional.
 
-📋 Recomendaciones inmediatas:
+ Recomendaciones inmediatas:
 
 1. Evalúa la gravedad:
-   • Fiebre > 39.5°C → Urgente
-   • Hinchazón rápida → Urgente
+   • Fiebre > 39.5°C  Urgente
+   • Hinchazón rápida  Urgente
 
 2. Mientras tanto:
    • Mantén a tu mascota cómoda
@@ -76,12 +76,12 @@ El chatbot ahora proporciona información detallada sobre:
    • No auto-mediques
 
 3. Consulta veterinaria:
-   📞 Llama o agenda una cita
-   🏥 Si es urgente, acude inmediatamente
+    Llama o agenda una cita
+    Si es urgente, acude inmediatamente
 
-💡 Fiebre + hinchazón de oreja → Puede ser infección de oído
+ Fiebre + hinchazón de oreja  Puede ser infección de oído
 
-📞 ¿Necesitas agendar una cita?
+ ¿Necesitas agendar una cita?
 ```
 
 ### Ejemplo 2: Vacunas
@@ -89,9 +89,9 @@ El chatbot ahora proporciona información detallada sobre:
 
 **Chatbot responde:**
 ```
-💉 INFORMACIÓN SOBRE VACUNAS
+ INFORMACIÓN SOBRE VACUNAS
 
-🐕 PERROS - Vacunas esenciales:
+ PERROS - Vacunas esenciales:
 
 Cachorros (6-16 semanas):
 • 6-8 sem: Primera vacuna múltiple
@@ -109,17 +109,17 @@ Adultos (Anual):
 
 **Chatbot responde:**
 ```
-🚨 EMERGENCIA VETERINARIA
+ EMERGENCIA VETERINARIA
 
-⚠️ ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE
+ ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE
 
-🔴 EMERGENCIAS CRÍTICAS:
+ EMERGENCIAS CRÍTICAS:
 • Dificultad para respirar
 • Sangrado que no para
 • Trauma severo (atropellamiento, caída)
 ...
 
-📞 MIENTRAS LLEGAS AL VETERINARIO:
+ MIENTRAS LLEGAS AL VETERINARIO:
 1. Mantén la calma
 2. Transporte seguro
 3. No des medicamentos
@@ -129,7 +129,7 @@ Adultos (Anual):
 
 ---
 
-## 🚀 Cómo Probar
+##  Cómo Probar
 
 ### Opción 1: Reiniciar la API
 
@@ -174,48 +174,48 @@ fetch('http://localhost:8000/api/chat', {
 
 ---
 
-## 📝 Preguntas que Ahora Funcionan
+##  Preguntas que Ahora Funcionan
 
 ### Síntomas
-✅ "Mi gata tiene fiebre de 39 grados y molesta la oreja izquierda tiene hinchada"  
-✅ "Mi perro tiene vómito y diarrea"  
-✅ "Mi mascota está coja y le duele la pata"  
-✅ "Mi gato tiene los ojos rojos e hinchados"  
-✅ "Mi perro no para de rascarse"  
+ "Mi gata tiene fiebre de 39 grados y molesta la oreja izquierda tiene hinchada"  
+ "Mi perro tiene vómito y diarrea"  
+ "Mi mascota está coja y le duele la pata"  
+ "Mi gato tiene los ojos rojos e hinchados"  
+ "Mi perro no para de rascarse"  
 
 ### Vacunas
-✅ "¿Qué vacunas necesita un cachorro?"  
-✅ "Calendario de vacunación para gatos"  
-✅ "¿Cuándo vacunar a mi perro?"  
-✅ "Mi mascota necesita refuerzo de vacuna"  
+ "¿Qué vacunas necesita un cachorro?"  
+ "Calendario de vacunación para gatos"  
+ "¿Cuándo vacunar a mi perro?"  
+ "Mi mascota necesita refuerzo de vacuna"  
 
 ### Desparasitación
-✅ "¿Cada cuánto desparasitar a mi perro?"  
-✅ "Mi gato tiene pulgas"  
-✅ "Calendario de desparasitación"  
-✅ "¿Cómo saber si tiene parásitos?"  
+ "¿Cada cuánto desparasitar a mi perro?"  
+ "Mi gato tiene pulgas"  
+ "Calendario de desparasitación"  
+ "¿Cómo saber si tiene parásitos?"  
 
 ### Alimentación
-✅ "¿Qué debe comer un cachorro?"  
-✅ "Alimentación para gatos adultos"  
-✅ "Mi perro no quiere comer"  
-✅ "¿Puedo darle chocolate a mi perro?"  
+ "¿Qué debe comer un cachorro?"  
+ "Alimentación para gatos adultos"  
+ "Mi perro no quiere comer"  
+ "¿Puedo darle chocolate a mi perro?"  
 
 ### Cuidados
-✅ "¿Cada cuánto bañar a mi perro?"  
-✅ "Cómo cuidar el pelo de mi gato"  
-✅ "Higiene dental en mascotas"  
-✅ "¿Cuánto ejercicio necesita mi perro?"  
+ "¿Cada cuánto bañar a mi perro?"  
+ "Cómo cuidar el pelo de mi gato"  
+ "Higiene dental en mascotas"  
+ "¿Cuánto ejercicio necesita mi perro?"  
 
 ### Emergencias
-✅ "Mi perro tuvo un accidente"  
-✅ "Mi gato está convulsionando"  
-✅ "Emergencia veterinaria"  
-✅ "Mi mascota comió algo tóxico"  
+ "Mi perro tuvo un accidente"  
+ "Mi gato está convulsionando"  
+ "Emergencia veterinaria"  
+ "Mi mascota comió algo tóxico"  
 
 ---
 
-## ⚡ Mejora Futura: Modelo de IA Completo
+##  Mejora Futura: Modelo de IA Completo
 
 Para respuestas aún más precisas, puedes entrenar el modelo de red neuronal LSTM:
 
@@ -240,49 +240,49 @@ python api.py
 ### Beneficios del Modelo Entrenado
 
 El modelo neuronal es más inteligente que el sistema de patrones porque:
-- ✅ Entiende contexto y sinónimos
-- ✅ Aprende de miles de ejemplos
-- ✅ Mayor precisión en la clasificación
-- ✅ Reconoce preguntas complejas o mal escritas
+-  Entiende contexto y sinónimos
+-  Aprende de miles de ejemplos
+-  Mayor precisión en la clasificación
+-  Reconoce preguntas complejas o mal escritas
 
 ---
 
-## 📊 Comparación: Antes vs Ahora
+##  Comparación: Antes vs Ahora
 
 | Pregunta | Antes | Ahora | Con Modelo IA |
 |----------|-------|-------|---------------|
-| "Mi gata tiene fiebre..." | ❌ No entendí | ✅ Responde | ✅✅ Mejor |
-| "¿Qué vacunas...?" | ❌ No entendí | ✅ Responde | ✅✅ Mejor |
-| "Mi perro vomita" | ❌ No entendí | ✅ Responde | ✅✅ Mejor |
-| "¿Cuántas citas hay?" | ✅ Funciona | ✅ Funciona | ✅ Funciona |
-| "Ventas del día" | ✅ Funciona | ✅ Funciona | ✅ Funciona |
+| "Mi gata tiene fiebre..." |  No entendí |  Responde |  Mejor |
+| "¿Qué vacunas...?" |  No entendí |  Responde |  Mejor |
+| "Mi perro vomita" |  No entendí |  Responde |  Mejor |
+| "¿Cuántas citas hay?" |  Funciona |  Funciona |  Funciona |
+| "Ventas del día" |  Funciona |  Funciona |  Funciona |
 
 ---
 
-## 🎯 Resumen
+##  Resumen
 
-### ✅ Lo que se Arregló:
+###  Lo que se Arregló:
 1. **Detección de síntomas** - Reconoce palabras como "fiebre", "hinchado", "oreja"
 2. **Consultas médicas** - Detecta frases como "mi gata tiene", "mi perro está"
 3. **Temas veterinarios** - Vacunas, desparasitación, alimentación, cuidados, emergencias
 4. **Respuestas detalladas** - Información completa y útil para cada tema
 5. **Mensaje de ayuda mejorado** - Incluye ejemplos veterinarios
 
-### 🚀 Estado Actual:
-- ✅ **Sistema de fallback funcionando** - No requiere entrenamiento
-- ✅ **Respuestas inmediatas** - El chatbot responde de inmediato
-- ✅ **Información veterinaria completa** - Síntomas, vacunas, cuidados, emergencias
-- ✅ **Compatible con métricas de negocio** - Todo sigue funcionando
-- ✅ **Listo para usar** - Solo reinicia la API
+###  Estado Actual:
+-  **Sistema de fallback funcionando** - No requiere entrenamiento
+-  **Respuestas inmediatas** - El chatbot responde de inmediato
+-  **Información veterinaria completa** - Síntomas, vacunas, cuidados, emergencias
+-  **Compatible con métricas de negocio** - Todo sigue funcionando
+-  **Listo para usar** - Solo reinicia la API
 
-### 📈 Próximo Nivel (Opcional):
+###  Próximo Nivel (Opcional):
 - Entrena el modelo con `python entrenar_chatbot_veterinario.py`
 - Mayor precisión y comprensión de contexto
 - Reconocimiento de preguntas más complejas
 
 ---
 
-## 🆘 Troubleshooting
+##  Troubleshooting
 
 ### Problema: El chatbot sigue sin responder
 **Solución:** 
@@ -304,7 +304,7 @@ python entrenar_chatbot_veterinario.py
 
 ---
 
-## ✨ ¡Todo Listo!
+##  ¡Todo Listo!
 
 El chatbot ahora responde correctamente a preguntas veterinarias. Reinicia la API y pruébalo:
 
@@ -317,7 +317,7 @@ Luego pregunta:
 - "¿Qué vacunas necesita un cachorro?"
 - "Mi perro tiene vómito"
 
-**¡Debería funcionar perfectamente!** 🎉
+**¡Debería funcionar perfectamente!** 
 
 ---
 

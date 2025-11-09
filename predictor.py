@@ -56,13 +56,13 @@ class PetStorePredictor:
         Features: día_semana, hora, mes, service_id
         Target: tipo_mascota
         """
-        logger.info("📊 Preparando datos para predicción de tipo de mascota...")
+        logger.info("Preparando datos para predicción de tipo de mascota...")
         
         # Eliminar registros nulos
         df_clean = df.dropna(subset=['tipo_mascota', 'dia_semana', 'hora', 'mes', 'service_id'])
         
         if len(df_clean) == 0:
-            logger.error("❌ No hay datos suficientes para entrenar")
+            logger.error(" No hay datos suficientes para entrenar")
             return None, None, None, None
         
         # Features
@@ -87,7 +87,7 @@ class PetStorePredictor:
             )
         else:
             # Sin stratify si hay clases con pocos ejemplos
-            logger.warning(f"⚠️ Algunas clases tienen pocos ejemplos ({min_class_count}). Entrenando sin stratify.")
+            logger.warning(f"ADVERTENCIA: Algunas clases tienen pocos ejemplos ({min_class_count}). Entrenando sin stratify.")
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, 
                 test_size=PREDICTOR_CONFIG['test_size'],
@@ -102,8 +102,8 @@ class PetStorePredictor:
         y_train_cat = keras.utils.to_categorical(y_train)
         y_test_cat = keras.utils.to_categorical(y_test)
         
-        logger.info(f"✓ Datos preparados: {X_train.shape[0]} train, {X_test.shape[0]} test")
-        logger.info(f"✓ Clases: {len(self.label_encoder_tipo.classes_)}")
+        logger.info(f"Datos preparados: {X_train.shape[0]} train, {X_test.shape[0]} test")
+        logger.info(f"Clases: {len(self.label_encoder_tipo.classes_)}")
         
         return X_train, X_test, y_train_cat, y_test_cat
     
@@ -113,14 +113,14 @@ class PetStorePredictor:
         Features: día_semana, hora, mes, service_id, edad_mascota
         Target: asistio (1=sí, 0=no)
         """
-        logger.info("📊 Preparando datos para predicción de asistencia...")
+        logger.info("Preparando datos para predicción de asistencia...")
         
         # Eliminar registros nulos
         df_clean = df.dropna(subset=['asistio', 'dia_semana', 'hora', 'mes', 
                                       'service_id', 'edad_mascota'])
         
         if len(df_clean) == 0:
-            logger.error("❌ No hay datos suficientes para entrenar")
+            logger.error(" No hay datos suficientes para entrenar")
             return None, None, None, None
         
         # Features
@@ -143,7 +143,7 @@ class PetStorePredictor:
                 stratify=y
             )
         else:
-            logger.warning(f"⚠️ Clases desbalanceadas ({min_class_count}). Entrenando sin stratify.")
+            logger.warning(f"ADVERTENCIA: Clases desbalanceadas ({min_class_count}). Entrenando sin stratify.")
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y,
                 test_size=PREDICTOR_CONFIG['test_size'],
@@ -154,7 +154,7 @@ class PetStorePredictor:
         X_train = self.scaler.fit_transform(X_train)
         X_test = self.scaler.transform(X_test)
         
-        logger.info(f"✓ Datos preparados: {X_train.shape[0]} train, {X_test.shape[0]} test")
+        logger.info(f"Datos preparados: {X_train.shape[0]} train, {X_test.shape[0]} test")
         
         return X_train, X_test, y_train, y_test
     
@@ -165,9 +165,9 @@ class PetStorePredictor:
     def construir_modelo_tipo_mascota(self, num_features: int, num_classes: int):
         """
         Red neuronal para clasificar tipo de mascota
-        Arquitectura: Dense → Dropout → Dense → Softmax
+        Arquitectura: Dense  Dropout  Dense  Softmax
         """
-        logger.info("🏗️  Construyendo modelo de predicción de tipo de mascota...")
+        logger.info("Construyendo modelo de predicción de tipo de mascota...")
         
         model = Sequential([
             Dense(128, activation='relu', input_shape=(num_features,)),
@@ -185,15 +185,15 @@ class PetStorePredictor:
             metrics=['accuracy']
         )
         
-        logger.info("✓ Modelo construido")
+        logger.info("Modelo construido")
         return model
     
     def construir_modelo_asistencia(self, num_features: int):
         """
         Red neuronal para predecir asistencia (clasificación binaria)
-        Arquitectura: Dense → Dropout → Dense → Sigmoid
+        Arquitectura: Dense  Dropout  Dense  Sigmoid
         """
-        logger.info("🏗️  Construyendo modelo de predicción de asistencia...")
+        logger.info("Construyendo modelo de predicción de asistencia...")
         
         model = Sequential([
             Dense(64, activation='relu', input_shape=(num_features,)),
@@ -210,7 +210,7 @@ class PetStorePredictor:
             metrics=['accuracy', tf.keras.metrics.AUC()]
         )
         
-        logger.info("✓ Modelo construido")
+        logger.info("Modelo construido")
         return model
     
     # =========================================================================
@@ -220,7 +220,7 @@ class PetStorePredictor:
     def entrenar_modelo_tipo_mascota(self, df: pd.DataFrame) -> Dict:
         """Entrena el modelo de predicción de tipo de mascota"""
         logger.info("\n" + "=" * 80)
-        logger.info("🚀 ENTRENANDO MODELO: Tipo de Mascota")
+        logger.info("ENTRENANDO MODELO: Tipo de Mascota")
         logger.info("=" * 80)
         
         # Preparar datos
@@ -250,7 +250,7 @@ class PetStorePredictor:
         )
         
         # Entrenar
-        logger.info("\n📈 Entrenando...")
+        logger.info("\nEntrenando...")
         history = self.model_tipo_mascota.fit(
             X_train, y_train,
             epochs=PREDICTOR_CONFIG['prediction_epochs'],
@@ -261,13 +261,13 @@ class PetStorePredictor:
         )
         
         # Evaluar
-        logger.info("\n📊 Evaluando modelo...")
+        logger.info("\nEvaluando modelo...")
         y_pred = self.model_tipo_mascota.predict(X_test)
         y_pred_classes = np.argmax(y_pred, axis=1)
         y_test_classes = np.argmax(y_test, axis=1)
         
         accuracy = accuracy_score(y_test_classes, y_pred_classes)
-        logger.info(f"✓ Precisión en test: {accuracy:.2%}")
+        logger.info(f"Precisión en test: {accuracy:.2%}")
         
         return {
             "accuracy": accuracy,
@@ -278,7 +278,7 @@ class PetStorePredictor:
     def entrenar_modelo_asistencia(self, df: pd.DataFrame) -> Dict:
         """Entrena el modelo de predicción de asistencia"""
         logger.info("\n" + "=" * 80)
-        logger.info("🚀 ENTRENANDO MODELO: Predicción de Asistencia")
+        logger.info("ENTRENANDO MODELO: Predicción de Asistencia")
         logger.info("=" * 80)
         
         # Preparar datos
@@ -298,7 +298,7 @@ class PetStorePredictor:
         )
         
         # Entrenar
-        logger.info("\n📈 Entrenando...")
+        logger.info("\nEntrenando...")
         history = self.model_asistencia.fit(
             X_train, y_train,
             epochs=PREDICTOR_CONFIG['prediction_epochs'],
@@ -309,11 +309,11 @@ class PetStorePredictor:
         )
         
         # Evaluar
-        logger.info("\n📊 Evaluando modelo...")
+        logger.info("\nEvaluando modelo...")
         y_pred = (self.model_asistencia.predict(X_test) > 0.5).astype(int)
         accuracy = accuracy_score(y_test, y_pred)
         
-        logger.info(f"✓ Precisión en test: {accuracy:.2%}")
+        logger.info(f"Precisión en test: {accuracy:.2%}")
         
         return {
             "accuracy": accuracy,
@@ -485,7 +485,7 @@ class PetStorePredictor:
             resultado = predictor.clustering_mascotas(df, n_clusters=3)
             print(resultado['clusters'][0]['tipo_mascota_predominante'])
         """
-        logger.info(f"🔬 Aplicando Hierarchical Clustering a mascotas ({n_clusters} clusters)...")
+        logger.info(f"Aplicando Hierarchical Clustering a mascotas ({n_clusters} clusters)...")
         
         try:
             # PASO 1: PREPARAR DATOS
@@ -507,6 +507,8 @@ class PetStorePredictor:
             #          Edad: 1-15, Precio: 10-500
             #          Después de escalar: ambos entre -2 y +2
             scaler = StandardScaler()
+            #Esta instrucción toma tus datos originales (df_clustering), aprende sus características estadísticas (media y desviación estándar) y los transforma en su versión estandarizada (normalizada).
+            #El resultado (X_scaled) es un array NumPy
             X_scaled = scaler.fit_transform(df_clustering)
             
             # PASO 3: APLICAR CLUSTERING JERÁRQUICO
@@ -517,7 +519,7 @@ class PetStorePredictor:
             # - Continúa hasta tener n_clusters grupos
             clustering = AgglomerativeClustering(
                 n_clusters=n_clusters,    # Número de grupos finales
-                linkage='ward',           # Método Ward: minimiza varianza intra-cluster
+                linkage='ward',           # Método Ward: minimiza varianza intra-cluster en una similitid de caracteristicas de mascotas
                 metric='euclidean'        # Distancia euclidiana entre puntos
             )
             
@@ -545,29 +547,29 @@ class PetStorePredictor:
                 clusters_info.append({
                     "cluster_id": int(i),
                     "total_mascotas": len(cluster_data),
-                    "edad_promedio": float(cluster_data['edad_mascota'].mean()),
+                    "edad_promedio": float(cluster_data['edad_mascota'].mean()), #se usa para calcular el promedio
                     "precio_promedio": float(cluster_data['precio_servicio'].mean()),
                     "tipo_mascota_predominante": mascotas_cluster.index[0] if len(mascotas_cluster) > 0 else "N/A",
-                    "distribucion_tipos": mascotas_cluster.to_dict()
+                    "distribucion_tipos": mascotas_cluster.to_dict()#Convierte en un diccionario
                 })
             
-            # Calcular linkage para dendrograma
+            # Calcular linkage para dendrograma - graficar el dendrograma
             Z = linkage(X_scaled, method='ward')
             
-            logger.info(f"✓ Clustering completado. Silhouette Score: {silhouette_avg:.3f}")
+            logger.info(f"Clustering completado. Silhouette Score: {silhouette_avg:.3f}")
             
             return {
-                "n_clusters": n_clusters,
-                "total_mascotas": len(df_clustering),
-                "silhouette_score": float(silhouette_avg),
-                "clusters": clusters_info,
-                "linkage_matrix": Z.tolist(),
-                "metodo": "Agglomerative (Ward)",
-                "metrica": "Euclidean"
+                "n_clusters": n_clusters, #Número de cluster
+                "total_mascotas": len(df_clustering), #Número de mascotas
+                "silhouette_score": float(silhouette_avg), #Métrica de calidad entr -1 y 1
+                "clusters": clusters_info, #Informacion detallada de cada cluster
+                "linkage_matrix": Z.tolist(), #Matriz de linkage para graficar el dendrograma
+                "metodo": "Agglomerative (Ward)", #Método de clustering
+                "metrica": "Euclidean" #Métrica de distancia euclidiana
             }
             
         except Exception as e:
-            logger.error(f"❌ Error en clustering: {e}")
+            logger.error(f"Error en clustering: {e}")
             return {"error": str(e)}
     
     def clustering_clientes(self, df: pd.DataFrame, n_clusters: int = 4) -> Dict:
@@ -607,13 +609,13 @@ class PetStorePredictor:
         - Programas de lealtad para VIPs
         - Campañas de reactivación para ocasionales
         """
-        logger.info(f"🔬 Segmentando clientes con Hierarchical Clustering ({n_clusters} grupos)...")
+        logger.info(f"Segmentando clientes con Hierarchical Clustering ({n_clusters} grupos)...")
         
         try:
             # PASO 1: AGREGACIÓN POR CLIENTE
             # ===============================
             # Consolidamos todas las citas de cada cliente en una fila
-            # De: 2000 citas → A: 150 clientes con sus estadísticas
+            # De: 2000 citas  A: 150 clientes con sus estadísticas
             clientes_stats = df.groupby('client_id').agg({
                 'appointment_id': 'count',  # Frecuencia: cuántas veces vino
                 'precio_servicio': 'sum',    # Gasto total: $$ que ha gastado
@@ -660,8 +662,8 @@ class PetStorePredictor:
             #   3. Repite hasta tener n_clusters grupos (4 en este caso)
             clustering = AgglomerativeClustering(
                 n_clusters=n_clusters,    # Número final de segmentos (4)
-                linkage='average',        # Método: promedio de distancias
-                metric='euclidean'        # Distancia: euclidiana (d = √(Δx² + Δy² + Δz²))
+                linkage='average',        # Método: promedio de distancias calcula más o menos la distancia “promedio” entre los grupos. No forma ni grupos muy largos ni muy cerrados, sino algo intermedio.
+                metric='euclidean'        # Distancia: euclidiana (d = (Δx² + Δy² + Δz²))
             )
             
             # Ejecutar clustering y asignar etiquetas
@@ -693,11 +695,12 @@ class PetStorePredictor:
             }
             
             for i in range(n_clusters):
+                #segmento_data es un dataframe que contiene los datos de los clientes en el segmento i
                 segmento_data = clientes_stats[clientes_stats['segmento'] == i]
                 
                 # Determinar perfil del segmento
-                citas_promedio = segmento_data['total_citas'].mean()
-                gasto_promedio = segmento_data['gasto_total'].mean()
+                citas_promedio = segmento_data['total_citas'].mean() #se usa para calcular el promedio
+                gasto_promedio = segmento_data['gasto_total'].mean() #se usa para calcular el promedio
                 
                 segmentos_info.append({
                     "segmento_id": int(i),
@@ -712,7 +715,7 @@ class PetStorePredictor:
             # Ordenar por valor
             segmentos_info = sorted(segmentos_info, key=lambda x: x['gasto_promedio'], reverse=True)
             
-            logger.info(f"✓ Segmentación completada. Silhouette Score: {silhouette_avg:.3f}")
+            logger.info(f"Segmentación completada. Silhouette Score: {silhouette_avg:.3f}")
             
             return {
                 "n_segmentos": n_clusters,
@@ -724,7 +727,7 @@ class PetStorePredictor:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error en clustering de clientes: {e}")
+            logger.error(f"Error en clustering de clientes: {e}")
             return {"error": str(e)}
     
     def clustering_servicios(self, df: pd.DataFrame, n_clusters: int = 3) -> Dict:
@@ -739,7 +742,7 @@ class PetStorePredictor:
         Returns:
             Dict con análisis de grupos de servicios
         """
-        logger.info(f"🔬 Agrupando servicios con Hierarchical Clustering ({n_clusters} grupos)...")
+        logger.info(f"Agrupando servicios con Hierarchical Clustering ({n_clusters} grupos)...")
         
         try:
             # Agrupar por servicio
@@ -776,7 +779,7 @@ class PetStorePredictor:
             # Clustering
             clustering = AgglomerativeClustering(
                 n_clusters=n_clusters,
-                linkage='complete',
+                linkage='complete', # Método de clustering que une los clusters más cercanos
                 metric='euclidean'
             )
             
@@ -800,7 +803,7 @@ class PetStorePredictor:
                     "tasa_asistencia_promedio": float(grupo_data['tasa_asistencia'].mean())
                 })
             
-            logger.info(f"✓ Agrupación de servicios completada. Silhouette: {silhouette_avg:.3f}")
+            logger.info(f"Agrupación de servicios completada. Silhouette: {silhouette_avg:.3f}")
             
             return {
                 "n_grupos": n_clusters,
@@ -811,7 +814,7 @@ class PetStorePredictor:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error en clustering de servicios: {e}")
+            logger.error(f"Error en clustering de servicios: {e}")
             return {"error": str(e)}
     
     def analisis_clustering_completo(self, df: pd.DataFrame) -> Dict:
@@ -822,20 +825,24 @@ class PetStorePredictor:
         Returns:
             Dict con todos los análisis de clustering
         """
+        # Imprimo un encabezado visual en el log para separar esta sección de análisis
         logger.info("\n" + "=" * 80)
-        logger.info("🔬 ANÁLISIS DE HIERARCHICAL CLUSTERING COMPLETO")
+        logger.info("ANALISIS DE HIERARCHICAL CLUSTERING COMPLETO")
         logger.info("=" * 80)
         
+        # Creo un diccionario donde almacenaré todos los resultados de los diferentes análisis de clustering
         resultados = {
-            "timestamp": pd.Timestamp.now().isoformat(),
-            "total_registros": len(df),
-            "clustering_mascotas": self.clustering_mascotas(df, n_clusters=3),
-            "clustering_clientes": self.clustering_clientes(df, n_clusters=4),
-            "clustering_servicios": self.clustering_servicios(df, n_clusters=3)
+            "timestamp": pd.Timestamp.now().isoformat(),  # Registro la fecha y hora exacta del análisis
+            "total_registros": len(df),  # Guardo cuántos registros en total estoy analizando
+            "clustering_mascotas": self.clustering_mascotas(df, n_clusters=3),  # Agrupo mascotas en 3 clusters por características similares
+            "clustering_clientes": self.clustering_clientes(df, n_clusters=4),  # Segmento clientes en 4 grupos (VIP, Regular, Ocasional, Nuevo)
+            "clustering_servicios": self.clustering_servicios(df, n_clusters=3)  # Agrupo servicios en 3 categorías por patrones de uso
         }
         
-        logger.info("\n✅ Análisis de clustering completado")
+        # Registro en el log que el análisis completo de clustering ha terminado exitosamente
+        logger.info("\nAnalisis de clustering completado")
         
+        # Retorno el diccionario completo con todos los análisis de agrupamiento realizados
         return resultados
     
     # =========================================================================
@@ -844,11 +851,11 @@ class PetStorePredictor:
     
     def guardar_modelos(self):
         """Guarda los modelos entrenados"""
-        logger.info("\n💾 Guardando modelos...")
+        logger.info("\nGuardando modelos...")
         
         if self.model_tipo_mascota:
             self.model_tipo_mascota.save(PATHS['predictor_model'])
-            logger.info("✓ Modelo tipo mascota guardado")
+            logger.info("Modelo tipo mascota guardado")
         
         # Guardar encoders y scaler
         with open(PATHS['scaler'], 'wb') as f:
@@ -857,13 +864,13 @@ class PetStorePredictor:
                 'label_encoder_tipo': self.label_encoder_tipo
             }, f)
         
-        logger.info("✓ Encoders y scaler guardados")
+        logger.info("Encoders y scaler guardados")
         self.trained = True
     
     def cargar_modelos(self):
         """Carga modelos previamente entrenados"""
         try:
-            logger.info("📂 Cargando modelos...")
+            logger.info("Cargando modelos...")
             
             self.model_tipo_mascota = load_model(PATHS['predictor_model'])
             
@@ -873,10 +880,10 @@ class PetStorePredictor:
                 self.label_encoder_tipo = data['label_encoder_tipo']
             
             self.trained = True
-            logger.info("✓ Modelos cargados exitosamente")
+            logger.info("Modelos cargados exitosamente")
             
         except Exception as e:
-            logger.error(f"❌ Error cargando modelos: {e}")
+            logger.error(f"Error cargando modelos: {e}")
             self.trained = False
 
 
@@ -887,14 +894,14 @@ if __name__ == "__main__":
     from database import PetStoreDatabase
     
     print("=" * 80)
-    print("🧠 ENTRENANDO MODELOS DE PREDICCIÓN")
+    print("ENTRENANDO MODELOS DE PREDICCION")
     print("=" * 80)
     
     # Conectar a BD y obtener datos
     db = PetStoreDatabase()
     df = db.obtener_dataset_completo()
     
-    print(f"\n📊 Dataset cargado: {len(df)} registros")
+    print(f"\nDataset cargado: {len(df)} registros")
     
     if len(df) > 0:
         # Crear predictor
@@ -902,25 +909,25 @@ if __name__ == "__main__":
         
         # Análisis básicos
         print("\n" + "=" * 80)
-        print("📊 ANÁLISIS ESTADÍSTICO")
+        print("ANALISIS ESTADISTICO")
         print("=" * 80)
         
-        print("\n🐾 Tipo de mascota más común:")
+        print("\nTipo de mascota mas comun:")
         analisis_tipo = predictor.analizar_tipo_mascota_mas_comun(df)
         for stat in analisis_tipo['estadisticas'][:5]:
             print(f"   {stat['tipo']}: {stat['cantidad']} ({stat['porcentaje']}%)")
         
-        print("\n📅 Día con más atención:")
+        print("\nDia con mas atencion:")
         analisis_dia = predictor.analizar_dia_mas_atencion(df)
         print(f"   {analisis_dia['dia_con_mas_atencion']}")
         
-        print("\n⏰ Hora pico:")
+        print("\nHora pico:")
         analisis_hora = predictor.analizar_hora_pico(df)
         print(f"   {analisis_hora['hora_pico']}:00 horas")
         
         # Entrenar modelos
         print("\n" + "=" * 80)
-        print("🚀 ENTRENANDO MODELOS")
+        print("ENTRENANDO MODELOS")
         print("=" * 80)
         
         # Modelo 1: Tipo de mascota
@@ -933,8 +940,8 @@ if __name__ == "__main__":
         predictor.guardar_modelos()
         
         print("\n" + "=" * 80)
-        print("✅ ENTRENAMIENTO COMPLETADO")
+        print("ENTRENAMIENTO COMPLETADO")
         print("=" * 80)
     else:
-        print("\n❌ No hay datos suficientes para entrenar")
+        print("\nNo hay datos suficientes para entrenar")
 

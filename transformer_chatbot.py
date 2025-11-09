@@ -308,9 +308,9 @@ class PetStoreBotTransformer:
         self.model_trained = False
         try:
             self.cargar_modelo()
-            logger.info("✓ Modelo Transformer cargado exitosamente")
+            logger.info(" Modelo Transformer cargado exitosamente")
         except Exception as e:
-            logger.warning(f"⚠️  Modelo Transformer no encontrado: {e}")
+            logger.warning(f"  Modelo Transformer no encontrado: {e}")
             logger.info("   Se usará modo híbrido con respuestas predefinidas")
     
     def construir_vocabulario(self, textos: List[str]):
@@ -441,7 +441,7 @@ class PetStoreBotTransformer:
         # === SALUDOS ===
         if any(palabra in texto_norm for palabra in ['hola', 'buenos', 'buenas', 'hey', 'saludos']):
             respuestas = [
-                "¡Hola! 👋 Soy tu asistente virtual con IA. ¿En qué puedo ayudarte?",
+                "¡Hola!  Soy tu asistente virtual con IA. ¿En qué puedo ayudarte?",
                 "¡Bienvenido! Estoy aquí para ayudarte con información del Pet Store.",
                 "¡Hola! Pregúntame sobre mascotas, citas, estadísticas o predicciones."
             ]
@@ -451,7 +451,7 @@ class PetStoreBotTransformer:
         # === DESPEDIDAS ===
         if any(palabra in texto_norm for palabra in ['adios', 'chao', 'hasta luego', 'bye', 'gracias']):
             respuestas = [
-                "¡Hasta pronto! 👋 Cuida bien a tus mascotas 🐾",
+                "¡Hasta pronto!  Cuida bien a tus mascotas ",
                 "¡Adiós! Regresa cuando necesites ayuda.",
                 "¡Nos vemos! Que tengas un excelente día."
             ]
@@ -479,16 +479,16 @@ class PetStoreBotTransformer:
             if nombre:
                 df = self.db.buscar_mascota_por_nombre(nombre)
                 if df.empty:
-                    respuesta = f"❌ No se encontró ninguna mascota con el nombre '{nombre}'.\n\n"
-                    respuesta += "💡 **Sugerencias:**\n"
+                    respuesta = f" No se encontró ninguna mascota con el nombre '{nombre}'.\n\n"
+                    respuesta += " **Sugerencias:**\n"
                     respuesta += "• Verifica la ortografía\n"
                     respuesta += "• Intenta con solo el nombre (sin apellidos)\n"
                     respuesta += "• Usa el formato: 'buscar mascota [nombre]'"
                     return respuesta, 0.85
                 
-                respuesta = f"🔍 **RESULTADOS DE BÚSQUEDA: '{nombre}'**\n\n"
+                respuesta = f" **RESULTADOS DE BÚSQUEDA: '{nombre}'**\n\n"
                 for idx, row in df.iterrows():
-                    respuesta += f"🐾 **{row['nombre']}** (ID: {row['pet_id']})\n"
+                    respuesta += f" **{row['nombre']}** (ID: {row['pet_id']})\n"
                     respuesta += f"   • Tipo: {row['tipo']}\n"
                     respuesta += f"   • Raza: {row['raza']}\n"
                     respuesta += f"   • Edad: {row['edad']} años | Sexo: {row['sexo']}\n"
@@ -496,7 +496,7 @@ class PetStoreBotTransformer:
                     respuesta += f"   • Contacto: {row['telefono']}\n\n"
                 return respuesta, 0.92
             else:
-                respuesta = "❓ Por favor proporciona el nombre de la mascota.\n\n"
+                respuesta = " Por favor proporciona el nombre de la mascota.\n\n"
                 respuesta += "**Ejemplos:**\n"
                 respuesta += "• 'buscar mascota Max'\n"
                 respuesta += "• 'información de la mascota Luna'\n"
@@ -508,14 +508,14 @@ class PetStoreBotTransformer:
         if (any(palabra in texto_norm for palabra in ['estadistica', 'estadisticas', 'metricas', 'reporte', 'resumen', 'numeros', 'cifras']) and 
             not any(palabra in texto_norm for palabra in ['prediccion', 'predicciones', 'predecir', 'pronostico'])):
             stats = self.db.obtener_estadisticas_generales()
-            respuesta = f"""📊 **Estadísticas del Sistema:**
+            respuesta = f""" **Estadísticas del Sistema:**
 
-🐾 Mascotas registradas: {stats['total_mascotas']}
-👥 Clientes activos: {stats['total_clientes']}
-📅 Total de citas: {stats['total_citas']}
-🏥 Servicios disponibles: {stats['total_servicios']}
+             Mascotas registradas: {stats['total_mascotas']}
+             Clientes activos: {stats['total_clientes']}
+             Total de citas: {stats['total_citas']}
+             Servicios disponibles: {stats['total_servicios']}
 
-¿Necesitas más detalles sobre alguna métrica específica?"""
+            ¿Necesitas más detalles sobre alguna métrica específica?"""
             return respuesta, 0.92
         
         # === CITAS ===
@@ -523,17 +523,17 @@ class PetStoreBotTransformer:
             df = self.db.obtener_citas_hoy()
             total = len(df)
             if total > 0:
-                respuesta = f"📅 **CITAS PROGRAMADAS HOY ({datetime.now().strftime('%d/%m/%Y')})**\n\n"
+                respuesta = f" **CITAS PROGRAMADAS HOY ({datetime.now().strftime('%d/%m/%Y')})**\n\n"
                 respuesta += f"Total de citas: {total}\n\n"
                 for idx, row in df.head(5).iterrows():
                     hora = f"{int(row['hora']):02d}:00"
-                    respuesta += f"🕐 **{hora}** - {row['mascota']} ({row['tipo_mascota']})\n"
+                    respuesta += f" **{hora}** - {row['mascota']} ({row['tipo_mascota']})\n"
                     respuesta += f"   • Cliente: {row['cliente']}\n"
                     respuesta += f"   • Servicio: {row['servicio']}\n\n"
                 if total > 5:
                     respuesta += f"... y {total - 5} citas más.\n"
             else:
-                respuesta = "✅ No hay citas programadas para hoy. Es un día tranquilo."
+                respuesta = " No hay citas programadas para hoy. Es un día tranquilo."
             return respuesta, 0.92
         
         # === VENTAS ===
@@ -542,22 +542,22 @@ class PetStoreBotTransformer:
             ventas_mes = self.db.obtener_ventas_mes()
             comparativa = self.db.obtener_comparativa_ventas_mensual()
             
-            respuesta = "💰 **REPORTE DE VENTAS**\n\n"
-            respuesta += "📊 **Ventas del Día:**\n"
+            respuesta = " **REPORTE DE VENTAS**\n\n"
+            respuesta += " **Ventas del Día:**\n"
             respuesta += f"   • Total: ${ventas_dia['total_ventas']:,.2f}\n"
             respuesta += f"   • Transacciones: {ventas_dia['total_transacciones']}\n"
             respuesta += f"   • Items vendidos: {ventas_dia['total_items_vendidos']}\n\n"
             
-            respuesta += "📅 **Ventas del Mes:**\n"
+            respuesta += " **Ventas del Mes:**\n"
             respuesta += f"   • Total: ${ventas_mes['total_ventas']:,.2f}\n"
             respuesta += f"   • Transacciones: {ventas_mes['total_transacciones']}\n\n"
             
             if comparativa['tendencia'] == 'crecimiento':
-                emoji = '📈'
+                emoji = ''
             elif comparativa['tendencia'] == 'decrecimiento':
-                emoji = '📉'
+                emoji = ''
             else:
-                emoji = '➡️'
+                emoji = ''
             
             respuesta += f"{emoji} **Tendencia:** {comparativa['tendencia'].upper()}\n"
             respuesta += f"   • Cambio: {comparativa['porcentaje_cambio']:+.2f}%"
@@ -569,32 +569,32 @@ class PetStoreBotTransformer:
             df = self.db.obtener_dataset_completo()
             if not df.empty:
                 analisis = self.predictor.analizar_tipo_mascota_mas_comun(df)
-                respuesta = f"🐾 **ANÁLISIS: Tipo de Mascota Más Común**\n\n"
-                respuesta += f"🏆 El tipo más común es: **{analisis['tipo_mas_comun']}**\n\n"
-                respuesta += "📊 **Distribución completa:**\n"
+                respuesta = f" **ANÁLISIS: Tipo de Mascota Más Común**\n\n"
+                respuesta += f" El tipo más común es: **{analisis['tipo_mas_comun']}**\n\n"
+                respuesta += " **Distribución completa:**\n"
                 for stat in analisis['estadisticas'][:5]:
-                    barra = "█" * int(stat['porcentaje'] / 5)
+                    barra = "" * int(stat['porcentaje'] / 5)
                     respuesta += f"• {stat['tipo']}: {stat['cantidad']} ({stat['porcentaje']}%) {barra}\n"
                 return respuesta, 0.92
             else:
-                return "❌ No hay datos suficientes para realizar el análisis.", 0.70
+                return " No hay datos suficientes para realizar el análisis.", 0.70
         
         # === PRODUCTOS E INVENTARIO ===
         if any(palabra in texto_norm for palabra in ['productos', 'producto', 'inventario', 'stock']):
             cantidad = self.db.obtener_cantidad_productos()
             bajo_inventario = self.db.obtener_alerta_bajo_inventario()
             
-            respuesta = "📦 **INFORMACIÓN DE INVENTARIO**\n\n"
+            respuesta = " **INFORMACIÓN DE INVENTARIO**\n\n"
             respuesta += f"**Total de productos:** {cantidad}\n\n"
             
             if not bajo_inventario.empty:
-                respuesta += f"🚨 **ALERTAS DE BAJO INVENTARIO:** {len(bajo_inventario)} productos\n\n"
+                respuesta += f" **ALERTAS DE BAJO INVENTARIO:** {len(bajo_inventario)} productos\n\n"
                 respuesta += "**Top 5 productos con menos stock:**\n"
                 for idx, row in bajo_inventario.head(5).iterrows():
                     respuesta += f"• **{row['producto']}** ({row['categoria']})\n"
                     respuesta += f"  Stock actual: {int(row['stock_actual'])} | Mínimo: {int(row['stock_minimo'])}\n"
             else:
-                respuesta += "✅ No hay alertas de bajo inventario."
+                respuesta += " No hay alertas de bajo inventario."
             
             return respuesta, 0.90
         
@@ -603,51 +603,51 @@ class PetStoreBotTransformer:
             productos_vencer = self.db.obtener_productos_proximos_vencer(30)
             bajo_inventario = self.db.obtener_alerta_bajo_inventario()
             
-            respuesta = "⚠️ **ALERTAS DEL SISTEMA**\n\n"
+            respuesta = " **ALERTAS DEL SISTEMA**\n\n"
             
             if not productos_vencer.empty:
-                respuesta += f"📅 **PRODUCTOS PRÓXIMOS A VENCER:** {len(productos_vencer)}\n\n"
+                respuesta += f" **PRODUCTOS PRÓXIMOS A VENCER:** {len(productos_vencer)}\n\n"
                 criticos = productos_vencer[productos_vencer['dias_hasta_vencer'] <= 7]
                 if not criticos.empty:
-                    respuesta += "🔴 **CRÍTICOS (≤ 7 días):**\n"
+                    respuesta += " **CRÍTICOS ( 7 días):**\n"
                     for idx, row in criticos.head(3).iterrows():
                         respuesta += f"• {row['producto']} - {int(row['dias_hasta_vencer'])} días\n"
                     respuesta += "\n"
             else:
-                respuesta += "✅ No hay productos próximos a vencer.\n\n"
+                respuesta += " No hay productos próximos a vencer.\n\n"
             
             if not bajo_inventario.empty:
-                respuesta += f"🚨 **BAJO INVENTARIO:** {len(bajo_inventario)} productos\n"
+                respuesta += f" **BAJO INVENTARIO:** {len(bajo_inventario)} productos\n"
             else:
-                respuesta += "✅ No hay alertas de bajo inventario."
+                respuesta += " No hay alertas de bajo inventario."
             
             return respuesta, 0.90
         
         # === PREDICCIONES ===
         if any(palabra in texto_norm for palabra in ['predice', 'prediccion', 'predicciones', 'pronostico', 'dame predicciones', 'dame prediciones', 'predicciones con machine learning']):
             if not self.predictor.trained:
-                respuesta = """⚠️ **Los modelos predictivos aún no están entrenados**
+                respuesta = """ **Los modelos predictivos aún no están entrenados**
 
-Para activar las predicciones con red neuronal:
+                    Para activar las predicciones con red neuronal:
 
-**Opción 1: Desde la API**
-```
-POST http://localhost:8000/api/entrenar
-```
+                    **Opción 1: Desde la API**
+                    ```
+                    POST http://localhost:8000/api/entrenar
+                    ```
 
-**Opción 2: Desde terminal**
-```bash
-python entrenar_modelos.py
-```
+                    **Opción 2: Desde terminal**
+                    ```bash
+                    python entrenar_modelos.py
+                    ```
 
-⏱️ Tiempo estimado: 5-10 minutos
+                    ⏱ Tiempo estimado: 5-10 minutos
 
-Mientras tanto, puedo ayudarte con:
-📊 Estadísticas actuales
-📅 Citas programadas
-💰 Análisis de ventas
-🐾 Tipo de mascota más común (análisis sin ML)
-"""
+                    Mientras tanto, puedo ayudarte con:
+                     Estadísticas actuales
+                     Citas programadas
+                     Análisis de ventas
+                     Tipo de mascota más común (análisis sin ML)
+                    """
                 return respuesta, 0.85
             
             ahora = datetime.now()
@@ -659,11 +659,11 @@ Mientras tanto, puedo ayudarte con:
             
             dias_nombre = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
             
-            respuesta = f"🔮 **PREDICCIÓN: Tipo de Mascota**\n\n"
-            respuesta += f"📅 Día: {dias_nombre[dia_semana]}\n"
+            respuesta = f" **PREDICCIÓN: Tipo de Mascota**\n\n"
+            respuesta += f" Día: {dias_nombre[dia_semana]}\n"
             respuesta += f"⏰ Hora: {hora_dia}:00\n\n"
-            respuesta += f"🏆 **Predicción:** {prediccion['tipo_mas_probable']}\n"
-            respuesta += f"📊 **Confianza:** {prediccion['confianza']:.1%}\n\n"
+            respuesta += f" **Predicción:** {prediccion['tipo_mas_probable']}\n"
+            respuesta += f" **Confianza:** {prediccion['confianza']:.1%}\n\n"
             respuesta += "**Top 3 más probables:**\n"
             for pred in prediccion['predicciones'][:3]:
                 respuesta += f"• {pred['tipo_mascota']}: {pred['probabilidad']:.1%}\n"
@@ -675,14 +675,14 @@ Mientras tanto, puedo ayudarte con:
             try:
                 df = self.db.obtener_dataset_completo()
                 if df.empty:
-                    return "❌ No hay datos suficientes para realizar clustering.", 0.70
+                    return " No hay datos suficientes para realizar clustering.", 0.70
                 
                 analisis = self.predictor.analisis_clustering_completo(df)
-                respuesta = "🔬 **ANÁLISIS DE HIERARCHICAL CLUSTERING**\n\n"
+                respuesta = " **ANÁLISIS DE HIERARCHICAL CLUSTERING**\n\n"
                 
                 if "clustering_clientes" in analisis and "error" not in analisis['clustering_clientes']:
                     cc = analisis['clustering_clientes']
-                    respuesta += f"👥 **SEGMENTACIÓN DE CLIENTES:** {cc['n_segmentos']} segmentos\n\n"
+                    respuesta += f" **SEGMENTACIÓN DE CLIENTES:** {cc['n_segmentos']} segmentos\n\n"
                     for segmento in cc['segmentos'][:3]:
                         respuesta += f"   **{segmento['nombre']}:**\n"
                         respuesta += f"   • Clientes: {segmento['total_clientes']}\n"
@@ -690,274 +690,274 @@ Mientras tanto, puedo ayudarte con:
                 
                 return respuesta, 0.88
             except:
-                return "❌ Error al generar clustering. Verifica que haya datos suficientes.", 0.60
+                return " Error al generar clustering. Verifica que haya datos suficientes.", 0.60
         
         # === SERVICIOS ===
         if any(palabra in texto_norm for palabra in ['servicios', 'servicio', 'que servicios', 'lista de servicios']):
             df = self.db.obtener_servicios_disponibles()
             if df.empty:
-                return "❌ No se encontraron servicios disponibles.", 0.70
+                return " No se encontraron servicios disponibles.", 0.70
             
-            respuesta = "🏥 **SERVICIOS DISPONIBLES:**\n\n"
+            respuesta = " **SERVICIOS DISPONIBLES:**\n\n"
             for idx, row in df.head(10).iterrows():
                 respuesta += f"• **{row['nombre']}**\n"
                 if row['descripcion']:
                     respuesta += f"  {row['descripcion']}\n"
-                respuesta += f"  💰 Precio: ${row['precio']:,.2f}"
+                respuesta += f"   Precio: ${row['precio']:,.2f}"
                 if row['duracion_minutos']:
-                    respuesta += f" | ⏱️ {row['duracion_minutos']} min"
+                    respuesta += f" | ⏱ {row['duracion_minutos']} min"
                 respuesta += "\n\n"
             
             return respuesta, 0.90
         
         # === INFORMACIÓN VETERINARIA GENÉRICA ===
         if any(palabra in texto_norm for palabra in ['informacion veterinaria', 'info veterinaria', 'informacion de mascota', 'informacion sobre mascota']) and not any(palabra in texto_norm for palabra in ['buscar', 'busca', 'llamada']):
-            respuesta = """🏥 **INFORMACIÓN VETERINARIA DISPONIBLE**
+            respuesta = """ **INFORMACIÓN VETERINARIA DISPONIBLE**
 
-Puedo ayudarte con:
+            Puedo ayudarte con:
 
-**Enfermedades:**
-• "qué es moquillo" - Información sobre moquillo canino
-• "qué es parvovirus" - Información sobre parvovirus
-• "qué es rabia" - Información sobre rabia
-• "leucemia felina" - Información sobre FeLV
+            **Enfermedades:**
+            • "qué es moquillo" - Información sobre moquillo canino
+            • "qué es parvovirus" - Información sobre parvovirus
+            • "qué es rabia" - Información sobre rabia
+            • "leucemia felina" - Información sobre FeLV
 
-**Prevención:**
-• "vacunas" - Calendario de vacunación completo
-• "desparasitación" - Guía de desparasitación
+            **Prevención:**
+            • "vacunas" - Calendario de vacunación completo
+            • "desparasitación" - Guía de desparasitación
 
-**Cuidados:**
-• "alimentación" - Consejos de alimentación
-• "cuidados" - Cuidados generales
+            **Cuidados:**
+            • "alimentación" - Consejos de alimentación
+            • "cuidados" - Cuidados generales
 
-**Emergencias:**
-• "emergencia" - Guía de emergencias veterinarias
+            **Emergencias:**
+            • "emergencia" - Guía de emergencias veterinarias
 
-**Ejemplos:**
-"¿Qué es el moquillo?"
-"Calendario de vacunas"
-"¿Cómo alimentar a mi cachorro?"
+            **Ejemplos:**
+            "¿Qué es el moquillo?"
+            "Calendario de vacunas"
+            "¿Cómo alimentar a mi cachorro?"
 
-¿Sobre qué tema necesitas información?"""
+            ¿Sobre qué tema necesitas información?"""
             return respuesta, 0.90
         
         # === INFORMACIÓN VETERINARIA ESPECÍFICA ===
         
         # Moquillo
         if any(palabra in texto_norm for palabra in ['moquillo', 'distemper', 'que es moquillo']):
-            respuesta = """🏥 **MOQUILLO CANINO**
+            respuesta = """ **MOQUILLO CANINO**
 
-El moquillo es una enfermedad viral grave que afecta a perros.
+            El moquillo es una enfermedad viral grave que afecta a perros.
 
-**Síntomas:**
-• Fiebre alta
-• Secreción nasal y ocular
-• Tos y dificultad respiratoria
-• Vómitos y diarrea
-• Letargo y falta de apetito
-• En casos avanzados: convulsiones
+            **Síntomas:**
+            • Fiebre alta
+            • Secreción nasal y ocular
+            • Tos y dificultad respiratoria
+            • Vómitos y diarrea
+            • Letargo y falta de apetito
+            • En casos avanzados: convulsiones
 
-**Prevención:**
-✅ Vacunación (parte de la vacuna múltiple)
-✅ Refuerzos anuales
-✅ Evitar contacto con perros enfermos
+            **Prevención:**
+             Vacunación (parte de la vacuna múltiple)
+             Refuerzos anuales
+             Evitar contacto con perros enfermos
 
-**Tratamiento:**
-⚠️ Requiere atención veterinaria URGENTE
-No hay cura específica, se trata sintomáticamente
+            **Tratamiento:**
+             Requiere atención veterinaria URGENTE
+            No hay cura específica, se trata sintomáticamente
 
-📞 ¿Necesitas agendar una cita de urgencia?"""
+             ¿Necesitas agendar una cita de urgencia?"""
             return respuesta, 0.95
         
         # Parvovirus
         if any(palabra in texto_norm for palabra in ['parvovirus', 'parvo', 'parvoviral']):
-            respuesta = """🏥 **PARVOVIRUS CANINO**
+            respuesta = """ **PARVOVIRUS CANINO**
 
-Enfermedad viral muy contagiosa que afecta principalmente a cachorros.
+            Enfermedad viral muy contagiosa que afecta principalmente a cachorros.
 
-**Síntomas:**
-• Diarrea severa (a menudo con sangre)
-• Vómitos intensos
-• Fiebre
-• Letargo extremo
-• Pérdida de apetito
-• Deshidratación rápida
+            **Síntomas:**
+            • Diarrea severa (a menudo con sangre)
+            • Vómitos intensos
+            • Fiebre
+            • Letargo extremo
+            • Pérdida de apetito
+            • Deshidratación rápida
 
-**Prevención:**
-✅ Vacunación temprana (6-8 semanas)
-✅ Refuerzos según calendario
-✅ Evitar lugares con perros hasta completar vacunas
+            **Prevención:**
+             Vacunación temprana (6-8 semanas)
+             Refuerzos según calendario
+             Evitar lugares con perros hasta completar vacunas
 
-**Emergencia:**
-🚨 REQUIERE ATENCIÓN VETERINARIA INMEDIATA
-La deshidratación puede ser mortal en 24-48 horas
+            **Emergencia:**
+             REQUIERE ATENCIÓN VETERINARIA INMEDIATA
+            La deshidratación puede ser mortal en 24-48 horas
 
-📞 Si sospechas parvo, llama YA a tu veterinario"""
+             Si sospechas parvo, llama YA a tu veterinario"""
             return respuesta, 0.95
         
         # Vacunas
         if any(palabra in texto_norm for palabra in ['vacuna', 'vacunas', 'vacunar', 'inmunizacion']):
-            respuesta = """💉 **INFORMACIÓN SOBRE VACUNAS**
+            respuesta = """ **INFORMACIÓN SOBRE VACUNAS**
 
-🐕 **PERROS - Vacunas esenciales:**
+             **PERROS - Vacunas esenciales:**
 
-**Cachorros (6-16 semanas):**
-• 6-8 sem: Primera vacuna múltiple
-• 10-12 sem: Segunda dosis
-• 14-16 sem: Tercera dosis + Rabia
+            **Cachorros (6-16 semanas):**
+            • 6-8 sem: Primera vacuna múltiple
+            • 10-12 sem: Segunda dosis
+            • 14-16 sem: Tercera dosis + Rabia
 
-**Adultos (Anual):**
-• Refuerzo múltiple
-• Rabia (cada 1-3 años según vacuna)
+            **Adultos (Anual):**
+            • Refuerzo múltiple
+            • Rabia (cada 1-3 años según vacuna)
 
-🐱 **GATOS - Vacunas esenciales:**
+             **GATOS - Vacunas esenciales:**
 
-**Gatitos (6-16 semanas):**
-• 6-8 sem: Primera triple felina
-• 10-12 sem: Segunda dosis
-• 14-16 sem: Tercera dosis + Rabia
+            **Gatitos (6-16 semanas):**
+            • 6-8 sem: Primera triple felina
+            • 10-12 sem: Segunda dosis
+            • 14-16 sem: Tercera dosis + Rabia
 
-**Adultos (Anual):**
-• Refuerzo triple felina
-• Rabia
+            **Adultos (Anual):**
+            • Refuerzo triple felina
+            • Rabia
 
-💡 **Importante:** Mantén el calendario al día para proteger a tu mascota"""
+             **Importante:** Mantén el calendario al día para proteger a tu mascota"""
             return respuesta, 0.95
         
         # Desparasitación
         if any(palabra in texto_norm for palabra in ['desparasitar', 'desparasitacion', 'parasito', 'parasitos', 'gusano', 'gusanos']):
-            respuesta = """🐛 **DESPARASITACIÓN**
+            respuesta = """ **DESPARASITACIÓN**
 
-📅 **Calendario recomendado:**
+             **Calendario recomendado:**
 
-**Cachorros/Gatitos:**
-• 2, 4, 6, 8 semanas de edad
-• Luego mensual hasta los 6 meses
-• Después cada 3-6 meses
+            **Cachorros/Gatitos:**
+            • 2, 4, 6, 8 semanas de edad
+            • Luego mensual hasta los 6 meses
+            • Después cada 3-6 meses
 
-**Adultos:**
-• Cada 3-6 meses
-• Cada 3 meses si tiene acceso al exterior
+            **Adultos:**
+            • Cada 3-6 meses
+            • Cada 3 meses si tiene acceso al exterior
 
-🔍 **Señales de parásitos:**
-• Diarrea o vómito
-• Abdomen hinchado
-• Pérdida de peso
-• Picazón anal (se arrastra)
-• Gusanos visibles en heces
+             **Señales de parásitos:**
+            • Diarrea o vómito
+            • Abdomen hinchado
+            • Pérdida de peso
+            • Picazón anal (se arrastra)
+            • Gusanos visibles en heces
 
-⚠️ **Importante:** Usa productos recomendados por veterinario"""
+             **Importante:** Usa productos recomendados por veterinario"""
             return respuesta, 0.95
         
         # Alimentación
         if any(palabra in texto_norm for palabra in ['alimentacion', 'comida', 'comer', 'dieta', 'alimento']):
-            respuesta = """🍽️ **ALIMENTACIÓN PARA MASCOTAS**
+            respuesta = """ **ALIMENTACIÓN PARA MASCOTAS**
 
-🐕 **PERROS:**
+             **PERROS:**
 
-**Cachorros:** 3-4 comidas al día, alimento especial para cachorros
-**Adultos:** 2 comidas al día, alimento balanceado
-**Mayores (>7 años):** Alimento senior, menor grasa
+            **Cachorros:** 3-4 comidas al día, alimento especial para cachorros
+            **Adultos:** 2 comidas al día, alimento balanceado
+            **Mayores (>7 años):** Alimento senior, menor grasa
 
-🐱 **GATOS:**
+             **GATOS:**
 
-**Gatitos:** 3-4 comidas pequeñas, alto en proteínas
-**Adultos:** 2-3 comidas al día, alimento balanceado
-**Agua fresca siempre disponible**
+            **Gatitos:** 3-4 comidas pequeñas, alto en proteínas
+            **Adultos:** 2-3 comidas al día, alimento balanceado
+            **Agua fresca siempre disponible**
 
-❌ **NUNCA les des:**
-• Chocolate
-• Cebolla/Ajo
-• Uvas/Pasas
-• Aguacate
-• Huesos cocidos
+             **NUNCA les des:**
+            • Chocolate
+            • Cebolla/Ajo
+            • Uvas/Pasas
+            • Aguacate
+            • Huesos cocidos
 
-💡 Consulta con tu veterinario para recomendaciones específicas"""
+             Consulta con tu veterinario para recomendaciones específicas"""
             return respuesta, 0.93
         
         # Emergencia
         if any(palabra in texto_norm for palabra in ['emergencia', 'urgente', 'grave', 'ayuda']):
-            respuesta = """🚨 **EMERGENCIA VETERINARIA**
+            respuesta = """ **EMERGENCIA VETERINARIA**
 
-⚠️ **ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE si:**
+             **ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE si:**
 
-🔴 **EMERGENCIAS CRÍTICAS:**
-• Dificultad para respirar
-• Sangrado que no para
-• Convulsiones
-• Pérdida de conciencia
-• Trauma severo
-• Abdomen hinchado y duro
-• Intoxicación conocida
+             **EMERGENCIAS CRÍTICAS:**
+            • Dificultad para respirar
+            • Sangrado que no para
+            • Convulsiones
+            • Pérdida de conciencia
+            • Trauma severo
+            • Abdomen hinchado y duro
+            • Intoxicación conocida
 
-📞 **MIENTRAS LLEGAS AL VETERINARIO:**
-1. Mantén la calma
-2. Transporte seguro
-3. No des medicamentos
-4. Llama antes de ir
+             **MIENTRAS LLEGAS AL VETERINARIO:**
+            1. Mantén la calma
+            2. Transporte seguro
+            3. No des medicamentos
+            4. Llama antes de ir
 
-⏱️ **En emergencias, CADA MINUTO CUENTA**"""
+            ⏱ **En emergencias, CADA MINUTO CUENTA**"""
             return respuesta, 0.95
         
         # Ayuda
         if 'ayuda' in texto_norm or 'help' in texto_norm or 'que puedes' in texto_norm or 'comandos' in texto_norm:
-            respuesta = """🤖 **COMANDOS DISPONIBLES:**
+            respuesta = """ **COMANDOS DISPONIBLES:**
 
-🔍 **BÚSQUEDA:**
-• "buscar mascota [nombre]" - Buscar por nombre
-• "información de la mascota [nombre]"
-• "mascota llamada [nombre]"
+             **BÚSQUEDA:**
+            • "buscar mascota [nombre]" - Buscar por nombre
+            • "información de la mascota [nombre]"
+            • "mascota llamada [nombre]"
 
-📊 **ESTADÍSTICAS Y ANÁLISIS:**
-• "estadísticas" - Estadísticas generales
-• "tipo más común" - Tipo de mascota más común
-• "citas hoy" - Citas programadas
+             **ESTADÍSTICAS Y ANÁLISIS:**
+            • "estadísticas" - Estadísticas generales
+            • "tipo más común" - Tipo de mascota más común
+            • "citas hoy" - Citas programadas
 
-💼 **MÉTRICAS DE NEGOCIO:**
-• "ventas" - Reporte de ventas
-• "alertas" - Alertas de inventario
-• "productos" - Info de inventario
+             **MÉTRICAS DE NEGOCIO:**
+            • "ventas" - Reporte de ventas
+            • "alertas" - Alertas de inventario
+            • "productos" - Info de inventario
 
-🏥 **INFORMACIÓN VETERINARIA:**
-• "qué es moquillo" - Info sobre moquillo
-• "qué es parvovirus" - Info sobre parvovirus
-• "vacunas" - Calendario de vacunación
-• "desparasitación" - Guía de desparasitación
-• "alimentación" - Consejos de alimentación
+             **INFORMACIÓN VETERINARIA:**
+            • "qué es moquillo" - Info sobre moquillo
+            • "qué es parvovirus" - Info sobre parvovirus
+            • "vacunas" - Calendario de vacunación
+            • "desparasitación" - Guía de desparasitación
+            • "alimentación" - Consejos de alimentación
 
-🔮 **ANÁLISIS CON IA:**
-• "predicciones" - Predicción con IA
-• "clustering" - Segmentación de clientes
+             **ANÁLISIS CON IA:**
+            • "predicciones" - Predicción con IA
+            • "clustering" - Segmentación de clientes
 
-**Ejemplos:**
-"buscar mascota Corona"
-"¿Cuántas citas hay hoy?"
-"¿Qué es el parvovirus?"
-"Alertas de inventario"
-"""
+            **Ejemplos:**
+            "buscar mascota Corona"
+            "¿Cuántas citas hay hoy?"
+            "¿Qué es el parvovirus?"
+            "Alertas de inventario"
+            """
             return respuesta, 0.90
         
         # Respuesta por defecto
-        respuesta = """¡Hola! 👋 Soy tu asistente virtual con IA.
+        respuesta = """¡Hola!  Soy tu asistente virtual con IA.
 
-Puedo ayudarte con:
-🔍 Buscar mascotas por nombre
-📊 Estadísticas y métricas del negocio
-📅 Consultar citas y programación  
-💰 Análisis de ventas
-🏥 Información veterinaria (moquillo, vacunas, etc.)
-🔮 Predicciones con machine learning
+        Puedo ayudarte con:
+         Buscar mascotas por nombre
+         Estadísticas y métricas del negocio
+         Consultar citas y programación  
+         Análisis de ventas
+         Información veterinaria (moquillo, vacunas, etc.)
+         Predicciones con machine learning
 
-**Ejemplos de preguntas:**
-• "buscar mascota Corona"
-• "estadísticas"
-• "citas hoy"
-• "qué es el moquillo"
-• "predicciones"
+        **Ejemplos de preguntas:**
+        • "buscar mascota Corona"
+        • "estadísticas"
+        • "citas hoy"
+        • "qué es el moquillo"
+        • "predicciones"
 
-Escribe "ayuda" para ver todos los comandos disponibles.
+        Escribe "ayuda" para ver todos los comandos disponibles.
 
-¿Qué necesitas?"""
+        ¿Qué necesitas?"""
         
         return respuesta, 0.70
     
@@ -970,7 +970,7 @@ Escribe "ayuda" para ver todos los comandos disponibles.
         # Si menciona estadísticas, agregar datos reales
         if 'estadistica' in mensaje_lower or 'metrica' in mensaje_lower:
             stats = self.db.obtener_estadisticas_generales()
-            respuesta_base += f"\n\n📊 Datos actuales:\n"
+            respuesta_base += f"\n\n Datos actuales:\n"
             respuesta_base += f"• Mascotas: {stats['total_mascotas']}\n"
             respuesta_base += f"• Clientes: {stats['total_clientes']}\n"
             respuesta_base += f"• Citas: {stats['total_citas']}"
@@ -984,15 +984,16 @@ Escribe "ayuda" para ver todos los comandos disponibles.
         Returns:
             Dict con respuesta, intención, confianza y timestamp
         """
-        # Generar respuesta con transformer
+        # Utilizo el modelo Transformer para generar una respuesta contextual al mensaje del usuario
         respuesta, confianza = self.generar_respuesta_con_contexto(mensaje)
         
+        # Creo un diccionario con toda la información de la respuesta generada para el frontend
         return {
-            "respuesta": respuesta,
-            "intencion": "transformer_generation",
-            "confianza": confianza,
-            "timestamp": datetime.now().isoformat(),
-            "modelo": "Transformer" if self.model_trained else "Híbrido"
+            "respuesta": respuesta,  # Texto de la respuesta que el chatbot generó para el usuario
+            "intencion": "transformer_generation",  # Indico que la respuesta fue generada por el modelo Transformer
+            "confianza": confianza,  # Nivel de confianza del modelo en su respuesta (0-1, donde 1 es máxima confianza)
+            "timestamp": datetime.now().isoformat(),  # Registro la fecha y hora exacta cuando se generó la respuesta
+            "modelo": "Transformer" if self.model_trained else "Híbrido"  # Identifico qué modelo se usó (Transformer si está entrenado, Híbrido si no)
         }
     
     def guardar_modelo(self, ruta='models/'):
@@ -1016,7 +1017,7 @@ Escribe "ayuda" para ver todos los comandos disponibles.
                 }
             }, os.path.join(ruta, 'transformer_chatbot.pth'))
             
-            logger.info("✅ Modelo Transformer guardado")
+            logger.info(" Modelo Transformer guardado")
     
     def cargar_modelo(self, ruta='models/transformer_chatbot.pth'):
         """Carga el modelo transformer"""
@@ -1055,14 +1056,14 @@ Escribe "ayuda" para ver todos los comandos disponibles.
         self.model.eval()
         self.model_trained = True
         
-        logger.info(f"✅ Modelo Transformer cargado desde {ruta}")
+        logger.info(f" Modelo Transformer cargado desde {ruta}")
 
 
 # =============================================================================
 # EJEMPLO DE USO
 # =============================================================================
 if __name__ == "__main__":
-    print("🤖 Chatbot con Transformer - Pet Store")
+    print(" Chatbot con Transformer - Pet Store")
     print("=" * 60)
     
     bot = PetStoreBotTransformer()
@@ -1077,8 +1078,8 @@ if __name__ == "__main__":
     ]
     
     for mensaje in ejemplos:
-        print(f"\n👤 Usuario: {mensaje}")
+        print(f"\n Usuario: {mensaje}")
         resultado = bot.procesar_mensaje(mensaje)
-        print(f"🤖 Bot ({resultado['modelo']}): {resultado['respuesta']}")
+        print(f" Bot ({resultado['modelo']}): {resultado['respuesta']}")
         print(f"   Confianza: {resultado['confianza']:.0%}")
 

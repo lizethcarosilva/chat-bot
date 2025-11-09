@@ -1,13 +1,13 @@
-# 📡 RESUMEN FINAL - TODOS LOS ENDPOINTS DISPONIBLES
+#  RESUMEN FINAL - TODOS LOS ENDPOINTS DISPONIBLES
 
-## 🎯 Sistema Pet Store - API REST Completa
+##  Sistema Pet Store - API REST Completa
 
 **Base URL:** `http://localhost:8000`  
 **Documentación:** `http://localhost:8000/docs`
 
 ---
 
-## 📊 MÉTRICAS DE NEGOCIO
+##  MÉTRICAS DE NEGOCIO
 
 | Endpoint | Descripción |
 |----------|-------------|
@@ -22,7 +22,7 @@
 
 ---
 
-## 🔬 CLUSTERING (NUEVO)
+##  CLUSTERING (NUEVO)
 
 | Endpoint | Descripción | Parámetros |
 |----------|-------------|------------|
@@ -33,7 +33,7 @@
 
 ---
 
-## 📈 ANÁLISIS Y PREDICCIONES
+##  ANÁLISIS Y PREDICCIONES
 
 | Endpoint | Descripción |
 |----------|-------------|
@@ -47,7 +47,7 @@
 
 ---
 
-## 💬 CHATBOT
+##  CHATBOT
 
 | Endpoint | Método | Body |
 |----------|--------|------|
@@ -55,7 +55,7 @@
 
 ---
 
-## 🔍 CONSULTAS
+##  CONSULTAS
 
 | Endpoint | Descripción |
 |----------|-------------|
@@ -65,7 +65,7 @@
 
 ---
 
-## 💻 EJEMPLO DE CONSUMO
+##  EJEMPLO DE CONSUMO
 
 ### JavaScript/Fetch:
 
@@ -97,7 +97,7 @@ data = response.json()
 
 ---
 
-## ✅ ENDPOINTS LISTOS PARA TU FRONTEND
+##  ENDPOINTS LISTOS PARA TU FRONTEND
 
 Todos los endpoints están documentados en:
 
@@ -107,5 +107,5 @@ Todos los endpoints están documentados en:
 
 ---
 
-🚀 **Sistema completo funcionando con Hierarchical Clustering + Métricas de Negocio**
+ **Sistema completo funcionando con Hierarchical Clustering + Métricas de Negocio**
 

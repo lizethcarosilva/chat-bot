@@ -1,0 +1,4 @@
+# Este archivo mantiene la carpeta models/ en Git aunque esté vacía
+# Los modelos entrenados (.h5, .pth, .pkl) no se suben por ser muy pesados
+# Pero la carpeta debe existir para que el código funcione
+

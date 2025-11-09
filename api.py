@@ -31,7 +31,7 @@ app = FastAPI(
 # Configurar CORS para permitir peticiones desde React
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción, especifica el dominio de tu frontend
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,15 +46,15 @@ bot_transformer = PetStoreBotTransformer()
 # Intentar cargar modelos entrenados
 try:
     predictor.cargar_modelos()
-    logger.info("✅ Modelos predictivos cargados exitosamente")
+    logger.info("Modelos predictivos cargados exitosamente")
 except:
-    logger.warning("⚠️ Modelos predictivos no encontrados. Entrena primero.")
+    logger.warning("ADVERTENCIA: Modelos predictivos no encontrados. Entrena primero.")
 
 # Verificar modelo transformer
 if bot_transformer.model_trained:
-    logger.info("✅ Chatbot Transformer cargado y listo")
+    logger.info("Chatbot Transformer cargado y listo")
 else:
-    logger.info("ℹ️  Chatbot usando modo híbrido (sin transformer entrenado)")
+    logger.info("INFO: Chatbot usando modo híbrido (sin transformer entrenado)")
 
 
 # =============================================================================
@@ -146,14 +146,17 @@ async def root():
 async def health_check():
     """Verifica el estado de la API y conexiones"""
     try:
+        # Obtengo las estadísticas generales desde la base de datos para verificar la conexión
         stats = db.obtener_estadisticas_generales()
+        # Retorno un diccionario con el estado del sistema, confirmando que todo funciona correctamente
         return {
-            "status": "ok",
-            "database": "connected",
-            "modelos_entrenados": predictor.trained,
-            "timestamp": datetime.now().isoformat()
+            "status": "ok",  # Indico que la API está funcionando sin problemas
+            "database": "connected",  # Confirmo que la conexión con la base de datos es exitosa
+            "modelos_entrenados": predictor.trained,  # Verifico si los modelos de IA están listos para hacer predicciones
+            "timestamp": datetime.now().isoformat()  # Registro la fecha y hora exacta de la verificación en formato ISO
         }
     except Exception as e:
+        # Si algo sale mal, lanzo una excepción HTTP 503 indicando que el servicio no está disponible
         raise HTTPException(status_code=503, detail=f"Error: {str(e)}")
 
 
@@ -177,19 +180,7 @@ async def chat(request: ChatRequest, use_transformer: bool = True):
     - usuario_id: Identificador del usuario (opcional)
     - use_transformer: True para usar Transformer, False para LSTM clásico (default: True)
     
-    **Ejemplo de uso:**
-    ```javascript
-    const response = await fetch('http://localhost:8000/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            mensaje: "¿Cuál es el tipo de mascota más común?",
-            usuario_id: "user123"
-        })
-    });
-    const data = await response.json();
-    ```
-    
+
     **Ventajas del Transformer:**
     - Respuestas más naturales y contextuales
     - Mejor comprensión del lenguaje
@@ -197,18 +188,24 @@ async def chat(request: ChatRequest, use_transformer: bool = True):
     - Arquitectura estado del arte en NLP
     """
     try:
+        # Verifico qué modelo de IA voy a usar según el parámetro recibido
         if use_transformer:
-            # Usar el nuevo chatbot con Transformer
+            # Proceso el mensaje del usuario usando el modelo Transformer que es más avanzado y contextual
             resultado = bot_transformer.procesar_mensaje(request.mensaje)
-            logger.info(f"💬 Transformer generó respuesta con {resultado['confianza']:.0%} confianza")
+            # Registro en el log cuánta confianza tiene el modelo en su respuesta generada
+            logger.info(f"Transformer genero respuesta con {resultado['confianza']:.0%} confianza")
         else:
-            # Usar el chatbot LSTM clásico
+            # Proceso el mensaje usando el modelo LSTM clásico como alternativa al Transformer
             resultado = bot.procesar_mensaje(request.mensaje)
-            logger.info(f"💬 LSTM generó respuesta con {resultado['confianza']:.0%} confianza")
+            # Registro en el log la confianza del modelo LSTM en su respuesta
+            logger.info(f"LSTM genero respuesta con {resultado['confianza']:.0%} confianza")
         
+        # Retorno la respuesta del chatbot encapsulada en el modelo ChatResponse para el frontend
         return ChatResponse(**resultado)
     except Exception as e:
+        # Si ocurre algún error durante el procesamiento del mensaje, lo registro y lo comunico al cliente
         logger.error(f"Error en chat: {e}")
+        # Lanzo una excepción HTTP 500 indicando que hubo un error interno del servidor
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/chat/comandos", tags=["Chatbot"])
@@ -266,10 +263,14 @@ async def obtener_estadisticas():
     - Total de servicios disponibles
     """
     try:
+        # Consulto a la base de datos para obtener un resumen con las métricas generales del negocio
         stats = db.obtener_estadisticas_generales()
+        # Transformo el diccionario de estadísticas en un objeto de respuesta validado por Pydantic
         return EstadisticasResponse(**stats)
     except Exception as e:
+        # Si hay algún error al consultar la base de datos, lo registro para debugging
         logger.error(f"Error obteniendo estadísticas: {e}")
+        # Notifico al cliente que hubo un problema interno con código de error 500
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/analisis/tipos-mascota", tags=["Análisis"])
@@ -283,28 +284,36 @@ async def analisis_tipos_mascota():
     - Total de mascotas por tipo
     """
     try:
+        # Consulto la base de datos para obtener información agregada sobre tipos de mascotas (perro, gato, etc.)
         df = db.obtener_tipos_mascota_mas_comunes()
         
+        # Verifico si la consulta devolvió datos o está vacía
         if df.empty:
+            # Si no hay datos, retorno un mensaje de error informativo al usuario
             return {"error": "No hay datos disponibles"}
         
-        # Convertir a formato JSON amigable
+        # Creo una lista vacía donde almacenaré cada tipo de mascota con sus estadísticas
         tipos = []
+        # Itero sobre cada fila del DataFrame para transformar los datos a formato JSON
         for _, row in df.iterrows():
+            # Agrego un diccionario con las estadísticas de cada tipo de mascota
             tipos.append({
-                "tipo_mascota": row['tipo_mascota'],
-                "total_mascotas": int(row['total_mascotas']),
-                "total_citas": int(row['total_citas']),
-                "promedio_citas": float(row['promedio_citas_por_mascota']),
-                "porcentaje": float(row['porcentaje'])
+                "tipo_mascota": row['tipo_mascota'],  # Nombre del tipo (perro, gato, conejo, etc.)
+                "total_mascotas": int(row['total_mascotas']),  # Cantidad total de mascotas de este tipo
+                "total_citas": int(row['total_citas']),  # Cantidad de citas agendadas por este tipo
+                "promedio_citas": float(row['promedio_citas_por_mascota']),  # Promedio de citas por mascota
+                "porcentaje": float(row['porcentaje'])  # Porcentaje que representa del total de mascotas
             })
         
+        # Retorno el tipo más común (primera posición) junto con todas las estadísticas
         return {
-            "tipo_mas_comun": tipos[0]['tipo_mascota'] if tipos else None,
-            "estadisticas": tipos
+            "tipo_mas_comun": tipos[0]['tipo_mascota'] if tipos else None,  # El tipo con más mascotas registradas
+            "estadisticas": tipos  # Lista completa de todos los tipos con sus métricas
         }
     except Exception as e:
+        # Si ocurre un error durante el procesamiento, lo registro para debugging
         logger.error(f"Error en análisis de tipos: {e}")
+        # Informo al cliente que hubo un error interno del servidor
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/analisis/dias-atencion", tags=["Análisis"])
@@ -318,31 +327,40 @@ async def analisis_dias_atencion():
     - Tasa de asistencia por día
     """
     try:
+        # Consulto la base de datos para obtener las estadísticas de citas agrupadas por día de la semana
         df = db.obtener_dias_con_mas_atencion()
         
+        # Verifico si hay información disponible en la consulta
         if df.empty:
+            # Si no hay datos, informo al usuario que no hay información para mostrar
             return {"error": "No hay datos disponibles"}
         
+        # Creo una lista para almacenar las estadísticas de cada día
         dias = []
+        # Recorro cada fila del DataFrame que representa un día de la semana
         for _, row in df.iterrows():
+            # Agrego un diccionario con las métricas de cada día
             dias.append({
-                "dia_semana": row['dia_semana'],
-                "numero_dia": int(row['numero_dia']),
-                "total_citas": int(row['total_citas']),
-                "completadas": int(row['completadas']),
-                "canceladas": int(row['canceladas']),
-                "tasa_asistencia": float(row['tasa_asistencia'])
+                "dia_semana": row['dia_semana'],  # Nombre del día (Lunes, Martes, etc.)
+                "numero_dia": int(row['numero_dia']),  # Número del día (0=Domingo, 1=Lunes, etc.)
+                "total_citas": int(row['total_citas']),  # Cantidad total de citas programadas ese día
+                "completadas": int(row['completadas']),  # Cuántas citas se realizaron exitosamente
+                "canceladas": int(row['canceladas']),  # Cuántas citas fueron canceladas
+                "tasa_asistencia": float(row['tasa_asistencia'])  # Porcentaje de asistencia real ese día
             })
         
-        # Ordenar por cantidad de citas
+        # Ordeno los días de mayor a menor según la cantidad de citas para identificar el más concurrido
         dias_ordenados = sorted(dias, key=lambda x: x['total_citas'], reverse=True)
         
+        # Retorno el día con más atención y las estadísticas completas de todos los días
         return {
-            "dia_mas_atencion": dias_ordenados[0]['dia_semana'] if dias_ordenados else None,
-            "estadisticas": dias
+            "dia_mas_atencion": dias_ordenados[0]['dia_semana'] if dias_ordenados else None,  # El día con más citas
+            "estadisticas": dias  # Estadísticas detalladas de todos los días de la semana
         }
     except Exception as e:
+        # Si algo sale mal durante el procesamiento, lo registro en el log
         logger.error(f"Error en análisis de días: {e}")
+        # Notifico al cliente sobre el error interno del servidor
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/analisis/horas-pico", tags=["Análisis"])
@@ -356,30 +374,39 @@ async def analisis_horas_pico():
     - Mascotas y clientes únicos por hora
     """
     try:
+        # Consulto la base de datos para obtener la distribución de citas por hora del día
         df = db.obtener_horas_pico()
         
+        # Verifico si la consulta retornó información o está vacía
         if df.empty:
+            # Si no hay datos disponibles, informo al usuario con un mensaje descriptivo
             return {"error": "No hay datos disponibles"}
         
+        # Creo una lista para almacenar las estadísticas de cada hora del día
         horas = []
+        # Itero sobre cada fila del DataFrame que representa una hora específica
         for _, row in df.iterrows():
+            # Agrego un diccionario con todas las métricas de esa hora
             horas.append({
-                "hora": int(row['hora']),
-                "total_citas": int(row['total_citas']),
-                "mascotas_unicas": int(row['mascotas_unicas']),
-                "clientes_unicos": int(row['clientes_unicos']),
-                "duracion_promedio": float(row['duracion_promedio']) if row['duracion_promedio'] else 0
+                "hora": int(row['hora']),  # Hora del día en formato 24 horas (0-23)
+                "total_citas": int(row['total_citas']),  # Cantidad de citas agendadas en esta hora
+                "mascotas_unicas": int(row['mascotas_unicas']),  # Cuántas mascotas diferentes fueron atendidas
+                "clientes_unicos": int(row['clientes_unicos']),  # Cuántos clientes diferentes visitaron
+                "duracion_promedio": float(row['duracion_promedio']) if row['duracion_promedio'] else 0  # Tiempo promedio de duración de las citas en minutos
             })
         
-        # Ordenar por cantidad de citas
+        # Ordeno las horas de mayor a menor demanda para identificar las horas pico
         horas_ordenadas = sorted(horas, key=lambda x: x['total_citas'], reverse=True)
         
+        # Retorno la hora con mayor demanda y el top 10 de horas más concurridas
         return {
-            "hora_pico": horas_ordenadas[0]['hora'] if horas_ordenadas else None,
-            "estadisticas": horas[:10]  # Top 10
+            "hora_pico": horas_ordenadas[0]['hora'] if horas_ordenadas else None,  # La hora con más citas del día
+            "estadisticas": horas[:10]  # Las 10 horas con mayor cantidad de citas
         }
     except Exception as e:
+        # Si ocurre un error durante el análisis, lo registro para poder revisarlo después
         logger.error(f"Error en análisis de horas: {e}")
+        # Informo al cliente que hubo un error interno del servidor
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/analisis/servicios", tags=["Análisis"])
@@ -671,16 +698,23 @@ async def clustering_completo():
     - Recomendaciones estratégicas
     """
     try:
+        # Obtengo el dataset completo con todas las citas, mascotas, clientes y servicios desde la base de datos
         df = db.obtener_dataset_completo()
         
+        # Verifico si el dataset tiene información para poder realizar el análisis
         if df.empty:
+            # Si no hay datos, lanzo una excepción HTTP 404 indicando que no hay información disponible
             raise HTTPException(status_code=404, detail="No hay datos disponibles")
         
+        # Ejecuto el análisis completo de clustering jerárquico que agrupa mascotas, clientes y servicios
         resultado = predictor.analisis_clustering_completo(df)
         
+        # Retorno el resultado completo con todos los clusters identificados y sus características
         return resultado
     except Exception as e:
+        # Si hay un error durante el análisis de clustering, lo registro para debugging
         logger.error(f"Error en clustering completo: {e}")
+        # Notifico al cliente que ocurrió un error interno durante el procesamiento
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -881,13 +915,13 @@ async def obtener_comparativa_ventas():
     try:
         comparativa = db.obtener_comparativa_ventas_mensual()
         
-        # Determinar emoji según tendencia
-        emoji_tendencia = {
-            'crecimiento': '📈',
-            'decrecimiento': '📉',
-            'estable': '➡️',
-            'sin_datos': '❓',
-            'error': '⚠️'
+        # Determinar icono según tendencia
+        icono_tendencia = {
+            'crecimiento': '+',
+            'decrecimiento': '-',
+            'estable': '=',
+            'sin_datos': '?',
+            'error': '!'
         }
         
         return {
@@ -898,7 +932,7 @@ async def obtener_comparativa_ventas():
             "diferencia_ventas": comparativa['diferencia_ventas'],
             "porcentaje_cambio": comparativa['porcentaje_cambio'],
             "tendencia": comparativa['tendencia'],
-            "icono_tendencia": emoji_tendencia.get(comparativa['tendencia'], '➡️'),
+            "icono_tendencia": icono_tendencia.get(comparativa['tendencia'], '='),
             "mensaje": _generar_mensaje_tendencia(comparativa)
         }
     except Exception as e:
@@ -1135,13 +1169,13 @@ async def entrenar_modelos(background_tasks: BackgroundTasks):
     """
     def entrenar():
         try:
-            logger.info("🚀 Iniciando entrenamiento de modelos...")
+            logger.info("Iniciando entrenamiento de modelos...")
             
             # Obtener datos
             df = db.obtener_dataset_completo()
             
             if df.empty:
-                logger.error("❌ No hay datos para entrenar")
+                logger.error("No hay datos para entrenar")
                 return
             
             # Entrenar modelos
@@ -1151,10 +1185,10 @@ async def entrenar_modelos(background_tasks: BackgroundTasks):
             # Guardar modelos
             predictor.guardar_modelos()
             
-            logger.info("✅ Entrenamiento completado")
+            logger.info("Entrenamiento completado")
             
         except Exception as e:
-            logger.error(f"❌ Error en entrenamiento: {e}")
+            logger.error(f"Error en entrenamiento: {e}")
     
     # Ejecutar en background
     background_tasks.add_task(entrenar)
@@ -1252,22 +1286,22 @@ if __name__ == "__main__":
     import uvicorn
     
     print("\n" + "=" * 80)
-    print("🚀 INICIANDO API REST - PET STORE CHATBOT")
+    print("INICIANDO API REST - PET STORE CHATBOT")
     print("=" * 80)
-    print("\n🌐 Servidor corriendo en: http://localhost:8000")
-    print("\n📝 Documentación:")
-    print("   • Swagger UI (Recomendado): http://localhost:8000/docs")
-    print("   • ReDoc:                    http://localhost:8000/redoc")
-    print("\n🔌 Endpoints para Frontend:")
-    print("   • Chatbot:       POST   /api/chat")
-    print("   • Estadísticas:  GET    /api/estadisticas")
-    print("   • Análisis:      GET    /api/analisis/tipos-mascota")
-    print("   • Predicciones:  POST   /api/predicciones/tipo-mascota")
-    print("   • Buscar:        GET    /api/mascotas/buscar/{nombre}")
-    print("   • Servicios:     GET    /api/servicios")
-    print("\n💡 Tip: Abre http://localhost:8000/docs para ver todos los endpoints")
+    print("\nServidor corriendo en: http://localhost:8000")
+    print("\nDocumentacion:")
+    print("   - Swagger UI (Recomendado): http://localhost:8000/docs")
+    print("   - ReDoc:                    http://localhost:8000/redoc")
+    print("\nEndpoints para Frontend:")
+    print("   - Chatbot:       POST   /api/chat")
+    print("   - Estadisticas:  GET    /api/estadisticas")
+    print("   - Analisis:      GET    /api/analisis/tipos-mascota")
+    print("   - Predicciones:  POST   /api/predicciones/tipo-mascota")
+    print("   - Buscar:        GET    /api/mascotas/buscar/{nombre}")
+    print("   - Servicios:     GET    /api/servicios")
+    print("\nTip: Abre http://localhost:8000/docs para ver todos los endpoints")
     print("\n" + "=" * 80)
-    print("✅ LISTO - Presiona Ctrl+C para detener")
+    print("LISTO - Presiona Ctrl+C para detener")
     print("=" * 80 + "\n")
     
     uvicorn.run(

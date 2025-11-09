@@ -1,12 +1,12 @@
-# 🔌 API REST - Pet Store Chatbot
+#  API REST - Pet Store Chatbot
 
-## 📖 Resumen
+##  Resumen
 
 Esta API REST proporciona **todos los endpoints necesarios** para tu frontend React. Ya no necesitas ejecutar `main.py`, solo inicia la API y consume los endpoints.
 
 ---
 
-## ⚡ Inicio Rápido
+##  Inicio Rápido
 
 ### 1. Instalar Dependencias (Una sola vez)
 ```bash
@@ -28,20 +28,20 @@ Abre en tu navegador: `http://localhost:8000/docs`
 
 ---
 
-## 🌐 URLs de la API
+##  URLs de la API
 
 | URL | Descripción |
 |-----|-------------|
 | `http://localhost:8000` | Base de la API |
-| `http://localhost:8000/docs` | **Documentación interactiva Swagger** ⭐ |
+| `http://localhost:8000/docs` | **Documentación interactiva Swagger**  |
 | `http://localhost:8000/redoc` | Documentación ReDoc |
 | `http://localhost:8000/api/health` | Estado del servidor |
 
 ---
 
-## 🔌 Endpoints Principales para tu Frontend
+##  Endpoints Principales para tu Frontend
 
-### 1️⃣ Chatbot
+### 1⃣ Chatbot
 ```http
 POST /api/chat
 Content-Type: application/json
@@ -55,7 +55,7 @@ Content-Type: application/json
 **Respuesta:**
 ```json
 {
-  "respuesta": "🏆 El tipo más común es: Perro (45.5%)",
+  "respuesta": " El tipo más común es: Perro (45.5%)",
   "intencion": "tipo_mas_comun",
   "confianza": 0.9,
   "timestamp": "2024-11-03T10:30:00"
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 ---
 
-### 2️⃣ Estadísticas para Dashboard
+### 2⃣ Estadísticas para Dashboard
 ```http
 GET /api/estadisticas
 ```
@@ -81,7 +81,7 @@ GET /api/estadisticas
 
 ---
 
-### 3️⃣ Análisis - Tipos de Mascota Más Comunes
+### 3⃣ Análisis - Tipos de Mascota Más Comunes
 ```http
 GET /api/analisis/tipos-mascota
 ```
@@ -111,7 +111,7 @@ GET /api/analisis/tipos-mascota
 
 ---
 
-### 4️⃣ Análisis - Días con Más Atención
+### 4⃣ Análisis - Días con Más Atención
 ```http
 GET /api/analisis/dias-atencion
 ```
@@ -135,7 +135,7 @@ GET /api/analisis/dias-atencion
 
 ---
 
-### 5️⃣ Análisis - Horas Pico
+### 5⃣ Análisis - Horas Pico
 ```http
 GET /api/analisis/horas-pico
 ```
@@ -158,7 +158,7 @@ GET /api/analisis/horas-pico
 
 ---
 
-### 6️⃣ Análisis - Servicios Más Utilizados
+### 6⃣ Análisis - Servicios Más Utilizados
 ```http
 GET /api/analisis/servicios
 ```
@@ -183,7 +183,7 @@ GET /api/analisis/servicios
 
 ---
 
-### 7️⃣ Predicción - Tipo de Mascota (Red Neuronal)
+### 7⃣ Predicción - Tipo de Mascota (Red Neuronal)
 ```http
 POST /api/predicciones/tipo-mascota
 Content-Type: application/json
@@ -216,7 +216,7 @@ Content-Type: application/json
 
 ---
 
-### 8️⃣ Predicción - Asistencia a Cita
+### 8⃣ Predicción - Asistencia a Cita
 ```http
 POST /api/predicciones/asistencia
 Content-Type: application/json
@@ -241,7 +241,7 @@ Content-Type: application/json
 
 ---
 
-### 9️⃣ Buscar Mascota
+### 9⃣ Buscar Mascota
 ```http
 GET /api/mascotas/buscar/Max
 ```
@@ -268,7 +268,7 @@ GET /api/mascotas/buscar/Max
 
 ---
 
-### 🔟 Listar Servicios Disponibles
+###  Listar Servicios Disponibles
 ```http
 GET /api/servicios
 ```
@@ -291,7 +291,7 @@ GET /api/servicios
 
 ---
 
-## 🔧 Integración con tu Frontend React
+##  Integración con tu Frontend React
 
 ### Configurar Axios (Una sola vez)
 
@@ -420,7 +420,7 @@ const Prediccion = () => {
 
 ---
 
-## ⚠️ Antes de las Predicciones
+##  Antes de las Predicciones
 
 **Los modelos deben estar entrenados primero:**
 
@@ -456,25 +456,25 @@ GET /api/predicciones/estado
 
 ---
 
-## 🔄 Flujo de Trabajo
+##  Flujo de Trabajo
 
 ```
 1. Iniciar API: python api.py
-   ↓
+   
 2. API corre en: http://localhost:8000
-   ↓
+   
 3. Frontend hace peticiones a: http://localhost:8000/api/*
-   ↓
+   
 4. API consulta base de datos PostgreSQL
-   ↓
+   
 5. API devuelve JSON al frontend
-   ↓
+   
 6. Frontend muestra los datos
 ```
 
 ---
 
-## 🚨 Solución de Problemas
+##  Solución de Problemas
 
 ### Error: "ModuleNotFoundError: No module named 'fastapi'"
 ```bash
@@ -490,7 +490,7 @@ uvicorn.run("api:app", host="0.0.0.0", port=3001, reload=True)
 ### Error: "Los modelos no están entrenados"
 ```bash
 # Opción 1: Entrenar desde terminal
-python main.py  # → Opción 4
+python main.py  #  Opción 4
 
 # Opción 2: Desde tu frontend
 POST http://localhost:8000/api/entrenar
@@ -510,24 +510,24 @@ app.add_middleware(
 
 ---
 
-## 📂 Archivos del Proyecto
+##  Archivos del Proyecto
 
 ```
 chat-bot/
-├── api.py                    ⭐ EJECUTAR ESTE
-├── iniciar_api.py            ⭐ O ESTE (alternativa)
-├── database.py               (usado por api.py)
-├── predictor.py              (usado por api.py)
-├── chatbot.py                (usado por api.py)
-├── config.py                 (configuración)
-├── main.py                   (NO NECESARIO - solo para terminal)
-├── requirements.txt
-└── .env                      (credenciales BD)
+ api.py                     EJECUTAR ESTE
+ iniciar_api.py             O ESTE (alternativa)
+ database.py               (usado por api.py)
+ predictor.py              (usado por api.py)
+ chatbot.py                (usado por api.py)
+ config.py                 (configuración)
+ main.py                   (NO NECESARIO - solo para terminal)
+ requirements.txt
+ .env                      (credenciales BD)
 ```
 
 ---
 
-## 📚 Documentación Completa
+##  Documentación Completa
 
 - **API_ENDPOINTS.md** - Lista completa de todos los endpoints
 - **EJEMPLOS_REACT.md** - Componentes React completos
@@ -535,7 +535,7 @@ chat-bot/
 
 ---
 
-## ✅ Checklist
+##  Checklist
 
 - [ ] Instalar dependencias: `pip install fastapi uvicorn pydantic`
 - [ ] Iniciar API: `python api.py`
@@ -547,7 +547,7 @@ chat-bot/
 
 ---
 
-## 🎯 Endpoints Más Importantes para tu Dashboard
+##  Endpoints Más Importantes para tu Dashboard
 
 ```javascript
 // 1. Estadísticas generales
@@ -574,7 +574,7 @@ POST /api/predicciones/tipo-mascota
 
 ---
 
-## 💡 Tip Final
+##  Tip Final
 
 **Usa la documentación interactiva:**
 `http://localhost:8000/docs`
@@ -587,5 +587,5 @@ Ahí puedes:
 
 ---
 
-**¡API lista para tu frontend! 🚀**
+**¡API lista para tu frontend! **
 

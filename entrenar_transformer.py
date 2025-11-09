@@ -61,11 +61,11 @@ def generar_datos_entrenamiento():
     
     training_data = [
         # Saludos y conversación básica
-        ("hola", "¡Hola! 👋 Soy tu asistente virtual del Pet Store. ¿En qué puedo ayudarte?"),
+        ("hola", "¡Hola!  Soy tu asistente virtual del Pet Store. ¿En qué puedo ayudarte?"),
         ("buenos dias", "¡Buenos días! Estoy aquí para ayudarte con información sobre mascotas y servicios."),
         ("como estas", "¡Muy bien! Listo para ayudarte. ¿Qué necesitas saber?"),
-        ("adios", "¡Hasta pronto! 👋 Cuida bien a tus mascotas 🐾"),
-        ("gracias", "¡De nada! Estoy aquí para ayudarte. 😊"),
+        ("adios", "¡Hasta pronto!  Cuida bien a tus mascotas "),
+        ("gracias", "¡De nada! Estoy aquí para ayudarte. "),
         
         # Estadísticas
         ("muestrame las estadisticas", "Te muestro las estadísticas generales del sistema con información actualizada."),
@@ -141,7 +141,7 @@ def guardar_datos_entrenamiento(filename='data/chatbot_training_data.json'):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(datos, f, ensure_ascii=False, indent=2)
     
-    logger.info(f"✅ Datos de entrenamiento guardados en {filename}")
+    logger.info(f" Datos de entrenamiento guardados en {filename}")
     logger.info(f"   Total de ejemplos: {len(datos)}")
 
 
@@ -156,7 +156,7 @@ def cargar_datos_entrenamiento(filename='data/chatbot_training_data.json'):
     with open(filename, 'r', encoding='utf-8') as f:
         datos = json.load(f)
     
-    logger.info(f"✅ Datos de entrenamiento cargados: {len(datos)} ejemplos")
+    logger.info(f" Datos de entrenamiento cargados: {len(datos)} ejemplos")
     return datos
 
 
@@ -183,18 +183,18 @@ def entrenar_transformer(
     # Determinar dispositivo
     if device is None:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    logger.info(f"🔧 Usando dispositivo: {device}")
+    logger.info(f" Usando dispositivo: {device}")
     
     # Inicializar bot
-    logger.info("🤖 Inicializando chatbot...")
+    logger.info(" Inicializando chatbot...")
     bot = PetStoreBotTransformer()
     
     # Cargar datos de entrenamiento
-    logger.info("📚 Cargando datos de entrenamiento...")
+    logger.info(" Cargando datos de entrenamiento...")
     datos = cargar_datos_entrenamiento()
     
     # Construir vocabulario
-    logger.info("📝 Construyendo vocabulario...")
+    logger.info(" Construyendo vocabulario...")
     textos = []
     for pregunta, respuesta in datos:
         textos.append(pregunta)
@@ -202,7 +202,7 @@ def entrenar_transformer(
     bot.construir_vocabulario(textos)
     
     # Crear modelo
-    logger.info("🏗️  Creando modelo Transformer...")
+    logger.info("  Creando modelo Transformer...")
     bot.model = TransformerChatbot(
         vocab_size=bot.vocab_size,
         d_model=bot.d_model,
@@ -222,7 +222,7 @@ def entrenar_transformer(
     criterion = nn.CrossEntropyLoss(ignore_index=bot.word2idx[bot.PAD_TOKEN])
     
     logger.info(f"\n{'='*80}")
-    logger.info(f"🚀 INICIANDO ENTRENAMIENTO")
+    logger.info(f" INICIANDO ENTRENAMIENTO")
     logger.info(f"{'='*80}")
     logger.info(f"Épocas: {epochs}")
     logger.info(f"Batch size: {batch_size}")
@@ -262,19 +262,19 @@ def entrenar_transformer(
         # Guardar checkpoint cada 10 épocas
         if (epoch + 1) % 10 == 0:
             bot.guardar_modelo()
-            logger.info(f"💾 Checkpoint guardado en época {epoch+1}")
+            logger.info(f" Checkpoint guardado en época {epoch+1}")
     
     # Guardar modelo final
-    logger.info("\n💾 Guardando modelo final...")
+    logger.info("\n Guardando modelo final...")
     bot.model_trained = True
     bot.guardar_modelo()
     
     logger.info(f"\n{'='*80}")
-    logger.info("✅ ENTRENAMIENTO COMPLETADO")
+    logger.info(" ENTRENAMIENTO COMPLETADO")
     logger.info(f"{'='*80}\n")
     
     # Probar el modelo
-    logger.info("🧪 Probando el modelo entrenado...\n")
+    logger.info(" Probando el modelo entrenado...\n")
     probar_modelo(bot)
     
     return bot
@@ -292,9 +292,9 @@ def probar_modelo(bot: PetStoreBotTransformer):
     ]
     
     for ejemplo in ejemplos:
-        print(f"\n👤 Usuario: {ejemplo}")
+        print(f"\n Usuario: {ejemplo}")
         resultado = bot.procesar_mensaje(ejemplo)
-        print(f"🤖 Bot ({resultado['modelo']}): {resultado['respuesta']}")
+        print(f" Bot ({resultado['modelo']}): {resultado['respuesta']}")
         print(f"   Confianza: {resultado['confianza']:.0%}")
 
 
@@ -304,7 +304,7 @@ def probar_modelo(bot: PetStoreBotTransformer):
 
 if __name__ == "__main__":
     print("\n" + "="*80)
-    print("🎓 ENTRENAMIENTO DEL CHATBOT TRANSFORMER")
+    print(" ENTRENAMIENTO DEL CHATBOT TRANSFORMER")
     print("="*80 + "\n")
     
     # Configuración
@@ -322,14 +322,14 @@ if __name__ == "__main__":
             learning_rate=config['learning_rate']
         )
         
-        print("\n✅ ¡Modelo entrenado exitosamente!")
-        print("\n💡 Para usar el modelo, ejecuta:")
+        print("\n ¡Modelo entrenado exitosamente!")
+        print("\n Para usar el modelo, ejecuta:")
         print("   python api.py")
         print("\nO pruébalo directamente:")
         print("   python transformer_chatbot.py")
         
     except Exception as e:
-        logger.error(f"\n❌ Error durante el entrenamiento: {e}")
+        logger.error(f"\n Error durante el entrenamiento: {e}")
         import traceback
         traceback.print_exc()
     

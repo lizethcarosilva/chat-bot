@@ -1,13 +1,13 @@
-════════════════════════════════════════════════════════════════════════════════
-🔬 HIERARCHICAL CLUSTERING - INICIO RÁPIDO
-════════════════════════════════════════════════════════════════════════════════
 
-⏱️  TIEMPO: 5 minutos
+ HIERARCHICAL CLUSTERING - INICIO RÁPIDO
 
 
-════════════════════════════════════════════════════════════════════════════════
+⏱  TIEMPO: 5 minutos
+
+
+
 PASO 1: INSTALAR SCIPY (Si no lo tienes)
-════════════════════════════════════════════════════════════════════════════════
+
 
 pip install scipy
 
@@ -17,9 +17,9 @@ O instala todas las dependencias:
 pip install -r requirements.txt
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 2: REINICIAR LA API
-════════════════════════════════════════════════════════════════════════════════
+
 
 Ctrl+C para detener
 
@@ -28,13 +28,13 @@ python api.py
 
 Deberías ver:
 
-   ✅ LISTO - Presiona Ctrl+C para detener
-   🌐 Servidor corriendo en: http://localhost:8000
+    LISTO - Presiona Ctrl+C para detener
+    Servidor corriendo en: http://localhost:8000
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 3: PROBAR EN EL NAVEGADOR
-════════════════════════════════════════════════════════════════════════════════
+
 
 Abre:
 
@@ -43,16 +43,16 @@ Abre:
 Deberías ver JSON con análisis de clustering.
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 4: PROBAR EN SWAGGER UI
-════════════════════════════════════════════════════════════════════════════════
+
 
 1. Abre: http://localhost:8000/docs
 
 2. Busca la sección: "Clustering" (debería estar en verde)
 
 3. Prueba: GET /api/clustering/completo
-   Click "Try it out" → "Execute"
+   Click "Try it out"  "Execute"
 
 4. Verás análisis completo de:
    • Clusters de mascotas
@@ -60,9 +60,9 @@ PASO 4: PROBAR EN SWAGGER UI
    • Agrupación de servicios
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 5: PROBAR CON EL CHATBOT
-════════════════════════════════════════════════════════════════════════════════
+
 
 Pregunta al bot:
 
@@ -70,9 +70,9 @@ Pregunta al bot:
 
 Respuesta esperada:
 
-   🔬 ANÁLISIS DE HIERARCHICAL CLUSTERING
+    ANÁLISIS DE HIERARCHICAL CLUSTERING
    
-   🐾 CLUSTERS DE MASCOTAS: 3 grupos
+    CLUSTERS DE MASCOTAS: 3 grupos
       Calidad (Silhouette): 0.652
       
       Cluster 0:
@@ -80,7 +80,7 @@ Respuesta esperada:
       • Edad promedio: 3.5 años
       • Tipo predominante: Perro
       
-   👥 SEGMENTACIÓN DE CLIENTES: 4 segmentos
+    SEGMENTACIÓN DE CLIENTES: 4 segmentos
       Calidad: Buena
       
       VIP - Alta frecuencia:
@@ -90,12 +90,12 @@ Respuesta esperada:
    ...
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎯 QUÉ HACE EL CLUSTERING
-════════════════════════════════════════════════════════════════════════════════
+
+ QUÉ HACE EL CLUSTERING
+
 
 1. CLUSTERS DE MASCOTAS
-   ─────────────────────
+   
    Identifica grupos de mascotas con características similares:
    
    Ejemplo:
@@ -105,24 +105,24 @@ Respuesta esperada:
 
 
 2. SEGMENTACIÓN DE CLIENTES
-   ─────────────────────────
+   
    Clasifica clientes en 4 segmentos:
    
    • VIP: Visitan frecuentemente, gastan mucho
-      → Estrategia: Programa de lealtad
+       Estrategia: Programa de lealtad
    
    • Regular: Visitas moderadas, clientes fieles
-      → Estrategia: Mantener satisfacción
+       Estrategia: Mantener satisfacción
    
    • Ocasional: Visitas raras
-      → Estrategia: Campañas de reactivación
+       Estrategia: Campañas de reactivación
    
    • Nuevo: Recién llegados
-      → Estrategia: Onboarding y bienvenida
+       Estrategia: Onboarding y bienvenida
 
 
 3. AGRUPACIÓN DE SERVICIOS
-   ────────────────────────
+   
    Agrupa servicios con patrones similares:
    
    Ejemplo:
@@ -131,9 +131,9 @@ Respuesta esperada:
    • Grupo 2: Servicios especializados de baja frecuencia
 
 
-════════════════════════════════════════════════════════════════════════════════
-💻 EJEMPLO EN REACT
-════════════════════════════════════════════════════════════════════════════════
+
+ EJEMPLO EN REACT
+
 
 import React, { useEffect, useState } from 'react';
 
@@ -150,9 +150,9 @@ function ClusteringDashboard() {
 
   return (
     <div>
-      <h1>🔬 Análisis de Clustering</h1>
+      <h1> Análisis de Clustering</h1>
       
-      <h2>👥 Segmentos de Clientes</h2>
+      <h2> Segmentos de Clientes</h2>
       {data.clustering_clientes.segmentos.map(seg => (
         <div key={seg.segmento_id}>
           <h3>{seg.nombre}</h3>
@@ -165,9 +165,9 @@ function ClusteringDashboard() {
 }
 
 
-════════════════════════════════════════════════════════════════════════════════
-🧪 PRUEBA RÁPIDA
-════════════════════════════════════════════════════════════════════════════════
+
+ PRUEBA RÁPIDA
+
 
 Desde terminal:
 
@@ -176,23 +176,23 @@ curl http://localhost:8000/api/clustering/clientes
 Deberías ver JSON con segmentación de clientes.
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 INTERPRETACIÓN DE RESULTADOS
-════════════════════════════════════════════════════════════════════════════════
+
+ INTERPRETACIÓN DE RESULTADOS
+
 
 SILHOUETTE SCORE (Calidad):
 
-  0.7 - 1.0 → ✅ EXCELENTE
-  0.5 - 0.7 → ✅ BUENO
-  0.3 - 0.5 → ⚠️  MODERADO
-  0.0 - 0.3 → ❌ BAJO
+  0.7 - 1.0   EXCELENTE
+  0.5 - 0.7   BUENO
+  0.3 - 0.5    MODERADO
+  0.0 - 0.3   BAJO
 
-Si el score es > 0.5 → El clustering es útil y confiable
+Si el score es > 0.5  El clustering es útil y confiable
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎯 CASOS DE USO INMEDIATOS
-════════════════════════════════════════════════════════════════════════════════
+
+ CASOS DE USO INMEDIATOS
+
 
 1. Identificar clientes VIP para programa de lealtad
 2. Crear paquetes personalizados por cluster de mascotas
@@ -201,21 +201,21 @@ Si el score es > 0.5 → El clustering es útil y confiable
 5. Retención de clientes en riesgo
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ RESUMEN
-════════════════════════════════════════════════════════════════════════════════
+
+ RESUMEN
+
 
 1. Instala scipy: pip install scipy
 2. Reinicia API: python api.py
 3. Prueba: http://localhost:8000/api/clustering/completo
 4. O pregunta al bot: "clustering"
 
-¡Listo para descubrir patrones en tus datos! 🔬🚀
+¡Listo para descubrir patrones en tus datos! 
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 MÁS INFORMACIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ MÁS INFORMACIÓN
+
 
 Lee: HIERARCHICAL_CLUSTERING_DOCS.md
 Documentación completa con ejemplos de código.

@@ -24,9 +24,9 @@ class PetStoreDatabase:
         """Establece conexión con PostgreSQL"""
         try:
             self.conn = psycopg2.connect(**DB_CONFIG)
-            logger.info("✅ Conexión exitosa a PostgreSQL")
+            logger.info(" Conexión exitosa a PostgreSQL")
         except Exception as e:
-            logger.error(f"❌ Error de conexión: {e}")
+            logger.error(f" Error de conexión: {e}")
             raise
     
     def ejecutar_query(self, query: str, params: tuple = None) -> pd.DataFrame:
@@ -34,7 +34,7 @@ class PetStoreDatabase:
         try:
             # Verificar si la conexión está cerrada y reconectar
             if self.conn is None or self.conn.closed:
-                logger.warning("⚠️  Conexión cerrada, reconectando...")
+                logger.warning("  Conexión cerrada, reconectando...")
                 self.conectar()
             
             if params:
@@ -43,10 +43,10 @@ class PetStoreDatabase:
                 df = pd.read_sql(query, self.conn)
             return df
         except Exception as e:
-            logger.error(f"❌ Error ejecutando query: {e}")
+            logger.error(f" Error ejecutando query: {e}")
             # Intentar reconectar una vez más
             try:
-                logger.info("🔄 Intentando reconectar...")
+                logger.info(" Intentando reconectar...")
                 self.conectar()
                 if params:
                     df = pd.read_sql(query, self.conn, params=params)
@@ -54,7 +54,7 @@ class PetStoreDatabase:
                     df = pd.read_sql(query, self.conn)
                 return df
             except Exception as e2:
-                logger.error(f"❌ Error en segundo intento: {e2}")
+                logger.error(f" Error en segundo intento: {e2}")
                 return pd.DataFrame()
     
     # =========================================================================
@@ -66,119 +66,133 @@ class PetStoreDatabase:
         Obtiene dataset completo para Machine Learning
         Incluye: citas, mascotas, servicios, clientes
         """
+        # Construyo una consulta SQL compleja que obtiene todos los datos necesarios para machine learning
         query = """
         SELECT 
-            -- Identificadores
-            a.appointment_id,
-            a.pet_id,
-            a.client_id,
-            a.service_id,
+            -- Selecciono los identificadores únicos de cada entidad
+            a.appointment_id,  -- ID único de la cita para rastrear cada registro
+            a.pet_id,  -- ID de la mascota para relacionar con su información
+            a.client_id,  -- ID del cliente dueño de la mascota
+            a.service_id,  -- ID del servicio contratado
             
-            -- Fecha y tiempo (features temporales)
-            a.fecha_hora AS fecha_cita,
-            EXTRACT(YEAR FROM a.fecha_hora) AS año,
-            EXTRACT(MONTH FROM a.fecha_hora) AS mes,
-            EXTRACT(DAY FROM a.fecha_hora) AS dia,
-            EXTRACT(DOW FROM a.fecha_hora) AS dia_semana,
-            EXTRACT(HOUR FROM a.fecha_hora) AS hora,
-            EXTRACT(WEEK FROM a.fecha_hora) AS semana_del_año,
+            -- Extraigo características temporales que son importantes para predecir patrones
+            a.fecha_hora AS fecha_cita,  -- Fecha y hora completa de la cita
+            EXTRACT(YEAR FROM a.fecha_hora) AS año,  -- Año de la cita para análisis de tendencias anuales
+            EXTRACT(MONTH FROM a.fecha_hora) AS mes,  -- Mes (1-12) para identificar estacionalidad
+            EXTRACT(DAY FROM a.fecha_hora) AS dia,  -- Día del mes (1-31)
+            EXTRACT(DOW FROM a.fecha_hora) AS dia_semana,  -- Día de la semana (0-6) para patrones semanales
+            EXTRACT(HOUR FROM a.fecha_hora) AS hora,  -- Hora del día (0-23) para identificar horas pico
+            EXTRACT(WEEK FROM a.fecha_hora) AS semana_del_año,  -- Número de semana del año (1-52)
             
-            -- Información del servicio
-            s.nombre AS servicio,
-            s.precio AS precio_servicio,
-            s.duracion_minutos,
+            -- Obtengo información del servicio que impacta en el análisis
+            s.nombre AS servicio,  -- Nombre descriptivo del servicio (baño, vacuna, consulta, etc.)
+            s.precio AS precio_servicio,  -- Precio del servicio como feature económico
+            s.duracion_minutos,  -- Duración estimada para planificación de recursos
             
-            -- Información de la mascota
-            p.tipo AS tipo_mascota,
-            p.raza,
-            p.edad AS edad_mascota,
-            p.sexo AS sexo_mascota,
+            -- Extraigo características de la mascota que son relevantes para predicciones
+            p.tipo AS tipo_mascota,  -- Tipo de mascota (perro, gato, conejo, etc.)
+            p.raza,  -- Raza específica de la mascota
+            p.edad AS edad_mascota,  -- Edad en años, importante para tipos de servicios
+            p.sexo AS sexo_mascota,  -- Sexo de la mascota
             
-            -- Estado de la cita (target)
-            a.estado,
-            CASE WHEN a.estado = 'COMPLETADA' THEN 1 ELSE 0 END AS asistio,
-            CASE WHEN a.estado = 'CANCELADA' THEN 1 ELSE 0 END AS cancelo
+            -- Obtengo el estado de la cita que usaremos como variable objetivo en ML
+            a.estado,  -- Estado actual de la cita (COMPLETADA, CANCELADA, PROGRAMADA, etc.)
+            CASE WHEN a.estado = 'COMPLETADA' THEN 1 ELSE 0 END AS asistio,  -- Variable binaria: 1 si asistió, 0 si no
+            CASE WHEN a.estado = 'CANCELADA' THEN 1 ELSE 0 END AS cancelo  -- Variable binaria: 1 si canceló, 0 si no
             
-        FROM appointment a
-        JOIN service s ON a.service_id = s.service_id
-        JOIN pet p ON a.pet_id = p.pet_id
-        JOIN client c ON a.client_id = c.client_id
-        WHERE a.activo = true
-        ORDER BY a.fecha_hora DESC;
+        FROM appointment a  -- Tabla principal de citas
+        JOIN service s ON a.service_id = s.service_id  -- Uno con servicios para obtener detalles del servicio
+        JOIN pet p ON a.pet_id = p.pet_id  -- Uno con mascotas para obtener características de la mascota
+        JOIN client c ON a.client_id = c.client_id  -- Uno con clientes para validar que el cliente existe
+        WHERE a.activo = true  -- Solo incluyo citas activas, excluyendo registros eliminados
+        ORDER BY a.fecha_hora DESC;  -- Ordeno por fecha descendente para tener las más recientes primero
         """
         
-        logger.info("📊 Obteniendo dataset completo para ML...")
+        # Registro en el log que estoy obteniendo el dataset para machine learning
+        logger.info(" Obteniendo dataset completo para ML...")
+        # Ejecuto la consulta SQL y obtengo los resultados en un DataFrame de pandas
         df = self.ejecutar_query(query)
-        logger.info(f"✓ Dataset obtenido: {len(df)} registros")
+        # Registro cuántos registros obtuve para validar la cantidad de datos disponibles
+        logger.info(f" Dataset obtenido: {len(df)} registros")
+        # Retorno el DataFrame completo listo para ser usado en modelos de machine learning
         return df
     
     def obtener_tipos_mascota_mas_comunes(self) -> pd.DataFrame:
         """Obtiene estadísticas de tipos de mascotas"""
+        # Creo una consulta SQL compleja que analiza los diferentes tipos de mascotas
         query = """
         SELECT 
-            p.tipo AS tipo_mascota,
-            COUNT(DISTINCT p.pet_id) AS total_mascotas,
-            COUNT(a.appointment_id) AS total_citas,
+            p.tipo AS tipo_mascota,  -- Extraigo el tipo de mascota (perro, gato, conejo, etc.)
+            COUNT(DISTINCT p.pet_id) AS total_mascotas,  -- Cuento cuántas mascotas únicas hay de cada tipo
+            COUNT(a.appointment_id) AS total_citas,  -- Cuento el total de citas que ha tenido este tipo de mascota
             ROUND(COUNT(a.appointment_id)::numeric / 
-                  NULLIF(COUNT(DISTINCT p.pet_id), 0), 2) AS promedio_citas_por_mascota,
+                  NULLIF(COUNT(DISTINCT p.pet_id), 0), 2) AS promedio_citas_por_mascota,  -- Calculo el promedio de citas por mascota de este tipo
             ROUND(COUNT(DISTINCT p.pet_id)::numeric * 100.0 / 
-                  (SELECT COUNT(*) FROM pet WHERE activo = true), 2) AS porcentaje
-        FROM pet p
-        LEFT JOIN appointment a ON p.pet_id = a.pet_id AND a.activo = true
-        WHERE p.activo = true
-        GROUP BY p.tipo
-        ORDER BY total_mascotas DESC;
+                  (SELECT COUNT(*) FROM pet WHERE activo = true), 2) AS porcentaje  -- Calculo qué porcentaje representa este tipo del total de mascotas
+        FROM pet p  -- Tabla principal de mascotas
+        LEFT JOIN appointment a ON p.pet_id = a.pet_id AND a.activo = true  -- Uno con las citas para obtener estadísticas de uso
+        WHERE p.activo = true  -- Solo considero mascotas activas en el sistema
+        GROUP BY p.tipo  -- Agrupo los resultados por tipo de mascota para obtener totales
+        ORDER BY total_mascotas DESC;  -- Ordeno de mayor a menor para ver los tipos más comunes primero
         """
         
-        logger.info("🐾 Obteniendo tipos de mascotas...")
+        # Registro en el log que estoy consultando los tipos de mascotas
+        logger.info(" Obteniendo tipos de mascotas...")
+        # Ejecuto la consulta y retorno el DataFrame con los resultados
         return self.ejecutar_query(query)
     
     def obtener_dias_con_mas_atencion(self) -> pd.DataFrame:
         """Obtiene estadísticas por día de la semana"""
+        # Construyo una consulta SQL que analiza el comportamiento por día de la semana
         query = """
         SELECT 
-            CASE EXTRACT(DOW FROM a.fecha_hora)
-                WHEN 0 THEN 'Domingo'
-                WHEN 1 THEN 'Lunes'
+            CASE EXTRACT(DOW FROM a.fecha_hora)  -- Extraigo el día de la semana de la fecha (0-6)
+                WHEN 0 THEN 'Domingo'  -- Convierto el número 0 en el nombre del día
+                WHEN 1 THEN 'Lunes'    -- Transformo cada número en su correspondiente nombre
                 WHEN 2 THEN 'Martes'
                 WHEN 3 THEN 'Miércoles'
                 WHEN 4 THEN 'Jueves'
                 WHEN 5 THEN 'Viernes'
                 WHEN 6 THEN 'Sábado'
-            END AS dia_semana,
-            EXTRACT(DOW FROM a.fecha_hora) AS numero_dia,
-            COUNT(a.appointment_id) AS total_citas,
-            COUNT(CASE WHEN a.estado = 'COMPLETADA' THEN 1 END) AS completadas,
-            COUNT(CASE WHEN a.estado = 'CANCELADA' THEN 1 END) AS canceladas,
-            ROUND(AVG(EXTRACT(HOUR FROM a.fecha_hora)), 2) AS hora_promedio,
+            END AS dia_semana,  -- Guardo el nombre del día en formato legible
+            EXTRACT(DOW FROM a.fecha_hora) AS numero_dia,  -- Mantengo también el número del día (0-6) para ordenamiento
+            COUNT(a.appointment_id) AS total_citas,  -- Cuento cuántas citas hay en total ese día
+            COUNT(CASE WHEN a.estado = 'COMPLETADA' THEN 1 END) AS completadas,  -- Cuento solo las citas que se realizaron exitosamente
+            COUNT(CASE WHEN a.estado = 'CANCELADA' THEN 1 END) AS canceladas,  -- Cuento cuántas citas fueron canceladas ese día
+            ROUND(AVG(EXTRACT(HOUR FROM a.fecha_hora)), 2) AS hora_promedio,  -- Calculo a qué hora promedio se dan las citas ese día
             ROUND(COUNT(CASE WHEN a.estado = 'COMPLETADA' THEN 1 END)::numeric * 100.0 / 
-                  NULLIF(COUNT(a.appointment_id), 0), 2) AS tasa_asistencia
-        FROM appointment a
-        WHERE a.activo = true
-        GROUP BY EXTRACT(DOW FROM a.fecha_hora)
-        ORDER BY numero_dia;
+                  NULLIF(COUNT(a.appointment_id), 0), 2) AS tasa_asistencia  -- Calculo el porcentaje de citas completadas vs totales
+        FROM appointment a  -- Consulto la tabla de citas
+        WHERE a.activo = true  -- Solo considero citas activas en el sistema
+        GROUP BY EXTRACT(DOW FROM a.fecha_hora)  -- Agrupo todos los resultados por día de la semana
+        ORDER BY numero_dia;  -- Ordeno de domingo a sábado para visualización cronológica
         """
         
-        logger.info("📅 Obteniendo días con más atención...")
+        # Registro en el log que estoy obteniendo estadísticas de días
+        logger.info(" Obteniendo días con más atención...")
+        # Ejecuto la consulta SQL y retorno los resultados en un DataFrame
         return self.ejecutar_query(query)
     
     def obtener_horas_pico(self) -> pd.DataFrame:
         """Obtiene estadísticas por hora del día"""
+        # Creo una consulta SQL para analizar la distribución de citas por hora del día
         query = """
         SELECT 
-            EXTRACT(HOUR FROM a.fecha_hora) AS hora,
-            COUNT(a.appointment_id) AS total_citas,
-            COUNT(DISTINCT a.pet_id) AS mascotas_unicas,
-            COUNT(DISTINCT a.client_id) AS clientes_unicos,
-            ROUND(AVG(s.duracion_minutos), 2) AS duracion_promedio
-        FROM appointment a
-        JOIN service s ON a.service_id = s.service_id
-        WHERE a.activo = true
-        GROUP BY hora
-        ORDER BY hora;
+            EXTRACT(HOUR FROM a.fecha_hora) AS hora,  -- Extraigo solo la hora (0-23) de la fecha y hora de la cita
+            COUNT(a.appointment_id) AS total_citas,  -- Cuento cuántas citas hay programadas en esa hora
+            COUNT(DISTINCT a.pet_id) AS mascotas_unicas,  -- Cuento cuántas mascotas diferentes han tenido citas en esa hora
+            COUNT(DISTINCT a.client_id) AS clientes_unicos,  -- Cuento cuántos clientes distintos visitaron en esa hora
+            ROUND(AVG(s.duracion_minutos), 2) AS duracion_promedio  -- Calculo la duración promedio de los servicios en esa hora
+        FROM appointment a  -- Consulto la tabla principal de citas
+        JOIN service s ON a.service_id = s.service_id  -- Uno con servicios para obtener información de duración
+        WHERE a.activo = true  -- Solo considero citas activas en el sistema
+        GROUP BY hora  -- Agrupo todos los resultados por hora del día
+        ORDER BY hora;  -- Ordeno cronológicamente de 0 (medianoche) a 23 (11pm)
         """
         
+        # Registro en el log que estoy consultando las horas pico
         logger.info("⏰ Obteniendo horas pico...")
+        # Ejecuto la consulta y retorno el DataFrame con las estadísticas horarias
         return self.ejecutar_query(query)
     
     def obtener_servicios_mas_utilizados(self) -> pd.DataFrame:
@@ -201,7 +215,7 @@ class PetStoreDatabase:
         ORDER BY total_citas DESC;
         """
         
-        logger.info("🏥 Obteniendo servicios más utilizados...")
+        logger.info(" Obteniendo servicios más utilizados...")
         return self.ejecutar_query(query)
     
     def obtener_razas_por_tipo(self, tipo_mascota: str) -> pd.DataFrame:
@@ -220,7 +234,7 @@ class PetStoreDatabase:
         LIMIT 10;
         """
         
-        logger.info(f"🐕 Obteniendo razas de {tipo_mascota}...")
+        logger.info(f" Obteniendo razas de {tipo_mascota}...")
         return self.ejecutar_query(query, (tipo_mascota,))
     
     # =========================================================================
@@ -366,28 +380,38 @@ class PetStoreDatabase:
     
     def obtener_estadisticas_generales(self) -> Dict:
         """Obtiene estadísticas generales del sistema"""
+        # Creo un diccionario vacío donde almacenaré todas las métricas del sistema
         stats = {}
         
-        # Total de mascotas
+        # Consulto cuántas mascotas activas hay registradas en la base de datos
         query_mascotas = "SELECT COUNT(*) as total FROM pet WHERE activo = true"
+        # Ejecuto la consulta y obtengo el resultado en un DataFrame de pandas
         df_mascotas = self.ejecutar_query(query_mascotas)
+        # Extraigo el número total de mascotas, usando 0 si no hay resultados
         stats['total_mascotas'] = int(df_mascotas.iloc[0]['total']) if not df_mascotas.empty else 0
         
-        # Total de clientes
+        # Consulto la cantidad de clientes activos registrados en el sistema
         query_clientes = "SELECT COUNT(*) as total FROM client WHERE activo = true"
+        # Ejecuto la consulta SQL para contar clientes
         df_clientes = self.ejecutar_query(query_clientes)
+        # Guardo el total de clientes en el diccionario de estadísticas
         stats['total_clientes'] = int(df_clientes.iloc[0]['total']) if not df_clientes.empty else 0
         
-        # Total de citas
+        # Consulto el número total de citas programadas que están activas
         query_citas = "SELECT COUNT(*) as total FROM appointment WHERE activo = true"
+        # Ejecuto la query para obtener el conteo de citas
         df_citas = self.ejecutar_query(query_citas)
+        # Almaceno el total de citas en las estadísticas generales
         stats['total_citas'] = int(df_citas.iloc[0]['total']) if not df_citas.empty else 0
         
-        # Servicios disponibles
+        # Consulto cuántos servicios diferentes ofrece la veterinaria
         query_servicios = "SELECT COUNT(*) as total FROM service WHERE activo = true"
+        # Ejecuto la consulta para contar los servicios disponibles
         df_servicios = self.ejecutar_query(query_servicios)
+        # Guardo la cantidad de servicios disponibles en el diccionario
         stats['total_servicios'] = int(df_servicios.iloc[0]['total']) if not df_servicios.empty else 0
         
+        # Retorno el diccionario completo con todas las estadísticas del sistema
         return stats
     
     # =========================================================================
@@ -424,7 +448,7 @@ class PetStoreDatabase:
         ORDER BY a.fecha_hora;
         """
         
-        logger.info("📅 Obteniendo citas de hoy...")
+        logger.info(" Obteniendo citas de hoy...")
         return self.ejecutar_query(query)
     
     def obtener_cantidad_productos(self) -> int:
@@ -443,10 +467,10 @@ class PetStoreDatabase:
         try:
             df = self.ejecutar_query(query)
             total = int(df.iloc[0]['total']) if not df.empty else 0
-            logger.info(f"📦 Total de productos: {total}")
+            logger.info(f" Total de productos: {total}")
             return total
         except Exception as e:
-            logger.warning(f"⚠️  Tabla 'producto' no existe: {e}")
+            logger.warning(f"  Tabla 'producto' no existe: {e}")
             return 0
     
     def obtener_ventas_dia(self) -> Dict:
@@ -490,11 +514,11 @@ class PetStoreDatabase:
                 'ticket_promedio': float(row['ticket_promedio'])
             }
             
-            logger.info(f"💰 Ventas del día: ${resultado['total_ventas']:,.2f}")
+            logger.info(f" Ventas del día: ${resultado['total_ventas']:,.2f}")
             return resultado
             
         except Exception as e:
-            logger.warning(f"⚠️  Error obteniendo ventas del día: {e}")
+            logger.warning(f"  Error obteniendo ventas del día: {e}")
             return {
                 'total_ventas': 0,
                 'total_transacciones': 0,
@@ -548,11 +572,11 @@ class PetStoreDatabase:
                 'clientes_unicos': int(row['clientes_unicos'])
             }
             
-            logger.info(f"💰 Ventas del mes: ${resultado['total_ventas']:,.2f}")
+            logger.info(f" Ventas del mes: ${resultado['total_ventas']:,.2f}")
             return resultado
             
         except Exception as e:
-            logger.warning(f"⚠️  Error obteniendo ventas del mes: {e}")
+            logger.warning(f"  Error obteniendo ventas del mes: {e}")
             return {
                 'total_ventas': 0,
                 'total_transacciones': 0,
@@ -591,12 +615,12 @@ class PetStoreDatabase:
         """
         
         try:
-            logger.info(f"⚠️  Buscando productos próximos a vencer (en {dias} días)...")
+            logger.info(f"  Buscando productos próximos a vencer (en {dias} días)...")
             df = self.ejecutar_query(query % dias)
             logger.info(f"   Encontrados: {len(df)} productos")
             return df
         except Exception as e:
-            logger.warning(f"⚠️  Error obteniendo productos próximos a vencer: {e}")
+            logger.warning(f"  Error obteniendo productos próximos a vencer: {e}")
             return pd.DataFrame()
     
     def obtener_alerta_bajo_inventario(self) -> pd.DataFrame:
@@ -626,12 +650,12 @@ class PetStoreDatabase:
         """
         
         try:
-            logger.info("🚨 Verificando alertas de bajo inventario...")
+            logger.info(" Verificando alertas de bajo inventario...")
             df = self.ejecutar_query(query)
             logger.info(f"   Alertas: {len(df)} productos con bajo inventario")
             return df
         except Exception as e:
-            logger.warning(f"⚠️  Error obteniendo alertas de inventario: {e}")
+            logger.warning(f"  Error obteniendo alertas de inventario: {e}")
             return pd.DataFrame()
     
     def obtener_comparativa_ventas_mensual(self) -> Dict:
@@ -711,11 +735,11 @@ class PetStoreDatabase:
                 'tendencia': tendencia
             }
             
-            logger.info(f"📊 Comparativa mensual: {porcentaje:+.2f}% ({tendencia})")
+            logger.info(f" Comparativa mensual: {porcentaje:+.2f}% ({tendencia})")
             return resultado
             
         except Exception as e:
-            logger.warning(f"⚠️  Error obteniendo comparativa de ventas: {e}")
+            logger.warning(f"  Error obteniendo comparativa de ventas: {e}")
             return {
                 'ventas_mes_actual': 0,
                 'ventas_mes_anterior': 0,
@@ -730,7 +754,7 @@ class PetStoreDatabase:
         """Cierra la conexión a la base de datos"""
         if self.conn and not self.conn.closed:
             self.conn.close()
-            logger.info("🔒 Conexión cerrada")
+            logger.info(" Conexión cerrada")
     
     # Nota: No usar __del__ porque causa problemas con FastAPI
     # La conexión se mantendrá abierta durante toda la vida de la aplicación
@@ -741,29 +765,29 @@ class PetStoreDatabase:
 # =============================================================================
 if __name__ == "__main__":
     print("=" * 80)
-    print("🗄️  PROBANDO CONEXIÓN A BASE DE DATOS")
+    print("  PROBANDO CONEXIÓN A BASE DE DATOS")
     print("=" * 80)
     
     try:
         db = PetStoreDatabase()
         
-        print("\n📊 Estadísticas Generales:")
+        print("\n Estadísticas Generales:")
         stats = db.obtener_estadisticas_generales()
         for key, value in stats.items():
             print(f"   • {key}: {value}")
         
-        print("\n🐾 Tipos de Mascotas:")
+        print("\n Tipos de Mascotas:")
         df_mascotas = db.obtener_tipos_mascota_mas_comunes()
         print(df_mascotas.to_string(index=False))
         
-        print("\n📅 Días con Más Atención:")
+        print("\n Días con Más Atención:")
         df_dias = db.obtener_dias_con_mas_atencion()
         print(df_dias.to_string(index=False))
         
-        print("\n✅ Conexión y consultas exitosas!")
+        print("\n Conexión y consultas exitosas!")
         
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
     
     finally:
         print("\n" + "=" * 80)

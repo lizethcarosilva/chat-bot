@@ -1,12 +1,12 @@
-# 📊 MÉTRICAS DE NEGOCIO - Documentación
+#  MÉTRICAS DE NEGOCIO - Documentación
 
-## 🎯 Nuevas Funcionalidades Incorporadas
+##  Nuevas Funcionalidades Incorporadas
 
 El sistema ahora incluye métricas de negocio completas para análisis de ventas, inventario y operaciones diarias. La IA puede analizar estos datos y responder preguntas sobre el estado del negocio.
 
 ---
 
-## 🚀 Configuración Inicial
+##  Configuración Inicial
 
 ### 1. Crear Tablas en la Base de Datos
 
@@ -30,9 +30,9 @@ Busca la sección **"Métricas de Negocio"** en la documentación Swagger.
 
 ---
 
-## 📡 Endpoints de la API
+##  Endpoints de la API
 
-### 1. 📅 Citas de Hoy
+### 1.  Citas de Hoy
 
 **Endpoint:** `GET /api/metricas/citas-hoy`
 
@@ -70,7 +70,7 @@ console.log(`Citas hoy: ${data.total_citas}`);
 
 ---
 
-### 2. 📦 Cantidad de Productos
+### 2.  Cantidad de Productos
 
 **Endpoint:** `GET /api/metricas/cantidad-productos`
 
@@ -86,7 +86,7 @@ Obtiene el total de productos únicos en inventario.
 
 ---
 
-### 3. 💰 Ventas del Día
+### 3.  Ventas del Día
 
 **Endpoint:** `GET /api/metricas/ventas-dia`
 
@@ -119,7 +119,7 @@ const VentasDia = () => {
 
   return (
     <div className="ventas-card">
-      <h3>💰 Ventas del Día</h3>
+      <h3> Ventas del Día</h3>
       <p className="total">${ventas.total_ventas.toFixed(2)}</p>
       <div className="stats">
         <span>Transacciones: {ventas.total_transacciones}</span>
@@ -132,7 +132,7 @@ const VentasDia = () => {
 
 ---
 
-### 4. 📅 Ventas del Mes
+### 4.  Ventas del Mes
 
 **Endpoint:** `GET /api/metricas/ventas-mes`
 
@@ -153,7 +153,7 @@ Obtiene las ventas del mes actual.
 
 ---
 
-### 5. ⚠️ Productos Próximos a Vencer
+### 5.  Productos Próximos a Vencer
 
 **Endpoint:** `GET /api/metricas/productos-proximos-vencer?dias=30`
 
@@ -198,10 +198,10 @@ const AlertaVencimiento = () => {
 
   return (
     <div className="alerta-card">
-      <h3>⚠️ Productos por Vencer</h3>
+      <h3> Productos por Vencer</h3>
       {criticos.length > 0 && (
         <div className="alert alert-danger">
-          <strong>🔴 CRÍTICO:</strong> {criticos.length} productos vencen en 7 días
+          <strong> CRÍTICO:</strong> {criticos.length} productos vencen en 7 días
         </div>
       )}
       <ul>
@@ -218,7 +218,7 @@ const AlertaVencimiento = () => {
 
 ---
 
-### 6. 🚨 Alerta de Bajo Inventario
+### 6.  Alerta de Bajo Inventario
 
 **Endpoint:** `GET /api/metricas/alerta-bajo-inventario`
 
@@ -249,7 +249,7 @@ Obtiene productos con stock por debajo del mínimo.
 
 ---
 
-### 7. 📊 Comparativa de Ventas Mensual
+### 7.  Comparativa de Ventas Mensual
 
 **Endpoint:** `GET /api/metricas/comparativa-ventas`
 
@@ -265,7 +265,7 @@ Compara las ventas del mes actual vs mes anterior.
   "diferencia_ventas": 3320.30,
   "porcentaje_cambio": 10.35,
   "tendencia": "crecimiento",
-  "icono_tendencia": "📈",
+  "icono_tendencia": "",
   "mensaje": "Las ventas aumentaron +10.35% respecto al mes anterior"
 }
 ```
@@ -316,7 +316,7 @@ const ComparativaVentas = () => {
 
 ---
 
-### 8. 🎯 Dashboard Completo
+### 8.  Dashboard Completo
 
 **Endpoint:** `GET /api/metricas/dashboard`
 
@@ -378,26 +378,26 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1>📊 Dashboard Pet Store</h1>
+      <h1> Dashboard Pet Store</h1>
       
       <div className="metrics-grid">
         <MetricCard
-          icon="📅"
+          icon=""
           title="Citas Hoy"
           value={dashboard.citas_hoy.total}
         />
         <MetricCard
-          icon="📦"
+          icon=""
           title="Productos"
           value={dashboard.productos.total}
         />
         <MetricCard
-          icon="💰"
+          icon=""
           title="Ventas del Día"
           value={`$${dashboard.ventas_dia.total_ventas.toFixed(2)}`}
         />
         <MetricCard
-          icon="📈"
+          icon=""
           title="Ventas del Mes"
           value={`$${dashboard.ventas_mes.total_ventas.toFixed(2)}`}
         />
@@ -406,13 +406,13 @@ const Dashboard = () => {
       <div className="alerts-section">
         {dashboard.productos_proximos_vencer.criticos > 0 && (
           <Alert type="danger">
-            🔴 {dashboard.productos_proximos_vencer.criticos} productos críticos por vencer
+             {dashboard.productos_proximos_vencer.criticos} productos críticos por vencer
           </Alert>
         )}
         
         {dashboard.bajo_inventario.total_alertas > 0 && (
           <Alert type="warning">
-            🚨 {dashboard.bajo_inventario.total_alertas} productos con bajo inventario
+             {dashboard.bajo_inventario.total_alertas} productos con bajo inventario
           </Alert>
         )}
       </div>
@@ -420,7 +420,7 @@ const Dashboard = () => {
       <div className="tendencia">
         <h3>Tendencia de Ventas</h3>
         <p>
-          {dashboard.comparativa_ventas.tendencia === 'crecimiento' ? '📈' : '📉'}
+          {dashboard.comparativa_ventas.tendencia === 'crecimiento' ? '' : ''}
           {' '}
           {dashboard.comparativa_ventas.porcentaje_cambio > 0 ? '+' : ''}
           {dashboard.comparativa_ventas.porcentaje_cambio.toFixed(2)}%
@@ -433,7 +433,7 @@ const Dashboard = () => {
 
 ---
 
-## 🤖 Interacción con el Chatbot
+##  Interacción con el Chatbot
 
 El chatbot ahora puede responder preguntas sobre estas métricas:
 
@@ -499,7 +499,7 @@ const Chat = () => {
 
 ---
 
-## 📈 Casos de Uso
+##  Casos de Uso
 
 ### 1. Dashboard de Gerencia
 
@@ -531,7 +531,7 @@ La IA puede:
 
 ---
 
-## 🎨 Componentes UI Sugeridos
+##  Componentes UI Sugeridos
 
 ### Card de Métricas
 ```jsx
@@ -615,7 +615,7 @@ const Alert = ({ type, children }) => (
 
 ---
 
-## 🔧 Configuración Avanzada
+##  Configuración Avanzada
 
 ### Actualización Automática del Dashboard
 
@@ -664,7 +664,7 @@ const Dashboard = () => {
 
 ---
 
-## ✅ Checklist de Implementación
+##  Checklist de Implementación
 
 - [ ] Ejecutar script SQL para crear tablas
 - [ ] Verificar que la API esté corriendo
@@ -679,7 +679,7 @@ const Dashboard = () => {
 
 ---
 
-## 🆘 Troubleshooting
+##  Troubleshooting
 
 ### Error: "Tabla 'producto' no existe"
 
@@ -702,7 +702,7 @@ const Dashboard = () => {
 
 ---
 
-## 📚 Recursos Adicionales
+##  Recursos Adicionales
 
 - **Documentación Swagger:** `http://localhost:8000/docs`
 - **Script SQL:** `crear_tablas_productos_ventas.sql`
@@ -712,7 +712,7 @@ const Dashboard = () => {
 
 ---
 
-## 🎯 Próximos Pasos
+##  Próximos Pasos
 
 1. **Implementar el dashboard en React**
 2. **Agregar gráficos con Chart.js o Recharts**
@@ -723,5 +723,5 @@ const Dashboard = () => {
 
 ---
 
-**¡Sistema de métricas de negocio listo para usar! 🚀**
+**¡Sistema de métricas de negocio listo para usar! **
 

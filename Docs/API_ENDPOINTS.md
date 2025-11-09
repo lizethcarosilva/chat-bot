@@ -1,6 +1,6 @@
-# 🔌 API REST - Documentación de Endpoints
+#  API REST - Documentación de Endpoints
 
-## 📡 Información General
+##  Información General
 
 **Base URL:** `http://localhost:8000`  
 **Documentación Interactiva:** `http://localhost:8000/docs`  
@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 
 ### 1. Instalar Dependencia Adicional
 ```bash
@@ -23,9 +23,9 @@ python api.py
 
 **Salida esperada:**
 ```
-🚀 INICIANDO API REST - PET STORE CHATBOT
-✅ API lista en: http://localhost:8000
-📝 Documentación: http://localhost:8000/docs
+ INICIANDO API REST - PET STORE CHATBOT
+ API lista en: http://localhost:8000
+ Documentación: http://localhost:8000/docs
 ```
 
 ### 3. Probar en React
@@ -35,33 +35,33 @@ npm install axios
 
 ---
 
-## 📋 Índice de Endpoints
+##  Índice de Endpoints
 
 ### **General**
 - `GET /` - Información de la API
 - `GET /api/health` - Estado del sistema
 
-### **Chatbot** 💬
+### **Chatbot** 
 - `POST /api/chat` - Enviar mensaje al chatbot
 - `GET /api/chat/comandos` - Listar comandos disponibles
 
-### **Estadísticas** 📊
+### **Estadísticas** 
 - `GET /api/estadisticas` - Estadísticas generales
 
-### **Análisis** 📈
+### **Análisis** 
 - `GET /api/analisis/tipos-mascota` - Tipos de mascota más comunes
 - `GET /api/analisis/dias-atencion` - Días con más atención
 - `GET /api/analisis/horas-pico` - Horas pico
 - `GET /api/analisis/servicios` - Servicios más utilizados
 
-### **Predicciones IA** 🔮
+### **Predicciones IA** 
 - `POST /api/predicciones/tipo-mascota` - Predecir tipo de mascota
 - `POST /api/predicciones/asistencia` - Predecir asistencia
 - `GET /api/predicciones/tipo-mas-comun` - Análisis de tipo más común
 - `GET /api/predicciones/dia-mas-atencion` - Análisis de día con más atención
 - `GET /api/predicciones/estado` - Estado de los modelos
 
-### **Consultas BD** 🔍
+### **Consultas BD** 
 - `GET /api/mascotas/buscar/{nombre}` - Buscar mascota
 - `GET /api/mascotas/{pet_id}/historial` - Historial médico
 - `GET /api/mascotas/{pet_id}/citas` - Próximas citas
@@ -70,13 +70,13 @@ npm install axios
 - `GET /api/clientes/{client_id}/mascotas` - Mascotas de cliente
 - `GET /api/servicios` - Servicios disponibles
 
-### **Administración** ⚙️
+### **Administración** 
 - `POST /api/entrenar` - Entrenar modelos IA
 - `GET /api/exportar/dataset` - Exportar dataset
 
 ---
 
-## 📝 Documentación Detallada
+##  Documentación Detallada
 
 ## 1. CHATBOT
 
@@ -94,7 +94,7 @@ Envía un mensaje al chatbot y recibe respuesta inteligente.
 **Response:**
 ```json
 {
-  "respuesta": "🏆 El tipo más común es: Perro (45.5%)\n\n📊 Distribución:\n   Perro: 250 (45.5%)\n   Gato: 180 (32.7%)",
+  "respuesta": " El tipo más común es: Perro (45.5%)\n\n Distribución:\n   Perro: 250 (45.5%)\n   Gato: 180 (32.7%)",
   "intencion": "tipo_mas_comun",
   "confianza": 0.9,
   "timestamp": "2024-11-03T10:30:00"
@@ -201,19 +201,19 @@ const EstadisticasComponent = () => {
       <h2>Estadísticas Generales</h2>
       <div className="stats-grid">
         <div className="stat-card">
-          <h3>🐾 Mascotas</h3>
+          <h3> Mascotas</h3>
           <p>{stats.total_mascotas}</p>
         </div>
         <div className="stat-card">
-          <h3>👥 Clientes</h3>
+          <h3> Clientes</h3>
           <p>{stats.total_clientes}</p>
         </div>
         <div className="stat-card">
-          <h3>📅 Citas</h3>
+          <h3> Citas</h3>
           <p>{stats.total_citas}</p>
         </div>
         <div className="stat-card">
-          <h3>🏥 Servicios</h3>
+          <h3> Servicios</h3>
           <p>{stats.total_servicios}</p>
         </div>
       </div>
@@ -285,7 +285,7 @@ const TiposMascotaChart = () => {
 
   return (
     <div>
-      <h2>🐾 Tipo de Mascota Más Común: {data.tipo_mas_comun}</h2>
+      <h2> Tipo de Mascota Más Común: {data.tipo_mas_comun}</h2>
       <Bar data={data} />
     </div>
   );
@@ -434,7 +434,7 @@ const PrediccionTipoMascota = () => {
       
       {prediccion && (
         <div className="prediccion-result">
-          <h3>🔮 Predicción: {prediccion.tipo_mas_probable}</h3>
+          <h3> Predicción: {prediccion.tipo_mas_probable}</h3>
           <p>Confianza: {(prediccion.confianza * 100).toFixed(1)}%</p>
           
           <h4>Top 3:</h4>
@@ -548,7 +548,7 @@ const BuscarMascota = () => {
       <div className="resultados">
         {resultados.map(mascota => (
           <div key={mascota.pet_id} className="mascota-card">
-            <h3>🐾 {mascota.nombre}</h3>
+            <h3> {mascota.nombre}</h3>
             <p>{mascota.tipo} - {mascota.raza}</p>
             <p>Edad: {mascota.edad} años</p>
             <p>Dueño: {mascota.propietario}</p>
@@ -659,7 +659,7 @@ const EntrenarModelos = () => {
 
 ---
 
-## 📦 Componente React Completo
+##  Componente React Completo
 
 ```javascript
 // src/services/api.js
@@ -715,14 +715,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>🐾 Pet Store Dashboard</h1>
+      <h1> Pet Store Dashboard</h1>
       
       {stats && (
         <div className="stats-grid">
-          <StatCard icon="🐾" title="Mascotas" value={stats.total_mascotas} />
-          <StatCard icon="👥" title="Clientes" value={stats.total_clientes} />
-          <StatCard icon="📅" title="Citas" value={stats.total_citas} />
-          <StatCard icon="🏥" title="Servicios" value={stats.total_servicios} />
+          <StatCard icon="" title="Mascotas" value={stats.total_mascotas} />
+          <StatCard icon="" title="Clientes" value={stats.total_clientes} />
+          <StatCard icon="" title="Citas" value={stats.total_citas} />
+          <StatCard icon="" title="Servicios" value={stats.total_servicios} />
         </div>
       )}
     </div>
@@ -742,7 +742,7 @@ export default App;
 
 ---
 
-## 🔧 Configuración en React
+##  Configuración en React
 
 ### 1. Instalar Dependencias
 ```bash
@@ -762,7 +762,7 @@ Crea `src/services/api.js` con las funciones mostradas arriba.
 
 ---
 
-## 🚨 Manejo de Errores
+##  Manejo de Errores
 
 ```javascript
 const handleApiCall = async (apiFunction) => {
@@ -795,7 +795,7 @@ if (stats) {
 
 ---
 
-## 📚 Recursos Adicionales
+##  Recursos Adicionales
 
 - **Documentación Swagger:** `http://localhost:8000/docs`
 - **Documentación ReDoc:** `http://localhost:8000/redoc`
@@ -803,7 +803,7 @@ if (stats) {
 
 ---
 
-## ✅ Checklist de Integración
+##  Checklist de Integración
 
 - [ ] Instalar `fastapi` y `uvicorn`
 - [ ] Ejecutar `python api.py`
@@ -817,5 +817,5 @@ if (stats) {
 
 ---
 
-**¡API lista para usar con tu frontend React! 🎉**
+**¡API lista para usar con tu frontend React! **
 

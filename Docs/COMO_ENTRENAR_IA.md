@@ -1,29 +1,29 @@
-# 🎓 CÓMO ENTRENAR LA RED NEURONAL DEL CHATBOT
+#  CÓMO ENTRENAR LA RED NEURONAL DEL CHATBOT
 
-## 🎯 Objetivo
+##  Objetivo
 
 Entrenar el modelo LSTM (Long Short-Term Memory) para que el chatbot sea **MÁS INTELIGENTE** y reconozca automáticamente las intenciones del usuario.
 
 ---
 
-## ✅ Estado Actual
+##  Estado Actual
 
 ### Sistema Actual (Sin Entrenar):
-- ✅ Funciona con **patrones de palabras clave**
-- ✅ Detecta ~30 intenciones diferentes
-- ⚠️ Debe coincidir exactamente con las palabras clave
-- ⚠️ No entiende sinónimos o variaciones complejas
+-  Funciona con **patrones de palabras clave**
+-  Detecta ~30 intenciones diferentes
+-  Debe coincidir exactamente con las palabras clave
+-  No entiende sinónimos o variaciones complejas
 
 ### Sistema Con IA Entrenada:
-- ✅ **Comprende contexto y sinónimos**
-- ✅ Reconoce patrones complejos
-- ✅ Aprende de miles de ejemplos
-- ✅ Mayor precisión
-- ✅ Funciona con preguntas mal escritas
+-  **Comprende contexto y sinónimos**
+-  Reconoce patrones complejos
+-  Aprende de miles de ejemplos
+-  Mayor precisión
+-  Funciona con preguntas mal escritas
 
 ---
 
-## 🚀 PASO 1: Verificar Archivo de Datos
+##  PASO 1: Verificar Archivo de Datos
 
 El archivo `datos_veterinarios.json` contiene los ejemplos de entrenamiento.
 
@@ -60,7 +60,7 @@ dir datos_veterinarios.json
 
 ---
 
-## 🚀 PASO 2: Entrenar el Modelo
+##  PASO 2: Entrenar el Modelo
 
 ### Opción A: Script Existente (Si existe)
 
@@ -70,15 +70,15 @@ python entrenar_chatbot_veterinario.py
 
 **Salida esperada:**
 ```
-🚀 Iniciando entrenamiento del chatbot veterinario...
-📊 Dataset cargado: 500 ejemplos
-🔄 Entrenando modelo...
+ Iniciando entrenamiento del chatbot veterinario...
+ Dataset cargado: 500 ejemplos
+ Entrenando modelo...
 Epoch 1/50 - Loss: 2.1234 - Accuracy: 0.45
 Epoch 2/50 - Loss: 1.8567 - Accuracy: 0.62
 ...
 Epoch 50/50 - Loss: 0.2134 - Accuracy: 0.94
-✅ Modelo entrenado con 94% de precisión
-💾 Guardado en models/chatbot_veterinario.h5
+ Modelo entrenado con 94% de precisión
+ Guardado en models/chatbot_veterinario.h5
 ```
 
 ### Opción B: Crear Script de Entrenamiento (Si no existe)
@@ -90,7 +90,7 @@ Si el script no existe, puedo crearlo para ti. Necesitas:
 
 ---
 
-## 🚀 PASO 3: Agregar Más Datos de Entrenamiento
+##  PASO 3: Agregar Más Datos de Entrenamiento
 
 Para que el modelo aprenda **MÁS COSAS**, necesitas agregar más ejemplos.
 
@@ -121,7 +121,7 @@ Edita `datos_veterinarios.json` y agrega:
 }
 ```
 
-### 📝 Ejemplos de Intenciones a Agregar:
+###  Ejemplos de Intenciones a Agregar:
 
 #### 1. Estadísticas
 ```json
@@ -230,9 +230,9 @@ Edita `datos_veterinarios.json` y agrega:
 
 ---
 
-## 📊 REGLAS PARA BUENOS DATOS DE ENTRENAMIENTO
+##  REGLAS PARA BUENOS DATOS DE ENTRENAMIENTO
 
-### ✅ Hacer:
+###  Hacer:
 
 1. **Al menos 10 ejemplos por intención** (más es mejor)
 2. **Variar las formas de preguntar:**
@@ -251,7 +251,7 @@ Edita `datos_veterinarios.json` y agrega:
    - Medio: "estadísticas del sistema"
    - Largo: "quiero ver las estadísticas generales del sistema"
 
-### ❌ Evitar:
+###  Evitar:
 
 1. Ejemplos muy similares
 2. Menos de 5 ejemplos por intención
@@ -260,7 +260,7 @@ Edita `datos_veterinarios.json` y agrega:
 
 ---
 
-## 🚀 PASO 4: Re-entrenar con Nuevos Datos
+##  PASO 4: Re-entrenar con Nuevos Datos
 
 Una vez que agregues más ejemplos:
 
@@ -272,28 +272,28 @@ python entrenar_chatbot_veterinario.py
 
 ---
 
-## 📈 MEJORA CONTINUA
+##  MEJORA CONTINUA
 
 ### Ciclo de Mejora:
 
 ```
 1. Usuarios prueban el chatbot
-   ↓
+   
 2. Identificas preguntas que no funciona
-   ↓
+   
 3. Agregas esos ejemplos a datos_veterinarios.json
-   ↓
+   
 4. Re-entrenas el modelo
-   ↓
+   
 5. El chatbot mejora
-   ↓
+   
 Repite el ciclo
 ```
 
 ### Ejemplo Práctico:
 
 **Usuario pregunta:** "Síntomas y enfermedades"
-**Bot no entiende** → Agregar al JSON:
+**Bot no entiende**  Agregar al JSON:
 
 ```json
 {
@@ -311,7 +311,7 @@ Repite el ciclo
 
 ---
 
-## 💪 CÓMO HACER QUE APRENDA MÁS
+##  CÓMO HACER QUE APRENDA MÁS
 
 ### 1. Agregar Más Intenciones
 
@@ -345,12 +345,12 @@ Luego revisa y agrega al JSON.
 ### 4. Balance de Clases
 
 Asegúrate que cada intención tenga similar cantidad de ejemplos:
-- ❌ Intención A: 5 ejemplos, Intención B: 100 ejemplos
-- ✅ Todas las intenciones: 20-30 ejemplos cada una
+-  Intención A: 5 ejemplos, Intención B: 100 ejemplos
+-  Todas las intenciones: 20-30 ejemplos cada una
 
 ---
 
-## 🔧 SCRIPT DE ENTRENAMIENTO
+##  SCRIPT DE ENTRENAMIENTO
 
 Si no tienes `entrenar_chatbot_veterinario.py`, aquí está:
 
@@ -382,10 +382,10 @@ BATCH_SIZE = 32
 # Crear carpeta models si no existe
 os.makedirs('models', exist_ok=True)
 
-print("🚀 Iniciando entrenamiento del chatbot veterinario...")
+print(" Iniciando entrenamiento del chatbot veterinario...")
 
 # 1. Cargar datos
-print("📂 Cargando datos...")
+print(" Cargando datos...")
 with open('datos_veterinarios.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
@@ -402,10 +402,10 @@ for intent in data['intents']:
         patterns.append(pattern.lower())
         tags.append(tag)
 
-print(f"📊 Dataset: {len(patterns)} ejemplos de {len(set(tags))} intenciones")
+print(f" Dataset: {len(patterns)} ejemplos de {len(set(tags))} intenciones")
 
 # 3. Tokenizar texto
-print("🔤 Tokenizando texto...")
+print(" Tokenizando texto...")
 tokenizer = Tokenizer(num_words=MAX_WORDS, oov_token="<OOV>")
 tokenizer.fit_on_texts(patterns)
 
@@ -413,7 +413,7 @@ sequences = tokenizer.texts_to_sequences(patterns)
 padded_sequences = pad_sequences(sequences, maxlen=MAX_LEN, padding='post')
 
 # 4. Codificar etiquetas
-print("🏷️  Codificando etiquetas...")
+print("  Codificando etiquetas...")
 label_encoder = LabelEncoder()
 encoded_tags = label_encoder.fit_transform(tags)
 num_classes = len(label_encoder.classes_)
@@ -426,10 +426,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     padded_sequences, y, test_size=0.2, random_state=42
 )
 
-print(f"📈 Entrenamiento: {len(X_train)} | Prueba: {len(X_test)}")
+print(f" Entrenamiento: {len(X_train)} | Prueba: {len(X_test)}")
 
 # 6. Crear modelo
-print("🏗️  Construyendo red neuronal...")
+print("  Construyendo red neuronal...")
 model = keras.Sequential([
     layers.Embedding(MAX_WORDS, EMBEDDING_DIM, input_length=MAX_LEN),
     layers.Bidirectional(layers.LSTM(LSTM_UNITS, return_sequences=True)),
@@ -450,7 +450,7 @@ model.compile(
 print(model.summary())
 
 # 7. Entrenar
-print(f"\n🔄 Entrenando por {EPOCHS} épocas...")
+print(f"\n Entrenando por {EPOCHS} épocas...")
 history = model.fit(
     X_train, y_train,
     epochs=EPOCHS,
@@ -460,12 +460,12 @@ history = model.fit(
 )
 
 # 8. Evaluar
-print("\n📊 Evaluando modelo...")
+print("\n Evaluando modelo...")
 loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
-print(f"✅ Precisión en test: {accuracy*100:.2f}%")
+print(f" Precisión en test: {accuracy*100:.2f}%")
 
 # 9. Guardar
-print("\n💾 Guardando modelo...")
+print("\n Guardando modelo...")
 model.save('models/chatbot_veterinario.h5')
 
 with open('models/tokenizer_veterinario.pkl', 'wb') as f:
@@ -477,8 +477,8 @@ with open('models/label_encoder_veterinario.pkl', 'wb') as f:
 with open('models/intents_veterinario.pkl', 'wb') as f:
     pickle.dump(responses_dict, f)
 
-print("\n🎉 ¡Entrenamiento completado!")
-print(f"📁 Archivos guardados en: models/")
+print("\n ¡Entrenamiento completado!")
+print(f" Archivos guardados en: models/")
 print(f"   • chatbot_veterinario.h5")
 print(f"   • tokenizer_veterinario.pkl")
 print(f"   • label_encoder_veterinario.pkl")
@@ -489,7 +489,7 @@ Guarda esto como `entrenar_chatbot_veterinario.py`
 
 ---
 
-## 🧪 PROBAR EL MODELO ENTRENADO
+##  PROBAR EL MODELO ENTRENADO
 
 Una vez entrenado, reinicia la API:
 
@@ -504,23 +504,23 @@ El chatbot automáticamente:
 
 ---
 
-## 📊 RESULTADOS ESPERADOS
+##  RESULTADOS ESPERADOS
 
 ### Antes de Entrenar:
-- ✅ 5/15 preguntas funcionan (~33%)
+-  5/15 preguntas funcionan (~33%)
 - Sistema de patrones básico
 
 ### Después de Entrenar:
-- ✅ 13/15 preguntas funcionan (~87%)
+-  13/15 preguntas funcionan (~87%)
 - Comprende sinónimos y variaciones
 
 ### Con Datos Mejorados:
-- ✅ 15/15 preguntas funcionan (100%)
+-  15/15 preguntas funcionan (100%)
 - Comprende contexto complejo
 
 ---
 
-## ✅ CHECKLIST COMPLETO
+##  CHECKLIST COMPLETO
 
 - [ ] Verificar que existe `datos_veterinarios.json`
 - [ ] Instalar dependencias: `pip install tensorflow scikit-learn`
@@ -530,11 +530,11 @@ El chatbot automáticamente:
 - [ ] Verificar precisión > 85%
 - [ ] Reiniciar API: `python api.py`
 - [ ] Probar preguntas que antes no funcionaban
-- [ ] Celebrar 🎉
+- [ ] Celebrar 
 
 ---
 
-## 🆘 TROUBLESHOOTING
+##  TROUBLESHOOTING
 
 ### Error: "No module named 'tensorflow'"
 ```bash
@@ -554,7 +554,7 @@ Verifica que los archivos .h5 y .pkl existan en `models/`
 
 ---
 
-## 🎯 RESUMEN
+##  RESUMEN
 
 **Para que el chatbot sea MÁS INTELIGENTE:**
 
@@ -567,5 +567,5 @@ Verifica que los archivos .h5 y .pkl existan en `models/`
 
 ---
 
-*¡Con estos pasos tu chatbot será mucho más inteligente!* 🚀
+*¡Con estos pasos tu chatbot será mucho más inteligente!* 
 

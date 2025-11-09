@@ -1,6 +1,6 @@
-# 📊 EXPLICACIÓN COMPLETA: CLUSTERING JERÁRQUICO
+#  EXPLICACIÓN COMPLETA: CLUSTERING JERÁRQUICO
 
-## 🎯 ÍNDICE
+##  ÍNDICE
 
 1. ¿Qué es el Silhouette Score?
 2. ¿Cómo se elige el número de clusters?
@@ -10,9 +10,9 @@
 
 ---
 
-# 1️⃣ ¿QUÉ ES EL SILHOUETTE SCORE?
+# 1⃣ ¿QUÉ ES EL SILHOUETTE SCORE?
 
-## 📐 Definición Simple
+##  Definición Simple
 
 El **Silhouette Score** (Coeficiente de Silueta) es una **métrica de calidad** que mide qué tan bien están agrupados los datos en un clustering.
 
@@ -29,7 +29,7 @@ Rango: -1 a +1
 
 ---
 
-## 🔬 ¿Cómo se calcula?
+##  ¿Cómo se calcula?
 
 ### Fórmula Matemática:
 
@@ -53,17 +53,17 @@ Silhouette Score total = Promedio de todos los s(i)
 ```
 Imagina 2 clusters:
 
-Cluster A: [●●●●●]              Cluster B: [■■■■■]
-            ↑
+Cluster A: []              Cluster B: []
+            
          Punto X
 
 Para Punto X:
-─────────────
+
 
 1. Calcula a(i):
-   a(i) = promedio distancia de X a los otros ● en Cluster A
+   a(i) = promedio distancia de X a los otros  en Cluster A
    
-   X está a: 0.5 del ●₁, 0.3 del ●₂, 0.4 del ●₃, 0.6 del ●₄
+   X está a: 0.5 del ₁, 0.3 del ₂, 0.4 del ₃, 0.6 del ₄
    a(i) = (0.5 + 0.3 + 0.4 + 0.6) / 4 = 0.45
    
    Interpretación: X está a 0.45 unidades promedio de su propio cluster
@@ -73,7 +73,7 @@ Para Punto X:
 2. Calcula b(i):
    b(i) = promedio distancia de X al cluster más cercano (B)
    
-   X está a: 2.1 del ■₁, 2.3 del ■₂, 2.0 del ■₃, 2.4 del ■₄, 2.2 del ■₅
+   X está a: 2.1 del ₁, 2.3 del ₂, 2.0 del ₃, 2.4 del ₄, 2.2 del ₅
    b(i) = (2.1 + 2.3 + 2.0 + 2.4 + 2.2) / 5 = 2.2
    
    Interpretación: X está a 2.2 unidades promedio del cluster más cercano
@@ -91,10 +91,10 @@ Para Punto X:
 
 
 SI FUERA MAL:
-─────────────
+
 Si X estuviera más cerca de Cluster B que de su propio cluster:
-  a(i) = 2.5  (lejos de los ●)
-  b(i) = 0.8  (cerca de los ■)
+  a(i) = 2.5  (lejos de los )
+  b(i) = 0.8  (cerca de los )
   s(i) = (0.8 - 2.5) / 2.5 = -0.68
   
   Interpretación: NEGATIVO = X probablemente está en el cluster equivocado
@@ -102,47 +102,47 @@ Si X estuviera más cerca de Cluster B que de su propio cluster:
 
 ---
 
-## 📊 Interpretación del Silhouette Score
+##  Interpretación del Silhouette Score
 
 ```
 ESCALA DE INTERPRETACIÓN:
-═════════════════════════
 
-0.9 - 1.0  →  ★★★★★  EXCELENTE
+
+0.9 - 1.0      EXCELENTE
               Clusters perfectamente separados
               Muy compactos, sin solapamiento
               
-0.7 - 0.9  →  ★★★★☆  MUY BUENO
+0.7 - 0.9      MUY BUENO
               Clusters bien definidos
               Poca o nula ambigüedad
               
-0.5 - 0.7  →  ★★★☆☆  BUENO
+0.5 - 0.7      BUENO
               Clusters razonablemente separados
               Estructura clara pero con algo de solapamiento
               
-0.3 - 0.5  →  ★★☆☆☆  MODERADO / ACEPTABLE
+0.3 - 0.5      MODERADO / ACEPTABLE
               Estructura presente pero débil
               Considerable solapamiento
               Útil para análisis exploratorio
               
-0.0 - 0.3  →  ★☆☆☆☆  BAJO / POBRE
+0.0 - 0.3      BAJO / POBRE
               Clusters muy solapados
               Difícil distinguir grupos
               Resultados cuestionables
               
-< 0.0      →  ☆☆☆☆☆  MUY MALO
+< 0.0          MUY MALO
               Puntos probablemente mal asignados
               Clustering no encuentra estructura real
 ```
 
 ---
 
-## 🎯 TUS RESULTADOS:
+##  TUS RESULTADOS:
 
 ```
-CLUSTERING DE MASCOTAS:   0.280  →  ★☆☆☆☆  BAJO
-CLUSTERING DE CLIENTES:   0.363  →  ★★☆☆☆  MODERADO
-CLUSTERING DE SERVICIOS:  0.223  →  ★☆☆☆☆  BAJO
+CLUSTERING DE MASCOTAS:   0.280      BAJO
+CLUSTERING DE CLIENTES:   0.363      MODERADO
+CLUSTERING DE SERVICIOS:  0.223      BAJO
 ```
 
 ### ¿Qué significa esto?
@@ -197,43 +197,43 @@ CAUSAS:
 
 ---
 
-## 🔍 Visualización del Silhouette Score
+##  Visualización del Silhouette Score
 
 ```
 SCORE ALTO (0.8):
-═════════════════
 
-  ●●●●●                    ■■■■■
-  ●●●●●     (espacio)      ■■■■■
-  ●●●●●                    ■■■■■
+
+                      
+       (espacio)      
+                      
 
 Puntos juntos en su grupo, lejos de otros
 Fácil distinguir clusters
 
 
 SCORE MEDIO (0.4):
-══════════════════
 
-  ●●●●●                  ■■■■■
-  ●●●●  ●●               ■■■ ■■
-  ●●●    ●●●          ■■■    ■■
+
+                    
+                    
+                    
 
 Algo de solapamiento pero aún distinguibles
 
 
 SCORE BAJO (0.2):
-═════════════════
 
-  ●●●●■■●●
-  ●■■●●■■●●■
-  ■●●■■●●■■
+
+  
+  
+  
 
 Muy mezclados, difícil ver separación
 ```
 
 ---
 
-## 📈 ¿Por qué NO es perfecto?
+##  ¿Por qué NO es perfecto?
 
 ```
 FACTORES QUE BAJAN EL SILHOUETTE SCORE:
@@ -261,13 +261,13 @@ FACTORES QUE BAJAN EL SILHOUETTE SCORE:
 
 ---
 
-# 2️⃣ ¿CÓMO SE ELIGE EL NÚMERO DE CLUSTERS?
+# 2⃣ ¿CÓMO SE ELIGE EL NÚMERO DE CLUSTERS?
 
-## 🎯 Método 1: Elbow Method (Método del Codo)
+##  Método 1: Elbow Method (Método del Codo)
 
 ```
 PROCESO:
-────────
+
 
 1. Prueba diferentes números de clusters (k=2, 3, 4, 5, 6...)
 2. Para cada k, calcula la INERCIA (suma de distancias al centroide)
@@ -276,19 +276,19 @@ PROCESO:
 
 
 EJEMPLO VISUAL:
-───────────────
+
 
 Inercia
-    │
-1000│●
-    │  ●
- 800│    ●
-    │      ●
- 600│        ●___●___●___●
-    │
- 400│
-    │
-    └─────────────────────────
+    
+1000
+      
+ 800    
+          
+ 600        _________
+    
+ 400
+    
+    
       2  3  4  5  6  7  8   k
 
 El "codo" está en k=4
@@ -296,7 +296,7 @@ Después de 4, agregar más clusters no mejora mucho
 
 
 CÓDIGO:
-───────
+
 
 inertias = []
 for k in range(2, 11):
@@ -313,11 +313,11 @@ plt.show()
 
 ---
 
-## 🎯 Método 2: Silhouette Analysis
+##  Método 2: Silhouette Analysis
 
 ```
 PROCESO:
-────────
+
 
 1. Prueba diferentes k
 2. Calcula Silhouette Score para cada k
@@ -325,10 +325,10 @@ PROCESO:
 
 
 EJEMPLO:
-────────
+
 
 k=2:  Silhouette = 0.45
-k=3:  Silhouette = 0.58  ← MEJOR
+k=3:  Silhouette = 0.58   MEJOR
 k=4:  Silhouette = 0.52
 k=5:  Silhouette = 0.41
 
@@ -336,7 +336,7 @@ Elige k=3
 
 
 CÓDIGO:
-───────
+
 
 scores = []
 for k in range(2, 11):
@@ -350,13 +350,13 @@ best_k = np.argmax(scores) + 2
 
 ---
 
-## 🎯 Método 3: Conocimiento del Negocio
+##  Método 3: Conocimiento del Negocio
 
 ```
 A VECES, EL NEGOCIO DICTA EL NÚMERO:
 
 EJEMPLO 1: CLIENTES
-───────────────────
+
 Business dice: "Queremos 4 segmentos"
   • VIP (para programa premium)
   • Regular (para retención normal)
@@ -368,7 +368,7 @@ el negocio NECESITA 4 para su estrategia.
 
 
 EJEMPLO 2: PRODUCTOS
-────────────────────
+
 Business dice: "Tenemos 3 líneas de producto"
   • Básica
   • Media
@@ -379,7 +379,7 @@ Los clusters deben alinearse con esto.
 
 ---
 
-## 🔍 TU CASO: ¿Por qué 3, 4 y 3?
+##  TU CASO: ¿Por qué 3, 4 y 3?
 
 ### MASCOTAS: 3 clusters
 
@@ -392,7 +392,7 @@ Los clusters deben alinearse con esto.
 1. **Elbow Method:**
    ```
    k=2: Muy general (solo "baratos" vs "caros")
-   k=3: Balance (bajo, medio, alto precio) ← ELEGIDO
+   k=3: Balance (bajo, medio, alto precio)  ELEGIDO
    k=4: Fragmentación innecesaria
    ```
 
@@ -407,7 +407,7 @@ Los clusters deben alinearse con esto.
 3. **Silhouette Score probado:**
    ```
    k=2: Score = 0.25
-   k=3: Score = 0.28  ← MEJOR (aunque bajo)
+   k=3: Score = 0.28   MEJOR (aunque bajo)
    k=4: Score = 0.22
    k=5: Score = 0.19
    ```
@@ -425,17 +425,17 @@ Los clusters deben alinearse con esto.
 1. **Estrategia de Marketing:**
    ```
    Necesitas 4 estrategias diferentes:
-   • VIP → Retener con beneficios
-   • Regular → Upselling
-   • Ocasional → Reactivar
-   • Nuevo → Onboarding
+   • VIP  Retener con beneficios
+   • Regular  Upselling
+   • Ocasional  Reactivar
+   • Nuevo  Onboarding
    ```
 
 2. **Silhouette Score:**
    ```
    k=2: Score = 0.31 (solo "buenos" vs "malos")
    k=3: Score = 0.35 (falta granularidad)
-   k=4: Score = 0.36  ← MEJOR Y ÚTIL
+   k=4: Score = 0.36   MEJOR Y ÚTIL
    k=5: Score = 0.34 (fragmentación excesiva)
    ```
 
@@ -461,27 +461,27 @@ Los clusters deben alinearse con esto.
 1. **Operativa del Negocio:**
    ```
    3 categorías operativas claras:
-   • Rutinarios → Alta frecuencia, staffing normal
-   • Importantes → Alta asistencia, prioridad
-   • Especializados → Baja asistencia, seguimiento
+   • Rutinarios  Alta frecuencia, staffing normal
+   • Importantes  Alta asistencia, prioridad
+   • Especializados  Baja asistencia, seguimiento
    ```
 
 2. **Silhouette Score:**
    ```
    k=2: Score = 0.19 (muy general)
-   k=3: Score = 0.22  ← MEJOR (aunque bajo)
+   k=3: Score = 0.22   MEJOR (aunque bajo)
    k=4: Score = 0.18 (fragmenta servicios similares)
    ```
 
 3. **Muestra Pequeña:**
    ```
    Solo 41 servicios
-   Más clusters → Grupos muy pequeños (inútiles)
+   Más clusters  Grupos muy pequeños (inútiles)
    ```
 
 ---
 
-## 📊 Tabla Resumen: Decisión de K
+##  Tabla Resumen: Decisión de K
 
 | Clustering | K | Silhouette | ¿Por qué K? |
 |------------|---|------------|-------------|
@@ -491,9 +491,9 @@ Los clusters deben alinearse con esto.
 
 ---
 
-# 3️⃣ EXPLICACIÓN DETALLADA DEL JSON
+# 3⃣ EXPLICACIÓN DETALLADA DEL JSON
 
-## 📋 Estructura General
+##  Estructura General
 
 ```json
 {
@@ -507,7 +507,7 @@ Los clusters deben alinearse con esto.
 
 ---
 
-## 🐾 CLUSTERING DE MASCOTAS
+##  CLUSTERING DE MASCOTAS
 
 ### Campos Principales:
 
@@ -578,7 +578,7 @@ Contenido: Características de cada cluster
 
 ```
 CLUSTER 0:
-─────────
+
 152 mascotas (50% del total)
 Edad promedio: 8.5 años (adultas)
 Precio: $46,855 (BAJO)
@@ -620,11 +620,11 @@ Significa:
 
 1. **Crear dendrogramas** (árboles jerárquicos):
    ```
-            ┌─────┐
-       ┌────┤     ├────┐
-   ┌───┤    └─────┘    ├───┐
-   │   └───────────────┘   │
-  ●●●                      ●●●
+            
+            
+           
+         
+                        
    ```
 
 2. **Entender el proceso de agrupamiento:**
@@ -632,8 +632,8 @@ Significa:
    - Últimas fusiones: Grupos diferentes
 
 3. **Validar la elección de K:**
-   - Si distancias crecen mucho → Estás uniendo grupos diferentes
-   - Si distancias crecen gradualmente → Grupos no tan claros
+   - Si distancias crecen mucho  Estás uniendo grupos diferentes
+   - Si distancias crecen gradualmente  Grupos no tan claros
 
 **Ejemplo de análisis:**
 
@@ -647,13 +647,13 @@ Significa:
 ```
 Interpretación:
   Primeras fusiones (distancia 0):
-    → Puntos casi idénticos
-    → Mismo tipo mascota, misma edad, mismo precio
+     Puntos casi idénticos
+     Mismo tipo mascota, misma edad, mismo precio
   
   Últimas fusiones (distancia >15):
-    → Uniendo clusters MUY diferentes
-    → Cluster "bajo precio" + Cluster "alto precio"
-    → Forzado por k=3
+     Uniendo clusters MUY diferentes
+     Cluster "bajo precio" + Cluster "alto precio"
+     Forzado por k=3
 ```
 
 #### Campo: `metodo`
@@ -667,12 +667,12 @@ Ward: Minimiza varianza intra-cluster
 ```
 Valor: "Euclidean"
 Significado: Método para medir distancia
-Fórmula: d = √((x₁-x₂)² + (y₁-y₂)² + (z₁-z₂)²)
+Fórmula: d = ((x₁-x₂)² + (y₁-y₂)² + (z₁-z₂)²)
 ```
 
 ---
 
-## 👥 CLUSTERING DE CLIENTES
+##  CLUSTERING DE CLIENTES
 
 ```json
 "clustering_clientes": {
@@ -768,7 +768,7 @@ total = len(clientes_seg)
 ```
 
 ```
-⚠️ NOTA IMPORTANTE:
+ NOTA IMPORTANTE:
 El nombre "VIP" es UNA INTERPRETACIÓN
 
 El algoritmo solo encontró:
@@ -799,7 +799,7 @@ Significado: Útil para negocio, aunque mejorable
 
 ---
 
-## 🏥 CLUSTERING DE SERVICIOS
+##  CLUSTERING DE SERVICIOS
 
 ```json
 "clustering_servicios": {
@@ -861,7 +861,7 @@ Clusters muy solapados
 
 ```
 GRUPO 0: RUTINARIOS
-─────────────────────
+
 24 servicios (59%)
 Uso alto (8.4 veces promedio)
 Horario temprano (7:47 AM)
@@ -871,21 +871,21 @@ Ejemplos: Baño, Desparasitación, Corte de uñas
 Estrategia: Alta rotación, staff temprano
 
 GRUPO 1: IMPORTANTES
-────────────────────
+
 3 servicios (7%)
 Uso moderado (4.7 veces)
 Horario medio (9:42 AM)
-Asistencia alta (86%) ⭐
+Asistencia alta (86%) 
 
 Ejemplos: Consulta General, Esterilización, Certificado
 Estrategia: Priorizar, no cancelar, alto seguimiento
 
 GRUPO 2: ESPECIALIZADOS
-────────────────────────
+
 14 servicios (34%)
 Uso medio (6.3 veces)
 Horario medio (8:38 AM)
-Asistencia BAJA (39%) ⚠️
+Asistencia BAJA (39%) 
 
 Ejemplos: Cirugía, Fisioterapia, Vacunación
 Estrategia: Mejorar recordatorios, confirmar 24h antes
@@ -900,35 +900,35 @@ Objetivo: Asegurar servicios muy similares juntos
 
 ---
 
-# 4️⃣ CÓMO INTERPRETAR LOS RESULTADOS
+# 4⃣ CÓMO INTERPRETAR LOS RESULTADOS
 
-## 🎯 Matriz de Decisión: ¿El clustering es útil?
+##  Matriz de Decisión: ¿El clustering es útil?
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│  Silhouette   │  Interpretación  │  ¿Útil?  │  Acción     │
-├───────────────┼──────────────────┼──────────┼─────────────┤
-│  > 0.7        │  Excelente       │  ✅✅✅  │  Usar       │
-│  0.5 - 0.7    │  Bueno           │  ✅✅    │  Usar       │
-│  0.3 - 0.5    │  Moderado        │  ✅      │  Usar+Validar│
-│  0.2 - 0.3    │  Bajo            │  ⚠️      │  Explorar   │
-│  < 0.2        │  Muy bajo        │  ❌      │  Descartar  │
-└───────────────┴──────────────────┴──────────┴─────────────┘
+
+  Silhouette     Interpretación    ¿Útil?    Acción     
+
+  > 0.7          Excelente             Usar       
+  0.5 - 0.7      Bueno                   Usar       
+  0.3 - 0.5      Moderado                  Usar+Validar
+  0.2 - 0.3      Bajo                      Explorar   
+  < 0.2          Muy bajo                  Descartar  
+
 
 TUS RESULTADOS:
-───────────────
-Mascotas:  0.280 → Bajo      → ⚠️  Explorar
-Clientes:  0.363 → Moderado  → ✅  Usar+Validar
-Servicios: 0.223 → Bajo      → ⚠️  Explorar
+
+Mascotas:  0.280  Bajo         Explorar
+Clientes:  0.363  Moderado     Usar+Validar
+Servicios: 0.223  Bajo         Explorar
 ```
 
 ---
 
-## 📊 Recomendaciones por Clustering
+##  Recomendaciones por Clustering
 
 ### CLUSTERING DE MASCOTAS (Score: 0.280)
 
-**Estado:** ⚠️ BAJO
+**Estado:**  BAJO
 
 **Recomendaciones:**
 
@@ -954,22 +954,22 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 **Uso recomendado:**
 ```
-✅ "Las mascotas con servicios caros tienden a ser X"
-❌ "Asigna automáticamente esta mascota al cluster Y"
+ "Las mascotas con servicios caros tienden a ser X"
+ "Asigna automáticamente esta mascota al cluster Y"
 ```
 
 ---
 
 ### CLUSTERING DE CLIENTES (Score: 0.363)
 
-**Estado:** ✅ MODERADO/ACEPTABLE
+**Estado:**  MODERADO/ACEPTABLE
 
 **Recomendaciones:**
 
 1. **Para Negocio:**
-   - ✅ Usa los segmentos para marketing
-   - ✅ Crea estrategias diferenciadas
-   - ✅ Diseña programas de lealtad
+   -  Usa los segmentos para marketing
+   -  Crea estrategias diferenciadas
+   -  Diseña programas de lealtad
 
 2. **Validación Necesaria:**
    ```
@@ -983,39 +983,39 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 3. **Estrategias Sugeridas:**
    ```
    Base Estable (68 clientes):
-     → Email mensual con tips
-     → Descuento cumpleaños mascota
-     → Mantener calidad de servicio
+      Email mensual con tips
+      Descuento cumpleaños mascota
+      Mantener calidad de servicio
    
    Regulares (12 clientes):
-     → Programa puntos
-     → Ofertas en servicios premium
-     → Upselling inteligente
+      Programa puntos
+      Ofertas en servicios premium
+      Upselling inteligente
    
    Inactivos (19 clientes):
-     → Campaña reactivación
-     → Descuento "te extrañamos"
-     → Email con nuevo servicio
+      Campaña reactivación
+      Descuento "te extrañamos"
+      Email con nuevo servicio
    
    Problemáticos (3 clientes):
-     → Llamada personal
-     → Entender por qué no asisten
-     → Ajustar horarios/recordatorios
+      Llamada personal
+      Entender por qué no asisten
+      Ajustar horarios/recordatorios
    ```
 
 **Uso recomendado:**
 ```
-✅ Estrategias de marketing segmentadas
-✅ Programas de retención
-✅ Análisis de valor del cliente
-⚠️ No para decisiones automáticas críticas
+ Estrategias de marketing segmentadas
+ Programas de retención
+ Análisis de valor del cliente
+ No para decisiones automáticas críticas
 ```
 
 ---
 
 ### CLUSTERING DE SERVICIOS (Score: 0.223)
 
-**Estado:** ⚠️ BAJO
+**Estado:**  BAJO
 
 **Recomendaciones:**
 
@@ -1026,9 +1026,9 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 2. **Insights Útiles:**
    ```
-   ✅ Servicios con baja asistencia → Mejorar recordatorios
-   ✅ Servicios matutinos → Staffing temprano
-   ✅ Servicios de alta asistencia → Replicar proceso
+    Servicios con baja asistencia  Mejorar recordatorios
+    Servicios matutinos  Staffing temprano
+    Servicios de alta asistencia  Replicar proceso
    ```
 
 3. **Alternativa Mejor:**
@@ -1042,16 +1042,16 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 **Uso recomendado:**
 ```
-✅ Identificar servicios problemáticos (baja asistencia)
-✅ Optimizar horarios generales
-❌ Categorización automática de nuevos servicios
+ Identificar servicios problemáticos (baja asistencia)
+ Optimizar horarios generales
+ Categorización automática de nuevos servicios
 ```
 
 ---
 
-# 5️⃣ PARA TU EXPOSICIÓN
+# 5⃣ PARA TU EXPOSICIÓN
 
-## 🎤 Explicación de Silhouette Score
+##  Explicación de Silhouette Score
 
 **Profesor pregunta:** *"¿Qué es el Silhouette Score y cómo se interpreta?"*
 
@@ -1071,7 +1071,7 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 ---
 
-## 🎤 Explicación de Número de Clusters
+##  Explicación de Número de Clusters
 
 **Profesor pregunta:** *"¿Por qué elegiste 3, 4 y 3 clusters?"*
 
@@ -1089,7 +1089,7 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 ---
 
-## 🎤 Explicación de Scores Bajos
+##  Explicación de Scores Bajos
 
 **Profesor pregunta:** *"Tus Silhouette Scores son bajos. ¿Por qué?"*
 
@@ -1109,27 +1109,27 @@ Servicios: 0.223 → Bajo      → ⚠️  Explorar
 
 ---
 
-## 📊 Slide Sugerido: "Métricas de Clustering"
+##  Slide Sugerido: "Métricas de Clustering"
 
 ```
 MÉTRICAS DE VALIDACIÓN
-═════════════════════
+
 
 Silhouette Score: Mide calidad del agrupamiento
 
                     Rango: -1 a +1
                     
-     ┌─────────┬─────────┬─────────┬─────────┐
-     │  Malo   │  Bajo   │  Bueno  │ Excelente│
-     │  < 0    │ 0 - 0.3 │ 0.3-0.7 │  > 0.7  │
-     └─────────┴─────────┴─────────┴─────────┘
-                    ↓         ↓
+     
+       Malo     Bajo     Bueno   Excelente
+       < 0     0 - 0.3  0.3-0.7   > 0.7  
+     
+                             
               Servicios  Clientes
                (0.22)    (0.36)
 
 RESULTADOS:
 • Mascotas:  0.280 (Bajo, pero útil para tendencias)
-• Clientes:  0.363 (Moderado, útil para marketing) ✓
+• Clientes:  0.363 (Moderado, útil para marketing) 
 • Servicios: 0.223 (Bajo, solo insights generales)
 
 CONCLUSIÓN:
@@ -1139,10 +1139,10 @@ directamente a estrategia de negocio.
 
 ---
 
-## 🎯 Mensajes Clave para la Exposición
+##  Mensajes Clave para la Exposición
 
 1. **Silhouette Score mide CALIDAD, no utilidad:**
-   - Score bajo ≠ Análisis inútil
+   - Score bajo  Análisis inútil
    - Depende del objetivo
 
 2. **Clustering es EXPLORATORIO:**
@@ -1161,24 +1161,24 @@ directamente a estrategia de negocio.
 
 ---
 
-## ✅ CHECKLIST PARA RESPONDER PREGUNTAS
+##  CHECKLIST PARA RESPONDER PREGUNTAS
 
-- [ ] ¿Qué es Silhouette Score? → Métrica de calidad, -1 a +1
-- [ ] ¿Cómo se calcula? → Compara distancia intra-cluster vs inter-cluster
-- [ ] ¿Qué significa tu score? → Moderado-bajo, útil pero mejorable
-- [ ] ¿Por qué bajo? → Pocos datos, pocas features, naturaleza de datos
-- [ ] ¿Cómo elegiste K? → Silhouette + Conocimiento negocio
-- [ ] ¿Es útil con score bajo? → Sí para clientes (0.36), limitado para otros
-- [ ] ¿Cómo mejorarías? → Más datos, más features, validación manual
+- [ ] ¿Qué es Silhouette Score?  Métrica de calidad, -1 a +1
+- [ ] ¿Cómo se calcula?  Compara distancia intra-cluster vs inter-cluster
+- [ ] ¿Qué significa tu score?  Moderado-bajo, útil pero mejorable
+- [ ] ¿Por qué bajo?  Pocos datos, pocas features, naturaleza de datos
+- [ ] ¿Cómo elegiste K?  Silhouette + Conocimiento negocio
+- [ ] ¿Es útil con score bajo?  Sí para clientes (0.36), limitado para otros
+- [ ] ¿Cómo mejorarías?  Más datos, más features, validación manual
 
 ---
 
-## 📚 RESUMEN EJECUTIVO
+##  RESUMEN EJECUTIVO
 
 ```
-┌──────────────────────────────────────────────────────────┐
-│              RESUMEN DE CLUSTERING                        │
-└──────────────────────────────────────────────────────────┘
+
+              RESUMEN DE CLUSTERING                        
+
 
 SILHOUETTE SCORE:
   Métrica de calidad de clustering
@@ -1187,7 +1187,7 @@ SILHOUETTE SCORE:
 
 TUS RESULTADOS:
   • Mascotas:  0.280 (Bajo)
-  • Clientes:  0.363 (Moderado) ← Más útil
+  • Clientes:  0.363 (Moderado)  Más útil
   • Servicios: 0.223 (Bajo)
 
 NÚMERO DE CLUSTERS:
@@ -1203,9 +1203,9 @@ CAMPOS DEL JSON:
   • metodo: Tipo de algoritmo (Ward/Average/Complete)
 
 APLICABILIDAD:
-  ✅ Clientes: Útil para marketing
-  ⚠️ Mascotas: Solo tendencias
-  ⚠️ Servicios: Insights limitados
+   Clientes: Útil para marketing
+   Mascotas: Solo tendencias
+   Servicios: Insights limitados
 
 MEJORAS FUTURAS:
   • Más datos (1000+ registros)
@@ -1218,5 +1218,5 @@ MEJORAS FUTURAS:
 
 **FIN DEL DOCUMENTO**
 
-**Usa este documento para preparar tu exposición.** Contiene todo lo que necesitas saber sobre Silhouette Score, elección de clusters, e interpretación de resultados. 🎓📊
+**Usa este documento para preparar tu exposición.** Contiene todo lo que necesitas saber sobre Silhouette Score, elección de clusters, e interpretación de resultados. 
 

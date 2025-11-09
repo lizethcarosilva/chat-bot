@@ -1,40 +1,40 @@
-# 📚 EXPLICACIÓN DE ARCHIVOS .PY - PARA EXPOSICIÓN
+#  EXPLICACIÓN DE ARCHIVOS .PY - PARA EXPOSICIÓN
 
-## 🎯 ARQUITECTURA DEL SISTEMA
+##  ARQUITECTURA DEL SISTEMA
 
 El sistema está compuesto por **7 archivos Python** que trabajan en conjunto:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     FRONTEND (React)                        │
-│                  (Tu aplicación web)                        │
-└────────────────────┬────────────────────────────────────────┘
-                     │ HTTP Requests
-                     ↓
-┌─────────────────────────────────────────────────────────────┐
-│  api.py - API REST (FastAPI)                                │
-│  ├─ Recibe peticiones HTTP                                  │
-│  ├─ Procesa requests                                        │
-│  └─ Retorna respuestas JSON                                 │
-└──────┬──────────────┬──────────────┬────────────────────────┘
-       │              │              │
-       ↓              ↓              ↓
-┌─────────────┐ ┌──────────┐ ┌────────────────┐
-│ chatbot.py  │ │database.py│ │ predictor.py   │
-│ (IA/NLP)    │ │(PostgreSQL)│ │(ML/Clustering) │
-└─────────────┘ └──────────┘ └────────────────┘
-       ↑              ↑              ↑
-       │              │              │
-┌──────────────────────────────────────────────┐
-│ config.py - Configuración centralizada       │
-└──────────────────────────────────────────────┘
+
+                     FRONTEND (React)                        
+                  (Tu aplicación web)                        
+
+                      HTTP Requests
+                     
+
+  api.py - API REST (FastAPI)                                
+   Recibe peticiones HTTP                                  
+   Procesa requests                                        
+   Retorna respuestas JSON                                 
+
+                                   
+                                   
+  
+ chatbot.py   database.py  predictor.py   
+ (IA/NLP)     (PostgreSQL) (ML/Clustering) 
+  
+                                   
+                                   
+
+ config.py - Configuración centralizada       
+
 ```
 
 ---
 
-## 📂 ARCHIVOS PRINCIPALES
+##  ARCHIVOS PRINCIPALES
 
-### 1. **api.py** ⭐⭐⭐⭐⭐ (NÚCLEO DEL SISTEMA)
+### 1. **api.py**  (NÚCLEO DEL SISTEMA)
 
 **¿Para qué sirve?**
 - Es el **servidor REST** que expone todos los servicios
@@ -64,7 +64,7 @@ GET  /api/estadisticas            # Estadísticas
 
 ---
 
-### 2. **chatbot.py** ⭐⭐⭐⭐ (INTELIGENCIA CONVERSACIONAL)
+### 2. **chatbot.py**  (INTELIGENCIA CONVERSACIONAL)
 
 **¿Para qué sirve?**
 - Procesa mensajes del usuario en lenguaje natural
@@ -112,7 +112,7 @@ def responder_clustering(self) -> str:
 
 ---
 
-### 3. **database.py** ⭐⭐⭐⭐ (CAPA DE DATOS)
+### 3. **database.py**  (CAPA DE DATOS)
 
 **¿Para qué sirve?**
 - Gestiona la conexión a PostgreSQL
@@ -161,7 +161,7 @@ def obtener_alerta_bajo_inventario(self) -> pd.DataFrame:
 
 ---
 
-### 4. **predictor.py** ⭐⭐⭐⭐⭐ (MACHINE LEARNING)
+### 4. **predictor.py**  (MACHINE LEARNING)
 
 **¿Para qué sirve?**
 - Implementa algoritmos de Machine Learning
@@ -175,13 +175,13 @@ def obtener_alerta_bajo_inventario(self) -> pd.DataFrame:
 ```python
 def construir_modelo_tipo_mascota(self, num_features, num_classes):
     # Red neuronal para clasificación
-    # Arquitectura: Dense → Dropout → Dense → Softmax
+    # Arquitectura: Dense  Dropout  Dense  Softmax
     
 def predecir_tipo_mascota(self, dia, hora, mes, service_id):
     # Usa la red entrenada para predecir
 ```
 
-#### b) **Hierarchical Clustering** 🔬 (NUEVO)
+#### b) **Hierarchical Clustering**  (NUEVO)
 ```python
 def clustering_mascotas(self, df, n_clusters=3):
     # Agrupa mascotas por características similares
@@ -210,7 +210,7 @@ def clustering_servicios(self, df, n_clusters=3):
 
 ---
 
-### 5. **config.py** ⭐⭐ (CONFIGURACIÓN)
+### 5. **config.py**  (CONFIGURACIÓN)
 
 **¿Para qué sirve?**
 - Centraliza toda la configuración del sistema
@@ -250,7 +250,7 @@ PATHS = {
 
 ---
 
-### 6. **entrenar_chatbot_veterinario.py** ⭐⭐⭐ (ENTRENAMIENTO)
+### 6. **entrenar_chatbot_veterinario.py**  (ENTRENAMIENTO)
 
 **¿Para qué sirve?**
 - Entrena la red neuronal LSTM del chatbot
@@ -267,18 +267,18 @@ PATHS = {
 **Arquitectura de la Red:**
 ```
 Embedding Layer (128 dimensiones)
-    ↓
+    
 Bidirectional LSTM (64 unidades)
-    ↓
+    
 Dropout (30%)
-    ↓
+    
 Bidirectional LSTM (64 unidades)
-    ↓
+    
 Dropout (30%)
-    ↓
+    
 Dense (64 neuronas, ReLU)
-    ↓
-Dense (Softmax) → Clasificación
+    
+Dense (Softmax)  Clasificación
 ```
 
 **Tecnologías:**
@@ -292,7 +292,7 @@ Dense (Softmax) → Clasificación
 
 ---
 
-### 7. **verificar_deteccion.py** ⭐ (TESTING)
+### 7. **verificar_deteccion.py**  (TESTING)
 
 **¿Para qué sirve?**
 - Script de prueba para verificar detecciones
@@ -303,50 +303,50 @@ Dense (Softmax) → Clasificación
 
 ---
 
-## 🎯 FLUJO COMPLETO DEL SISTEMA
+##  FLUJO COMPLETO DEL SISTEMA
 
 ### Ejemplo: Usuario pregunta "¿Cuántos clientes tengo?"
 
 ```
 1. FRONTEND (React)
-   └─> fetch('http://localhost:8000/api/chat', {
+   > fetch('http://localhost:8000/api/chat', {
          body: {"mensaje": "¿Cuántos clientes tengo?"}
        })
 
 2. API.PY
-   └─> Recibe POST /api/chat
-   └─> Llama a: bot.procesar_mensaje()
+   > Recibe POST /api/chat
+   > Llama a: bot.procesar_mensaje()
 
 3. CHATBOT.PY
-   └─> normalizar_texto() → "cuantos clientes tengo"
-   └─> detectar_intencion() → "estadisticas"
-   └─> responder_estadisticas()
+   > normalizar_texto()  "cuantos clientes tengo"
+   > detectar_intencion()  "estadisticas"
+   > responder_estadisticas()
 
 4. DATABASE.PY
-   └─> ejecutar_query()
-   └─> SELECT COUNT(*) FROM client WHERE activo = true
-   └─> Retorna: {total_clientes: 150}
+   > ejecutar_query()
+   > SELECT COUNT(*) FROM client WHERE activo = true
+   > Retorna: {total_clientes: 150}
 
 5. CHATBOT.PY
-   └─> Formatea respuesta:
-       "📊 ESTADÍSTICAS GENERALES:
-        👥 Clientes registrados: 150"
+   > Formatea respuesta:
+       " ESTADÍSTICAS GENERALES:
+         Clientes registrados: 150"
 
 6. API.PY
-   └─> Retorna JSON:
+   > Retorna JSON:
        {
-         "respuesta": "📊 ESTADÍSTICAS...",
+         "respuesta": " ESTADÍSTICAS...",
          "intencion": "estadisticas",
          "confianza": 0.9
        }
 
 7. FRONTEND
-   └─> Muestra la respuesta al usuario
+   > Muestra la respuesta al usuario
 ```
 
 ---
 
-## 🔬 ALGORITMOS DE IA UTILIZADOS
+##  ALGORITMOS DE IA UTILIZADOS
 
 ### 1. **Red Neuronal LSTM** (chatbot.py)
 - **Tipo:** Deep Learning - Recurrent Neural Network
@@ -358,11 +358,11 @@ Dense (Softmax) → Clasificación
 ### 2. **Redes Neuronales Densas** (predictor.py)
 - **Tipo:** Deep Learning - Feedforward
 - **Propósito:** Predecir tipo de mascota y asistencia
-- **Capas:** Dense → Dropout → Dense → Softmax
+- **Capas:** Dense  Dropout  Dense  Softmax
 - **Input:** Día, hora, mes, servicio, edad
 - **Output:** Predicción
 
-### 3. **Hierarchical Clustering** (predictor.py) 🔬
+### 3. **Hierarchical Clustering** (predictor.py) 
 - **Tipo:** Unsupervised Learning - Clustering
 - **Algoritmo:** Agglomerative Clustering
 - **Métodos:** Ward, Average, Complete
@@ -375,13 +375,13 @@ Dense (Softmax) → Clasificación
 - **Clustering de Servicios:** Agrupa por patrones de uso
 
 **Ventajas:**
-- ✅ No requiere etiquetas previas
-- ✅ Descubre patrones ocultos
-- ✅ Permite segmentación automática
+-  No requiere etiquetas previas
+-  Descubre patrones ocultos
+-  Permite segmentación automática
 
 ---
 
-## 📊 TECNOLOGÍAS UTILIZADAS
+##  TECNOLOGÍAS UTILIZADAS
 
 | Tecnología | Archivo | Propósito |
 |------------|---------|-----------|
@@ -395,11 +395,11 @@ Dense (Softmax) → Clasificación
 
 ---
 
-## 🎓 CONCEPTOS DE IA APLICADOS
+##  CONCEPTOS DE IA APLICADOS
 
 ### 1. **Procesamiento de Lenguaje Natural (NLP)**
 
-**Dónde:** chatbot.py → `normalizar_texto()`, `detectar_intencion()`
+**Dónde:** chatbot.py  `normalizar_texto()`, `detectar_intencion()`
 
 **Técnicas:**
 - Tokenización
@@ -409,7 +409,7 @@ Dense (Softmax) → Clasificación
 
 ### 2. **Deep Learning - LSTM**
 
-**Dónde:** chatbot.py → `predecir_intencion_neuronal()`
+**Dónde:** chatbot.py  `predecir_intencion_neuronal()`
 
 **Concepto:**
 - LSTM = Long Short-Term Memory
@@ -420,30 +420,30 @@ Dense (Softmax) → Clasificación
 **Arquitectura:**
 ```
 Input: "¿Cuántos clientes tengo?"
-   ↓
+   
 Embedding: Convierte palabras a vectores [128 dim]
-   ↓
+   
 Bidirectional LSTM: Procesa secuencia (adelante y atrás)
-   ↓
+   
 Dense Layers: Clasificación final
-   ↓
+   
 Softmax: Probabilidades por intención
-   ↓
+   
 Output: "estadisticas" (90% confianza)
 ```
 
 ### 3. **Supervised Learning - Clasificación**
 
-**Dónde:** predictor.py → `entrenar_modelo_tipo_mascota()`
+**Dónde:** predictor.py  `entrenar_modelo_tipo_mascota()`
 
 **Concepto:**
 - Aprende de ejemplos etiquetados
 - Predice categorías (Perro, Gato, Ave, etc.)
 - Usa features: día, hora, mes, servicio
 
-### 4. **Unsupervised Learning - Clustering** 🔬
+### 4. **Unsupervised Learning - Clustering** 
 
-**Dónde:** predictor.py → `clustering_mascotas()`, `clustering_clientes()`
+**Dónde:** predictor.py  `clustering_mascotas()`, `clustering_clientes()`
 
 **Concepto:**
 - Agrupa datos sin etiquetas previas
@@ -488,7 +488,7 @@ Rango: -1 a +1
 
 ---
 
-## 📐 FLUJO DE DATOS
+##  FLUJO DE DATOS
 
 ### Clustering de Clientes (Ejemplo Detallado)
 
@@ -530,7 +530,7 @@ return {
 
 ---
 
-## 🔧 CÓMO FUNCIONAN JUNTOS
+##  CÓMO FUNCIONAN JUNTOS
 
 ```python
 # EJEMPLO: Endpoint de clustering
@@ -551,7 +551,7 @@ async def clustering_clientes():
 
 ---
 
-## 📝 RESUMEN POR RESPONSABILIDAD
+##  RESUMEN POR RESPONSABILIDAD
 
 | Archivo | Responsabilidad Principal |
 |---------|---------------------------|
@@ -565,22 +565,22 @@ async def clustering_clientes():
 
 ---
 
-## 🎓 PARA TU EXPOSICIÓN
+##  PARA TU EXPOSICIÓN
 
 ### Diapositiva 1: Arquitectura
 - Muestra el diagrama de componentes
 - Explica cómo se comunican
 
 ### Diapositiva 2: Archivos Principales
-- api.py → Servidor REST
-- chatbot.py → IA conversacional
-- database.py → Datos
-- predictor.py → Machine Learning
+- api.py  Servidor REST
+- chatbot.py  IA conversacional
+- database.py  Datos
+- predictor.py  Machine Learning
 
 ### Diapositiva 3: Algoritmos de IA
 - LSTM para chatbot
 - Redes neuronales para predicciones
-- **Hierarchical Clustering** para segmentación 🔬
+- **Hierarchical Clustering** para segmentación 
 
 ### Diapositiva 4: Hierarchical Clustering
 - Qué es
@@ -594,5 +594,5 @@ async def clustering_clientes():
 
 ---
 
-**Ahora voy a agregar comentarios detallados al código...** 📝
+**Ahora voy a agregar comentarios detallados al código...** 
 

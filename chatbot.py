@@ -36,7 +36,7 @@ class PetStoreBot:
     - Predicciones con red neuronal para análisis de datos
     
     Red Neuronal:
-    - Arquitectura: Embedding → Bidirectional LSTM → Dense → Softmax
+    - Arquitectura: Embedding  Bidirectional LSTM  Dense  Softmax
     - Entrenada con datos veterinarios
     - Clasifica intenciones del usuario
     """
@@ -44,7 +44,7 @@ class PetStoreBot:
     def __init__(self):
         self.db = PetStoreDatabase()
         self.predictor = PetStorePredictor()
-        self.nombre_bot = "VetBot 🐾"
+        self.nombre_bot = "VetBot"
         self.contexto = {}
         
         # Variables para red neuronal del chatbot
@@ -58,17 +58,17 @@ class PetStoreBot:
         # Intentar cargar modelo del chatbot veterinario
         try:
             self.cargar_modelo_chatbot()
-            logger.info("✓ Chatbot veterinario cargado")
+            logger.info("Chatbot veterinario cargado")
         except Exception as e:
-            logger.warning(f"⚠️  Modelo de chatbot no encontrado: {e}")
+            logger.warning(f"ADVERTENCIA: Modelo de chatbot no encontrado: {e}")
             logger.warning("   Ejecuta: python entrenar_chatbot_veterinario.py")
         
         # Intentar cargar modelos de predicción de datos
         try:
             self.predictor.cargar_modelos()
-            logger.info("✓ Modelos predictivos de datos cargados")
+            logger.info("Modelos predictivos de datos cargados")
         except:
-            logger.warning("⚠️  Modelos predictivos no encontrados.")
+            logger.warning("ADVERTENCIA: Modelos predictivos no encontrados.")
     
     def cargar_modelo_chatbot(self):
         """Carga el modelo de red neuronal entrenado para el chatbot"""
@@ -311,42 +311,42 @@ class PetStoreBot:
     def responder_saludo(self) -> str:
         """Responde a saludos"""
         respuestas = [
-            "¡Hola! 👋 Soy PetBot, tu asistente virtual del Pet Store. ¿En qué puedo ayudarte?",
-            "¡Bienvenido! 🐾 Estoy aquí para ayudarte con información sobre mascotas, servicios y análisis predictivos.",
-            "¡Hola! 😊 Pregúntame sobre mascotas, citas, estadísticas o predicciones."
+            "Hola! Soy PetBot, tu asistente virtual del Pet Store. ¿En que puedo ayudarte?",
+            "Bienvenido! Estoy aqui para ayudarte con informacion sobre mascotas, servicios y analisis predictivos.",
+            "Hola! Preguntame sobre mascotas, citas, estadisticas o predicciones."
         ]
         return random.choice(respuestas)
     
     def responder_despedida(self) -> str:
         """Responde a despedidas"""
         respuestas = [
-            "¡Hasta pronto! 👋 Cuida bien a tus mascotas 🐾",
-            "¡Adiós! 😊 Que tengas un excelente día con tus peluditos",
-            "¡Nos vemos! 🐕 Regresa cuando necesites ayuda"
+            "Hasta pronto! Cuida bien a tus mascotas",
+            "Adios! Que tengas un excelente dia con tus peluditos",
+            "Nos vemos! Regresa cuando necesites ayuda"
         ]
         return random.choice(respuestas)
     
     def responder_ayuda(self) -> str:
         """Muestra comandos disponibles"""
         return """
-🤖 **PetBot - Comandos Disponibles:**
+ **PetBot - Comandos Disponibles:**
 
-📊 **ESTADÍSTICAS Y ANÁLISIS:**
+ **ESTADÍSTICAS Y ANÁLISIS:**
 • "estadísticas" - Estadísticas generales del sistema
 • "tipo más común" - Tipo de mascota más común
 • "día con más atención" - Día con más citas
 
-💼 **MÉTRICAS DE NEGOCIO:**
+ **MÉTRICAS DE NEGOCIO:**
 • "citas hoy" - Citas programadas para hoy
 • "ventas" - Reporte de ventas del día y mes
 • "alertas" - Alertas de inventario
 
-🔬 **CLUSTERING (Machine Learning):**
+ **CLUSTERING (Machine Learning):**
 • "clustering" - Análisis de agrupamiento jerárquico
 • "segmentar clientes" - Segmentación de clientes
 • "agrupar mascotas" - Clusters de mascotas
 
-🔮 **PREDICCIONES (Red Neuronal):**
+ **PREDICCIONES (Red Neuronal):**
 • "predice tipo mascota" - Predicción con IA
 • "entrenar" - Información de entrenamiento
 
@@ -361,16 +361,16 @@ Ejemplos:
         df = self.db.obtener_servicios_disponibles()
         
         if df.empty:
-            return "❌ No se encontraron servicios disponibles."
+            return " No se encontraron servicios disponibles."
         
-        respuesta = "🏥 **SERVICIOS DISPONIBLES:**\n\n"
+        respuesta = " **SERVICIOS DISPONIBLES:**\n\n"
         for idx, row in df.head(10).iterrows():
             respuesta += f"• **{row['nombre']}**\n"
             if row['descripcion']:
                 respuesta += f"  {row['descripcion']}\n"
-            respuesta += f"  💰 Precio: ${row['precio']:,.2f}"
+            respuesta += f"   Precio: ${row['precio']:,.2f}"
             if row['duracion_minutos']:
-                respuesta += f" | ⏱️ Duración: {row['duracion_minutos']} min"
+                respuesta += f" | ⏱ Duración: {row['duracion_minutos']} min"
             respuesta += "\n\n"
         
         return respuesta
@@ -379,11 +379,11 @@ Ejemplos:
         """Muestra estadísticas generales"""
         stats = self.db.obtener_estadisticas_generales()
         
-        respuesta = "📊 **ESTADÍSTICAS GENERALES:**\n\n"
-        respuesta += f"🐾 Mascotas registradas: **{stats['total_mascotas']}**\n"
-        respuesta += f"👥 Clientes registrados: **{stats['total_clientes']}**\n"
-        respuesta += f"📅 Total de citas: **{stats['total_citas']}**\n"
-        respuesta += f"🏥 Servicios disponibles: **{stats['total_servicios']}**\n"
+        respuesta = " **ESTADÍSTICAS GENERALES:**\n\n"
+        respuesta += f" Mascotas registradas: **{stats['total_mascotas']}**\n"
+        respuesta += f" Clientes registrados: **{stats['total_clientes']}**\n"
+        respuesta += f" Total de citas: **{stats['total_citas']}**\n"
+        respuesta += f" Servicios disponibles: **{stats['total_servicios']}**\n"
         
         return respuesta
     
@@ -392,16 +392,16 @@ Ejemplos:
         df = self.db.obtener_dataset_completo()
         
         if df.empty:
-            return "❌ No hay datos suficientes para realizar el análisis."
+            return " No hay datos suficientes para realizar el análisis."
         
         analisis = self.predictor.analizar_tipo_mascota_mas_comun(df)
         
-        respuesta = f"🐾 **ANÁLISIS: Tipo de Mascota Más Común**\n\n"
-        respuesta += f"🏆 El tipo más común es: **{analisis['tipo_mas_comun']}**\n\n"
-        respuesta += "📊 **Distribución completa:**\n"
+        respuesta = f" **ANÁLISIS: Tipo de Mascota Más Común**\n\n"
+        respuesta += f" El tipo más común es: **{analisis['tipo_mas_comun']}**\n\n"
+        respuesta += " **Distribución completa:**\n"
         
         for stat in analisis['estadisticas'][:5]:
-            barra = "█" * int(stat['porcentaje'] / 5)
+            barra = "" * int(stat['porcentaje'] / 5)
             respuesta += f"• {stat['tipo']}: {stat['cantidad']} ({stat['porcentaje']}%) {barra}\n"
         
         return respuesta
@@ -411,16 +411,16 @@ Ejemplos:
         df = self.db.obtener_dataset_completo()
         
         if df.empty:
-            return "❌ No hay datos suficientes para realizar el análisis."
+            return " No hay datos suficientes para realizar el análisis."
         
         analisis = self.predictor.analizar_dia_mas_atencion(df)
         
-        respuesta = f"📅 **ANÁLISIS: Día con Más Atención**\n\n"
-        respuesta += f"🏆 El día con más citas es: **{analisis['dia_con_mas_atencion']}**\n\n"
-        respuesta += "📊 **Distribución semanal:**\n"
+        respuesta = f" **ANÁLISIS: Día con Más Atención**\n\n"
+        respuesta += f" El día con más citas es: **{analisis['dia_con_mas_atencion']}**\n\n"
+        respuesta += " **Distribución semanal:**\n"
         
         for stat in analisis['estadisticas']:
-            barra = "█" * (stat['cantidad_citas'] // 10)
+            barra = "" * (stat['cantidad_citas'] // 10)
             respuesta += f"• {stat['dia']}: {stat['cantidad_citas']} citas {barra}\n"
         
         # Obtener hora pico también
@@ -432,7 +432,7 @@ Ejemplos:
     def responder_prediccion_tipo(self, dia: int = None, hora: int = None) -> str:
         """Predice tipo de mascota"""
         if not self.predictor.trained:
-            return "⚠️ Los modelos aún no están entrenados. Usa el comando 'entrenar' primero."
+            return " Los modelos aún no están entrenados. Usa el comando 'entrenar' primero."
         
         # Usar valores actuales si no se proporcionan
         ahora = datetime.now()
@@ -447,11 +447,11 @@ Ejemplos:
         
         dias_nombre = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
         
-        respuesta = f"🔮 **PREDICCIÓN: Tipo de Mascota**\n\n"
-        respuesta += f"📅 Día: {dias_nombre[dia_semana % 7]}\n"
+        respuesta = f" **PREDICCIÓN: Tipo de Mascota**\n\n"
+        respuesta += f" Día: {dias_nombre[dia_semana % 7]}\n"
         respuesta += f"⏰ Hora: {hora_dia}:00\n\n"
-        respuesta += f"🏆 **Predicción:** {prediccion['tipo_mas_probable']}\n"
-        respuesta += f"📊 **Confianza:** {prediccion['confianza']:.1%}\n\n"
+        respuesta += f" **Predicción:** {prediccion['tipo_mas_probable']}\n"
+        respuesta += f" **Confianza:** {prediccion['confianza']:.1%}\n\n"
         respuesta += "**Top 3 más probables:**\n"
         
         for pred in prediccion['predicciones']:
@@ -462,17 +462,17 @@ Ejemplos:
     def responder_buscar_mascota(self, nombre: str) -> str:
         """Busca una mascota por nombre"""
         if not nombre:
-            return "❓ Por favor proporciona el nombre de la mascota. Ej: 'buscar mascota Max'"
+            return " Por favor proporciona el nombre de la mascota. Ej: 'buscar mascota Max'"
         
         df = self.db.buscar_mascota_por_nombre(nombre)
         
         if df.empty:
-            return f"❌ No se encontró ninguna mascota con el nombre '{nombre}'."
+            return f" No se encontró ninguna mascota con el nombre '{nombre}'."
         
-        respuesta = f"🔍 **RESULTADOS DE BÚSQUEDA: '{nombre}'**\n\n"
+        respuesta = f" **RESULTADOS DE BÚSQUEDA: '{nombre}'**\n\n"
         
         for idx, row in df.iterrows():
-            respuesta += f"🐾 **{row['nombre']}** (ID: {row['pet_id']})\n"
+            respuesta += f" **{row['nombre']}** (ID: {row['pet_id']})\n"
             respuesta += f"   • Tipo: {row['tipo']}\n"
             respuesta += f"   • Raza: {row['raza']}\n"
             respuesta += f"   • Edad: {row['edad']} años | Sexo: {row['sexo']}\n"
@@ -486,14 +486,14 @@ Ejemplos:
         df = self.db.obtener_citas_hoy()
         
         if df.empty:
-            return "✅ No hay citas programadas para hoy."
+            return " No hay citas programadas para hoy."
         
-        respuesta = f"📅 **CITAS PROGRAMADAS HOY ({datetime.now().strftime('%d/%m/%Y')})**\n\n"
+        respuesta = f" **CITAS PROGRAMADAS HOY ({datetime.now().strftime('%d/%m/%Y')})**\n\n"
         respuesta += f"**Total de citas:** {len(df)}\n\n"
         
         for idx, row in df.head(10).iterrows():
             hora = f"{int(row['hora']):02d}:00"
-            respuesta += f"🕐 **{hora}** - {row['mascota']} ({row['tipo_mascota']})\n"
+            respuesta += f" **{hora}** - {row['mascota']} ({row['tipo_mascota']})\n"
             respuesta += f"   • Cliente: {row['cliente']}\n"
             respuesta += f"   • Servicio: {row['servicio']} (${row['precio']:.2f})\n"
             respuesta += f"   • Estado: {row['estado']}\n"
@@ -512,28 +512,28 @@ Ejemplos:
         ventas_mes = self.db.obtener_ventas_mes()
         comparativa = self.db.obtener_comparativa_ventas_mensual()
         
-        respuesta = "💰 **REPORTE DE VENTAS**\n\n"
+        respuesta = " **REPORTE DE VENTAS**\n\n"
         
         # Ventas del día
-        respuesta += "📊 **Ventas del Día:**\n"
+        respuesta += " **Ventas del Día:**\n"
         respuesta += f"   • Total: ${ventas_dia['total_ventas']:,.2f}\n"
         respuesta += f"   • Transacciones: {ventas_dia['total_transacciones']}\n"
         respuesta += f"   • Items vendidos: {ventas_dia['total_items_vendidos']}\n"
         respuesta += f"   • Ticket promedio: ${ventas_dia['ticket_promedio']:,.2f}\n\n"
         
         # Ventas del mes
-        respuesta += "📅 **Ventas del Mes:**\n"
+        respuesta += " **Ventas del Mes:**\n"
         respuesta += f"   • Total: ${ventas_mes['total_ventas']:,.2f}\n"
         respuesta += f"   • Transacciones: {ventas_mes['total_transacciones']}\n"
         respuesta += f"   • Clientes únicos: {ventas_mes['clientes_unicos']}\n\n"
         
         # Comparativa
         if comparativa['tendencia'] == 'crecimiento':
-            emoji = '📈'
+            emoji = ''
         elif comparativa['tendencia'] == 'decrecimiento':
-            emoji = '📉'
+            emoji = ''
         else:
-            emoji = '➡️'
+            emoji = ''
         
         respuesta += f"{emoji} **Comparativa Mensual:**\n"
         respuesta += f"   • Mes actual: ${comparativa['ventas_mes_actual']:,.2f}\n"
@@ -548,11 +548,11 @@ Ejemplos:
         cantidad = self.db.obtener_cantidad_productos()
         bajo_inventario = self.db.obtener_alerta_bajo_inventario()
         
-        respuesta = "📦 **INFORMACIÓN DE INVENTARIO**\n\n"
+        respuesta = " **INFORMACIÓN DE INVENTARIO**\n\n"
         respuesta += f"**Total de productos:** {cantidad}\n\n"
         
         if not bajo_inventario.empty:
-            respuesta += f"🚨 **ALERTAS DE BAJO INVENTARIO:** {len(bajo_inventario)} productos\n\n"
+            respuesta += f" **ALERTAS DE BAJO INVENTARIO:** {len(bajo_inventario)} productos\n\n"
             
             respuesta += "**Top 5 productos con menos stock:**\n"
             for idx, row in bajo_inventario.head(5).iterrows():
@@ -563,9 +563,9 @@ Ejemplos:
                 respuesta += f"  Costo reposición: ${row['costo_reposicion']:,.2f}\n\n"
             
             costo_total = bajo_inventario['costo_reposicion'].sum()
-            respuesta += f"💵 **Costo total de reposición:** ${costo_total:,.2f}\n"
+            respuesta += f" **Costo total de reposición:** ${costo_total:,.2f}\n"
         else:
-            respuesta += "✅ No hay alertas de bajo inventario.\n"
+            respuesta += " No hay alertas de bajo inventario.\n"
         
         return respuesta
     
@@ -574,16 +574,16 @@ Ejemplos:
         productos_vencer = self.db.obtener_productos_proximos_vencer(30)
         bajo_inventario = self.db.obtener_alerta_bajo_inventario()
         
-        respuesta = "⚠️  **ALERTAS DEL SISTEMA**\n\n"
+        respuesta = "  **ALERTAS DEL SISTEMA**\n\n"
         
         # Productos próximos a vencer
         if not productos_vencer.empty:
-            respuesta += f"📅 **PRODUCTOS PRÓXIMOS A VENCER:** {len(productos_vencer)}\n\n"
+            respuesta += f" **PRODUCTOS PRÓXIMOS A VENCER:** {len(productos_vencer)}\n\n"
             
             # Críticos (menos de 7 días)
             criticos = productos_vencer[productos_vencer['dias_hasta_vencer'] <= 7]
             if not criticos.empty:
-                respuesta += "🔴 **CRÍTICOS (≤ 7 días):**\n"
+                respuesta += " **CRÍTICOS ( 7 días):**\n"
                 for idx, row in criticos.iterrows():
                     respuesta += f"• {row['producto']} - {int(row['dias_hasta_vencer'])} días\n"
                     respuesta += f"  Stock: {int(row['stock_actual'])} | "
@@ -595,14 +595,14 @@ Ejemplos:
             if not advertencias.empty:
                 respuesta += f"🟡 **ADVERTENCIA (8-30 días):** {len(advertencias)} productos\n\n"
         else:
-            respuesta += "✅ No hay productos próximos a vencer.\n\n"
+            respuesta += " No hay productos próximos a vencer.\n\n"
         
         # Bajo inventario
         if not bajo_inventario.empty:
-            respuesta += f"🚨 **BAJO INVENTARIO:** {len(bajo_inventario)} productos\n"
-            respuesta += f"💵 Costo reposición: ${bajo_inventario['costo_reposicion'].sum():,.2f}\n"
+            respuesta += f" **BAJO INVENTARIO:** {len(bajo_inventario)} productos\n"
+            respuesta += f" Costo reposición: ${bajo_inventario['costo_reposicion'].sum():,.2f}\n"
         else:
-            respuesta += "✅ No hay alertas de bajo inventario.\n"
+            respuesta += " No hay alertas de bajo inventario.\n"
         
         return respuesta
     
@@ -613,17 +613,17 @@ Ejemplos:
     def responder_sintomas_enfermedad(self) -> str:
         """Responde a consultas sobre síntomas y enfermedades"""
         return """
-🏥 **CONSULTA VETERINARIA**
+ **CONSULTA VETERINARIA**
 
-⚠️ **IMPORTANTE:** Los síntomas que describes requieren atención veterinaria profesional.
+ **IMPORTANTE:** Los síntomas que describes requieren atención veterinaria profesional.
 
-📋 **Recomendaciones inmediatas:**
+ **Recomendaciones inmediatas:**
 
 1. **Evalúa la gravedad:**
-   • Fiebre > 39.5°C → Urgente
-   • Hinchazón rápida → Urgente
-   • Sangrado → Urgente
-   • Dificultad para respirar → Emergencia
+   • Fiebre > 39.5°C  Urgente
+   • Hinchazón rápida  Urgente
+   • Sangrado  Urgente
+   • Dificultad para respirar  Emergencia
 
 2. **Mientras tanto:**
    • Mantén a tu mascota cómoda y tranquila
@@ -632,35 +632,35 @@ Ejemplos:
    • Observa otros síntomas
 
 3. **Consulta veterinaria:**
-   📞 Llama o agenda una cita
-   🏥 Si es urgente, acude inmediatamente
-   📝 Anota todos los síntomas y cuándo comenzaron
+    Llama o agenda una cita
+    Si es urgente, acude inmediatamente
+    Anota todos los síntomas y cuándo comenzaron
 
-💡 **Para síntomas específicos:**
-• Fiebre + hinchazón de oreja → Puede ser infección de oído
-• Vómitos persistentes → Posible intoxicación o gastritis
-• Diarrea → Parasitosis o cambio de alimentación
-• Tos → Infección respiratoria
+ **Para síntomas específicos:**
+• Fiebre + hinchazón de oreja  Puede ser infección de oído
+• Vómitos persistentes  Posible intoxicación o gastritis
+• Diarrea  Parasitosis o cambio de alimentación
+• Tos  Infección respiratoria
 
-📞 **¿Necesitas agendar una cita?** 
+ **¿Necesitas agendar una cita?** 
 Puedo ayudarte a buscar información en el sistema.
 """
     
     def responder_consulta_veterinaria(self) -> str:
         """Responde a consultas veterinarias generales"""
         return """
-🩺 **CONSULTA VETERINARIA**
+ **CONSULTA VETERINARIA**
 
 Entiendo tu preocupación por tu mascota. Para brindarte la mejor atención:
 
-📋 **Información que necesito:**
+ **Información que necesito:**
 • Tipo de mascota (perro, gato, etc.)
 • Edad aproximada
 • Síntomas específicos
 • Cuándo comenzaron los síntomas
 • ¿Ha comido algo inusual?
 
-⚠️ **SEÑALES DE ALERTA - Acude inmediatamente si:**
+ **SEÑALES DE ALERTA - Acude inmediatamente si:**
 • Dificultad para respirar
 • Sangrado abundante
 • Convulsiones
@@ -668,21 +668,21 @@ Entiendo tu preocupación por tu mascota. Para brindarte la mejor atención:
 • Abdomen hinchado y duro
 • Llanto constante de dolor
 
-✅ **Puedo ayudarte con:**
+ **Puedo ayudarte con:**
 • Agendar una cita
 • Revisar historial médico
 • Información sobre vacunas
 • Cuidados preventivos
 
-📞 Para emergencias, contacta directamente a tu veterinario de confianza.
+ Para emergencias, contacta directamente a tu veterinario de confianza.
 """
     
     def responder_vacunas(self) -> str:
         """Responde sobre vacunas"""
         return """
-💉 **INFORMACIÓN SOBRE VACUNAS**
+ **INFORMACIÓN SOBRE VACUNAS**
 
-🐕 **PERROS - Vacunas esenciales:**
+ **PERROS - Vacunas esenciales:**
 
 **Cachorros (6-16 semanas):**
 • 6-8 sem: Primera vacuna múltiple
@@ -694,7 +694,7 @@ Entiendo tu preocupación por tu mascota. Para brindarte la mejor atención:
 • Rabia (cada 1-3 años según vacuna)
 • Tos de las perreras (opcional)
 
-🐱 **GATOS - Vacunas esenciales:**
+ **GATOS - Vacunas esenciales:**
 
 **Gatitos (6-16 semanas):**
 • 6-8 sem: Primera triple felina
@@ -706,21 +706,21 @@ Entiendo tu preocupación por tu mascota. Para brindarte la mejor atención:
 • Rabia
 • Leucemia (si tiene acceso al exterior)
 
-💡 **Importante:**
+ **Importante:**
 • Lleva registro de vacunas
 • Respeta las fechas de refuerzo
 • Consulta si hay reacción adversa
 
-📞 **¿Quieres agendar vacunación?**
+ **¿Quieres agendar vacunación?**
 Puedo ayudarte a verificar el historial y programar citas.
 """
     
     def responder_desparasitacion(self) -> str:
         """Responde sobre desparasitación"""
         return """
-🐛 **DESPARASITACIÓN**
+ **DESPARASITACIÓN**
 
-📅 **Calendario recomendado:**
+ **Calendario recomendado:**
 
 **Cachorros/Gatitos:**
 • 2, 4, 6, 8 semanas de edad
@@ -731,7 +731,7 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Cada 3-6 meses
 • Cada 3 meses si tiene acceso al exterior
 
-🔍 **Señales de parásitos:**
+ **Señales de parásitos:**
 • Diarrea o vómito
 • Abdomen hinchado
 • Pérdida de peso
@@ -739,25 +739,25 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Gusanos visibles en heces
 • Pulgas o garrapatas
 
-💊 **Tipos de desparasitantes:**
+ **Tipos de desparasitantes:**
 • Internos (pastillas/jarabes)
 • Externos (pipetas/collares)
 • Combinados
 
-⚠️ **Importante:**
+ **Importante:**
 • Usa productos recomendados por veterinario
 • Dosis según peso
 • Desparasita a todas las mascotas de la casa
 
-📞 ¿Necesitas consultar el historial de desparasitación de tu mascota?
+ ¿Necesitas consultar el historial de desparasitación de tu mascota?
 """
     
     def responder_alimentacion(self) -> str:
         """Responde sobre alimentación"""
         return """
-🍽️ **ALIMENTACIÓN PARA MASCOTAS**
+ **ALIMENTACIÓN PARA MASCOTAS**
 
-🐕 **PERROS:**
+ **PERROS:**
 
 **Cachorros (hasta 12 meses):**
 • Alimento especial para cachorros
@@ -774,7 +774,7 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Menor grasa, más fibra
 • Suplementos articulares
 
-🐱 **GATOS:**
+ **GATOS:**
 
 **Gatitos (hasta 12 meses):**
 • Alimento para gatitos
@@ -786,7 +786,7 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Alimento balanceado
 • Mucha agua fresca
 
-❌ **NUNCA les des:**
+ **NUNCA les des:**
 • Chocolate
 • Cebolla/Ajo
 • Uvas/Pasas
@@ -794,20 +794,20 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Huesos cocidos
 • Dulces/Cafeína
 
-💡 **Consejos:**
+ **Consejos:**
 • Transición gradual al cambiar alimento (7-10 días)
 • Agua fresca siempre disponible
 • Controla el peso regularmente
 
-📞 ¿Necesitas recomendación específica? Consulta con tu veterinario.
+ ¿Necesitas recomendación específica? Consulta con tu veterinario.
 """
     
     def responder_cuidados(self) -> str:
         """Responde sobre cuidados generales"""
         return """
-🐾 **CUIDADOS GENERALES**
+ **CUIDADOS GENERALES**
 
-🛁 **HIGIENE:**
+ **HIGIENE:**
 
 **Baño:**
 • Perros: Cada 4-8 semanas
@@ -828,7 +828,7 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Snacks dentales
 • Limpieza profesional anual
 
-🏃 **EJERCICIO:**
+ **EJERCICIO:**
 
 **Perros:**
 • 30-120 min diarios según raza
@@ -840,29 +840,29 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Rascadores
 • Juguetes interactivos
 
-🏥 **SALUD PREVENTIVA:**
+ **SALUD PREVENTIVA:**
 • Visitas veterinarias: 1-2 al año
 • Vacunas al día
 • Desparasitación regular
 • Control de peso
 
-💚 **BIENESTAR EMOCIONAL:**
+ **BIENESTAR EMOCIONAL:**
 • Ambiente enriquecido
 • Rutinas consistentes
 • Atención y cariño
 • Espacio propio
 
-📞 ¿Necesitas más información sobre algún cuidado específico?
+ ¿Necesitas más información sobre algún cuidado específico?
 """
     
     def responder_emergencia(self) -> str:
         """Responde a situaciones de emergencia"""
         return """
-🚨 **EMERGENCIA VETERINARIA**
+ **EMERGENCIA VETERINARIA**
 
-⚠️ **ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE si:**
+ **ACTÚA RÁPIDO - Lleva a tu mascota al veterinario INMEDIATAMENTE si:**
 
-🔴 **EMERGENCIAS CRÍTICAS:**
+ **EMERGENCIAS CRÍTICAS:**
 • Dificultad para respirar
 • Sangrado que no para
 • Convulsiones
@@ -881,7 +881,7 @@ Puedo ayudarte a verificar el historial y programar citas.
 • Dificultad para orinar
 • Hinchazón rápida
 
-📞 **MIENTRAS LLEGAS AL VETERINARIO:**
+ **MIENTRAS LLEGAS AL VETERINARIO:**
 
 1. **Mantén la calma** - Tu mascota siente tu nerviosismo
 2. **Transporte seguro** - Caja transportadora o manta
@@ -889,12 +889,12 @@ Puedo ayudarte a verificar el historial y programar citas.
 4. **Llama antes** - Avisa que vas en camino
 5. **Lleva historial** - Si tienes cartilla de vacunación
 
-💡 **NÚMEROS DE EMERGENCIA:**
+ **NÚMEROS DE EMERGENCIA:**
 • Guarda el número de tu veterinario
 • Ten a mano clínicas 24h cercanas
 • Centro de toxicología veterinaria
 
-⏱️ **En emergencias, CADA MINUTO CUENTA**
+⏱ **En emergencias, CADA MINUTO CUENTA**
 
 ¿Necesito ayuda para encontrar veterinarios de emergencia cercanos?
 """
@@ -905,18 +905,18 @@ Puedo ayudarte a verificar el historial y programar citas.
             df = self.db.obtener_dataset_completo()
             
             if df.empty:
-                return "❌ No hay datos suficientes para realizar clustering."
+                return " No hay datos suficientes para realizar clustering."
             
             # Realizar análisis de clustering
             analisis = self.predictor.analisis_clustering_completo(df)
             
-            respuesta = "🔬 **ANÁLISIS DE HIERARCHICAL CLUSTERING**\n\n"
+            respuesta = " **ANÁLISIS DE HIERARCHICAL CLUSTERING**\n\n"
             respuesta += "Agrupamiento jerárquico de datos usando IA\n\n"
             
             # Clustering de Mascotas
             if "clustering_mascotas" in analisis and "error" not in analisis['clustering_mascotas']:
                 cm = analisis['clustering_mascotas']
-                respuesta += f"🐾 **CLUSTERS DE MASCOTAS:** {cm['n_clusters']} grupos\n"
+                respuesta += f" **CLUSTERS DE MASCOTAS:** {cm['n_clusters']} grupos\n"
                 respuesta += f"   Calidad (Silhouette): {cm['silhouette_score']:.3f}\n\n"
                 
                 for cluster in cm['clusters'][:3]:
@@ -928,7 +928,7 @@ Puedo ayudarte a verificar el historial y programar citas.
             # Clustering de Clientes
             if "clustering_clientes" in analisis and "error" not in analisis['clustering_clientes']:
                 cc = analisis['clustering_clientes']
-                respuesta += f"👥 **SEGMENTACIÓN DE CLIENTES:** {cc['n_segmentos']} segmentos\n"
+                respuesta += f" **SEGMENTACIÓN DE CLIENTES:** {cc['n_segmentos']} segmentos\n"
                 respuesta += f"   Calidad: {cc['calidad_clustering']}\n\n"
                 
                 for segmento in cc['segmentos'][:3]:
@@ -940,7 +940,7 @@ Puedo ayudarte a verificar el historial y programar citas.
             # Clustering de Servicios
             if "clustering_servicios" in analisis and "error" not in analisis['clustering_servicios']:
                 cs = analisis['clustering_servicios']
-                respuesta += f"🏥 **GRUPOS DE SERVICIOS:** {cs['n_grupos']}\n\n"
+                respuesta += f" **GRUPOS DE SERVICIOS:** {cs['n_grupos']}\n\n"
                 
                 for grupo in cs['grupos'][:3]:
                     respuesta += f"   **Grupo {grupo['grupo_id']}:** {grupo['total_servicios']} servicios\n"
@@ -950,14 +950,14 @@ Puedo ayudarte a verificar el historial y programar citas.
                         servicios_txt += f" y {len(grupo['servicios'])-3} más"
                     respuesta += f"   • Servicios: {servicios_txt}\n\n"
             
-            respuesta += "\n💡 **Método:** Agglomerative Hierarchical Clustering\n"
-            respuesta += "📊 Este análisis identifica patrones ocultos en tus datos."
+            respuesta += "\n **Método:** Agglomerative Hierarchical Clustering\n"
+            respuesta += " Este análisis identifica patrones ocultos en tus datos."
             
             return respuesta
             
         except Exception as e:
             logger.error(f"Error en clustering: {e}")
-            return f"❌ Error al generar clustering: {str(e)}"
+            return f" Error al generar clustering: {str(e)}"
     
     # =========================================================================
     # PROCESAMIENTO PRINCIPAL
@@ -1025,34 +1025,34 @@ Puedo ayudarte a verificar el historial y programar citas.
         
         elif intencion == 'entrenar':
             respuesta = """
-🎓 **ENTRENAR MODELOS DE IA**
+ **ENTRENAR MODELOS DE IA**
 
-⚠️ **Nota:** El entrenamiento de modelos NO se puede hacer desde el chat.
+ **Nota:** El entrenamiento de modelos NO se puede hacer desde el chat.
 
-📋 **Cómo entrenar:**
+ **Cómo entrenar:**
 
-1️⃣ **Desde terminal:**
+1⃣ **Desde terminal:**
    ```
    python entrenar_chatbot_veterinario.py
    ```
    
-2️⃣ **O desde la API (segundo plano):**
+2⃣ **O desde la API (segundo plano):**
    ```
    POST http://localhost:8000/api/entrenar
    ```
 
-⏱️ **Tiempo estimado:** 5-10 minutos
+⏱ **Tiempo estimado:** 5-10 minutos
 
-📊 **¿Qué hace el entrenamiento?**
+ **¿Qué hace el entrenamiento?**
 • Entrena red neuronal con datos de citas
 • Mejora predicciones de tipos de mascota
 • Aumenta precisión de asistencia a citas
 
-✅ **Estado actual:**
-• Modelos entrenados: """ + ("Sí ✅" if self.predictor.trained else "No ❌") + """
+ **Estado actual:**
+• Modelos entrenados: """ + ("Sí " if self.predictor.trained else "No ") + """
 • Sistema funcional: Sí (usando análisis de datos)
 
-💡 **Tip:** Si los modelos no están entrenados, el sistema sigue funcionando perfectamente usando consultas directas a la base de datos.
+ **Tip:** Si los modelos no están entrenados, el sistema sigue funcionando perfectamente usando consultas directas a la base de datos.
 """
         
         # Nuevas intenciones de negocio
@@ -1095,31 +1095,31 @@ Puedo ayudarte a verificar el historial y programar citas.
             
         else:
             respuesta = """
-❓ No entendí tu pregunta. 
+ No entendí tu pregunta. 
 
 Puedo ayudarte con:
 
-🏥 **INFORMACIÓN VETERINARIA:**
+ **INFORMACIÓN VETERINARIA:**
 • Síntomas y enfermedades
 • Vacunas y desparasitación
 • Emergencias veterinarias
 
-💼 **MÉTRICAS DE NEGOCIO:**
+ **MÉTRICAS DE NEGOCIO:**
 • Citas del día
 • Ventas del mes
 • Alertas de inventario
 
-📊 **ANÁLISIS Y DATOS:**
+ **ANÁLISIS Y DATOS:**
 • Estadísticas del sistema
 • Tipo de mascota más común
 • Predicciones con IA
 
-💬 **Ejemplos:**
+ **Ejemplos:**
 • "Mi gata tiene fiebre"
 • "¿Qué vacunas necesita un cachorro?"
 • "¿Cuántas citas hay hoy?"
 
-✍️ Escribe tu pregunta y te ayudaré.
+ Escribe tu pregunta y te ayudaré.
 """
             confianza = 0.3
         
@@ -1137,7 +1137,7 @@ Puedo ayudarte con:
     def iniciar_chat_interactivo(self):
         """Inicia un chat interactivo en consola"""
         print("=" * 80)
-        print(f"🤖 {self.nombre_bot} - Asistente Virtual Pet Store")
+        print(f" {self.nombre_bot} - Asistente Virtual Pet Store")
         print("=" * 80)
         print("\n¡Hola! Soy tu asistente virtual. Escribe 'ayuda' para ver qué puedo hacer.")
         print("Escribe 'salir' para terminar la conversación.\n")
@@ -1145,19 +1145,19 @@ Puedo ayudarte con:
         while True:
             try:
                 # Leer entrada del usuario
-                mensaje = input("👤 Tú: ").strip()
+                mensaje = input(" Tú: ").strip()
                 
                 if not mensaje:
                     continue
                 
                 # Salir si el usuario lo solicita
                 if mensaje.lower() in ['salir', 'exit', 'quit']:
-                    print(f"\n🤖 {self.nombre_bot}: ¡Hasta pronto! 👋\n")
+                    print(f"\n {self.nombre_bot}: ¡Hasta pronto! \n")
                     break
                 
                 # Comando especial: entrenar modelos
                 if mensaje.lower() == 'entrenar':
-                    print(f"\n🤖 {self.nombre_bot}: Entrenando modelos...")
+                    print(f"\n {self.nombre_bot}: Entrenando modelos...")
                     self.entrenar_modelos()
                     continue
                 
@@ -1165,30 +1165,30 @@ Puedo ayudarte con:
                 resultado = self.procesar_mensaje(mensaje)
                 
                 # Mostrar respuesta
-                print(f"\n🤖 {self.nombre_bot}:")
+                print(f"\n {self.nombre_bot}:")
                 print(resultado['respuesta'])
                 print(f"\n   [Confianza: {resultado['confianza']:.0%}]\n")
                 
             except KeyboardInterrupt:
-                print(f"\n\n🤖 {self.nombre_bot}: ¡Hasta pronto! 👋\n")
+                print(f"\n\n {self.nombre_bot}: ¡Hasta pronto! \n")
                 break
             except Exception as e:
-                print(f"\n❌ Error: {e}\n")
+                print(f"\n Error: {e}\n")
     
     def entrenar_modelos(self):
         """Entrena los modelos de red neuronal"""
-        print("\n🚀 Iniciando entrenamiento de modelos...")
-        print("⏱️  Esto puede tardar varios minutos...\n")
+        print("\n Iniciando entrenamiento de modelos...")
+        print("⏱  Esto puede tardar varios minutos...\n")
         
         try:
             # Obtener datos
             df = self.db.obtener_dataset_completo()
             
             if df.empty:
-                print("❌ No hay datos suficientes para entrenar.\n")
+                print(" No hay datos suficientes para entrenar.\n")
                 return
             
-            print(f"📊 Dataset cargado: {len(df)} registros\n")
+            print(f" Dataset cargado: {len(df)} registros\n")
             
             # Entrenar modelos
             self.predictor.entrenar_modelo_tipo_mascota(df)
@@ -1197,10 +1197,10 @@ Puedo ayudarte con:
             # Guardar modelos
             self.predictor.guardar_modelos()
             
-            print("\n✅ ¡Modelos entrenados y guardados exitosamente!\n")
+            print("\n ¡Modelos entrenados y guardados exitosamente!\n")
             
         except Exception as e:
-            print(f"\n❌ Error durante el entrenamiento: {e}\n")
+            print(f"\n Error durante el entrenamiento: {e}\n")
     
     def cerrar(self):
         """Cierra conexiones"""
@@ -1215,7 +1215,7 @@ if __name__ == "__main__":
         bot = PetStoreBot()
         bot.iniciar_chat_interactivo()
     except KeyboardInterrupt:
-        print("\n\n👋 ¡Adiós!\n")
+        print("\n\n ¡Adiós!\n")
     except Exception as e:
-        print(f"\n❌ Error: {e}\n")
+        print(f"\n Error: {e}\n")
 

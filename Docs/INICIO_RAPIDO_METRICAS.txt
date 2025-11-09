@@ -1,28 +1,28 @@
-════════════════════════════════════════════════════════════════════════════════
-🚀 INICIO RÁPIDO - NUEVAS MÉTRICAS DE NEGOCIO
-════════════════════════════════════════════════════════════════════════════════
 
-⏱️  TIEMPO ESTIMADO: 10 minutos
+ INICIO RÁPIDO - NUEVAS MÉTRICAS DE NEGOCIO
 
 
-════════════════════════════════════════════════════════════════════════════════
+⏱  TIEMPO ESTIMADO: 10 minutos
+
+
+
 PASO 1: CREAR TABLAS EN LA BASE DE DATOS (5 min)
-════════════════════════════════════════════════════════════════════════════════
+
 
 Opción A - Desde terminal:
-───────────────────────────
+
 
 psql -h gondola.proxy.rlwy.net -p 22967 -U postgres -d railway -f crear_tablas_productos_ventas.sql
 
 
 Opción B - Desde un cliente PostgreSQL (pgAdmin, DBeaver, etc.):
-─────────────────────────────────────────────────────────────────
+
 
 1. Conecta a tu base de datos
 2. Abre el archivo: crear_tablas_productos_ventas.sql
 3. Ejecuta todo el contenido
 
-✅ Esto creará:
+ Esto creará:
    • Tabla: producto
    • Tabla: venta
    • Tabla: detalle_venta
@@ -30,9 +30,9 @@ Opción B - Desde un cliente PostgreSQL (pgAdmin, DBeaver, etc.):
    • Triggers automáticos
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 2: INICIAR LA API (1 min)
-════════════════════════════════════════════════════════════════════════════════
+
 
 Desde tu terminal en la carpeta del proyecto:
 
@@ -40,13 +40,13 @@ Desde tu terminal en la carpeta del proyecto:
 
 Deberías ver:
 
-    ✅ LISTO - Presiona Ctrl+C para detener
-    🌐 Servidor corriendo en: http://localhost:8000
+     LISTO - Presiona Ctrl+C para detener
+     Servidor corriendo en: http://localhost:8000
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 3: PROBAR EN EL NAVEGADOR (2 min)
-════════════════════════════════════════════════════════════════════════════════
+
 
 Abre en tu navegador:
 
@@ -57,7 +57,7 @@ Busca la sección: "Métricas de Negocio" (debería estar color verde)
 Prueba estos endpoints:
 
 1. GET /api/metricas/cantidad-productos
-   Click en "Try it out" → "Execute"
+   Click en "Try it out"  "Execute"
    
    Deberías ver:
    {
@@ -66,17 +66,17 @@ Prueba estos endpoints:
    }
 
 2. GET /api/metricas/dashboard
-   Click en "Try it out" → "Execute"
+   Click en "Try it out"  "Execute"
    
    Verás todas las métricas en una sola respuesta
 
 
-════════════════════════════════════════════════════════════════════════════════
+
 PASO 4: PROBAR CON EL CHATBOT (2 min)
-════════════════════════════════════════════════════════════════════════════════
+
 
 Opción A - Desde Swagger UI:
-────────────────────────────
+
 
 1. En http://localhost:8000/docs
 2. Busca: POST /api/chat
@@ -92,7 +92,7 @@ Opción A - Desde Swagger UI:
 
 
 Opción B - Desde terminal:
-──────────────────────────
+
 
 curl -X POST "http://localhost:8000/api/chat" \
      -H "Content-Type: application/json" \
@@ -100,7 +100,7 @@ curl -X POST "http://localhost:8000/api/chat" \
 
 
 Opción C - Desde tu React:
-─────────────────────────
+
 
 fetch('http://localhost:8000/api/chat', {
   method: 'POST',
@@ -114,24 +114,24 @@ fetch('http://localhost:8000/api/chat', {
   .then(data => console.log(data.respuesta));
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎯 PREGUNTAS PARA PROBAR CON EL BOT
-════════════════════════════════════════════════════════════════════════════════
+
+ PREGUNTAS PARA PROBAR CON EL BOT
+
 
 Prueba estas preguntas (una por una):
 
-✓ "¿Cuántos productos tenemos?"
-✓ "Muéstrame el inventario"
-✓ "¿Hay productos con bajo stock?"
-✓ "¿Hay productos próximos a vencer?"
-✓ "Muéstrame las alertas"
-✓ "¿Cuánto hemos vendido?"  (mostrará 0 si no hay ventas)
-✓ "¿Cuántas citas hay hoy?"  (mostrará 0 si no hay citas para hoy)
+ "¿Cuántos productos tenemos?"
+ "Muéstrame el inventario"
+ "¿Hay productos con bajo stock?"
+ "¿Hay productos próximos a vencer?"
+ "Muéstrame las alertas"
+ "¿Cuánto hemos vendido?"  (mostrará 0 si no hay ventas)
+ "¿Cuántas citas hay hoy?"  (mostrará 0 si no hay citas para hoy)
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 CREAR UNA VENTA DE PRUEBA (OPCIONAL)
-════════════════════════════════════════════════════════════════════════════════
+
+ CREAR UNA VENTA DE PRUEBA (OPCIONAL)
+
 
 Si quieres ver ventas reales, ejecuta esto en tu base de datos:
 
@@ -152,9 +152,9 @@ Ahora pregunta al bot:
   "¿Cuánto hemos vendido hoy?"
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎨 EJEMPLO RÁPIDO EN REACT
-════════════════════════════════════════════════════════════════════════════════
+
+ EJEMPLO RÁPIDO EN REACT
+
 
 Copia y pega este componente en tu React:
 
@@ -174,7 +174,7 @@ function Dashboard() {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>📊 Dashboard Pet Store</h1>
+      <h1> Dashboard Pet Store</h1>
       
       <div style={{ 
         display: 'grid', 
@@ -188,7 +188,7 @@ function Dashboard() {
           borderRadius: '10px',
           textAlign: 'center'
         }}>
-          <div style={{ fontSize: '40px' }}>📅</div>
+          <div style={{ fontSize: '40px' }}></div>
           <h3>Citas Hoy</h3>
           <p style={{ fontSize: '32px', fontWeight: 'bold' }}>
             {metrics.citas_hoy.total}
@@ -201,7 +201,7 @@ function Dashboard() {
           borderRadius: '10px',
           textAlign: 'center'
         }}>
-          <div style={{ fontSize: '40px' }}>📦</div>
+          <div style={{ fontSize: '40px' }}></div>
           <h3>Productos</h3>
           <p style={{ fontSize: '32px', fontWeight: 'bold' }}>
             {metrics.productos.total}
@@ -214,7 +214,7 @@ function Dashboard() {
           borderRadius: '10px',
           textAlign: 'center'
         }}>
-          <div style={{ fontSize: '40px' }}>💰</div>
+          <div style={{ fontSize: '40px' }}></div>
           <h3>Ventas Día</h3>
           <p style={{ fontSize: '32px', fontWeight: 'bold' }}>
             ${metrics.ventas_dia.total_ventas.toFixed(2)}
@@ -227,7 +227,7 @@ function Dashboard() {
           borderRadius: '10px',
           textAlign: 'center'
         }}>
-          <div style={{ fontSize: '40px' }}>📈</div>
+          <div style={{ fontSize: '40px' }}></div>
           <h3>Ventas Mes</h3>
           <p style={{ fontSize: '32px', fontWeight: 'bold' }}>
             ${metrics.ventas_mes.total_ventas.toFixed(2)}
@@ -245,7 +245,7 @@ function Dashboard() {
             marginBottom: '10px',
             borderLeft: '4px solid red'
           }}>
-            <strong>🔴 ALERTA:</strong> {metrics.productos_proximos_vencer.criticos} productos críticos por vencer
+            <strong> ALERTA:</strong> {metrics.productos_proximos_vencer.criticos} productos críticos por vencer
           </div>
         )}
         
@@ -256,7 +256,7 @@ function Dashboard() {
             borderRadius: '8px',
             borderLeft: '4px solid orange'
           }}>
-            <strong>🚨 ADVERTENCIA:</strong> {metrics.bajo_inventario.total_alertas} productos con bajo stock
+            <strong> ADVERTENCIA:</strong> {metrics.bajo_inventario.total_alertas} productos con bajo stock
           </div>
         )}
       </div>
@@ -265,7 +265,7 @@ function Dashboard() {
       <div style={{ marginTop: '30px', textAlign: 'center' }}>
         <h3>Tendencia de Ventas</h3>
         <p style={{ fontSize: '48px' }}>
-          {metrics.comparativa_ventas.tendencia === 'crecimiento' ? '📈' : '📉'}
+          {metrics.comparativa_ventas.tendencia === 'crecimiento' ? '' : ''}
         </p>
         <p style={{ 
           fontSize: '24px',
@@ -282,38 +282,38 @@ function Dashboard() {
 export default Dashboard;
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ VERIFICACIÓN RÁPIDA
-════════════════════════════════════════════════════════════════════════════════
+
+ VERIFICACIÓN RÁPIDA
+
 
 Marca lo que ya completaste:
 
-□ Tablas creadas en la base de datos
-□ API iniciada (http://localhost:8000)
-□ Swagger UI funciona (http://localhost:8000/docs)
-□ Endpoint /api/metricas/cantidad-productos retorna 10 productos
-□ Chatbot responde preguntas de inventario
-□ Dashboard React funcionando (opcional)
+ Tablas creadas en la base de datos
+ API iniciada (http://localhost:8000)
+ Swagger UI funciona (http://localhost:8000/docs)
+ Endpoint /api/metricas/cantidad-productos retorna 10 productos
+ Chatbot responde preguntas de inventario
+ Dashboard React funcionando (opcional)
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔧 SOLUCIÓN DE PROBLEMAS RÁPIDA
-════════════════════════════════════════════════════════════════════════════════
+
+ SOLUCIÓN DE PROBLEMAS RÁPIDA
+
 
 Problema: "Tabla 'producto' no existe"
-─────────────────────────────────────────
+
 Solución: Ejecuta el script SQL crear_tablas_productos_ventas.sql
 
 
 Problema: API no inicia
-────────────────────────
+
 Solución: 
   python -m pip install fastapi uvicorn psycopg2
   python api.py
 
 
 Problema: Productos muestran 0
-───────────────────────────────
+
 Normal si acabas de crear las tablas.
 El script SQL ya inserta 10 productos de ejemplo.
 Verifica con:
@@ -321,42 +321,42 @@ Verifica con:
 
 
 Problema: React no conecta
-───────────────────────────
+
 Verifica:
   1. API corriendo en http://localhost:8000
   2. CORS configurado en api.py (ya está)
   3. URL correcta en fetch
 
 
-════════════════════════════════════════════════════════════════════════════════
-📚 MÁS INFORMACIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ MÁS INFORMACIÓN
+
 
 Para documentación completa:
-  → METRICAS_NEGOCIO.md
+   METRICAS_NEGOCIO.md
 
 Para resumen detallado:
-  → NUEVAS_METRICAS_RESUMEN.txt
+   NUEVAS_METRICAS_RESUMEN.txt
 
 Para ejemplos de código React:
-  → METRICAS_NEGOCIO.md (sección "Componentes React")
+   METRICAS_NEGOCIO.md (sección "Componentes React")
 
 Documentación interactiva:
-  → http://localhost:8000/docs
+   http://localhost:8000/docs
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎉 ¡LISTO PARA USAR!
-════════════════════════════════════════════════════════════════════════════════
+
+ ¡LISTO PARA USAR!
+
 
 Tu sistema ahora incluye:
 
-✅ 7 nuevas métricas de negocio
-✅ 8 nuevos endpoints REST
-✅ Chatbot con análisis de ventas e inventario
-✅ Dashboard completo
-✅ Alertas automáticas
-✅ Comparativas de rendimiento
+ 7 nuevas métricas de negocio
+ 8 nuevos endpoints REST
+ Chatbot con análisis de ventas e inventario
+ Dashboard completo
+ Alertas automáticas
+ Comparativas de rendimiento
 
-¡Disfruta del análisis con IA! 🚀
+¡Disfruta del análisis con IA! 
 

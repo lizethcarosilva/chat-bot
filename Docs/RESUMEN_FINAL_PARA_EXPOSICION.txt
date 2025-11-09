@@ -1,63 +1,63 @@
-════════════════════════════════════════════════════════════════════════════════
-🎓 RESUMEN FINAL - SISTEMA COMPLETO PARA TU EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
 
-✅ ESTADO: Todo funcionando correctamente
-✅ VERIFICADO: Detecciones probadas y funcionando
-✅ LISTO: Para consumir desde tu frontend
+ RESUMEN FINAL - SISTEMA COMPLETO PARA TU EXPOSICIÓN
 
 
-════════════════════════════════════════════════════════════════════════════════
-📂 ARCHIVOS PYTHON QUE DEBES EXPLICAR (6 archivos)
-════════════════════════════════════════════════════════════════════════════════
+ ESTADO: Todo funcionando correctamente
+ VERIFICADO: Detecciones probadas y funcionando
+ LISTO: Para consumir desde tu frontend
 
-1. config.py (78 líneas) ⭐
-   ─────────────────────
+
+
+ ARCHIVOS PYTHON QUE DEBES EXPLICAR (6 archivos)
+
+
+1. config.py (78 líneas) 
+   
    ¿Qué hace? Configuración centralizada
    Explica: Constantes, conexión DB, paths
 
-2. database.py (740 líneas) ⭐⭐
-   ──────────────────────────
+2. database.py (740 líneas) 
+   
    ¿Qué hace? Capa de acceso a datos
    Explica: Conexión PostgreSQL, consultas SQL, métricas de negocio
    DESTACAR: Reconexión automática, consultas optimizadas
 
-3. chatbot.py (1201 líneas) ⭐⭐⭐⭐
-   ────────────────────────────────
+3. chatbot.py (1201 líneas) 
+   
    ¿Qué hace? Procesamiento de lenguaje natural
    Explica: Normalización texto, detección intenciones, LSTM
    DESTACAR: 30+ intenciones, red neuronal opcional
 
-4. predictor.py (815 líneas) ⭐⭐⭐⭐⭐
-   ─────────────────────────────────────
+4. predictor.py (815 líneas) 
+   
    ¿Qué hace? Machine Learning y Deep Learning
-   Explica: Redes neuronales, HIERARCHICAL CLUSTERING 🔬
+   Explica: Redes neuronales, HIERARCHICAL CLUSTERING 
    DESTACAR: Clustering jerárquico, segmentación clientes
    
-   ⭐⭐⭐ ESTE ES EL MÁS IMPORTANTE PARA TU EXPOSICIÓN ⭐⭐⭐
+    ESTE ES EL MÁS IMPORTANTE PARA TU EXPOSICIÓN 
 
-5. api.py (1247 líneas) ⭐⭐⭐
-   ─────────────────────────
+5. api.py (1247 líneas) 
+   
    ¿Qué hace? Servidor API REST
    Explica: FastAPI, endpoints, coordinación de módulos
    DESTACAR: 25+ endpoints, arquitectura REST
 
-6. entrenar_chatbot_veterinario.py (variable) ⭐⭐⭐
-   ──────────────────────────────────────────────
+6. entrenar_chatbot_veterinario.py (variable) 
+   
    ¿Qué hace? Entrenamiento de red LSTM
    Explica: Proceso de entrenamiento, arquitectura LSTM
    DESTACAR: Deep Learning, embeddings, clasificación
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔬 ENFOQUE DE LA EXPOSICIÓN: HIERARCHICAL CLUSTERING
-════════════════════════════════════════════════════════════════════════════════
+
+ ENFOQUE DE LA EXPOSICIÓN: HIERARCHICAL CLUSTERING
+
 
 ESTE ES TU PUNTO FUERTE - DEDICA EL 40% DE LA EXPOSICIÓN A ESTO
 
 
 ¿QUÉ ES?
-─────────
+
 Algoritmo de aprendizaje NO supervisado que agrupa datos automáticamente.
 
 Tipo: Unsupervised Learning - Clustering
@@ -66,40 +66,40 @@ Implementado en: predictor.py (líneas 430-730)
 
 
 ¿CÓMO FUNCIONA? (Explicar con diagrama)
-────────────────────────────────────────
+
 
 Paso 1: Cada punto es un cluster
    150 clientes = 150 clusters
 
 Paso 2: Une los 2 más cercanos (iterativo)
    Cliente A (8 citas, $800) + Cliente B (7 citas, $850)
-   → Son similares → Se unen
+    Son similares  Se unen
 
 Paso 3: Continúa hasta tener n_clusters
-   150 → 75 → 38 → 19 → 10 → 4 clusters finales
+   150  75  38  19  10  4 clusters finales
 
 
 MÉTODOS DE LINKAGE:
-───────────────────
+
 • Ward: Minimiza varianza (mascotas)
-• Average: Promedio distancias (clientes) ← EL QUE USAS
+• Average: Promedio distancias (clientes)  EL QUE USAS
 • Complete: Máxima distancia (servicios)
 
 
 MÉTRICA DE CALIDAD: Silhouette Score
-─────────────────────────────────────
+
 Fórmula: s = (b - a) / max(a, b)
 
 Interpretación:
   1.0  = Perfectos
   0.7  = Excelente
-  0.5  = Bueno      ← TU RESULTADO: 0.587
+  0.5  = Bueno       TU RESULTADO: 0.587
   0.3  = Moderado
   0.0  = Malo
 
 
 APLICACIÓN: Segmentación de Clientes
-─────────────────────────────────────
+
 Features usados:
   • total_citas (frecuencia)
   • gasto_total (valor)
@@ -112,39 +112,39 @@ Segmentos encontrados:
   4. Nuevo - Exploratorio: 15 clientes, $75 promedio
 
 Estrategias por segmento:
-  VIP → Programa de lealtad
-  Regular → Mantener satisfacción
-  Ocasional → Reactivación
-  Nuevo → Onboarding
+  VIP  Programa de lealtad
+  Regular  Mantener satisfacción
+  Ocasional  Reactivación
+  Nuevo  Onboarding
 
 
-════════════════════════════════════════════════════════════════════════════════
-📊 TECNOLOGÍAS QUE DEBES MENCIONAR
-════════════════════════════════════════════════════════════════════════════════
+
+ TECNOLOGÍAS QUE DEBES MENCIONAR
+
 
 Backend:
-  ✅ Python 3.x
-  ✅ FastAPI (API REST)
-  ✅ PostgreSQL (Base de datos)
+   Python 3.x
+   FastAPI (API REST)
+   PostgreSQL (Base de datos)
 
 Machine Learning:
-  ✅ TensorFlow/Keras (Deep Learning)
-  ✅ scikit-learn (Clustering, métricas)
-  ✅ scipy (Algoritmos científicos)
+   TensorFlow/Keras (Deep Learning)
+   scikit-learn (Clustering, métricas)
+   scipy (Algoritmos científicos)
 
 Procesamiento de Datos:
-  ✅ Pandas (DataFrames)
-  ✅ NumPy (Operaciones matemáticas)
+   Pandas (DataFrames)
+   NumPy (Operaciones matemáticas)
 
 Algoritmos de IA:
-  ✅ LSTM (Bidirectional) - Chatbot
-  ✅ Redes Neuronales Densas - Predicciones
-  ✅ Hierarchical Clustering - Segmentación ⭐
+   LSTM (Bidirectional) - Chatbot
+   Redes Neuronales Densas - Predicciones
+   Hierarchical Clustering - Segmentación 
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎯 ESTRUCTURA DE LA EXPOSICIÓN (Sugerencia 20 min)
-════════════════════════════════════════════════════════════════════════════════
+
+ ESTRUCTURA DE LA EXPOSICIÓN (Sugerencia 20 min)
+
 
 Minuto 0-2: INTRODUCCIÓN
   • Sistema Pet Store con IA
@@ -156,7 +156,7 @@ Minuto 2-5: ARQUITECTURA
   • 6 archivos Python y sus responsabilidades
   • Flujo de datos
 
-Minuto 5-10: HIERARCHICAL CLUSTERING ⭐⭐⭐
+Minuto 5-10: HIERARCHICAL CLUSTERING 
   • ¿Qué es clustering?
   • Algoritmo Agglomerative
   • Métodos de linkage
@@ -187,55 +187,55 @@ Minuto 18-20: CONCLUSIONES
   • Q&A
 
 
-════════════════════════════════════════════════════════════════════════════════
-📖 DOCUMENTOS PARA PREPARAR TU EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ DOCUMENTOS PARA PREPARAR TU EXPOSICIÓN
+
 
 ESENCIALES (Leer antes de exponer):
 
 1. GUIA_PARA_EXPOSICION.md
-   → Explicación completa de cada archivo
-   → Flujos de datos
-   → Algoritmos explicados
+    Explicación completa de cada archivo
+    Flujos de datos
+    Algoritmos explicados
 
 2. EXPLICACION_ARCHIVOS_PARA_EXPOSICION.md
-   → Para qué sirve cada archivo
-   → Tecnologías utilizadas
-   → Responsabilidades
+    Para qué sirve cada archivo
+    Tecnologías utilizadas
+    Responsabilidades
 
 3. HIERARCHICAL_CLUSTERING_DOCS.md
-   → Teoría del clustering
-   → Cómo funciona
-   → Métricas de calidad
+    Teoría del clustering
+    Cómo funciona
+    Métricas de calidad
 
 
 COMPLEMENTARIOS:
 
 4. ENDPOINTS_CLUSTERING.md
-   → Endpoints disponibles
-   → Ejemplos de respuestas
+    Endpoints disponibles
+    Ejemplos de respuestas
 
 5. RESUMEN_CLUSTERING_IMPLEMENTADO.txt
-   → Resumen ejecutivo de implementación
+    Resumen ejecutivo de implementación
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎬 DEMO PARA LA EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ DEMO PARA LA EXPOSICIÓN
+
 
 OPCIÓN 1: Swagger UI (Recomendado)
-───────────────────────────────────
+
 
 1. Abre: http://localhost:8000/docs
 2. Busca sección: "Clustering"
 3. Click en: GET /api/clustering/clientes
-4. Click: "Try it out" → "Execute"
+4. Click: "Try it out"  "Execute"
 5. Muestra el JSON de respuesta
 6. Explica cada campo
 
 
 OPCIÓN 2: Chatbot
-─────────────────
+
 
 1. Abre tu frontend del chatbot
 2. Escribe: "clustering"
@@ -244,7 +244,7 @@ OPCIÓN 2: Chatbot
 
 
 OPCIÓN 3: Desde código Python
-──────────────────────────────
+
 
 from database import PetStoreDatabase
 from predictor import PetStorePredictor
@@ -258,9 +258,9 @@ resultado = predictor.clustering_clientes(df, n_clusters=4)
 print(resultado)
 
 
-════════════════════════════════════════════════════════════════════════════════
-🔧 ANTES DE LA EXPOSICIÓN
-════════════════════════════════════════════════════════════════════════════════
+
+ ANTES DE LA EXPOSICIÓN
+
 
 1. Verifica que la API esté corriendo
    python api.py
@@ -278,9 +278,9 @@ print(resultado)
    - Llamadas a API desde frontend
 
 
-════════════════════════════════════════════════════════════════════════════════
-💡 PREGUNTAS QUE PUEDEN HACERTE
-════════════════════════════════════════════════════════════════════════════════
+
+ PREGUNTAS QUE PUEDEN HACERTE
+
 
 P: ¿Por qué usaste Hierarchical Clustering y no K-Means?
 R: Hierarchical produce dendrogramas útiles, no requiere especificar K óptimo
@@ -299,9 +299,9 @@ R: No. Es aprendizaje NO supervisado. Descubre patrones automáticamente
    sin necesidad de datos etiquetados.
 
 
-════════════════════════════════════════════════════════════════════════════════
-✅ CHECKLIST ANTES DE EXPONER
-════════════════════════════════════════════════════════════════════════════════
+
+ CHECKLIST ANTES DE EXPONER
+
 
 - [ ] Leer GUIA_PARA_EXPOSICION.md
 - [ ] Leer EXPLICACION_ARCHIVOS_PARA_EXPOSICION.md
@@ -316,16 +316,16 @@ R: No. Es aprendizaje NO supervisado. Descubre patrones automáticamente
 - [ ] Endpoints de clustering respondiendo
 
 
-════════════════════════════════════════════════════════════════════════════════
-🎉 ¡ÉXITO EN TU EXPOSICIÓN!
-════════════════════════════════════════════════════════════════════════════════
+
+ ¡ÉXITO EN TU EXPOSICIÓN!
+
 
 Tienes:
-  ✅ Sistema completo funcionando
-  ✅ Hierarchical Clustering implementado
-  ✅ Código comentado y explicado
-  ✅ Documentación completa
-  ✅ Ejemplos listos
+   Sistema completo funcionando
+   Hierarchical Clustering implementado
+   Código comentado y explicado
+   Documentación completa
+   Ejemplos listos
 
-¡Vas a brillar en tu exposición! 🌟
+¡Vas a brillar en tu exposición! 
 
